@@ -53,39 +53,37 @@
 
 </script>
 
-<div id="cartogram-container">
-    <svg width={width} height={height} viewBox="50 -100 {width} {height}" background-color="#E6EFF5">
+<svg width={width} height={height} viewBox="50 -100 {width} {height}" background-color="#E6EFF5">
 
-        <g class="country-group">
-            {#each nodes as d}
-            <rect class="country country--{d.category}"
-                x={d.x - d.r} y={d.y - d.r} width={d.r * 2} height={d.r * 2} 
-                on:mouseover={() => hoverNode = d}
-                on:mouseout={() => hoverNode = null}
-                opacity={(hoverNode && hoverNode !== d) ? 0.5 : 1}
-            ></rect>
-            {#if d.r > 30}
-                <text class="country-text" x={d.x} y={d.y}>
-                    {d.short}
-                </text>
-            {/if}
-            {/each}
-        </g>
-        
-        {#if hoverNode}
-        <g class="hover-group">
-            <line class="hover-line" x1={hoverNode.x} x2={hoverNode.x} y1={-50} y2={hoverNode.y - hoverNode.r - 5} />
-            <foreignObject x={hoverNode.x - 20} y="-100" width="180" height="180">
-                <div>
-                    <p class="hover-text">
-                        {hoverNode.name} emitted {hoverNode.emissions.toLocaleString()} in 2019
-                    </p>
-                </div>
-            </foreignObject>
-        </g>
+    <g class="country-group">
+        {#each nodes as d}
+        <rect class="country country--{d.category}"
+            x={d.x - d.r} y={d.y - d.r} width={d.r * 2} height={d.r * 2} 
+            on:mouseover={() => hoverNode = d}
+            on:mouseout={() => hoverNode = null}
+            opacity={(hoverNode && hoverNode !== d) ? 0.5 : 1}
+        ></rect>
+        {#if d.r > 30}
+            <text class="country-text" x={d.x} y={d.y}>
+                {d.short}
+            </text>
         {/if}
-    </svg>
-</div>
+        {/each}
+    </g>
+    
+    {#if hoverNode}
+    <g class="hover-group">
+        <line class="hover-line" x1={hoverNode.x} x2={hoverNode.x} y1={-50} y2={hoverNode.y - hoverNode.r - 5} />
+        <foreignObject x={hoverNode.x - 20} y="-100" width="180" height="180">
+            <div>
+                <p class="hover-text">
+                    {hoverNode.name} emitted {hoverNode.emissions.toLocaleString()} in 2019
+                </p>
+            </div>
+        </foreignObject>
+    </g>
+    {/if}
+</svg>
 
 <style>
 

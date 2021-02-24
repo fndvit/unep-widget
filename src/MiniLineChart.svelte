@@ -1,17 +1,18 @@
-<script lang="ts">
+<script context="module" lang="ts">
+    export interface IDatum {
+        year: number, value: number
+    };
+</script>
 
+<script lang="ts">
     import * as d3 from './d3';
 
     export let data: IDatum[];
 
     const startYear = data[0].year;
     const endYear = data[data.length-1].year;
-    const width = 200;
-    const height = 60;
-
-    interface IDatum {
-        year: number, value: number
-    }
+    const width = 300;
+    const height = 100;
 
     const x = d3.scaleLinear()
         .domain([startYear, endYear])
@@ -37,8 +38,8 @@
 
         <g class="x-axis" transform="translate(0, {y(0)})">
             <line class="x-axis-line" x1={x(startYear)} x2={x(endYear)} y1="0" y2="0" />
-            <text class="x-axis-text x-axis-text--min">{startYear}</text>
-            <text class="x-axis-text x-axis-text--max" x={x(endYear)}>{endYear}</text>
+            <text class="x-axis-text x-axis-text--min" y="2">{startYear}</text>
+            <text class="x-axis-text x-axis-text--max" x={x(endYear)} y="2">{endYear}</text>
         </g>
 
         <path class="line" d={linePath}></path>
@@ -77,7 +78,7 @@
     .line {
         fill: none;
         stroke: #00AACC;
-        stroke-width: 2.5;
+        stroke-width: 3;
     }
 
     .x-axis-line {
@@ -87,7 +88,8 @@
     }
 
     .x-axis-text {
-        fill: #B1ABC6;
+        font-weight: 100;
+        fill: #a0a0a0;
         dominant-baseline: hanging;
     }
     
