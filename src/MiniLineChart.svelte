@@ -14,11 +14,11 @@
     const topPadding = 50;
 
     const chartWidth = 300;
-    const chartHeight = 120;
+    const chartHeight = 100;
     const width = chartWidth;
     const height = chartHeight + topPadding;
     const axisHeight = 20;
-    
+
 
 
     const x = d3.scaleLinear()
@@ -55,7 +55,7 @@
 
         {#if hoverDatum}
         <g transform="translate(0, {topPadding})">
-            <line class="hover-line" x1={x(hoverDatum.year)} x2={x(hoverDatum.year)} 
+            <line class="hover-line" x1={x(hoverDatum.year)} x2={x(hoverDatum.year)}
                 y1={y(hoverDatum.value)} y2={y(0)} />
             <circle class="hover-circle" r="4" cx={x(hoverDatum.year)} cy={y(hoverDatum.value)} />
             <text class="hover-year" x={x(hoverDatum.year)} y={y(2) - 5}>{hoverDatum.year}</text>
@@ -67,7 +67,7 @@
             on:mousemove={mouseMove} on:mouseout={() => hoverDatum = null} />
 
     </svg>
-        
+
 </div>
 
 <style>
@@ -116,7 +116,7 @@
         fill: #a0a0a0;
         dominant-baseline: hanging;
     }
-    
+
     .x-axis-text--min {
         text-anchor: start;
     }
