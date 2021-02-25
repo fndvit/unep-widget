@@ -34,6 +34,11 @@
             </div>
             <div class="cartogram-container">
                 <GHGCartogram />
+                <div class="cartogram-legend">
+                    <div class="legend-item legend-item--climbing">Climbing</div>
+                    <div class="legend-item legend-item--decreasing">Decreasing</div>
+                    <div class="legend-item legend-item--stable">Stable emissions</div>
+                </div>
             </div>
         </div>
 
@@ -124,5 +129,29 @@
     .charts-row > :global(*:last-child) {
         margin: 0;
     }
+
+    .cartogram-legend {
+        position: absolute;
+        left: 40px;
+        top: 485px;
+    }
+
+    .legend-item {
+        display: inline-block;
+        margin-right: 12px;
+    }
+
+    .legend-item:before {
+        content: '';
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        margin-right: 5px;
+        border-radius: 5px;
+        margin-bottom: -2px;
+    }
+    .legend-item--climbing:before { background-color: #FD7D2E; }
+    .legend-item--decreasing:before { background-color: #00AACC; }
+    .legend-item--stable:before { background-color: #BEC7CD; }
 
 </style>
