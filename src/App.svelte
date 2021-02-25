@@ -147,8 +147,8 @@
     .legend-item:before {
         content: '';
         display: inline-block;
-        width: 18px;
-        height: 18px;
+        width: 17px;
+        height: 17px;
         margin-right: 5px;
         border-radius: 5px;
         margin-bottom: -2px;

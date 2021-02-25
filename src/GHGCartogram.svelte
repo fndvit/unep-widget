@@ -5,7 +5,7 @@
 	import {default as cartogramDataRaw} from './data/cartogram-data.json';
 
     interface ICartogramData { // data defs
-        
+
         // existing fields in JSON data
         name: string;
         short: string;
@@ -20,7 +20,7 @@
         category: string; // category used for coloring
         diff: number; // % emission change (2005 to 2015)
     }
-	
+
 	const width = 950;
 	const height = 550;
 
@@ -58,7 +58,7 @@
     <g class="country-group">
         {#each nodes as d}
         <rect class="country country--{d.category}"
-            x={d.x - d.r} y={d.y - d.r} width={d.r * 2} height={d.r * 2} 
+            x={d.x - d.r} y={d.y - d.r} width={d.r * 2} height={d.r * 2}
             on:mouseover={() => hoverNode = d}
             on:mouseout={() => hoverNode = null}
             opacity={(hoverNode && hoverNode !== d) ? 0.5 : 1}
@@ -70,7 +70,7 @@
         {/if}
         {/each}
     </g>
-    
+
     {#if hoverNode}
     <g class="hover-group">
         <line class="hover-line" x1={hoverNode.x} x2={hoverNode.x} y1={-50} y2={hoverNode.y - hoverNode.r - 5} />
@@ -102,11 +102,12 @@
     .country-text {
         fill: white;
         font-weight: 500;
+        font-size: 18px;
         pointer-events: none;
         text-anchor: middle;
         dominant-baseline: middle;
     }
-    
+
     .hover-group {
         pointer-events: none;
     }
