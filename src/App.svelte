@@ -102,7 +102,7 @@
     .charts :global(svg) {
         width: 100%;
     }
-    
+
     .charts-row:after {
         content: "";
         clear: both;
