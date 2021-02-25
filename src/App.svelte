@@ -28,8 +28,11 @@
                     but contributions vary by
                     country</h1>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, label legend A , label legend B ,
-                    label legend C , sed diam nonummy nibh euismod tincidunt ut laoreet
+                    Lorem ipsum dolor sit amet, consectetuer
+                    adipiscing elit, label legend A, label legend B, label
+                    legend C, sed diam nonummy nibh euismod
+                    tincidunt ut laoreet Lorem ipsum dolor sit amet,
+                    consectetuer adipiscing elit, sed diam nonumm
                 </p>
             </div>
             <div class="cartogram-container">
