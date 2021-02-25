@@ -93,7 +93,7 @@
     }
 
     .cartogram-container :global(svg) {
-        width: 100%;
+        width: calc(100% + 50px);
     }
 
     .charts :global(svg) {
