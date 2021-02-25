@@ -53,7 +53,7 @@
 
 </script>
 
-<svg width={width} height={height} viewBox="50 -120 {width} {height}" background-color="#E6EFF5">
+<svg width={width} height={height} viewBox="50 -120 {width} {height-50}" background-color="#E6EFF5">
 
     <g class="country-group">
         {#each nodes as d}

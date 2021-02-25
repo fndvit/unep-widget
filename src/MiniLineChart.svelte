@@ -11,16 +11,23 @@
 
     const startYear = data[0].year;
     const endYear = data[data.length-1].year;
-    const width = 300;
-    const height = 100;
+    const topPadding = 50;
+
+    const chartWidth = 300;
+    const chartHeight = 120;
+    const width = chartWidth;
+    const height = chartHeight + topPadding;
+    const axisHeight = 20;
+    
+
 
     const x = d3.scaleLinear()
         .domain([startYear, endYear])
-        .range([ 0, width ]);
+        .range([ 0, chartWidth ]);
 
     const y = d3.scaleLinear()
         .domain([0, Math.max(...data.map(d => d.value))])
-        .range([ height, 0 ]);
+        .range([ chartHeight, 0 ]);
 
     const linePath = d3.line<IDatum>().x(d => x(d.year)).y(d => y(d.value))(data);
 
@@ -34,21 +41,25 @@
 </script>
 
 <div id="chart-container">
-    <svg width={width+4} height={height+24} viewBox="-2 -2 {width+4} {height+24}">
+    <svg width={width} height={height} viewBox="0 0 {width} {height + axisHeight}">
 
-        <g class="x-axis" transform="translate(0, {y(0)})">
+        <g class="x-axis" transform="translate(0, {y(0) + topPadding})">
             <line class="x-axis-line" x1={x(startYear)} x2={x(endYear)} y1="0" y2="0" />
             <text class="x-axis-text x-axis-text--min" y="2">{startYear}</text>
             <text class="x-axis-text x-axis-text--max" x={x(endYear)} y="2">{endYear}</text>
         </g>
 
-        <path class="line" d={linePath}></path>
+        <g transform="translate(0, {topPadding})">
+            <path class="line" d={linePath}></path>
+        </g>
 
         {#if hoverDatum}
-        <g>
+        <g transform="translate(0, {topPadding})">
             <line class="hover-line" x1={x(hoverDatum.year)} x2={x(hoverDatum.year)} 
                 y1={y(hoverDatum.value)} y2={y(0)} />
             <circle class="hover-circle" r="4" cx={x(hoverDatum.year)} cy={y(hoverDatum.value)} />
+            <text class="hover-year" x={x(hoverDatum.year)} y={y(2) - 5}>{hoverDatum.year}</text>
+            <text class="hover-value" x={x(hoverDatum.year)} y={y(hoverDatum.value) - 10}>{hoverDatum.value.toLocaleString()}</text>
         </g>
         {/if}
 
@@ -73,6 +84,19 @@
         stroke-width: 2;
         stroke: black;
         fill: none;
+    }
+
+    .hover-year {
+        text-anchor: middle;
+        dominant-baseline: bottom;
+        fill: #555555;
+    }
+
+    .hover-value {
+        text-anchor: middle;
+        dominant-baseline: bottom;
+        fill: #555555;
+        font-weight: bold;
     }
 
     .line {
