@@ -6,7 +6,7 @@
     export let text: string;
 
 
-    const dummyText = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh";
+    const dummyText = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit";
 
 </script>
 

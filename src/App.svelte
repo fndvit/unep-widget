@@ -68,20 +68,24 @@
     .content {
         max-width: 1200px;
         margin: auto;
+        position: relative;
     }
 
     .top-section {
-        display: flex;
+        /* display: flex; */
+        position: relative;
+        height: 430px;
     }
 
     .left-pane {
-        width: 400px;
+        width: 450px;
         text-align: left;
+        position: absolute;
     }
 
     .left-pane h1 {
         color: #111;
-        font-size: 34px;
+        font-size: 38px;
         font-weight: 300;
         margin-bottom: 20px;
     }
@@ -91,8 +95,10 @@
     }
 
     .cartogram-container {
-        width: 800px;
-        margin-top: -60px;
+        width: 700px;
+        margin-top: -80px;
+        position: absolute;
+        left: 500px;
     }
 
     .cartogram-container :global(svg) {
