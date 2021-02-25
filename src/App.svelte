@@ -38,10 +38,12 @@
         </div>
 
         <div class="charts">
-            <LineChartWidget data={getDataForCountry('CHN')} />
-            <LineChartWidget data={getDataForCountry('USA')} />
-            <LineChartWidget data={getDataForCountry('MYS')} />
-            <LineChartWidget data={getDataForCountry('BRA')} />
+            <div class="charts-row">
+                <LineChartWidget data={getDataForCountry('CHN')} headlineFigure="67.12%" text="China's CO2 emissions have risen by 67.12% since 2005" />
+                <LineChartWidget data={getDataForCountry('USA')} />
+                <LineChartWidget data={getDataForCountry('MYS')} />
+                <LineChartWidget data={getDataForCountry('BRA')} />
+            </div>
         </div>
     </div>
 </main>
@@ -55,11 +57,12 @@
 
     main {
         text-align: center;
-        padding: 1em;
         margin: 0 auto;
         font-family: 'Roboto', sans-serif;
         margin-top: 100px;
         background-color: #F3F3F3;
+        padding-bottom: 30px;
+        padding-top: 20px;
     }
 
     .content {
@@ -99,9 +102,21 @@
     .charts :global(svg) {
         width: 100%;
     }
-
-    .charts {
-        display: flex;
-        gap: 40px;
+    
+    .charts-row:after {
+        content: "";
+        clear: both;
+        display: table;
     }
+
+    .charts-row > :global(*) {
+        float: left;
+        width: calc(25% - 6px);
+        margin-right: 8px;
+    }
+
+    .charts-row > :global(*:last-child) {
+        margin: 0;
+    }
+
 </style>

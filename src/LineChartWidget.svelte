@@ -2,15 +2,18 @@
     import MiniLineChart from "./MiniLineChart.svelte";
     import type {IDatum} from "./MiniLineChart.svelte";
     export let data: IDatum[];
+    export let headlineFigure: string;
+    export let text: string;
+
+
+    const dummyText = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh";
 
 </script>
 
 <main>
     <MiniLineChart data={data} />
-    <h2>{data[data.length-1].value.toLocaleString()}</h2>
-    <p>Lorem ipsum dolor sit amet,
-        consectetuer adipiscing elit, sed
-        diam nonummy nibh</p>
+    <h2>{headlineFigure || data[data.length-1].value.toLocaleString()}</h2>
+    <p>{text || dummyText}</p>
 </main>
 
 <style>
