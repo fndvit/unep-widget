@@ -4,18 +4,17 @@
 
     import {default as rawData } from './data/ghgdata-full.json';
 
-	function getTestDataUSA() {
-
+	function getDataForCountry(code: string) {
 		function* generateRange(end: number, start = 0, step = 1) {
 			let x = start - step;
 			while(x < end - step) yield x += step;
 		}
 
-		const USA = rawData.find(c => c.code === "USA")
+		const data = rawData.find(c => c.code === code)
 		const years = Array.from(generateRange(2016, 1950));
 		return years.map(year => {
 			return {
-				year, value: USA[year]
+				year, value: data[year]
 			};
 		});
 	}
@@ -37,10 +36,10 @@
 	</div>
 	
 	<div class="charts">
-		<LineChartWidget data={getTestDataUSA()} />
-		<LineChartWidget data={getTestDataUSA()} />
-		<LineChartWidget data={getTestDataUSA()} />
-		<LineChartWidget data={getTestDataUSA()} />
+		<LineChartWidget data={getDataForCountry('CHN')} />
+		<LineChartWidget data={getDataForCountry('USA')} />
+		<LineChartWidget data={getDataForCountry('MYS')} />
+		<LineChartWidget data={getDataForCountry('BRA')} />
 	</div>
 </main>
 
