@@ -20,6 +20,11 @@
 </div>
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+
+    :global(body) {
+        padding: 0;
+    }
     .widget {
         text-align: center;
         margin: 0 auto;
