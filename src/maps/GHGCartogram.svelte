@@ -1,8 +1,8 @@
 <script lang="ts">
-	import * as d3 from './d3';
+	import * as d3 from '../d3';
 
     // this local JSON data is temporary until we have an API
-	import {default as cartogramDataRaw} from './data/cartogram-data.json';
+	import {default as cartogramDataRaw} from '../data/cartogram-data.json';
 
     interface ICartogramData { // data defs
 
