@@ -1,16 +1,25 @@
 <script lang="ts">
     import GHGPage from './GHGPage.svelte';
-    // import Page from './Page.svelte';
-    import SubNav from './SubNav.svelte';
-    import SubNavButton from './SubNavButton.svelte';
+    import Page1Charts from './Page1Charts.svelte';
+    import SubNav from './components/SubNav.svelte';
+
+
+    const subNavMenuOptions = [
+        {text: "Total emissions", icon: 'test'},
+        {text: "Per capita emissions", icon: 'test'},
+        {text: "Country trends", icon: 'test'},
+    ];
+
+    let selectedNav = subNavMenuOptions[0];
+
+
 </script>
 
-<SubNav>
-    <SubNavButton icon="test" selected>Total emissions</SubNavButton>
-    <SubNavButton icon="test">Per capita emissions</SubNavButton>
-    <SubNavButton icon="test">Country trends</SubNavButton>
-</SubNav>
+<SubNav bind:selected={selectedNav} options={subNavMenuOptions} />
+{#if selectedNav === subNavMenuOptions[0]}
 <GHGPage/>
+{/if}
+<Page1Charts/>
 
 <style>
 </style>

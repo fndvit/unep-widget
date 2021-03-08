@@ -1,20 +1,39 @@
 <script lang="ts">
     import Page1 from './Page1.svelte';
-    import MainNav from './MainNav.svelte';
-    import MainNavButton from './MainNavButton.svelte';
+    import Page2 from './Page2.svelte';
+    import Page3 from './Page3.svelte';
+    import MainNav from './components/MainNav.svelte';
+    import type {MenuOption} from './components/MainNav.svelte';
+
+    const mainNavOptions = [
+        {text: "State of the climate", icon: 'test'},
+        {text: "What's happening", icon: 'test'},
+        {text: "Climate action progress", icon: 'test'},
+    ];
+
+    let selectedNavOption = mainNavOptions[0];
+
+    function onMenuChange(option: MenuOption) {
+        // go to spash or change page
+        // change page for now
+        selectedNavOption = option;
+    }
+
 </script>
 
 <div class="widget">
     <div class="content">
         <div class="navcontainer">
-            <MainNav>
-                <MainNavButton icon="test" selected={true}>State of the climate</MainNavButton>
-                <MainNavButton icon="test">What's happening</MainNavButton>
-                <MainNavButton icon="test">Climate action progress</MainNavButton>
-            </MainNav>
+            <MainNav options={mainNavOptions} bind:selected={selectedNavOption} onchange={onMenuChange} />
         </div>
         <div>
-            <Page1/>
+        {#if selectedNavOption === mainNavOptions[0]}
+        <Page1/>
+        {:else if selectedNavOption === mainNavOptions[1]}
+        <Page2/>
+        {:else if selectedNavOption === mainNavOptions[2]}
+        <Page3/>
+        {/if}
         </div>
     </div>
 </div>

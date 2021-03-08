@@ -1,10 +1,11 @@
 <script lang="ts">
     export let selected: boolean = false;
-    import svgs from './svgs';
+    import svgs from '../svg';
     export let icon: string;
+    export let onclick: () => any;
 </script>
 
-<button class:selected={selected} disabled={selected}>
+<button class:selected={selected} disabled={selected} on:click={onclick}>
     <div class="buttoncontent">
         <span class="text">
             <slot/>
