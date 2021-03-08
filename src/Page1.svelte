@@ -1,5 +1,7 @@
 <script lang="ts">
-    import GHGPage from './GHGPage.svelte';
+    import TotalEmissions from './Page1Viz-TotalEmissions.svelte';
+    import PerCapita from './Page1Viz-PerCapita.svelte';
+    import Trends from './Page1Viz-Trends.svelte';
     import Page1Charts from './Page1Charts.svelte';
     import SubNav from './components/SubNav.svelte';
 
@@ -16,9 +18,15 @@
 </script>
 
 <SubNav bind:selected={selectedNav} options={subNavMenuOptions} />
+
 {#if selectedNav === subNavMenuOptions[0]}
-<GHGPage/>
+<TotalEmissions/>
+{:else if selectedNav === subNavMenuOptions[1]}
+<PerCapita/>
+{:else if selectedNav === subNavMenuOptions[2]}
+<Trends/>
 {/if}
+
 <Page1Charts/>
 
 <style>

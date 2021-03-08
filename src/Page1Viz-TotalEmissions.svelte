@@ -4,21 +4,13 @@
     import CopyPane from './components/CopyPane.svelte';
     import CopyHeadline from './components/CopyHeadline.svelte';
     import CopyMain from './components/CopyMain.svelte';
+	import {default as copy} from './data/copy.json';
 </script>
 
 <MainViz>
     <CopyPane>
-        <CopyHeadline>Carbon dioxide emissions are choking the planet —
-            but contributions vary by
-            country
-        </CopyHeadline>
-        <CopyMain>
-            Lorem ipsum dolor sit amet, consectetuer
-            adipiscing elit, label legend A, label legend B, label
-            legend C, sed diam nonummy nibh euismod
-            tincidunt ut laoreet Lorem ipsum dolor sit amet,
-            consectetuer adipiscing elit, sed diam nonumm
-        </CopyMain>
+        <CopyHeadline>{copy.state.total.title}</CopyHeadline>
+        <CopyMain>{copy.state.total.summary}</CopyMain>
     </CopyPane>
     <div class="cartogram-container">
         <GHGCartogram />
