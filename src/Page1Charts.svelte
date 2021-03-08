@@ -1,6 +1,5 @@
 <script lang="ts">
     import LineChartWidget from './components/LineChartWidget.svelte';
-
     import {default as rawData } from './data/ghgdata-full.json';
 
     function getDataForCountry(code: string) {

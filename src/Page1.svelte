@@ -12,7 +12,7 @@
         {text: "Country trends", icon: 'test'},
     ];
 
-    let selectedNav = subNavMenuOptions[0];
+    let selectedNav = subNavMenuOptions[2];
 
 
 </script>

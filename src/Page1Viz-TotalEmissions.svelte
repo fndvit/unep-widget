@@ -1,5 +1,5 @@
 <script lang="ts">
-    import GHGCartogram from './GHGCartogram.svelte';
+    import GHGCartogram from './maps/GHGCartogram.svelte';
     import MainViz from './components/MainViz.svelte';
     import CopyPane from './components/CopyPane.svelte';
     import CopyHeadline from './components/CopyHeadline.svelte';

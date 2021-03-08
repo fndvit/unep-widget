@@ -1,4 +1,5 @@
 <script lang="ts">
+    import GHGTrendsCartogram from './maps/GHGTrendsCartogram.svelte';
     import MainViz from './components/MainViz.svelte';
     import CopyPane from './components/CopyPane.svelte';
     import CopyHeadline from './components/CopyHeadline.svelte';
@@ -12,6 +13,7 @@
         <CopyMain>{copy.state.trend.summary}</CopyMain>
     </CopyPane>
     <div class="cartogram-container">
+        <GHGTrendsCartogram />
     </div>
 </MainViz>
 
