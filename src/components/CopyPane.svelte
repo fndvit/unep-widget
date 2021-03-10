@@ -1,4 +1,3 @@
-
 <div class="copy-pane">
     <slot/>
 </div>
