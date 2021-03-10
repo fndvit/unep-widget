@@ -10,10 +10,8 @@
 </script>
 
 <script lang="ts">
-	import * as d3 from '../d3';
 
-    // this local JSON data is temporary until we have an API
-	// import {default as cartogramDataRaw} from '../data/ghg-tmp.json';
+	import * as d3 from '../d3';
 
     interface CartogramDataPoint extends CountryDataPoint {
         r: number
@@ -22,17 +20,8 @@
     export var data: CountryDataPoint[];
     export var nodeSize: number = 100;
 
-	const width = 950;
-	const height = 550;
 
     var cartogramData: CartogramDataPoint[];
-    // const cartogramData: CartogramDataPoint[] = data.map(d => {
-    //     return {
-    //         ...d,
-    //         r: radius(d.value),
-    //         //category: category(d)
-    //     };
-    // });
 
     $: {
 	    const largestVal = Math.max(...data.map(d => d.value));
@@ -61,38 +50,47 @@
     //     else return 'none';
     // }
 
-	// const nodes: ICartogramData[] = cartogramDataRaw.map(d => {
-    //     const diff = (d.emissions - d.emissions2005) / d.emissions2005;
-	// 	return {
-	// 		...d,
-	// 		r: radius(d.emissions),
-    //         diff,
-    //         category: getNodeCategory(diff)
-	// 	}
-	// })
-
     let hoverNode: CartogramDataPoint;
+
+    function calcStyle(d: CartogramDataPoint) {
+        const width = 950;
+        const height = 550;
+
+        const xScale = d3.scaleLinear()
+            .domain([0, 1000])
+            .range([0, width]);
+
+        const yScale = d3.scaleLinear()
+            .domain([0, 600])
+            .range([0, height]);
+
+        const styles = [
+            `left: ${xScale(d.x - d.r)}px`,
+            `top: ${yScale(d.y - d.r)}px`,
+            `width: ${xScale(d.r * 2)}px`,
+            `height: ${yScale(d.r * 2)}px`,
+        ];
+        return styles.join(';');
+    }
 
 </script>
 
-<svg width={width} height={height} viewBox="50 -120 {width} {height-50}" background-color="#E6EFF5">
+<div class="container">
 
-    <g class="country-group">
+    <div class="countries">
         {#each cartogramData as d}
-        <rect class="country"
-            x={d.x - d.r} y={d.y - d.r} width={d.r * 2} height={d.r * 2}
+        <div class="country" class:faded={hoverNode && hoverNode !== d}
+            style={calcStyle(d)}
             on:mouseover={() => hoverNode = d}
             on:mouseout={() => hoverNode = null}
-            opacity={(hoverNode && hoverNode !== d) ? 0.5 : 1}
-        ></rect>
-        {#if d.r > 30}
-            <text class="country-text" x={d.x} y={d.y}>
-                {d.short}
-            </text>
-        {/if}
-        {/each}
-    </g>
+        >
+            {#if d.r > 30}
+            <span class="country-text">{d.short}</span>
+            {/if}
 
+        </div>
+        {/each}
+<!--
     {#if hoverNode}
     <g class="hover-group">
         <line class="hover-line" x1={hoverNode.x} x2={hoverNode.x} y1={-50} y2={hoverNode.y - hoverNode.r - 5} />
@@ -104,16 +102,44 @@
             </div>
         </foreignObject>
     </g>
-    {/if}
-</svg>
+    {/if} -->
+    </div>
+</div>
 
 <style>
 
+    .container {
+        position: relative;
+    }
+
+    .countries {
+        position: relative;
+        top: 120px;
+        left: -100px;
+    }
+
+    .country-text {
+        color: white;
+        font-weight: 500;
+        font-size: 14px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        transform: translateY(-50%);
+    }
+
+    .faded {
+        opacity: 0.5;
+    }
+
     .country {
-        rx: 4px;
-        fill: black;
+        /* rx: 4px; */
+        position: absolute;
+        border-radius: 4px;
+        background-color: #BEC7CD;
         cursor: pointer;
-        transition: opacity 0.1s;
+        transition: opacity 0.1s, top 0.2s, left 0.2s, width 0.2s, height 0.2s;
     }
 
     .country--stable { fill: #BEC7CD; }
@@ -122,9 +148,6 @@
     .country--climbing-fast { fill: #FD7D2E; }
 
     .country-text {
-        fill: white;
-        font-weight: 500;
-        font-size: 18px;
         pointer-events: none;
         text-anchor: middle;
         dominant-baseline: middle;
