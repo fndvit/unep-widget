@@ -3,7 +3,7 @@
     import MiniLineChart from '../components/MiniLineChart.svelte';
 
 	import * as d3 from '../d3';
-    import rawData from '../data/ghgdata-full.json';
+    import rawData from '../data/ghgdata-tmp.json';
 
     const width = 1220;
 	const height = 520;
@@ -36,13 +36,13 @@
         .map(c => {
             const years = Array.from(generateRange(endYear, startYear));
             const lineData: IDatum[] = years.map(year => {
-                return {year, value:c[year]}
+                return {year, value:Math.max(0, c[year])}
             });
 
             const yVals = lineData.map(d => d.value);
 
             const maxVal = Math.max(...yVals);
-            const minVal = Math.min(...yVals);
+            const minVal = 0;
             const range = maxVal - minVal;
             const padding = range / 6;
 
@@ -149,18 +149,20 @@
         position: absolute;
         width: 200px;
         pointer-events: none !important;
-        transform: translateX(-50%) translateY(-50%);
         background: #EAEAEA;
         padding: 5px;
         box-shadow: 0px 0px 0px 0px #00000018;
         visibility: hidden;
         border: 1px solid #E7E7E7;
+        transform: translate(-50%, -50%) translate(10px, 10px) scale(0.3);
+        transform-origin: 50% 50%;
     }
 
     .hover-chart--show {
         visibility: visible;
         box-shadow: 0px 0px 15px 0px #00000018;
-        transition: box-shadow 0.1s;
+        transition: box-shadow 0.1s, transform 0.03s ease-in;
+        transform: translate(-50%, -50%) translate(10px, 10px) scale(1);
 
     }
 
