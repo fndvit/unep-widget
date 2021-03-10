@@ -1,6 +1,14 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
     import LineChartWidget from './components/LineChartWidget.svelte';
-    import {default as rawData } from './data/ghgdata-full.json';
+    import {ghg} from './data';
+    import type {GHGData} from './data';
+
+    let ghgData: GHGData[];
+
+    onMount(async () => {
+        ghgData = await ghg;
+    });
 
     function getDataForCountry(code: string) {
         function* generateRange(end: number, start = 0, step = 1) {
@@ -8,7 +16,7 @@
             while(x < end - step) yield x += step;
         }
 
-        const data = rawData.find(c => c.code === code)
+        const data = ghgData.find(c => c.code === code)
         const years = Array.from(generateRange(2016, 1950));
         return years.map(year => {
             return {
@@ -19,12 +27,14 @@
     </script>
 
 <div class="charts">
+    {#if ghgData}
     <div class="charts-row">
         <LineChartWidget data={getDataForCountry('CHN')} headlineFigure="67.1%" text="China's CO2 emissions have risen by 67.12% since 2005" />
         <LineChartWidget data={getDataForCountry('USA')} />
         <LineChartWidget data={getDataForCountry('MYS')} />
         <LineChartWidget data={getDataForCountry('BRA')} />
     </div>
+    {/if}
 </div>
 
 <style>
