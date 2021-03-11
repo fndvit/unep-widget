@@ -21,6 +21,11 @@ export const percapita = getMockData<GHGData>('percapita');
 
 // DATA TYPINGS
 
+export interface YearlyTimeseriesDatum {
+    year: number,
+    value: number;
+}
+
 export interface PerCapitaData {
     code: string,
     '2015': number

@@ -13,15 +13,18 @@
     const sections = [
         {
             text: "Total emissions", icon: 'test', // nav menu
-            copy: copy.state.total // section copy
+            copy: copy.state.total, // section copy
+            dataset: Datasets.GHGTotal
         },
         {
             text: "Per capita emissions", icon: 'test',
-            copy: copy.state.percapita // section copy
+            copy: copy.state.percapita, // section copy
+            dataset: Datasets.GHGPerCapita
         },
         {
             text: "Country trends", icon: 'test',
-            copy: copy.state.trend // section copy
+            copy: copy.state.trend, // section copy
+            dataset: Datasets.GHGTrends
         },
     ]
 
@@ -52,11 +55,11 @@
 
 
     <div class="cartogram-container">
-        {#if selectedSection.text === "Total emissions" || selectedSection.text === "Per capita emissions"}
-        <GHGCartogram dataset={selectedSection.text === "Total emissions" ? Datasets.GHGTotal : Datasets.GHGPerCapita} />
-        {:else if selectedSection.text === "Country trends"}
-        <GHGTrendsCartogram />
-        {/if}
+        <!-- {#if selectedSection.text === "Total emissions" || selectedSection.text === "Per capita emissions"} -->
+        <GHGCartogram dataset={selectedSection.dataset} />
+        <!-- {:else if selectedSection.text === "Country trends"}
+        <GHGTrendsCartogram /> -->
+        <!-- {/if} -->
     </div>
 
 

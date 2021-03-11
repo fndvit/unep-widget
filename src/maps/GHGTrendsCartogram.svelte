@@ -1,12 +1,13 @@
 <script lang="ts">
-    import type {IDatum} from '../components/MiniLineChart.svelte';
+    // import type {YearlyTimeseriesDatum} from '../data';
     import MiniLineChart from '../components/MiniLineChart.svelte';
 
-	import * as d3 from '../d3';
+    import * as d3 from '../d3';
+    import type { YearlyTimeseriesDatum } from '../data';
     import rawData from '../data/ghgdata-tmp.json';
 
     const width = 1220;
-	const height = 520;
+    const height = 520;
     const tileSize = 32;
     const startYear = 1950;
     const endYear = 2015;
@@ -35,7 +36,7 @@
         .filter(c => c.tx && c.ty)
         .map(c => {
             const years = Array.from(generateRange(endYear, startYear));
-            const lineData: IDatum[] = years.map(year => {
+            const lineData: YearlyTimeseriesDatum[] = years.map(year => {
                 return {year, value:Math.max(0, c[year])}
             });
 
@@ -50,7 +51,7 @@
                 .domain([minVal - padding, maxVal + padding])
                 .range([ tileSize, 0 ]);
 
-            const pathGenerator = d3.line<IDatum>()
+            const pathGenerator = d3.line<YearlyTimeseriesDatum>()
                 .x(d => x(d.year))
                 .y(d => y(d.value));
 
@@ -63,27 +64,27 @@
 
 
 
-        var hoverTimeout: number;
+    var hoverTimeout: number;
 
-        function onMouseOver(evt: MouseEvent, country) {
-            const el = evt.currentTarget as Element;
-            const {left,top} = el.getBoundingClientRect();
-            const containerRect = containerEl.getBoundingClientRect();
+    function onMouseOver(evt: MouseEvent, country) {
+        const el = evt.currentTarget as Element;
+        const {left,top} = el.getBoundingClientRect();
+        const containerRect = containerEl.getBoundingClientRect();
 
-            hoverData = {
-                country,
-                x: left - containerRect.left,
-                y: top - containerRect.top,
-                showHoverChart: false
-            };
+        hoverData = {
+            country,
+            x: left - containerRect.left,
+            y: top - containerRect.top,
+            showHoverChart: false
+        };
 
-            hoverTimeout = window.setTimeout(() => hoverData.showHoverChart = true, 300)
-        }
+        hoverTimeout = window.setTimeout(() => hoverData.showHoverChart = true, 300)
+    }
 
-        function onMouseOut() {
-            hoverData = null;
-            window.clearTimeout(hoverTimeout);
-        }
+    function onMouseOut() {
+        hoverData = null;
+        window.clearTimeout(hoverTimeout);
+    }
 
 </script>
 
@@ -145,31 +146,31 @@
     /* svg {
     } */
 
-    .hover-chart {
-        position: absolute;
-        width: 200px;
-        pointer-events: none !important;
-        background: #EAEAEA;
-        padding: 5px;
-        box-shadow: 0px 0px 0px 0px #00000018;
-        visibility: hidden;
-        border: 1px solid #E7E7E7;
-        transform: translate(-50%, -50%) translate(10px, 10px) scale(0.3);
-        transform-origin: 50% 50%;
-    }
+        .hover-chart {
+            position: absolute;
+            width: 200px;
+            pointer-events: none !important;
+            background: #EAEAEA;
+            padding: 5px;
+            box-shadow: 0px 0px 0px 0px #00000018;
+            visibility: hidden;
+            border: 1px solid #E7E7E7;
+            transform: translate(-50%, -50%) translate(10px, 10px) scale(0.3);
+            transform-origin: 50% 50%;
+        }
 
-    .hover-chart--show {
-        visibility: visible;
-        box-shadow: 0px 0px 15px 0px #00000018;
-        transition: box-shadow 0.1s, transform 0.03s ease-in;
-        transform: translate(-50%, -50%) translate(10px, 10px) scale(1);
+        .hover-chart--show {
+            visibility: visible;
+            box-shadow: 0px 0px 15px 0px #00000018;
+            transition: box-shadow 0.1s, transform 0.03s ease-in;
+            transform: translate(-50%, -50%) translate(10px, 10px) scale(1);
 
-    }
+        }
 
-    .hover-chart :global(svg) {
-        width: 200px;
-        height: 100px;
-    }
+        .hover-chart :global(svg) {
+            width: 200px;
+            height: 100px;
+        }
 
     .tile-rect {
         fill: #EAEAEA;

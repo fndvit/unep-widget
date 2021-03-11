@@ -1,4 +1,6 @@
 <script lang="ts" context="module">
+    import type { YearlyTimeseriesDatum } from '../data';
+
     export interface CountryDataPoint {
         name: string;
         short: string;
@@ -7,21 +9,37 @@
         y: number;
         value: number;
     }
+
+    export interface TrendsDataset {
+        code: string;
+        data: YearlyTimeseriesDatum[]
+    }
 </script>
 
 <script lang="ts">
 
 	import * as d3 from '../d3';
+    import MiniTrendCharts from './MiniTrendCharts.svelte';
+    import MiniLineChart from '../components/MiniLineChart.svelte';
 
     interface CartogramDataPoint extends CountryDataPoint {
-        r: number
+        r: number;
+        category: string;
+        trendsTimeseries: YearlyTimeseriesDatum[];
     }
 
     export var data: CountryDataPoint[];
     export var nodeSize: number = 100;
-
+    export var datasetWidth: number;
+    export var xOffset: number = 0;
+    export var trendsMode: boolean = false;
+    export var trendsTimeseriesData: TrendsDataset[];
+    var containerEl: Element;
 
     var cartogramData: CartogramDataPoint[];
+
+    var trendsTimeseriesLookup: {[code: string]: YearlyTimeseriesDatum[]} = {};
+    trendsTimeseriesData.forEach(d=> trendsTimeseriesLookup[d.code] = d.data)
 
     $: {
 	    const largestVal = Math.max(...data.map(d => d.value));
@@ -35,36 +53,64 @@
             return {
                 ...d,
                 r: radius(d.value),
-                //category: category(d)
+                category: getCategory(trendsTimeseriesLookup[d.code]),
+                trendsTimeseries: trendsTimeseriesLookup[d.code]
             };
         });
     }
 
-    // function getNodeCategory(diff: number) {
-    //     // 0 means the same. 0.5 means 50% increase. 1 means 100% increase. etc
-    //     if (Math.abs(diff) < 0.05) return 'stable';
-    //     else if (diff < -0.05) return 'falling';
-    //     else if (diff > 0.4) return 'climbing-fast';
-    //     else if (diff > 0.05) return 'climbing';
-    //     else return 'none';
-    // }
+    var lineDisplayBlock: boolean = false;
+    var lineFadeIn: boolean = false;
+    var timeout: number;
+    $: {
+        if (trendsMode) {
+            const delay = 200;
+            timeout = window.setTimeout(() => {
+                lineDisplayBlock = true;
+                window.setTimeout(() => {
+                    lineFadeIn = true;
+                    timeout = null;
+                }, 1)
+            }, delay)
+
+        }
+        if (!trendsMode) {
+            if (timeout) {
+                window.clearTimeout(timeout);
+                timeout = null;
+            }
+            lineDisplayBlock = false;
+            lineFadeIn = false;
+        }
+    }
+
+    function getCategory(data: YearlyTimeseriesDatum[]) {
+        const first = data[data.length-16].value;
+        const last = data[data.length-1].value;
+        const diff = (last - first) / first;
+        // 0 means the same. 0.5 means 50% increase. 1 means 100% increase. etc
+        if (Math.abs(diff) < 0.05) return 'stable';
+        else if (diff < -0.05) return 'falling';
+        else if (diff > 0.4) return 'climbing-fast';
+        else if (diff > 0.05) return 'climbing';
+        else return 'none';
+    }
 
     let hoverNode: CartogramDataPoint;
 
     function calcStyle(d: CartogramDataPoint) {
-        const width = 950;
-        const height = 550;
+        const ratio = 0.6
 
         const xScale = d3.scaleLinear()
             .domain([0, 1000])
-            .range([0, width]);
+            .range([0, datasetWidth]);
 
         const yScale = d3.scaleLinear()
             .domain([0, 600])
-            .range([0, height]);
+            .range([0, datasetWidth * ratio]);
 
         const styles = [
-            `left: ${xScale(d.x - d.r)}px`,
+            `left: ${xScale(d.x - d.r) + (xOffset || 0)}px`,
             `top: ${yScale(d.y - d.r)}px`,
             `width: ${xScale(d.r * 2)}px`,
             `height: ${yScale(d.r * 2)}px`,
@@ -72,23 +118,66 @@
         return styles.join(';');
     }
 
+
+    var hoverTimeout: number;
+    interface HoverData {
+        x: number,
+        y: number,
+        country: CartogramDataPoint,
+        showHoverChart: boolean
+    }
+
+    let hoverData: HoverData = null;
+
+    function onMouseOver(evt: MouseEvent, country) {
+        const el = evt.currentTarget as Element;
+        const {left,top} = el.getBoundingClientRect();
+        const containerRect = containerEl.getBoundingClientRect();
+
+        hoverData = {
+            country,
+            x: left - containerRect.left,
+            y: top - containerRect.top,
+            showHoverChart: false
+        };
+
+        hoverTimeout = window.setTimeout(() => hoverData.showHoverChart = true, 400)
+    }
+
+    function onMouseOut() {
+        hoverData = null;
+        window.clearTimeout(hoverTimeout);
+        console.log('mouseout');
+    }
+
 </script>
 
-<div class="container">
+<div class="cartogram" bind:this={containerEl}
+    class:trends-mode={trendsMode} class:test={lineDisplayBlock} class:trends-visible={lineFadeIn}
+    class:hovering={hoverData !== null}
+>
 
-    <div class="countries">
-        {#each cartogramData as d}
-        <div class="country" class:faded={hoverNode && hoverNode !== d}
+    <div class="countries" >
+        {#each cartogramData as d (d.code)}
+        <div class="country country--{d.category}"
             style={calcStyle(d)}
-            on:mouseover={() => hoverNode = d}
-            on:mouseout={() => hoverNode = null}
+            on:mouseover={(evt) => onMouseOver(evt, d)}
+            on:mouseleave={onMouseOut}
         >
             {#if d.r > 30}
             <span class="country-text">{d.short}</span>
             {/if}
 
+            {#if d.trendsTimeseries}
+                <div class="trendline" >
+                    <MiniTrendCharts data={d.trendsTimeseries} />
+                </div>
+            {/if}
+
         </div>
         {/each}
+
+
 <!--
     {#if hoverNode}
     <g class="hover-group">
@@ -103,19 +192,74 @@
     </g>
     {/if} -->
     </div>
+
+    {#if trendsMode && hoverData}
+    <div class="hover-chart" class:hover-chart--show={hoverData.showHoverChart}
+        style="top: {hoverData.y}px; left: {hoverData.x}px;" >
+            <h2>{hoverData.country.name}</h2>
+            <MiniLineChart data={hoverData.country.trendsTimeseries}  />
+    </div>
+    {/if}
 </div>
 
 <style>
 
-    .container {
+    .cartogram {
         position: relative;
     }
 
     .countries {
         position: relative;
         top: 120px;
-        left: -100px;
     }
+
+    .hovering:not(.trends-mode) .country {
+        opacity: 0.6;
+    }
+
+    .hovering:not(.trends-mode) .country:hover {
+        opacity: 1;
+    }
+
+    .hovering.trends-mode .country:hover {
+        filter: brightness(1.05);
+        transform: scale(1.5);
+        transition: transform 0.1s;
+        z-index: 2;
+    }
+
+    .trendline {
+        display: none;
+        opacity: 0;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    .test .trendline {
+        display: block;
+    }
+
+    .trendline :global(svg) {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .trends-visible .trendline {
+        opacity: 1;
+        transition: opacity 0.2s;
+    }
+
+    .trends-mode .country {
+        border-radius: 2px;
+        background-color: #EAEAEA;
+    }
+
 
     .country-text {
         color: white;
@@ -128,24 +272,26 @@
         transform: translateY(-50%);
     }
 
-    .faded {
-        opacity: 0.5;
-    }
-
     .country {
-        /* rx: 4px; */
         position: absolute;
         border-radius: 4px;
         background-color: #BEC7CD;
         cursor: pointer;
-        transition: opacity 0.1s, top 0.2s, left 0.2s, width 0.2s, height 0.2s;
+        transition: opacity 0.1s, top 0.2s, left 0.2s, width 0.2s, height 0.2s, background-color 0.2s;
     }
 
-    /* .country--stable { fill: #BEC7CD; }
-    .country--falling { fill: #00AACC; }
-    .country--climbing { fill: #FDCC4D; }
-    .country--climbing-fast { fill: #FD7D2E; }
+    .country--stable { background-color: #BEC7CD; }
+    .country--falling { background-color: #00AACC; }
+    .country--climbing { background-color: #FDCC4D; }
+    .country--climbing-fast { background-color: #FD7D2E; }
 
+    .country--stable .trendline :global(path) { stroke: #BEC7CD; }
+    .country--falling .trendline :global(path) { stroke: #00AACC; }
+    .country--climbing .trendline :global(path) { stroke: #FDCC4D; }
+    .country--climbing-fast .trendline :global(path) { stroke: #FD7D2E; }
+
+
+    /*
     .country-text {
         pointer-events: none;
         text-anchor: middle;
@@ -166,5 +312,37 @@
         margin: 0;
         text-align: left;
     } */
+
+    .hover-chart h2 {
+        font-size: 20px;
+        font-weight: 500;
+        margin: 0;
+    }
+    .hover-chart {
+        position: absolute;
+        width: 200px;
+        pointer-events: none !important;
+        background: #EAEAEA;
+        padding: 5px;
+        box-shadow: 0px 0px 0px 0px #00000018;
+        visibility: hidden;
+        border: 1px solid #E7E7E7;
+        transform: translate(-50%, -50%) translate(10px, 10px) scale(0.3);
+        transform-origin: 50% 50%;
+        z-index: 3;
+    }
+
+    .hover-chart--show {
+        visibility: visible;
+        box-shadow: 0px 0px 15px 0px #00000018;
+        transition: box-shadow 0.1s, transform 0.03s ease-in;
+        transform: translate(-50%, -50%) translate(10px, 10px) scale(1);
+
+    }
+
+    .hover-chart :global(svg) {
+        width: 200px;
+        height: 100px;
+    }
 
 </style>

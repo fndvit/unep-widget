@@ -1,13 +1,8 @@
-<script context="module" lang="ts">
-    export interface IDatum {
-        year: number, value: number
-    };
-</script>
-
 <script lang="ts">
     import * as d3 from '../d3';
+    import type { YearlyTimeseriesDatum } from '../data';
 
-    export let data: IDatum[];
+    export let data: YearlyTimeseriesDatum[];
 
     const startYear = data[0].year;
     const endYear = data[data.length-1].year;
@@ -29,9 +24,9 @@
         .domain([0, Math.max(...data.map(d => d.value))])
         .range([ chartHeight, 0 ]);
 
-    const linePath = d3.line<IDatum>().x(d => x(d.year)).y(d => y(d.value))(data);
+    const linePath = d3.line<YearlyTimeseriesDatum>().x(d => x(d.year)).y(d => y(d.value))(data);
 
-    let hoverDatum: IDatum;
+    let hoverDatum: YearlyTimeseriesDatum;
 
     function mouseMove(event: any) {
         const pointer = d3.pointer(event);
@@ -40,7 +35,7 @@
     }
 </script>
 
-<div id="chart-container">
+<div class="chart-container">
     <svg width={width} height={height} viewBox="0 0 {width} {height + axisHeight}">
 
         <g class="x-axis" transform="translate(0, {y(0) + topPadding})">
@@ -73,7 +68,7 @@
 <style>
     .mouse-rect {
         fill: none;
-        pointer-events: all;
+        pointer-events: none;
     }
     .hover-line {
         stroke-width: 1;
@@ -125,5 +120,12 @@
     }
     .x-axis-text--max {
         text-anchor: end;
+    }
+
+    .chart-container {
+        pointer-events: none;
+    }
+    .chart-container svg {
+        pointer-events: none;
     }
 </style>
