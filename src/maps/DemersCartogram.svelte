@@ -32,7 +32,6 @@
 
         // add r values and categories
         cartogramData = data.map(d => {
-            if (!d.value) console.log(d);
             return {
                 ...d,
                 r: radius(d.value),
@@ -142,7 +141,7 @@
         transition: opacity 0.1s, top 0.2s, left 0.2s, width 0.2s, height 0.2s;
     }
 
-    .country--stable { fill: #BEC7CD; }
+    /* .country--stable { fill: #BEC7CD; }
     .country--falling { fill: #00AACC; }
     .country--climbing { fill: #FDCC4D; }
     .country--climbing-fast { fill: #FD7D2E; }
@@ -166,6 +165,6 @@
     .hover-text {
         margin: 0;
         text-align: left;
-    }
+    } */
 
 </style>

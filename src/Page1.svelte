@@ -53,7 +53,6 @@
 
     <div class="cartogram-container">
         {#if selectedSection.text === "Total emissions" || selectedSection.text === "Per capita emissions"}
-        <div>{selectedSection.text === "Total emissions" ? Datasets.GHGTotal : Datasets.GHGPerCapita}</div>
         <GHGCartogram dataset={selectedSection.text === "Total emissions" ? Datasets.GHGTotal : Datasets.GHGPerCapita} />
         {:else if selectedSection.text === "Country trends"}
         <GHGTrendsCartogram />
@@ -78,11 +77,11 @@
         width: 100%;
     }
 
-    .cartogram-legend {
+    /* .cartogram-legend {
         position: absolute;
         left: 40px;
         top: 485px;
-    }
+    } */
 
 
 </style>
