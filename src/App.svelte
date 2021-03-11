@@ -49,7 +49,9 @@
         margin: 0 auto;
         font-family: 'Roboto', sans-serif;
         background-color: #F3F3F3;
+        font-size: 24px;
     }
+
     .navcontainer {
         position: absolute;
         right: 100%;

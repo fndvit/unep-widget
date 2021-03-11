@@ -90,6 +90,7 @@
         text-anchor: middle;
         dominant-baseline: bottom;
         fill: #555555;
+        font-size: 16px;
     }
 
     .hover-value {
@@ -97,6 +98,7 @@
         dominant-baseline: bottom;
         fill: #555555;
         font-weight: bold;
+        font-size: 16px;
     }
 
     .line {
@@ -115,6 +117,7 @@
         font-weight: 100;
         fill: #a0a0a0;
         dominant-baseline: hanging;
+        font-size: 16px;
     }
 
     .x-axis-text--min {

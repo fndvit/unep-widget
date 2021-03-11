@@ -24,6 +24,8 @@
         position: relative;
         box-sizing: border-box;
         height: 55px;
+        font-size: 16px;
+        outline: none;
     }
 
     button:not(.selected):hover {

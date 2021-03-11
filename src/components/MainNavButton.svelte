@@ -28,7 +28,8 @@
         font-weight: 300;
         text-align: left;
         padding: 0;
-        outline: inherit;
+        outline: none;
+        font-size: 16px;
     }
 
     button.selected {
