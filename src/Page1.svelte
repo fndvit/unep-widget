@@ -7,7 +7,6 @@
     import CopyMain from './components/CopyMain.svelte';
     import ChartsContainer from './components/ChartsContainer.svelte';
     import GHGCartogram from './maps/GHGCartogram.svelte';
-    import GHGTrendsCartogram from './maps/GHGTrendsCartogram.svelte';
     import {default as copy} from './data/copy.json';
     import {Datasets} from './maps/GHGCartogram.svelte';
 
@@ -56,11 +55,7 @@
 
 
     <div class="cartogram-container">
-        <!-- {#if selectedSection.text === "Total emissions" || selectedSection.text === "Per capita emissions"} -->
         <GHGCartogram dataset={selectedSection.dataset} />
-        <!-- {:else if selectedSection.text === "Country trends"}
-        <GHGTrendsCartogram /> -->
-        <!-- {/if} -->
     </div>
 
 
