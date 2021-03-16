@@ -1,10 +1,12 @@
 import {default as ghgMockData} from './data/ghgdata-tmp.json';
 import {default as percapitaMockData} from './data/percapita-tmp.json';
+import {default as criMockData} from './data/cri-mock.json';
 
 // mock data while we wait for API
 const mockData = {
     ghg: ghgMockData,
-    percapita: percapitaMockData
+    percapita: percapitaMockData,
+    cri: criMockData
 }
 
 async function getMockData<DatumType>(dataset) {
@@ -17,13 +19,21 @@ async function getJsonData(url) {
 
 export const ghg = getMockData<GHGData>('ghg');
 export const percapita = getMockData<GHGData>('percapita');
+export const cri = getMockData<CRIData>('cri');
 
 
 // DATA TYPINGS
 
+export interface CRIData {
+    //code: string,
+    cri_rank: number,
+    fatalities_per_100000_inhabitants: number,
+    losses_per_unit_gdp_percentage: number
+}
+
 export interface YearlyTimeseriesDatum {
     year: number,
-    value: number;
+    value: number
 }
 
 export interface PerCapitaData {

@@ -5,6 +5,7 @@
     import CopyPane from './components/CopyPane.svelte';
     import CopyHeadline from './components/CopyHeadline.svelte';
     import CopyMain from './components/CopyMain.svelte';
+    import ChartsContainer from './components/ChartsContainer.svelte';
     import GHGCartogram from './maps/GHGCartogram.svelte';
     import GHGTrendsCartogram from './maps/GHGTrendsCartogram.svelte';
     import {default as copy} from './data/copy.json';
@@ -65,7 +66,9 @@
 
 </MainViz>
 
-<Page1Charts/>
+<ChartsContainer>
+    <Page1Charts/>
+</ChartsContainer>
 
 <style>
 

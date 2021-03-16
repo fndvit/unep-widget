@@ -1,7 +1,7 @@
 <script lang="ts">
     import MiniLineChart from "./MiniLineChart.svelte";
-    import type {IDatum} from "./MiniLineChart.svelte";
-    export let data: IDatum[];
+    import type { YearlyTimeseriesDatum } from '../data';
+    export let data: YearlyTimeseriesDatum[];
     export let headlineFigure: string;
     export let text: string;
 
@@ -10,11 +10,11 @@
 
 </script>
 
-<main>
+<div>
     <MiniLineChart data={data} />
     <h2>{headlineFigure || data[data.length-1].value.toLocaleString()}</h2>
     <p>{text || dummyText}</p>
-</main>
+</div>
 
 <style>
     h2 {

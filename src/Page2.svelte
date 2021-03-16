@@ -3,6 +3,8 @@
     import Land from './Page2Viz-Land.svelte';
     import Ocean from './Page2Viz-Ocean.svelte';
     import Fires from './Page2Viz-Fires.svelte';
+    import ChartsContainer from './components/ChartsContainer.svelte';
+    import Page2Charts from './Page2Charts.svelte';
 
     const subNavMenuOptions = [
         {text: "Land Temperature", icon: 'test'},
@@ -25,6 +27,10 @@
 <Fires/>
 {/if}
 
+<ChartsContainer>
+    <Page2Charts></Page2Charts>
+
+</ChartsContainer>
 
 <style>
 </style>

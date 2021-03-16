@@ -26,42 +26,36 @@
     }
     </script>
 
-<div class="charts">
-    {#if ghgData}
-    <div class="charts-row">
-        <LineChartWidget data={getDataForCountry('CHN')} headlineFigure="67.1%" text="China's CO2 emissions have risen by 67.12% since 2005" />
-        <LineChartWidget data={getDataForCountry('USA')} />
-        <LineChartWidget data={getDataForCountry('MYS')} />
-        <LineChartWidget data={getDataForCountry('BRA')} />
-    </div>
-    {/if}
+{#if ghgData}
+<div class="p1-charts">
+    <LineChartWidget data={getDataForCountry('CHN')} headlineFigure="67.1%" text="China's CO2 emissions have risen by 67.12% since 2005" />
+    <LineChartWidget data={getDataForCountry('USA')} />
+    <LineChartWidget data={getDataForCountry('MYS')} />
+    <LineChartWidget data={getDataForCountry('BRA')} />
 </div>
+{/if}
 
 <style>
-    .charts {
-        position: relative;
-        z-index: 5;
-        padding-left: 20px;
-    }
 
-    .charts :global(svg) {
-        width: 100%;
-    }
 
-    .charts-row:after {
+    .p1-charts:after {
         content: "";
         clear: both;
         display: table;
     }
 
-    .charts-row > :global(*) {
+    .p1-charts > :global(*) {
         float: left;
         width: calc(25% - 12px);
         margin-right: 16px;
     }
 
-    .charts-row > :global(*:last-child) {
+    .p1-charts > :global(*:last-child) {
         margin: 0;
+    }
+
+    .p1-charts :global(svg) {
+        width: 100%;
     }
 
 </style>
