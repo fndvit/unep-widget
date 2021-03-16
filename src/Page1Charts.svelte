@@ -1,13 +1,20 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import LineChartWidget from './components/LineChartWidget.svelte';
-    import {ghg} from './data';
-    import type {GHGData} from './data';
+    import {ghg, getGHGCategory} from './data';
+    import type {GHGData, YearlyTimeseriesDatum} from './data';
 
     let ghgData: GHGData[];
+    var test_data: YearlyTimeseriesDatum[][];
 
     onMount(async () => {
         ghgData = await ghg;
+        test_data = [
+            getDataForCountry('CHN'),
+            getDataForCountry('USA'),
+            getDataForCountry('MYS'),
+            getDataForCountry('BRA')
+        ];
     });
 
     function getDataForCountry(code: string) {
@@ -24,14 +31,15 @@
             };
         });
     }
+
     </script>
 
 {#if ghgData}
 <div class="p1-charts">
-    <LineChartWidget data={getDataForCountry('CHN')} headlineFigure="67.1%" text="China's CO2 emissions have risen by 67.12% since 2005" />
-    <LineChartWidget data={getDataForCountry('USA')} />
-    <LineChartWidget data={getDataForCountry('MYS')} />
-    <LineChartWidget data={getDataForCountry('BRA')} />
+    <LineChartWidget data={test_data[0]} category={getGHGCategory(test_data[0])} headlineFigure="67.1%" text="China's CO2 emissions have risen by 67.12% since 2005" />
+    <LineChartWidget data={test_data[1]} category={getGHGCategory(test_data[1])}  />
+    <LineChartWidget data={test_data[2]} category={getGHGCategory(test_data[2])}  />
+    <LineChartWidget data={test_data[3]} category={getGHGCategory(test_data[3])}  />
 </div>
 {/if}
 

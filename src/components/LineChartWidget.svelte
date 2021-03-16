@@ -2,16 +2,16 @@
     import MiniLineChart from "./MiniLineChart.svelte";
     import type { YearlyTimeseriesDatum } from '../data';
     export let data: YearlyTimeseriesDatum[];
+    export let category: string;
     export let headlineFigure: string;
     export let text: string;
-
 
     const dummyText = "Lorem ipsum dolor sit amet, sed diam nonummy nibh, consectetuer";
 
 </script>
 
 <div>
-    <MiniLineChart data={data} />
+    <MiniLineChart data={data} category={category} />
     <h2>{headlineFigure || data[data.length-1].value.toLocaleString()}</h2>
     <p>{text || dummyText}</p>
 </div>

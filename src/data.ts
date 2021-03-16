@@ -21,6 +21,18 @@ export const ghg = getMockData<GHGData>('ghg');
 export const percapita = getMockData<GHGData>('percapita');
 export const cri = getMockData<CRIData>('cri');
 
+export function getGHGCategory(data: YearlyTimeseriesDatum[]) {
+    // TODO: set thresholds
+    const first = data[data.length-16].value;
+    const last = data[data.length-1].value;
+    const diff = (last - first) / first;
+    // 0 means the same. 0.5 means 50% increase. 1 means 100% increase. etc
+    if (Math.abs(diff) < 0.05) return 'stable';
+    else if (diff < -0.05) return 'falling';
+    else if (diff > 0.4) return 'climbing-fast';
+    else if (diff > 0.05) return 'climbing';
+    else return 'none';
+}
 
 // DATA TYPINGS
 

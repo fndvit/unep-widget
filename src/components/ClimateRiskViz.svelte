@@ -97,9 +97,9 @@
                 d={curvePath(x_fat + (barWidth/2), y_track2 + (barHeight/2), x_gdp + (barWidth/2), y_track3 - (barHeight/2))} />
         </g>
         <g class="bars">
-            <rect class="bar--{cat_cri}" height={barHeight} width={barWidth} x={x_cri} y={y_track1 - barHeight/2}></rect>
-            <rect class="bar--{cat_fat}" height={barHeight} width={barWidth} x={x_fat} y={y_track2 - barHeight/2}></rect>
-            <rect class="bar--{cat_gdp}" height={barHeight} width={barWidth} x={x_gdp} y={y_track3 - barHeight/2}></rect>
+            <rect class="bar--{cat_cri}" height={barHeight} width={barWidth} x={x_cri} y={y_track1 - barHeight/2} rx="2" />
+            <rect class="bar--{cat_fat}" height={barHeight} width={barWidth} x={x_fat} y={y_track2 - barHeight/2} rx="2" />
+            <rect class="bar--{cat_gdp}" height={barHeight} width={barWidth} x={x_gdp} y={y_track3 - barHeight/2} rx="2" />
         </g>
     </svg>
 </div>
@@ -108,9 +108,6 @@
     .tracks {
         stroke: #DCDCDC;
         stroke-width: 1px;
-    }
-    .bars rect {
-        rx: 2;
     }
 
     .bar--high { fill: #FC7C2D; }

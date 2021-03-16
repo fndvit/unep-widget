@@ -3,6 +3,7 @@
     import type { YearlyTimeseriesDatum } from '../data';
 
     export let data: YearlyTimeseriesDatum[];
+    export let category: string;
 
     const startYear = data[0].year;
     const endYear = data[data.length-1].year;
@@ -45,7 +46,7 @@
         </g>
 
         <g transform="translate(0, {topPadding})">
-            <path class="line" d={linePath}></path>
+            <path class="line stroke--{category}" d={linePath}></path>
         </g>
 
         {#if hoverDatum}
@@ -98,7 +99,6 @@
 
     .line {
         fill: none;
-        stroke: #00AACC;
         stroke-width: 3;
     }
 

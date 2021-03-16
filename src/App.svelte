@@ -62,4 +62,15 @@
         margin: auto;
         position: relative;
     }
+
+    :global(.stroke--stable) { stroke: #BEC7CD; }
+    :global(.stroke--falling) { stroke: #00AACC; }
+    :global(.stroke--climbing) { stroke: #FDCC4D; }
+    :global(.stroke--climbing-fast) { stroke: #FD7D2E; }
+
+    :global(.bg--stable) { background-color: #BEC7CD; }
+    :global(.bg--falling) { background-color: #00AACC; }
+    :global(.bg--climbing) { background-color: #FDCC4D; }
+    :global(.bg--climbing-fast) { background-color: #FD7D2E; }
+
 </style>

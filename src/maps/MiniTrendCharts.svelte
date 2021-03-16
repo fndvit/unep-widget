@@ -3,9 +3,13 @@
 	import * as d3 from '../d3';
     import type { YearlyTimeseriesDatum } from '../data';
 
+    // TODO: optimization these should only be created once on load
+    // currently inconsistent data means some are being created on
+    // the cartogram transition
     console.log('created mtc');
 
     export var data: YearlyTimeseriesDatum[];
+    export var category: string = 'stable';
     export var tileSize = 32;
 
     const years = data.map(d => d.year);
@@ -46,15 +50,16 @@
 
 <svg width={tileSize} height={tileSize} viewBox="0 0 {tileSize} {tileSize}">
 <!-- <rect class="tile-rect" width={tileSize} height={tileSize} /> -->
-    <path class="line" d={_tmp.path} />
+    <path class="line stroke--{category}" d={_tmp.path} />
 </svg>
 
 <style>
 
     path {
         fill: none;
-        stroke: #BDC6CD;
         stroke-width: 2px;
         pointer-events: none;
     }
+
+
 </style>

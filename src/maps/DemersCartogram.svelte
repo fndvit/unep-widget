@@ -17,6 +17,7 @@
 </script>
 
 <script lang="ts">
+    import { getGHGCategory } from '../data';
 
 	import * as d3 from '../d3';
     import MiniTrendCharts from './MiniTrendCharts.svelte';
@@ -53,7 +54,7 @@
             return {
                 ...d,
                 r: radius(d.value),
-                category: getCategory(trendsTimeseriesLookup[d.code]),
+                category: getGHGCategory(trendsTimeseriesLookup[d.code]),
                 trendsTimeseries: trendsTimeseriesLookup[d.code]
             };
         });
@@ -82,18 +83,6 @@
             lineDisplayBlock = false;
             lineFadeIn = false;
         }
-    }
-
-    function getCategory(data: YearlyTimeseriesDatum[]) {
-        const first = data[data.length-16].value;
-        const last = data[data.length-1].value;
-        const diff = (last - first) / first;
-        // 0 means the same. 0.5 means 50% increase. 1 means 100% increase. etc
-        if (Math.abs(diff) < 0.05) return 'stable';
-        else if (diff < -0.05) return 'falling';
-        else if (diff > 0.4) return 'climbing-fast';
-        else if (diff > 0.05) return 'climbing';
-        else return 'none';
     }
 
     let hoverNode: CartogramDataPoint;
@@ -159,7 +148,7 @@
 
     <div class="countries" >
         {#each cartogramData as d (d.code)}
-        <div class="country country--{d.category}"
+        <div class="country bg--{d.category}"
             style={calcStyle(d)}
             on:mouseover={(evt) => onMouseOver(evt, d)}
             on:mouseleave={onMouseOut}
@@ -170,7 +159,7 @@
 
             {#if d.trendsTimeseries}
                 <div class="trendline" >
-                    <MiniTrendCharts data={d.trendsTimeseries} />
+                    <MiniTrendCharts data={d.trendsTimeseries} category={d.category} />
                 </div>
             {/if}
 
@@ -197,7 +186,7 @@
     <div class="hover-chart" class:hover-chart--show={hoverData.showHoverChart}
         style="top: {hoverData.y}px; left: {hoverData.x}px;" >
             <h2>{hoverData.country.name}</h2>
-            <MiniLineChart data={hoverData.country.trendsTimeseries}  />
+            <MiniLineChart data={hoverData.country.trendsTimeseries} category={hoverData.country.category} />
     </div>
     {/if}
 </div>
@@ -275,20 +264,9 @@
     .country {
         position: absolute;
         border-radius: 4px;
-        background-color: #BEC7CD;
         cursor: pointer;
         transition: opacity 0.1s, top 0.2s, left 0.2s, width 0.2s, height 0.2s, background-color 0.2s;
     }
-
-    .country--stable { background-color: #BEC7CD; }
-    .country--falling { background-color: #00AACC; }
-    .country--climbing { background-color: #FDCC4D; }
-    .country--climbing-fast { background-color: #FD7D2E; }
-
-    .country--stable .trendline :global(path) { stroke: #BEC7CD; }
-    .country--falling .trendline :global(path) { stroke: #00AACC; }
-    .country--climbing .trendline :global(path) { stroke: #FDCC4D; }
-    .country--climbing-fast .trendline :global(path) { stroke: #FD7D2E; }
 
 
     /*
