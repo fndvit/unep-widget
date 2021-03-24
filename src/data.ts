@@ -30,7 +30,7 @@ export function getGHGCategory(data: YearlyTimeseriesDatum[]) {
     // 0 means the same. 0.5 means 50% increase. 1 means 100% increase. etc
     if (Math.abs(diff) < 0.2) return 'stable';
     else if (diff < -0.2) return 'falling';
-    else if (diff > 0.4) return 'climbing-fast';
+    else if (diff > 0.7) return 'climbing-fast';
     else if (diff > 0.05) return 'climbing';
     else return 'none';
 }
