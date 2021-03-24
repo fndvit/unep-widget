@@ -46,7 +46,7 @@
         <CopyMain>{selectedSection.copy.summary}</CopyMain>
     </CopyPane>
     {:else if selectedSection.text === "Country trends"}
-    <CopyPane >
+    <CopyPane>
         <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
         <CopyMain>{selectedSection.copy.summary}</CopyMain>
     </CopyPane>
