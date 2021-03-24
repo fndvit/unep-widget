@@ -41,8 +41,8 @@
 
         <g class="x-axis" transform="translate(0, {y(0) + topPadding})">
             <line class="x-axis-line" x1={x(startYear)} x2={x(endYear)} y1="0" y2="0" />
-            <text class="x-axis-text x-axis-text--min" y="2">{startYear}</text>
-            <text class="x-axis-text x-axis-text--max" x={x(endYear)} y="2">{endYear}</text>
+            <text class="x-axis-text x-axis-text--min" y="6">{startYear}</text>
+            <text class="x-axis-text x-axis-text--max" x={x(endYear)} y="6">{endYear}</text>
         </g>
 
         <g transform="translate(0, {topPadding})">
