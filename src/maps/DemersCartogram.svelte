@@ -292,9 +292,15 @@
     } */
 
     .hover-chart h2 {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 500;
         margin: 0;
+        text-align: left;
+        width: 100%;
+        padding-left: 5px;
+        padding-top: 2px;
+        margin-bottom: -10px;
+
     }
     .hover-chart {
         position: absolute;

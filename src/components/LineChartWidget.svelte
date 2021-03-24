@@ -19,7 +19,7 @@
 <style>
     h2 {
         text-align: left;
-        font-size: 48px;
+        font-size: 38px;
         font-weight: 300;
         color: #111;
         margin-bottom: 8px;

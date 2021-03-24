@@ -50,6 +50,7 @@
         font-family: 'Roboto', sans-serif;
         background-color: #F3F3F3;
         font-size: 24px;
+        max-height: 760px;
     }
 
     .navcontainer {
@@ -58,7 +59,7 @@
         width: 200px;
     }
     .content {
-        max-width: 1200px;
+        max-width: 1100px;
         margin: auto;
         position: relative;
     }

@@ -9,5 +9,6 @@
         position: relative;
         height: 430px;
         padding-left: 20px;
+        height: 420px;
     }
 </style>

@@ -15,15 +15,14 @@
     button {
         border: 0;
         border-radius: 0;
-        padding: 20px;
-        padding-bottom: 10px;
+        padding: 16px;
         background: none;
         border-bottom: 1px solid #dcdcdc;
         margin: 0;
         display: block;
         position: relative;
         box-sizing: border-box;
-        height: 55px;
+        height: 49px;
         font-size: 16px;
         outline: none;
     }

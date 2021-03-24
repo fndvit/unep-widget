@@ -17,11 +17,10 @@
 <style>
 
     button {
-        display: block;
         width: 100%;
         position: relative;
         margin: 0;
-        height: 56px;
+        height: 50px;
         box-sizing: border-box;
         border: none;
         color: #222;
@@ -30,6 +29,7 @@
         padding: 0;
         outline: none;
         font-size: 16px;
+        line-height: 18px;
     }
 
     button.selected {
@@ -55,6 +55,9 @@
         bottom: 0;
         right: 0;
         border: 1px solid #DCDCDC;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
     }
 
     button.selected .buttoncontent {
@@ -63,7 +66,7 @@
     }
 
     button:not(.selected) .buttoncontent {
-        width: 56px;
+        width: 50px;
     }
 
     button:not(.selected) .buttoncontent .text {
@@ -83,23 +86,19 @@
     }
 
     .text {
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        padding: 10px;
         width: 120px;
     }
 
     i {
-        width: 56px;
-        height: 56px;
-        box-sizing: border-box;
+        width: 50px;
+        height: 50px;
         padding: 12px;
+        box-sizing: border-box;
         position: absolute;
         right: 0;
-        top: 0;
-        display: inline-block;
+
+        /* display: inline-block; */
+        display: block;
         fill: #999999;
     }
 

@@ -69,20 +69,12 @@
 
     .cartogram-container {
         width: 700px;
-        margin-top: -80px;
-        position: absolute;
-        left: 500px;
+        float: left;
+        margin-right: -100px; /* right-side overflow */
     }
 
     .cartogram-container :global(svg) {
         width: 100%;
     }
-
-    /* .cartogram-legend {
-        position: absolute;
-        left: 40px;
-        top: 485px;
-    } */
-
 
 </style>
