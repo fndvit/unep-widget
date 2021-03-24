@@ -1,2 +1,3 @@
 import test from "./test.svg";
-export default { test };
+import downarrow from './downarrow.svg'
+export default { test, downarrow };
