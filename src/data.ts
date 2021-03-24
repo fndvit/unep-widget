@@ -64,7 +64,8 @@ export interface CountryBaseData {
 }
 
 export interface CRIData {
-    //code: string,
+    code: string,
+    country: string,
     cri_rank: number,
     fatalities_per_100000_inhabitants: number,
     losses_per_unit_gdp_percentage: number

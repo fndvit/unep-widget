@@ -1,7 +1,7 @@
 [
     {
       "cri_rank": 1,
-      "coiuntry": "Mozambique",
+      "country": "Mozambique",
       "cri_score": 2.67,
       "fatalities_in_2019": 2,
       "fatalities_per_100000_inhabitants": 3,
@@ -10,7 +10,7 @@
     },
     {
       "cri_rank": 3,
-      "coiuntry": "The Bahamas",
+      "country": "The Bahamas",
       "cri_score": 6.5,
       "fatalities_in_2019": 30,
       "fatalities_per_100000_inhabitants": 1,
@@ -19,7 +19,7 @@
     },
     {
       "cri_rank": 4,
-      "coiuntry": "Japan",
+      "country": "Japan",
       "cri_score": 14.5,
       "fatalities_in_2019": 9,
       "fatalities_per_100000_inhabitants": 20,
@@ -28,7 +28,7 @@
     },
     {
       "cri_rank": 5,
-      "coiuntry": "Malawi",
+      "country": "Malawi",
       "cri_score": 15.17,
       "fatalities_in_2019": 20,
       "fatalities_per_100000_inhabitants": 13,
@@ -37,7 +37,7 @@
     },
     {
       "cri_rank": 6,
-      "coiuntry": "Islamic Republic of Af-\nghanistan",
+      "country": "Islamic Republic of Af-\nghanistan",
       "cri_score": 16,
       "fatalities_in_2019": 11,
       "fatalities_per_100000_inhabitants": 11,
@@ -46,7 +46,7 @@
     },
     {
       "cri_rank": 7,
-      "coiuntry": "India",
+      "country": "India",
       "cri_score": 16.67,
       "fatalities_in_2019": 1,
       "fatalities_per_100000_inhabitants": 36,
@@ -55,7 +55,7 @@
     },
     {
       "cri_rank": 8,
-      "coiuntry": "South Sudan",
+      "country": "South Sudan",
       "cri_score": 17.33,
       "fatalities_in_2019": 12,
       "fatalities_per_100000_inhabitants": 4,
@@ -64,7 +64,7 @@
     },
     {
       "cri_rank": 9,
-      "coiuntry": "Niger",
+      "country": "Niger",
       "cri_score": 18.17,
       "fatalities_in_2019": 17,
       "fatalities_per_100000_inhabitants": 12,
@@ -73,7 +73,7 @@
     },
     {
       "cri_rank": 10,
-      "coiuntry": "Bolivia",
+      "country": "Bolivia",
       "cri_score": 19.67,
       "fatalities_in_2019": 43,
       "fatalities_per_100000_inhabitants": 15,
@@ -82,7 +82,7 @@
     },
     {
       "cri_rank": 11,
-      "coiuntry": "Sudan",
+      "country": "Sudan",
       "cri_score": 19.83,
       "fatalities_in_2019": 22,
       "fatalities_per_100000_inhabitants": 25,
@@ -91,7 +91,7 @@
     },
     {
       "cri_rank": 12,
-      "coiuntry": "Nepal",
+      "country": "Nepal",
       "cri_score": 20,
       "fatalities_in_2019": 10,
       "fatalities_per_100000_inhabitants": 7,
@@ -100,7 +100,7 @@
     },
     {
       "cri_rank": 13,
-      "coiuntry": "Bangladesh",
+      "country": "Bangladesh",
       "cri_score": 23.5,
       "fatalities_in_2019": 7,
       "fatalities_per_100000_inhabitants": 29,
@@ -109,7 +109,7 @@
     },
     {
       "cri_rank": 14,
-      "coiuntry": "Indonesia",
+      "country": "Indonesia",
       "cri_score": 24.83,
       "fatalities_in_2019": 3,
       "fatalities_per_100000_inhabitants": 31,
@@ -118,7 +118,7 @@
     },
     {
       "cri_rank": 15,
-      "coiuntry": "Pakistan",
+      "country": "Pakistan",
       "cri_score": 25,
       "fatalities_in_2019": 8,
       "fatalities_per_100000_inhabitants": 39,
@@ -127,7 +127,7 @@
     },
     {
       "cri_rank": 16,
-      "coiuntry": "Comoros",
+      "country": "Comoros",
       "cri_score": 25.33,
       "fatalities_in_2019": 67,
       "fatalities_per_100000_inhabitants": 6,
@@ -136,7 +136,7 @@
     },
     {
       "cri_rank": 17,
-      "coiuntry": "Philippines",
+      "country": "Philippines",
       "cri_score": 26.67,
       "fatalities_in_2019": 13,
       "fatalities_per_100000_inhabitants": 40,
@@ -145,7 +145,7 @@
     },
     {
       "cri_rank": 18,
-      "coiuntry": "Islamic Republic of\nIran",
+      "country": "Islamic Republic of\nIran",
       "cri_score": 27,
       "fatalities_in_2019": 22,
       "fatalities_per_100000_inhabitants": 45,
@@ -154,7 +154,7 @@
     },
     {
       "cri_rank": 19,
-      "coiuntry": "Australia",
+      "country": "Australia",
       "cri_score": 28,
       "fatalities_in_2019": 37,
       "fatalities_per_100000_inhabitants": 37,
@@ -163,7 +163,7 @@
     },
     {
       "cri_rank": 20,
-      "coiuntry": "Paraguay",
+      "country": "Paraguay",
       "cri_score": 30,
       "fatalities_in_2019": 52,
       "fatalities_per_100000_inhabitants": 22,
@@ -172,7 +172,7 @@
     },
     {
       "cri_rank": 21,
-      "coiuntry": "Myanmar",
+      "country": "Myanmar",
       "cri_score": 31.33,
       "fatalities_in_2019": 24,
       "fatalities_per_100000_inhabitants": 38,
@@ -181,7 +181,7 @@
     },
     {
       "cri_rank": 22,
-      "coiuntry": "Mongolia",
+      "country": "Mongolia",
       "cri_score": 31.67,
       "fatalities_in_2019": 50,
       "fatalities_per_100000_inhabitants": 9,
@@ -190,7 +190,7 @@
     },
     {
       "cri_rank": 23,
-      "coiuntry": "Angola",
+      "country": "Angola",
       "cri_score": 32.33,
       "fatalities_in_2019": 44,
       "fatalities_per_100000_inhabitants": 50,
@@ -199,7 +199,7 @@
     },
     {
       "cri_rank": 24,
-      "coiuntry": "South Africa",
+      "country": "South Africa",
       "cri_score": 32.5,
       "fatalities_in_2019": 16,
       "fatalities_per_100000_inhabitants": 26,
@@ -208,7 +208,7 @@
     },
     {
       "cri_rank": 25,
-      "coiuntry": "Chile",
+      "country": "Chile",
       "cri_score": 33,
       "fatalities_in_2019": 52,
       "fatalities_per_100000_inhabitants": 59,
@@ -217,7 +217,7 @@
     },
     {
       "cri_rank": 25,
-      "coiuntry": "Kenya",
+      "country": "Kenya",
       "cri_score": 33,
       "fatalities_in_2019": 15,
       "fatalities_per_100000_inhabitants": 16,
@@ -226,7 +226,7 @@
     },
     {
       "cri_rank": 27,
-      "coiuntry": "Brazil",
+      "country": "Brazil",
       "cri_score": 33.67,
       "fatalities_in_2019": 5,
       "fatalities_per_100000_inhabitants": 32,
@@ -235,7 +235,7 @@
     },
     {
       "cri_rank": 28,
-      "coiuntry": "Colombia",
+      "country": "Colombia",
       "cri_score": 36.33,
       "fatalities_in_2019": 17,
       "fatalities_per_100000_inhabitants": 18,
@@ -244,7 +244,7 @@
     },
     {
       "cri_rank": 29,
-      "coiuntry": "Madagascar",
+      "country": "Madagascar",
       "cri_score": 40.33,
       "fatalities_in_2019": 19,
       "fatalities_per_100000_inhabitants": 14,
@@ -253,7 +253,7 @@
     },
     {
       "cri_rank": 30,
-      "coiuntry": "Sri Lanka",
+      "country": "Sri Lanka",
       "cri_score": 41.83,
       "fatalities_in_2019": 33,
       "fatalities_per_100000_inhabitants": 24,
@@ -262,7 +262,7 @@
     },
     {
       "cri_rank": 31,
-      "coiuntry": "Uganda",
+      "country": "Uganda",
       "cri_score": 42.17,
       "fatalities_in_2019": 21,
       "fatalities_per_100000_inhabitants": 19,
@@ -271,7 +271,7 @@
     },
     {
       "cri_rank": 32,
-      "coiuntry": "China",
+      "country": "China",
       "cri_score": 42.83,
       "fatalities_in_2019": 4,
       "fatalities_per_100000_inhabitants": 83,
@@ -280,7 +280,7 @@
     },
     {
       "cri_rank": 32,
-      "coiuntry": "Spain",
+      "country": "Spain",
       "cri_score": 42.83,
       "fatalities_in_2019": 47,
       "fatalities_per_100000_inhabitants": 69,
@@ -289,7 +289,7 @@
     },
     {
       "cri_rank": 34,
-      "coiuntry": "Thailand",
+      "country": "Thailand",
       "cri_score": 43.17,
       "fatalities_in_2019": 36,
       "fatalities_per_100000_inhabitants": 64,
@@ -298,7 +298,7 @@
     },
     {
       "cri_rank": 35,
-      "coiuntry": "Italy",
+      "country": "Italy",
       "cri_score": 43.5,
       "fatalities_in_2019": 46,
       "fatalities_per_100000_inhabitants": 70,
@@ -307,7 +307,7 @@
     },
     {
       "cri_rank": 36,
-      "coiuntry": "Greece",
+      "country": "Greece",
       "cri_score": 45,
       "fatalities_in_2019": 50,
       "fatalities_per_100000_inhabitants": 34,
@@ -316,7 +316,7 @@
     },
     {
       "cri_rank": 37,
-      "coiuntry": "Portugal",
+      "country": "Portugal",
       "cri_score": 48.33,
       "fatalities_in_2019": 67,
       "fatalities_per_100000_inhabitants": 61,
@@ -325,7 +325,7 @@
     },
     {
       "cri_rank": 38,
-      "coiuntry": "Vietnam",
+      "country": "Vietnam",
       "cri_score": 50.17,
       "fatalities_in_2019": 25,
       "fatalities_per_100000_inhabitants": 57,
@@ -334,7 +334,7 @@
     },
     {
       "cri_rank": 39,
-      "coiuntry": "Russia",
+      "country": "Russia",
       "cri_score": 50.67,
       "fatalities_in_2019": 33,
       "fatalities_per_100000_inhabitants": 80,
@@ -343,7 +343,7 @@
     },
     {
       "cri_rank": 40,
-      "coiuntry": "France",
+      "country": "France",
       "cri_score": 52.5,
       "fatalities_in_2019": 41,
       "fatalities_per_100000_inhabitants": 68,
@@ -352,7 +352,7 @@
     },
     {
       "cri_rank": 41,
-      "coiuntry": "The Gambia",
+      "country": "The Gambia",
       "cri_score": 53.17,
       "fatalities_in_2019": 80,
       "fatalities_per_100000_inhabitants": 33,
@@ -361,7 +361,7 @@
     },
     {
       "cri_rank": 42,
-      "coiuntry": "Ghana",
+      "country": "Ghana",
       "cri_score": 53.33,
       "fatalities_in_2019": 29,
       "fatalities_per_100000_inhabitants": 30,
@@ -370,7 +370,7 @@
     },
     {
       "cri_rank": 42,
-      "coiuntry": "Rwanda",
+      "country": "Rwanda",
       "cri_score": 53.33,
       "fatalities_in_2019": 45,
       "fatalities_per_100000_inhabitants": 21,
@@ -379,7 +379,7 @@
     },
     {
       "cri_rank": 44,
-      "coiuntry": "Lebanon",
+      "country": "Lebanon",
       "cri_score": 54.67,
       "fatalities_in_2019": 72,
       "fatalities_per_100000_inhabitants": 55,
@@ -388,7 +388,7 @@
     },
     {
       "cri_rank": 45,
-      "coiuntry": "Lao People's Demo-\ncratic Republic",
+      "country": "Lao People's Demo-\ncratic Republic",
       "cri_score": 55.17,
       "fatalities_in_2019": 57,
       "fatalities_per_100000_inhabitants": 28,
@@ -397,7 +397,7 @@
     },
     {
       "cri_rank": 46,
-      "coiuntry": "Peru",
+      "country": "Peru",
       "cri_score": 56.33,
       "fatalities_in_2019": 37,
       "fatalities_per_100000_inhabitants": 43,
@@ -406,7 +406,7 @@
     },
     {
       "cri_rank": 47,
-      "coiuntry": "Austria",
+      "country": "Austria",
       "cri_score": 56.83,
       "fatalities_in_2019": 84,
       "fatalities_per_100000_inhabitants": 79,
@@ -415,7 +415,7 @@
     },
     {
       "cri_rank": 48,
-      "coiuntry": "Bosnia and Herze-",
+      "country": "Bosnia and Herze-",
       "cri_score": 57.83,
       "fatalities_in_2019": 98,
       "fatalities_per_100000_inhabitants": 82,
@@ -424,7 +424,7 @@
     },
     {
       "cri_rank": 49,
-      "coiuntry": "Nicaragua",
+      "country": "Nicaragua",
       "cri_score": 58,
       "fatalities_in_2019": 72,
       "fatalities_per_100000_inhabitants": 52,
@@ -433,7 +433,7 @@
     },
     {
       "cri_rank": 51,
-      "coiuntry": "Democratic Republic\nof Congo",
+      "country": "Democratic Republic\nof Congo",
       "cri_score": 58.67,
       "fatalities_in_2019": 14,
       "fatalities_per_100000_inhabitants": 41,
@@ -442,7 +442,7 @@
     },
     {
       "cri_rank": 51,
-      "coiuntry": "Papua New Guinea",
+      "country": "Papua New Guinea",
       "cri_score": 58.67,
       "fatalities_in_2019": 49,
       "fatalities_per_100000_inhabitants": 17,
@@ -451,7 +451,7 @@
     },
     {
       "cri_rank": 53,
-      "coiuntry": "Republic of Yemen",
+      "country": "Republic of Yemen",
       "cri_score": 59.33,
       "fatalities_in_2019": 42,
       "fatalities_per_100000_inhabitants": 46,
@@ -460,7 +460,7 @@
     },
     {
       "cri_rank": 54,
-      "coiuntry": "Mexico",
+      "country": "Mexico",
       "cri_score": 59.5,
       "fatalities_in_2019": 31,
       "fatalities_per_100000_inhabitants": 73,
@@ -469,7 +469,7 @@
     },
     {
       "cri_rank": 55,
-      "coiuntry": "Argentina",
+      "country": "Argentina",
       "cri_score": 60,
       "fatalities_in_2019": 60,
       "fatalities_per_100000_inhabitants": 86,
@@ -478,7 +478,7 @@
     },
     {
       "cri_rank": 56,
-      "coiuntry": "Germany",
+      "country": "Germany",
       "cri_score": 61.33,
       "fatalities_in_2019": 65,
       "fatalities_per_100000_inhabitants": 102,
@@ -487,7 +487,7 @@
     },
     {
       "cri_rank": 57,
-      "coiuntry": "Burundi",
+      "country": "Burundi",
       "cri_score": 61.83,
       "fatalities_in_2019": 26,
       "fatalities_per_100000_inhabitants": 10,
@@ -496,7 +496,7 @@
     },
     {
       "cri_rank": 58,
-      "coiuntry": "Mauritania",
+      "country": "Mauritania",
       "cri_score": 63,
       "fatalities_in_2019": 76,
       "fatalities_per_100000_inhabitants": 44,
@@ -505,7 +505,7 @@
     },
     {
       "cri_rank": 59,
-      "coiuntry": "Zambia",
+      "country": "Zambia",
       "cri_score": 63.33,
       "fatalities_in_2019": 80,
       "fatalities_per_100000_inhabitants": 90,
@@ -514,7 +514,7 @@
     },
     {
       "cri_rank": 60,
-      "coiuntry": "Korea. Republic of",
+      "country": "Korea. Republic of",
       "cri_score": 64,
       "fatalities_in_2019": 52,
       "fatalities_per_100000_inhabitants": 81,
@@ -523,7 +523,7 @@
     },
     {
       "cri_rank": 61,
-      "coiuntry": "Lesotho",
+      "country": "Lesotho",
       "cri_score": 64.67,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -532,7 +532,7 @@
     },
     {
       "cri_rank": 62,
-      "coiuntry": "Canada",
+      "country": "Canada",
       "cri_score": 65.67,
       "fatalities_in_2019": 90,
       "fatalities_per_100000_inhabitants": 104,
@@ -541,7 +541,7 @@
     },
     {
       "cri_rank": 62,
-      "coiuntry": "Guatemala",
+      "country": "Guatemala",
       "cri_score": 65.67,
       "fatalities_in_2019": 60,
       "fatalities_per_100000_inhabitants": 66,
@@ -550,7 +550,7 @@
     },
     {
       "cri_rank": 64,
-      "coiuntry": "Belgium",
+      "country": "Belgium",
       "cri_score": 66,
       "fatalities_in_2019": 84,
       "fatalities_per_100000_inhabitants": 85,
@@ -559,7 +559,7 @@
     },
     {
       "cri_rank": 64,
-      "coiuntry": "Turkey",
+      "country": "Turkey",
       "cri_score": 66,
       "fatalities_in_2019": 40,
       "fatalities_per_100000_inhabitants": 71,
@@ -568,7 +568,7 @@
     },
     {
       "cri_rank": 66,
-      "coiuntry": "New Zealand",
+      "country": "New Zealand",
       "cri_score": 66.33,
       "fatalities_in_2019": 90,
       "fatalities_per_100000_inhabitants": 76,
@@ -577,7 +577,7 @@
     },
     {
       "cri_rank": 67,
-      "coiuntry": "Tanzania",
+      "country": "Tanzania",
       "cri_score": 66.5,
       "fatalities_in_2019": 27,
       "fatalities_per_100000_inhabitants": 47,
@@ -586,7 +586,7 @@
     },
     {
       "cri_rank": 68,
-      "coiuntry": "Cameroon",
+      "country": "Cameroon",
       "cri_score": 67.33,
       "fatalities_in_2019": 32,
       "fatalities_per_100000_inhabitants": 27,
@@ -595,7 +595,7 @@
     },
     {
       "cri_rank": 68,
-      "coiuntry": "Malta",
+      "country": "Malta",
       "cri_score": 67.33,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -604,7 +604,7 @@
     },
     {
       "cri_rank": 70,
-      "coiuntry": "Central African Repub-",
+      "country": "Central African Repub-",
       "cri_score": 67.5,
       "fatalities_in_2019": 98,
       "fatalities_per_100000_inhabitants": 92,
@@ -613,7 +613,7 @@
     },
     {
       "cri_rank": 70,
-      "coiuntry": "Senegal",
+      "country": "Senegal",
       "cri_score": 67.5,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -622,7 +622,7 @@
     },
     {
       "cri_rank": 72,
-      "coiuntry": "Ethiopia",
+      "country": "Ethiopia",
       "cri_score": 69.33,
       "fatalities_in_2019": 39,
       "fatalities_per_100000_inhabitants": 74,
@@ -631,7 +631,7 @@
     },
     {
       "cri_rank": 73,
-      "coiuntry": "Nigeria",
+      "country": "Nigeria",
       "cri_score": 70,
       "fatalities_in_2019": 27,
       "fatalities_per_100000_inhabitants": 84,
@@ -640,7 +640,7 @@
     },
     {
       "cri_rank": 74,
-      "coiuntry": "Luxembourg",
+      "country": "Luxembourg",
       "cri_score": 72.83,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -649,7 +649,7 @@
     },
     {
       "cri_rank": 75,
-      "coiuntry": "Djibouti",
+      "country": "Djibouti",
       "cri_score": 73,
       "fatalities_in_2019": 64,
       "fatalities_per_100000_inhabitants": 5,
@@ -658,7 +658,7 @@
     },
     {
       "cri_rank": 75,
-      "coiuntry": "Fiji",
+      "country": "Fiji",
       "cri_score": 73,
       "fatalities_in_2019": 90,
       "fatalities_per_100000_inhabitants": 23,
@@ -667,7 +667,7 @@
     },
     {
       "cri_rank": 75,
-      "coiuntry": "Saudi Arabia",
+      "country": "Saudi Arabia",
       "cri_score": 73,
       "fatalities_in_2019": 48,
       "fatalities_per_100000_inhabitants": 65,
@@ -676,7 +676,7 @@
     },
     {
       "cri_rank": 75,
-      "coiuntry": "Vanuatu",
+      "country": "Vanuatu",
       "cri_score": 73,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -685,7 +685,7 @@
     },
     {
       "cri_rank": 79,
-      "coiuntry": "Honduras",
+      "country": "Honduras",
       "cri_score": 73.33,
       "fatalities_in_2019": 90,
       "fatalities_per_100000_inhabitants": 93,
@@ -694,7 +694,7 @@
     },
     {
       "cri_rank": 80,
-      "coiuntry": "Libya",
+      "country": "Libya",
       "cri_score": 73.67,
       "fatalities_in_2019": 67,
       "fatalities_per_100000_inhabitants": 48,
@@ -703,7 +703,7 @@
     },
     {
       "cri_rank": 81,
-      "coiuntry": "Croatia",
+      "country": "Croatia",
       "cri_score": 75.17,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -712,7 +712,7 @@
     },
     {
       "cri_rank": 82,
-      "coiuntry": "Denmark",
+      "country": "Denmark",
       "cri_score": 75.5,
       "fatalities_in_2019": 72,
       "fatalities_per_100000_inhabitants": 49,
@@ -721,7 +721,7 @@
     },
     {
       "cri_rank": 83,
-      "coiuntry": "Estonia",
+      "country": "Estonia",
       "cri_score": 75.67,
       "fatalities_in_2019": 98,
       "fatalities_per_100000_inhabitants": 60,
@@ -730,7 +730,7 @@
     },
     {
       "cri_rank": 84,
-      "coiuntry": "Cambodia",
+      "country": "Cambodia",
       "cri_score": 75.83,
       "fatalities_in_2019": 60,
       "fatalities_per_100000_inhabitants": 63,
@@ -739,7 +739,7 @@
     },
     {
       "cri_rank": 85,
-      "coiuntry": "Ukraine",
+      "country": "Ukraine",
       "cri_score": 76.17,
       "fatalities_in_2019": 76,
       "fatalities_per_100000_inhabitants": 100,
@@ -748,7 +748,7 @@
     },
     {
       "cri_rank": 86,
-      "coiuntry": "Sierra Leone",
+      "country": "Sierra Leone",
       "cri_score": 76.5,
       "fatalities_in_2019": 67,
       "fatalities_per_100000_inhabitants": 54,
@@ -757,7 +757,7 @@
     },
     {
       "cri_rank": 87,
-      "coiuntry": "Slovak Republic",
+      "country": "Slovak Republic",
       "cri_score": 77.17,
       "fatalities_in_2019": 76,
       "fatalities_per_100000_inhabitants": 53,
@@ -766,7 +766,7 @@
     },
     {
       "cri_rank": 88,
-      "coiuntry": "Dominica",
+      "country": "Dominica",
       "cri_score": 77.67,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -775,7 +775,7 @@
     },
     {
       "cri_rank": 89,
-      "coiuntry": "Montenegro",
+      "country": "Montenegro",
       "cri_score": 78,
       "fatalities_in_2019": 80,
       "fatalities_per_100000_inhabitants": 8,
@@ -784,7 +784,7 @@
     },
     {
       "cri_rank": 90,
-      "coiuntry": "Mali",
+      "country": "Mali",
       "cri_score": 79.67,
       "fatalities_in_2019": 52,
       "fatalities_per_100000_inhabitants": 58,
@@ -793,7 +793,7 @@
     },
     {
       "cri_rank": 90,
-      "coiuntry": "Morocco",
+      "country": "Morocco",
       "cri_score": 79.67,
       "fatalities_in_2019": 35,
       "fatalities_per_100000_inhabitants": 42,
@@ -802,7 +802,7 @@
     },
     {
       "cri_rank": 90,
-      "coiuntry": "Uruguay",
+      "country": "Uruguay",
       "cri_score": 79.67,
       "fatalities_in_2019": 84,
       "fatalities_per_100000_inhabitants": 56,
@@ -811,7 +811,7 @@
     },
     {
       "cri_rank": 93,
-      "coiuntry": "Poland",
+      "country": "Poland",
       "cri_score": 80,
       "fatalities_in_2019": 76,
       "fatalities_per_100000_inhabitants": 97,
@@ -820,7 +820,7 @@
     },
     {
       "cri_rank": 94,
-      "coiuntry": "Iraq",
+      "country": "Iraq",
       "cri_score": 84.33,
       "fatalities_in_2019": 56,
       "fatalities_per_100000_inhabitants": 77,
@@ -829,7 +829,7 @@
     },
     {
       "cri_rank": 95,
-      "coiuntry": "Oman",
+      "country": "Oman",
       "cri_score": 84.67,
       "fatalities_in_2019": 67,
       "fatalities_per_100000_inhabitants": 35,
@@ -838,7 +838,7 @@
     },
     {
       "cri_rank": 96,
-      "coiuntry": "Switzerland",
+      "country": "Switzerland",
       "cri_score": 85.5,
       "fatalities_in_2019": 90,
       "fatalities_per_100000_inhabitants": 87,
@@ -847,7 +847,7 @@
     },
     {
       "cri_rank": 97,
-      "coiuntry": "Hungary",
+      "country": "Hungary",
       "cri_score": 85.83,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -856,7 +856,7 @@
     },
     {
       "cri_rank": 98,
-      "coiuntry": "Latvia",
+      "country": "Latvia",
       "cri_score": 86.83,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -865,7 +865,7 @@
     },
     {
       "cri_rank": 99,
-      "coiuntry": "Malaysia",
+      "country": "Malaysia",
       "cri_score": 87.33,
       "fatalities_in_2019": 58,
       "fatalities_per_100000_inhabitants": 78,
@@ -874,7 +874,7 @@
     },
     {
       "cri_rank": 100,
-      "coiuntry": "Iceland",
+      "country": "Iceland",
       "cri_score": 88.83,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -883,7 +883,7 @@
     },
     {
       "cri_rank": 101,
-      "coiuntry": "Liberia",
+      "country": "Liberia",
       "cri_score": 89.5,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -892,7 +892,7 @@
     },
     {
       "cri_rank": 102,
-      "coiuntry": "United Kingdom",
+      "country": "United Kingdom",
       "cri_score": 90.83,
       "fatalities_in_2019": 84,
       "fatalities_per_100000_inhabitants": 105,
@@ -901,7 +901,7 @@
     },
     {
       "cri_rank": 103,
-      "coiuntry": "El Salvador",
+      "country": "El Salvador",
       "cri_score": 91.83,
       "fatalities_in_2019": 80,
       "fatalities_per_100000_inhabitants": 67,
@@ -910,7 +910,7 @@
     },
     {
       "cri_rank": 103,
-      "coiuntry": "Slovenia",
+      "country": "Slovenia",
       "cri_score": 91.83,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -919,7 +919,7 @@
     },
     {
       "cri_rank": 105,
-      "coiuntry": "Serbia",
+      "country": "Serbia",
       "cri_score": 92,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -928,7 +928,7 @@
     },
     {
       "cri_rank": 106,
-      "coiuntry": "Norway",
+      "country": "Norway",
       "cri_score": 92.33,
       "fatalities_in_2019": 98,
       "fatalities_per_100000_inhabitants": 94,
@@ -937,7 +937,7 @@
     },
     {
       "cri_rank": 107,
-      "coiuntry": "Czech Republic",
+      "country": "Czech Republic",
       "cri_score": 92.83,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -946,7 +946,7 @@
     },
     {
       "cri_rank": 108,
-      "coiuntry": "Georgia",
+      "country": "Georgia",
       "cri_score": 93.17,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -955,7 +955,7 @@
     },
     {
       "cri_rank": 109,
-      "coiuntry": "Netherlands",
+      "country": "Netherlands",
       "cri_score": 97.17,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -964,7 +964,7 @@
     },
     {
       "cri_rank": 109,
-      "coiuntry": "Republic of Congo",
+      "country": "Republic of Congo",
       "cri_score": 97.17,
       "fatalities_in_2019": 98,
       "fatalities_per_100000_inhabitants": 89,
@@ -973,7 +973,7 @@
     },
     {
       "cri_rank": 111,
-      "coiuntry": "Maldives",
+      "country": "Maldives",
       "cri_score": 97.33,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -982,7 +982,7 @@
     },
     {
       "cri_rank": 112,
-      "coiuntry": "Finland",
+      "country": "Finland",
       "cri_score": 97.83,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -991,7 +991,7 @@
     },
     {
       "cri_rank": 113,
-      "coiuntry": "Armenia",
+      "country": "Armenia",
       "cri_score": 98.17,
       "fatalities_in_2019": 90,
       "fatalities_per_100000_inhabitants": 62,
@@ -1000,7 +1000,7 @@
     },
     {
       "cri_rank": 113,
-      "coiuntry": "Namibia",
+      "country": "Namibia",
       "cri_score": 98.17,
       "fatalities_in_2019": 98,
       "fatalities_per_100000_inhabitants": 75,
@@ -1009,7 +1009,7 @@
     },
     {
       "cri_rank": 115,
-      "coiuntry": "Guinea",
+      "country": "Guinea",
       "cri_score": 99.17,
       "fatalities_in_2019": 72,
       "fatalities_per_100000_inhabitants": 72,
@@ -1018,7 +1018,7 @@
     },
     {
       "cri_rank": 116,
-      "coiuntry": "Chinese Taipei",
+      "country": "Chinese Taipei",
       "cri_score": 99.67,
       "fatalities_in_2019": 84,
       "fatalities_per_100000_inhabitants": 98,
@@ -1027,7 +1027,7 @@
     },
     {
       "cri_rank": 117,
-      "coiuntry": "Botswana",
+      "country": "Botswana",
       "cri_score": 99.83,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1036,7 +1036,7 @@
     },
     {
       "cri_rank": 118,
-      "coiuntry": "Sweden",
+      "country": "Sweden",
       "cri_score": 100.5,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1045,7 +1045,7 @@
     },
     {
       "cri_rank": 119,
-      "coiuntry": "Bulgaria",
+      "country": "Bulgaria",
       "cri_score": 101,
       "fatalities_in_2019": 98,
       "fatalities_per_100000_inhabitants": 96,
@@ -1054,7 +1054,7 @@
     },
     {
       "cri_rank": 120,
-      "coiuntry": "Egypt",
+      "country": "Egypt",
       "cri_score": 102,
       "fatalities_in_2019": 58,
       "fatalities_per_100000_inhabitants": 99,
@@ -1063,7 +1063,7 @@
     },
     {
       "cri_rank": 121,
-      "coiuntry": "Ecuador",
+      "country": "Ecuador",
       "cri_score": 103.83,
       "fatalities_in_2019": 98,
       "fatalities_per_100000_inhabitants": 103,
@@ -1072,7 +1072,7 @@
     },
     {
       "cri_rank": 122,
-      "coiuntry": "Tajikistan",
+      "country": "Tajikistan",
       "cri_score": 104.33,
       "fatalities_in_2019": 90,
       "fatalities_per_100000_inhabitants": 91,
@@ -1081,7 +1081,7 @@
     },
     {
       "cri_rank": 123,
-      "coiuntry": "Ireland",
+      "country": "Ireland",
       "cri_score": 104.5,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1090,7 +1090,7 @@
     },
     {
       "cri_rank": 123,
-      "coiuntry": "Romania",
+      "country": "Romania",
       "cri_score": 104.5,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1099,7 +1099,7 @@
     },
     {
       "cri_rank": 125,
-      "coiuntry": "Algeria",
+      "country": "Algeria",
       "cri_score": 105.17,
       "fatalities_in_2019": 65,
       "fatalities_per_100000_inhabitants": 95,
@@ -1108,7 +1108,7 @@
     },
     {
       "cri_rank": 125,
-      "coiuntry": "Mauritius",
+      "country": "Mauritius",
       "cri_score": 105.17,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1117,7 +1117,7 @@
     },
     {
       "cri_rank": 127,
-      "coiuntry": "Panama",
+      "country": "Panama",
       "cri_score": 108.33,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1126,7 +1126,7 @@
     },
     {
       "cri_rank": 128,
-      "coiuntry": "Israel",
+      "country": "Israel",
       "cri_score": 108.83,
       "fatalities_in_2019": 90,
       "fatalities_per_100000_inhabitants": 88,
@@ -1135,7 +1135,7 @@
     },
     {
       "cri_rank": 129,
-      "coiuntry": "Côte d'Ivoire",
+      "country": "Côte d'Ivoire",
       "cri_score": 111.67,
       "fatalities_in_2019": 84,
       "fatalities_per_100000_inhabitants": 101,
@@ -1144,7 +1144,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Albania",
+      "country": "Albania",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1153,7 +1153,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Antigua and Barbuda",
+      "country": "Antigua and Barbuda",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1162,7 +1162,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Azerbaijan",
+      "country": "Azerbaijan",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1171,7 +1171,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Bahrain",
+      "country": "Bahrain",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1180,7 +1180,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Barbados",
+      "country": "Barbados",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1189,7 +1189,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Belarus",
+      "country": "Belarus",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1198,7 +1198,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Belize",
+      "country": "Belize",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1207,7 +1207,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Benin",
+      "country": "Benin",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1216,7 +1216,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Bhutan",
+      "country": "Bhutan",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1225,7 +1225,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Brunei Darussalam",
+      "country": "Brunei Darussalam",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1234,7 +1234,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Burkina Faso",
+      "country": "Burkina Faso",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1243,7 +1243,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Cape Verde",
+      "country": "Cape Verde",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1252,7 +1252,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Chad",
+      "country": "Chad",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1261,7 +1261,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Costa Rica",
+      "country": "Costa Rica",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1270,7 +1270,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Cyprus",
+      "country": "Cyprus",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1279,7 +1279,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Democratic Republic\nof Timor-Leste",
+      "country": "Democratic Republic\nof Timor-Leste",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1288,7 +1288,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Dominican Republic",
+      "country": "Dominican Republic",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1297,7 +1297,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Eritrea",
+      "country": "Eritrea",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1306,7 +1306,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Eswatini",
+      "country": "Eswatini",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1315,7 +1315,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Gabon",
+      "country": "Gabon",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1324,7 +1324,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Grenada",
+      "country": "Grenada",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1333,7 +1333,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Guinea-Bissau",
+      "country": "Guinea-Bissau",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1342,7 +1342,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Guyana",
+      "country": "Guyana",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1351,7 +1351,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Jamaica",
+      "country": "Jamaica",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1360,7 +1360,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Jordan",
+      "country": "Jordan",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1369,7 +1369,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Kazakhstan",
+      "country": "Kazakhstan",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1378,7 +1378,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Kiribati",
+      "country": "Kiribati",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1387,7 +1387,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Kosovo",
+      "country": "Kosovo",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1396,7 +1396,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Kuwait",
+      "country": "Kuwait",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1405,7 +1405,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Kyrgyz Republic",
+      "country": "Kyrgyz Republic",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1414,7 +1414,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Lithuania",
+      "country": "Lithuania",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1423,7 +1423,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Micronesia",
+      "country": "Micronesia",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1432,7 +1432,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Moldova",
+      "country": "Moldova",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1441,7 +1441,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "North Macedonia",
+      "country": "North Macedonia",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1450,7 +1450,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Puerto Rico",
+      "country": "Puerto Rico",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1459,7 +1459,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Qatar",
+      "country": "Qatar",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1468,7 +1468,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Samoa",
+      "country": "Samoa",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1477,7 +1477,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Seychelles",
+      "country": "Seychelles",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1486,7 +1486,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Singapore",
+      "country": "Singapore",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1495,7 +1495,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Solomon Islands",
+      "country": "Solomon Islands",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1504,7 +1504,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "St. Kitts and Nevis",
+      "country": "St. Kitts and Nevis",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1513,7 +1513,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "St. Lucia",
+      "country": "St. Lucia",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1522,7 +1522,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "St. Vincent and the\nGrenadines",
+      "country": "St. Vincent and the\nGrenadines",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1531,7 +1531,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Suriname",
+      "country": "Suriname",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1540,7 +1540,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Togo",
+      "country": "Togo",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1549,7 +1549,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Tonga",
+      "country": "Tonga",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1558,7 +1558,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Trinidad and Tobago",
+      "country": "Trinidad and Tobago",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1567,7 +1567,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Tunisia",
+      "country": "Tunisia",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1576,7 +1576,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Tuvalu",
+      "country": "Tuvalu",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1585,7 +1585,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "United Arab Emirates",
+      "country": "United Arab Emirates",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
@@ -1594,7 +1594,7 @@
     },
     {
       "cri_rank": 130,
-      "coiuntry": "Uzbekistan",
+      "country": "Uzbekistan",
       "cri_score": 118,
       "fatalities_in_2019": 106,
       "fatalities_per_100000_inhabitants": 106,
