@@ -1,6 +1,7 @@
 import {default as ghgMockData} from './data/mock/ghg-by-country.json';
 import {default as percapitaMockData} from './data/mock/ghg-per-capita.json';
 import {default as criMockData} from './data/mock/cri.json';
+import {default as countries} from './data/countries.json';
 
 // mock data while we wait for API
 const mockData = {
@@ -23,18 +24,44 @@ export const cri = getMockData<CRIData>('cri');
 
 export function getGHGCategory(data: YearlyTimeseriesDatum[]) {
     // TODO: set thresholds
-    const first = data[data.length-16].value;
+    const largest = Math.max(... data.slice(0, data.length-15).map(d => d.value) );
     const last = data[data.length-1].value;
-    const diff = (last - first) / first;
+    const diff = (last - largest) / largest;
     // 0 means the same. 0.5 means 50% increase. 1 means 100% increase. etc
-    if (Math.abs(diff) < 0.05) return 'stable';
-    else if (diff < -0.05) return 'falling';
+    if (Math.abs(diff) < 0.2) return 'stable';
+    else if (diff < -0.2) return 'falling';
     else if (diff > 0.4) return 'climbing-fast';
     else if (diff > 0.05) return 'climbing';
     else return 'none';
 }
 
+function* generateRange(end: number, start = 0, step = 1) {
+    let x = start - step;
+    while(x < end - step) yield x += step;
+}
+
+export function extractTimeseries(data: GHGData): YearlyTimeseriesDatum[] {
+    const years = Array.from(generateRange(2019, 1970));
+    return years.map(year => {
+        return {
+            year, value: data.emissions[year]
+        };
+    });
+}
+
+const countryLookup: {[code: string]: CountryBaseData} = {};
+countries.forEach(c => countryLookup[c.code] = c);
+export function getCountryBaseData(code: string): CountryBaseData | null {
+    return countryLookup[code];
+}
+
 // DATA TYPINGS
+
+export interface CountryBaseData {
+    code: string;
+    name: string;
+    short: string;
+}
 
 export interface CRIData {
     //code: string,

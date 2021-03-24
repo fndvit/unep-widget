@@ -1,51 +1,67 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+    import {ChartTextType} from './components/LineChartWidget.svelte';
     import LineChartWidget from './components/LineChartWidget.svelte';
-    import {ghg, getGHGCategory} from './data';
+    import {ghg, getGHGCategory, getCountryBaseData} from './data';
     import type {GHGData, YearlyTimeseriesDatum} from './data';
 
     let ghgData: GHGData[];
-    var test_data: YearlyTimeseriesDatum[][];
+    var chartData: GHGData[];
+
+    function calcRelativeChange(d: GHGData, fromYear: number, toYear: number): number {
+        const a = d.emissions[`${fromYear}`];
+        const b = d.emissions[`${toYear}`];
+        console.log(`${d.code} ${(b - a) / a}`);
+        return (b - a) / a;
+    }
+
+    function getRandom(data: GHGData[]): GHGData {
+        const r = Math.floor(Math.random() * data.length);
+        return data[r];
+    }
 
     onMount(async () => {
         ghgData = await ghg;
-        test_data = [
-            getDataForCountry('CHN'),
-            getDataForCountry('USA'),
-            getDataForCountry('MYS'),
-            getDataForCountry('BRA')
+        const useableCountries = ghgData
+            .filter(c => getCountryBaseData(c.code))
+            .filter(c => c.emissions['2018'] > 1000) // TODO: wheredo we set the cutoff here?
+
+        const dataWithRelChanges = useableCountries.map<[GHGData, number]>(d => [d, calcRelativeChange(d, 1970, 2018)])
+
+        const largest10Emitters = useableCountries
+            .sort((a, b) => b.emissions['2018'] - a.emissions['2018'])
+            .slice(0, 10);
+
+        const largest10Increase = [...dataWithRelChanges]
+            .sort((a,b) => b[1] - a[1])
+            .map(d => d[0])
+            .slice(0, 10)
+
+        const largest10Decrease = [...dataWithRelChanges]
+            .sort((a,b) => a[1] - b[1])
+            .map(d => d[0])
+            .slice(0, 10)
+
+        chartData = [
+            getRandom(largest10Emitters),
+            getRandom(largest10Decrease),
+            getRandom(largest10Increase),
+            getRandom(largest10Increase),
         ];
     });
-
-    function getDataForCountry(code: string) {
-        function* generateRange(end: number, start = 0, step = 1) {
-            let x = start - step;
-            while(x < end - step) yield x += step;
-        }
-
-        const data = ghgData.find(c => c.code === code)
-        const years = Array.from(generateRange(2019, 1970));
-        return years.map(year => {
-            return {
-                year, value: data.emissions[year]
-            };
-        });
-    }
 
     </script>
 
 {#if ghgData}
 <div class="p1-charts">
-    <LineChartWidget data={test_data[0]} category={getGHGCategory(test_data[0])} headlineFigure="67.1%" text="China's CO2 emissions have risen by 67.12% since 2005" />
-    <LineChartWidget data={test_data[1]} category={getGHGCategory(test_data[1])}  />
-    <LineChartWidget data={test_data[2]} category={getGHGCategory(test_data[2])}  />
-    <LineChartWidget data={test_data[3]} category={getGHGCategory(test_data[3])}  />
+    <LineChartWidget data={chartData[0]} chartTextType={ChartTextType.Largest}/>
+    <LineChartWidget data={chartData[1]} chartTextType={ChartTextType.Decrease}/>
+    <LineChartWidget data={chartData[2]} chartTextType={ChartTextType.Increase}/>
+    <LineChartWidget data={chartData[3]} chartTextType={ChartTextType.PerCapita}/>
 </div>
 {/if}
 
 <style>
-
-
     .p1-charts:after {
         content: "";
         clear: both;
