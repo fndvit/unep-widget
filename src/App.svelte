@@ -11,7 +11,7 @@
         // {text: "Climate action progress", icon: 'test'},
     ];
 
-    let selectedNavOption = mainNavOptions[1];
+    let selectedNavOption = mainNavOptions[0];
 
     function onMenuChange(option: MenuOption) {
         // go to spash or change page
