@@ -35,23 +35,25 @@
 <SubNav bind:selected={selectedSection} options={sections} />
 
 <MainViz>
-    {#if selectedSection.text === "Total emissions"}
-    <CopyPane>
-        <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
-        <CopyMain>{selectedSection.copy.summary}</CopyMain>
-    </CopyPane>
-    {:else if selectedSection.text === "Per capita emissions"}
-    <CopyPane >
-        <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
-        <CopyMain>{selectedSection.copy.summary}</CopyMain>
-    </CopyPane>
-    {:else if selectedSection.text === "Country trends"}
-    <CopyPane>
-        <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
-        <CopyMain>{selectedSection.copy.summary}</CopyMain>
-    </CopyPane>
+    <div class="p1-copy">
+        {#if selectedSection.text === "Total emissions"}
+        <CopyPane>
+            <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
+            <CopyMain>{selectedSection.copy.summary}</CopyMain>
+        </CopyPane>
+        {:else if selectedSection.text === "Per capita emissions"}
+        <CopyPane >
+            <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
+            <CopyMain>{selectedSection.copy.summary}</CopyMain>
+        </CopyPane>
+        {:else if selectedSection.text === "Country trends"}
+        <CopyPane>
+            <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
+            <CopyMain>{selectedSection.copy.summary}</CopyMain>
+        </CopyPane>
 
-    {/if}
+        {/if}
+    </div>
 
 
     <div class="cartogram-container">
@@ -77,4 +79,8 @@
         width: 100%;
     }
 
+    .p1-copy {
+        width: 450px;
+        float: left;
+    }
 </style>

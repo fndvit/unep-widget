@@ -31,23 +31,25 @@
 
 
 <MainViz>
-    {#if selectedSection.text === "Land Temperature"}
-    <CopyPane>
-        <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
-        <CopyMain>{selectedSection.copy.summary}</CopyMain>
-    </CopyPane>
-    {:else if selectedSection.text === "Ocean Temperature"}
-    <CopyPane>
-        <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
-        <CopyMain>{selectedSection.copy.summary}</CopyMain>
-    </CopyPane>
-    {:else if selectedSection.text === "Fires"}
-    <CopyPane>
-        <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
-        <CopyMain>{selectedSection.copy.summary}</CopyMain>
-    </CopyPane>
+    <div class="p2-copy">
+        {#if selectedSection.text === "Land Temperature"}
+        <CopyPane>
+            <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
+            <CopyMain>{selectedSection.copy.summary}</CopyMain>
+        </CopyPane>
+        {:else if selectedSection.text === "Ocean Temperature"}
+        <CopyPane>
+            <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
+            <CopyMain>{selectedSection.copy.summary}</CopyMain>
+        </CopyPane>
+        {:else if selectedSection.text === "Fires"}
+        <CopyPane>
+            <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
+            <CopyMain>{selectedSection.copy.summary}</CopyMain>
+        </CopyPane>
 
-    {/if}
+        {/if}
+    </div>
 
 
     <div class="cartogram-container">
@@ -68,8 +70,15 @@
 </ChartsContainer>
 
 <style>
+    .cartogram-container {
+        flex-grow: 1;
+        padding-top: 10px;
+    }
+
     .cartogram-container > img {
-        margin-right: -100px;
-        width: 600px;
+        width: 100%;
+    }
+    .p2-copy {
+        width: 400px;
     }
 </style>

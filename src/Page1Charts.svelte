@@ -62,20 +62,14 @@
 {/if}
 
 <style>
-    .p1-charts:after {
-        content: "";
-        clear: both;
-        display: table;
+
+    .p1-charts {
+        display: flex;
+        justify-content: space-between;
     }
 
     .p1-charts > :global(*) {
-        float: left;
-        width: calc(25% - 12px);
-        margin-right: 16px;
-    }
-
-    .p1-charts > :global(*:last-child) {
-        margin: 0;
+        width: 250px;
     }
 
     .p1-charts :global(svg) {
