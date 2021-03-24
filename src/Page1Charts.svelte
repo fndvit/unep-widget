@@ -24,10 +24,10 @@
         }
 
         const data = ghgData.find(c => c.code === code)
-        const years = Array.from(generateRange(2016, 1950));
+        const years = Array.from(generateRange(2019, 1970));
         return years.map(year => {
             return {
-                year, value: data[year]
+                year, value: data.emissions[year]
             };
         });
     }
