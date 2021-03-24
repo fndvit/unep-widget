@@ -18,25 +18,29 @@
 
 <script lang="ts">
     import { getGHGCategory } from '../data';
-
 	import * as d3 from '../d3';
     import MiniTrendCharts from './MiniTrendCharts.svelte';
     import MiniLineChart from '../components/MiniLineChart.svelte';
 
     interface CartogramDataPoint extends CountryDataPoint {
-        r: number;
         category: string;
         trendsTimeseries: YearlyTimeseriesDatum[];
+
+        left: number;
+        top: number;
+        width: number;
+        height: number;
     }
 
     export var data: CountryDataPoint[];
     export var nodeSize: number = 100;
-    export var datasetWidth: number;
-    export var xOffset: number = 0;
+    export var domain: [number, number];
+    export var offset: [number, number] = [0,0];
     export var trendsMode: boolean = false;
     export var trendsTimeseriesData: TrendsDataset[];
-    var containerEl: Element;
+    export var helpText: {code: string, text: string} = null;
 
+    var containerEl: Element;
     var cartogramData: CartogramDataPoint[];
 
     var trendsTimeseriesLookup: {[code: string]: YearlyTimeseriesDatum[]} = {};
@@ -49,15 +53,35 @@
             .domain([0, largestVal])
             .range([0, nodeSize]);
 
+        const xScale = d3.scaleLinear()
+            .domain([0, domain[0]])
+            .range([0, 740]);
+
+        const yScale = d3.scaleLinear()
+            .domain([0, domain[1]])
+            .range([0, 420]);
+
         // add r values and categories
         cartogramData = data.map(d => {
+            const trendsTimeseries = trendsTimeseriesLookup[d.code];
+            const r = radius(d.value);
             return {
                 ...d,
-                r: radius(d.value),
-                category: getGHGCategory(trendsTimeseriesLookup[d.code]),
-                trendsTimeseries: trendsTimeseriesLookup[d.code]
+
+                category: getGHGCategory(trendsTimeseries),
+                trendsTimeseries,
+
+                left: xScale(d.x - r) + (offset[0] || 0),
+                top: yScale(d.y - r) + (offset[1] || 0),
+
+                // width height should be the same if the aspect is correct
+                width: xScale(r * 2),
+                height: yScale(r * 2),
+
+
             };
         });
+        hoverData = null;
     }
 
     var lineDisplayBlock: boolean = false;
@@ -85,56 +109,55 @@
         }
     }
 
-    let hoverNode: CartogramDataPoint;
+    var helpCountry: CartogramDataPoint;
+    $: {
+        helpCountry = null;
+        window.setTimeout(() => {
+            helpCountry = helpText ? cartogramData.find(d => d.code === helpText.code) : null;
+        }, 10);
+
+    }
+
 
     function calcStyle(d: CartogramDataPoint) {
-        const ratio = 0.6
-
-        const xScale = d3.scaleLinear()
-            .domain([0, 1000])
-            .range([0, datasetWidth]);
-
-        const yScale = d3.scaleLinear()
-            .domain([0, 600])
-            .range([0, datasetWidth * ratio]);
-
         const styles = [
-            `left: ${xScale(d.x - d.r) + (xOffset || 0)}px`,
-            `top: ${yScale(d.y - d.r)}px`,
-            `width: ${xScale(d.r * 2)}px`,
-            `height: ${yScale(d.r * 2)}px`,
+            `left: ${d.left}px`,
+            `top: ${d.top}px`,
+            `width: ${d.width}px`,
+            `height: ${d.height}px`,
         ];
         return styles.join(';');
     }
 
-
+    var countryHoverState: boolean = false;
     var hoverTimeout: number;
     interface HoverData {
         x: number,
         y: number,
-        country: CartogramDataPoint,
-        showHoverChart: boolean
+        country: CartogramDataPoint
     }
 
     let hoverData: HoverData = null;
 
     function onMouseOver(evt: MouseEvent, country) {
         const el = evt.currentTarget as Element;
-        const {left,top} = el.getBoundingClientRect();
-        const containerRect = containerEl.getBoundingClientRect();
 
-        hoverData = {
-            country,
-            x: left - containerRect.left,
-            y: top - containerRect.top,
-            showHoverChart: false
-        };
+        countryHoverState = true;
 
-        hoverTimeout = window.setTimeout(() => hoverData.showHoverChart = true, 400)
+        hoverTimeout = window.setTimeout(() => {
+            const {left,top} = el.getBoundingClientRect();
+            const containerRect = containerEl.getBoundingClientRect();
+            hoverData = {
+                country,
+                x: left - containerRect.left,
+                y: top - containerRect.top
+            };
+        }, 350);
     }
 
     function onMouseOut() {
         hoverData = null;
+        countryHoverState = false;
         window.clearTimeout(hoverTimeout);
         console.log('mouseout');
     }
@@ -143,18 +166,20 @@
 
 <div class="cartogram" bind:this={containerEl}
     class:trends-mode={trendsMode} class:test={lineDisplayBlock} class:trends-visible={lineFadeIn}
-    class:hovering={hoverData !== null}
+    class:hovering={countryHoverState} class:showing-chart={hoverData}
 >
 
     <div class="countries" >
         {#each cartogramData as d (d.code)}
+        {#if d.x && d.y}
         <div class="country bg--{d.category}"
             style={calcStyle(d)}
+            data-code={d.code}
             on:mouseover={(evt) => onMouseOver(evt, d)}
             on:mouseleave={onMouseOut}
         >
-            {#if d.r > 30}
-            <span class="country-text">{d.short}</span>
+            {#if d.width > 50}
+                <span class="country-text">{d.short}</span>
             {/if}
 
             {#if d.trendsTimeseries}
@@ -164,8 +189,18 @@
             {/if}
 
         </div>
+        {/if}
         {/each}
 
+
+    {#if helpText}
+    <div class="help" class:help-show={helpCountry}>
+        {#if helpCountry}
+        <div class="help-line" style="left: {helpCountry.left - 1 + helpCountry.width/2}px; top: {0}px; height: {helpCountry.top - 2}px;"></div>
+        <div class="help-text" style="top: -20px; left: {helpCountry.left - 90 + helpCountry.width/2}px;">{@html helpText.text}</div>
+        {/if}
+    </div>
+    {/if}
 
 <!--
     {#if hoverNode}
@@ -183,7 +218,7 @@
     </div>
 
     {#if trendsMode && hoverData}
-    <div class="hover-chart" class:hover-chart--show={hoverData.showHoverChart}
+    <div class="hover-chart" class:hover-chart--show={hoverData}
         style="top: {hoverData.y}px; left: {hoverData.x}px;" >
             <h2>{hoverData.country.name}</h2>
             <MiniLineChart data={hoverData.country.trendsTimeseries} category={hoverData.country.category} />
@@ -195,19 +230,16 @@
 
     .cartogram {
         position: relative;
+        transform-origin: 0 0;
     }
 
     .countries {
         position: relative;
-        top: 120px;
+        top: 0px;
     }
 
-    .hovering:not(.trends-mode) .country {
-        opacity: 0.6;
-    }
-
-    .hovering:not(.trends-mode) .country:hover {
-        opacity: 1;
+    .showing-chart .country:hover {
+        cursor: none;
     }
 
     .hovering.trends-mode .country:hover {
@@ -265,7 +297,18 @@
         position: absolute;
         border-radius: 4px;
         cursor: pointer;
-        transition: opacity 0.1s, top 0.2s, left 0.2s, width 0.2s, height 0.2s, background-color 0.2s;
+        opacity: 1;
+        transition: top 0.2s, left 0.2s, width 0.2s, height 0.2s, background-color 0.2s, opacity 0.45s ease 0.15s;
+    }
+
+    .hovering:not(.trends-mode) .country:not(:hover) {
+        opacity: 0.65;
+        transition: opacity 0.05s;
+    }
+
+    .hovering:not(.trends-mode) .country:hover {
+        opacity: 0.999; /* not 1 so it overrides the opacity: 1 in the other def */
+        transition: opacity 0s;
     }
 
 
@@ -327,6 +370,31 @@
     .hover-chart :global(svg) {
         width: 200px;
         height: 100px;
+    }
+
+    .help {
+        opacity: 0;
+    }
+
+    .help-show {
+        opacity: 1;
+        transition: opacity 0.2s ease 0.2s;
+    }
+
+    .help-text {
+        position: absolute;
+        font-size: 14px;
+        line-height: 20px;
+        width: 180px;
+        background-color: #F3F3F3;
+        padding-bottom: 5px;
+        z-index: 2;
+    }
+
+    .help-line {
+        position: absolute;
+        z-index: 1;
+        border-left: 1px solid #dfdfdf;
     }
 
 </style>
