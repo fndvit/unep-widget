@@ -47,8 +47,7 @@
     .container {
         height: 420px;
         position: relative;
-        width: 450px;
-        float: left;
+        width: 100%;
     }
 
     .copy-pane {
