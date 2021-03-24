@@ -8,10 +8,10 @@
     const mainNavOptions = [
         {text: "State of the climate", icon: 'test'},
         {text: "What's happening", icon: 'test'},
-        {text: "Climate action progress", icon: 'test'},
+        // {text: "Climate action progress", icon: 'test'},
     ];
 
-    let selectedNavOption = mainNavOptions[0];
+    let selectedNavOption = mainNavOptions[1];
 
     function onMenuChange(option: MenuOption) {
         // go to spash or change page
@@ -39,7 +39,7 @@
 </div>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
 
     :global(body) {
         padding: 0;
@@ -50,7 +50,7 @@
         font-family: 'Roboto', sans-serif;
         background-color: #F3F3F3;
         font-size: 24px;
-        max-height: 760px;
+        height: 760px;
     }
 
     .navcontainer {
