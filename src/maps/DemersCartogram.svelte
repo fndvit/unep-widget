@@ -39,6 +39,7 @@
     export var trendsMode: boolean = false;
     export var trendsTimeseriesData: TrendsDataset[];
     export var helpText: {code: string, text: string} = null;
+    export var hoverText: string = null;
 
     var containerEl: Element;
     var cartogramData: CartogramDataPoint[];
@@ -155,6 +156,13 @@
         }, 350);
     }
 
+    function generateHoverText(text: string, country: CartogramDataPoint): string {
+        return text
+            .replace("%country%", country.name)
+            .replace("%value%", Math.round(country.value).toLocaleString())
+            .replace("%year%", '2015');
+    }
+
     function onMouseOut() {
         hoverData = null;
         countryHoverState = false;
@@ -191,17 +199,6 @@
         </div>
         {/if}
         {/each}
-
-
-    {#if helpText}
-    <div class="help" class:help-show={helpCountry}>
-        {#if helpCountry}
-        <div class="help-line" style="left: {helpCountry.left - 1 + helpCountry.width/2}px; top: {0}px; height: {helpCountry.top - 2}px;"></div>
-        <div class="help-text" style="top: -20px; left: {helpCountry.left - 90 + helpCountry.width/2}px;">{@html helpText.text}</div>
-        {/if}
-    </div>
-    {/if}
-
 <!--
     {#if hoverNode}
     <g class="hover-group">
@@ -217,6 +214,29 @@
     {/if} -->
     </div>
 
+
+
+    {#if helpText}
+    <div class="help" class:help-show={helpCountry && !countryHoverState}>
+        {#if helpCountry}
+        <div class="help-line" style="left: {helpCountry.left - 1 + helpCountry.width/2}px; top: {0}px; height: {helpCountry.top - 2}px;"></div>
+        <div class="help-text" style="top: -20px; left: {helpCountry.left - 40 + helpCountry.width/2}px;">{@html helpText.text}</div>
+        {/if}
+    </div>
+    {/if}
+
+    {#if hoverText && hoverData && !trendsMode }
+    <div class="annotation">
+        <span style="left: {hoverData.x - 80 + hoverData.country.width / 2}px;">
+            {@html generateHoverText(hoverText, hoverData.country)}
+        </span>
+        <div class="annotation-line"
+            style="left: {hoverData.x + hoverData.country.width / 2}px; height: {hoverData.country.y - 16 - hoverData.country.height/2}px;">
+        </div>
+    </div>
+    {/if}
+
+
     {#if trendsMode && hoverData}
     <div class="hover-chart" class:hover-chart--show={hoverData}
         style="top: {hoverData.y}px; left: {hoverData.x}px;" >
@@ -227,10 +247,11 @@
 </div>
 
 <style>
-
     .cartogram {
         position: relative;
         transform-origin: 0 0;
+        height: 100%;
+        width: 100%;
     }
 
     .countries {
@@ -298,6 +319,7 @@
         border-radius: 4px;
         cursor: pointer;
         opacity: 1;
+        z-index: 2;
         transition: top 0.2s, left 0.2s, width 0.2s, height 0.2s, background-color 0.2s, opacity 0.45s ease 0.15s;
     }
 
@@ -305,10 +327,14 @@
         opacity: 0.65;
         transition: opacity 0.05s;
     }
+    .hovering:not(.trends-mode) .country.bg--stable:not(:hover) {
+        background-color: #bec7cde8;
+    }
 
     .hovering:not(.trends-mode) .country:hover {
         opacity: 0.999; /* not 1 so it overrides the opacity: 1 in the other def */
         transition: opacity 0s;
+        z-index: 3;
     }
 
 
@@ -389,12 +415,41 @@
         background-color: #F3F3F3;
         padding-bottom: 5px;
         z-index: 2;
+        text-align: left;
     }
 
     .help-line {
         position: absolute;
         z-index: 1;
         border-left: 1px solid #dfdfdf;
+    }
+
+    .annotation span {
+        position: absolute;
+        font-size: 14px;
+        line-height: 20px;
+        width: 220px;
+        padding-bottom: 5px;
+        z-index: 2;
+        text-align: left;
+        bottom: calc(100% - 15px);
+        padding: 0 20px;
+        box-sizing: border-box;
+        background: #f3f3f3;
+        box-shadow: 0px 0px 15px 10px #f3f3f3;
+    }
+    .annotation span :global(sub) {
+        margin-bottom: -0.2em;
+        display: inline-block;
+        font-size: 10px;
+    }
+
+    .annotation-line {
+        position: absolute;
+        top: 14px;
+        z-index: 5;
+        border-left: 1px solid #bbbbbb;
+        /* box-shadow: 0 -1px 1px 1px #f3f3f3cc; */
     }
 
 </style>

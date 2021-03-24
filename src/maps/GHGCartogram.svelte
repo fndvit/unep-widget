@@ -30,24 +30,26 @@
             domain: [740, 420],
             helpText: {
                 code: "IRL",
-                text: "Each square is a country, sized by their <b>greenhouse gas</b> emissions"
-            }
+                text: "Each square represents a country, scaled by its emissions"
+            },
+            hoverText: "<b>%country%</b> emitted %value% Mt CO<sub>2</sub>e in %year%"
         },
         [Datasets.GHGPerCapita]: {
             nodeSize: 34,
             domain: [740, 420],
             helpText: {
-                code: "JPN",
-                text: "Each square is a country, sized by their per capita <b>greenhouse gas</b> emissions"
-            }
+                code: "BRB",
+                text: "Each square represents a country, scaled by its per capita emissions"
+            },
+            hoverText: "<b>%country%</b> emitted %value% Mt CO<sub>2</sub>e per capita in %year%"
         },
         [Datasets.GHGTrends]: {
             nodeSize: 16,
             domain: [1350, 1350 / (740/435)],
             offset: [0, 0],
             helpText: {
-                code: "PRK",
-                text: "Each tile shows the country's trend in <b>greenhouse gas</b> emissions since 1950"
+                code: "UZB",
+                text: "Each tile represents individual country trends in greenhouse gas emissions"
             }
 
 
@@ -129,6 +131,7 @@
             trendsMode={dataset === Datasets.GHGTrends}
             trendsTimeseriesData={trendsTimeseriesData}
             helpText={datasetParams[dataset].helpText}
+            hoverText={datasetParams[dataset].hoverText}
         />
         <div class="legend">
             <CartogramLegend/>
