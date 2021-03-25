@@ -59,7 +59,15 @@
 
         const sorted = [cat1,cat2].sort();
         return `url(#${sorted[0]}-${sorted[1]})`;
+    }
 
+    function ordinal(i: number): string {
+        let j = i % 10,
+            k = i % 100;
+        if (j == 1 && k != 11) return i + "st";
+        if (j == 2 && k != 12) return i + "nd";
+        if (j == 3 && k != 13) return i + "rd";
+        return i + "th";
     }
 
 </script>
@@ -101,6 +109,11 @@
         <rect class="bar--{cat_fat}" height={barHeight} width={barWidth} x={x_fat} y={y_track2 - barHeight/2} rx="2" />
         <rect class="bar--{cat_gdp}" height={barHeight} width={barWidth} x={x_gdp} y={y_track3 - barHeight/2} rx="2" />
     </g>
+    <g class="hover-values">
+        <text x={x_cri} y={y_track1} class:hang-left={data.cri_rank < 80}>{ordinal(data.cri_rank)}</text>
+        <text x={x_fat} y={y_track2} class:hang-left={data.fatalities_per_100000_inhabitants < 80}>{ordinal(data.fatalities_per_100000_inhabitants)}</text>
+        <text x={x_gdp} y={y_track3} class:hang-left={data.losses_per_unit_gdp_percentage < 80}>{ordinal(data.losses_per_unit_gdp_percentage)}</text>
+    </g>
 </svg>
 
 <style>
@@ -119,6 +132,25 @@
     .paths path {
         fill: transparent;
         stroke-width: 1.5px;
+    }
+
+    svg:hover .hover-values text {
+        opacity: 1;
+    }
+
+    .hover-values text {
+        opacity: 0;
+        stroke: black;
+        stroke-width: 0.75;
+        fill: black;
+        font-size: 12px;
+        dominant-baseline: middle;
+        transform: translate(10px, 2px);
+    }
+
+    .hover-values text.hang-left {
+        text-anchor: end;
+        transform: translate(-6px, 2px);
     }
 
 </style>
