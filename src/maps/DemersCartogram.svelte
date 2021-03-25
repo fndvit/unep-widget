@@ -160,6 +160,7 @@
         return text
             .replace("%country%", country.name)
             .replace("%value%", Math.round(country.value).toLocaleString())
+            .replace("%value1dp%", (Math.round(country.value*10)/10).toLocaleString())
             .replace("%year%", '2015');
     }
 

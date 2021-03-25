@@ -41,7 +41,7 @@
                 code: "BRB",
                 text: "Each square represents a country, scaled by its per capita emissions"
             },
-            hoverText: "<b>%country%</b> emitted %value% Mt CO<sub>2</sub>e per capita in %year%"
+            hoverText: "<b>%country%</b> emitted %value1dp% Mt CO<sub>2</sub>e per capita in %year%"
         },
         [Datasets.GHGTrends]: {
             nodeSize: 16,
