@@ -9,7 +9,7 @@
 
 <script lang="ts">
     import MiniLineChart from "./MiniLineChart.svelte";
-    import type { GHGData, YearlyTimeseriesDatum } from '../data';
+    import type { GHGData } from '../data';
     import {getGHGCategory, extractTimeseries, getCountryBaseData} from '../data';
     export let data: GHGData;
     export let chartTextType: number;

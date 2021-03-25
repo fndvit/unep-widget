@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
     import {ChartTextType} from './components/LineChartWidget.svelte';
     import LineChartWidget from './components/LineChartWidget.svelte';
-    import {ghg, getGHGCategory, getCountryBaseData} from './data';
+    import {ghg, getGHGCategory, getCountryBaseData, startYear, endYear} from './data';
     import type {GHGData, YearlyTimeseriesDatum} from './data';
 
     let ghgData: GHGData[];
@@ -23,12 +23,12 @@
         ghgData = await ghg;
         const useableCountries = ghgData
             .filter(c => getCountryBaseData(c.code))
-            .filter(c => c.emissions['2018'] > 1000) // TODO: wheredo we set the cutoff here?
+            .filter(c => c.emissions[`${endYear}`] > 1000) // TODO: wheredo we set the cutoff here?
 
-        const dataWithRelChanges = useableCountries.map<[GHGData, number]>(d => [d, calcRelativeChange(d, 1970, 2018)])
+        const dataWithRelChanges = useableCountries.map<[GHGData, number]>(d => [d, calcRelativeChange(d, startYear, endYear)])
 
         const largest10Emitters = useableCountries
-            .sort((a, b) => b.emissions['2018'] - a.emissions['2018'])
+            .sort((a, b) => b.emissions[`${endYear}`] - a.emissions[`${endYear}`])
             .slice(0, 10);
 
         const largest10Increase = [...dataWithRelChanges]
