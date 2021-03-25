@@ -1,6 +1,5 @@
 <script lang="ts">
     export let selected: boolean = false;
-    import svgs from '../svg';
     export let icon: string;
     export let onclick: () => any;
 </script>
@@ -10,7 +9,7 @@
         <span class="text">
             <slot/>
         </span>
-        <i>{@html svgs[icon]}</i>
+        <i>{@html icon}</i>
     </div>
 </button>
 
@@ -28,7 +27,7 @@
         text-align: left;
         padding: 0;
         outline: none;
-        font-size: 16px;
+        font-size: 14px;
         line-height: 18px;
     }
 
@@ -38,8 +37,19 @@
     }
 
     button.selected i {
-        fill: white;
         border-color: black;
+    }
+
+    button.selected i :global(svg *) {
+        stroke: white;
+    }
+
+    button:not(.selected) i :global(svg *) {
+        stroke: #999999;
+    }
+
+    button:not(.selected):hover i :global(svg *) {
+        stroke: #888888;
     }
 
 
@@ -86,20 +96,17 @@
     }
 
     .text {
-        width: 120px;
+        width: 100px;
     }
 
     i {
         width: 50px;
         height: 50px;
-        padding: 12px;
+        padding: 8px;
         box-sizing: border-box;
         position: absolute;
         right: 0;
-
-        /* display: inline-block; */
         display: block;
-        fill: #999999;
     }
 
 </style>

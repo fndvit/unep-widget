@@ -4,10 +4,11 @@
     import Page3 from './Page3.svelte';
     import MainNav from './components/MainNav.svelte';
     import type {MenuOption} from './components/MainNav.svelte';
+    import svgs from './svg';
 
     const mainNavOptions = [
-        {text: "State of the climate", icon: 'test'},
-        {text: "What's happening", icon: 'test'},
+        {text: "State of the climate", icon: svgs.stateoftheclimate.main},
+        {text: "What's happening", icon: svgs.whatshappening.main},
         // {text: "Climate action progress", icon: 'test'},
     ];
 
@@ -44,6 +45,7 @@
     :global(body) {
         padding: 0;
     }
+
     .widget {
         text-align: center;
         margin: 0 auto;
@@ -53,11 +55,14 @@
         height: 760px;
     }
 
-    .navcontainer {
-        position: absolute;
-        right: 100%;
-        width: 200px;
+    @media (min-width: 1400px) {
+        .navcontainer {
+            position: absolute;
+            right: 100%;
+            width: 150px;
+        }
     }
+
     .content {
         max-width: 1100px;
         margin: auto;
