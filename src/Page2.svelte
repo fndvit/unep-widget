@@ -83,6 +83,21 @@
         width: 100%;
     }
     .p2-copy {
+        flex-shrink: 0;
         width: 400px;
+    }
+
+    .p2-copy-temp :global(.copy-pane) {
+        margin-right: -80px;
+    }
+
+    .p2-copy-fires :global(.copy-pane) {
+        margin-right: -70px;
+    }
+
+    @media (max-width: 1000px) {
+        .p2-copy {
+            width: 350px;
+        }
     }
 </style>

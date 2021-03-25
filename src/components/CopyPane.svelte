@@ -48,6 +48,8 @@
         height: 420px;
         position: relative;
         width: 100%;
+        padding-left: 20px;
+        box-sizing: border-box;
     }
 
     .copy-pane {

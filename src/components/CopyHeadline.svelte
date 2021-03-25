@@ -12,4 +12,11 @@
         margin-top: 14px;
     }
 
+    @media (max-width: 1000px) {
+        h1 {
+            font-size: 30px;
+            line-height: 36px;
+        }
+    }
+
 </style>
