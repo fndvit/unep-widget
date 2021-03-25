@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
     import type { YearlyTimeseriesDatum } from '../data';
+    import { endYear } from '../data';
 
     export interface CountryDataPoint {
         name: string;
@@ -146,6 +147,7 @@
         countryHoverState = true;
 
         hoverTimeout = window.setTimeout(() => {
+            if (!countryHoverState) return;
             const {left,top} = el.getBoundingClientRect();
             const containerRect = containerEl.getBoundingClientRect();
             hoverData = {
@@ -161,7 +163,7 @@
             .replace("%country%", country.name)
             .replace("%value%", Math.round(country.value).toLocaleString())
             .replace("%value1dp%", (Math.round(country.value*10)/10).toLocaleString())
-            .replace("%year%", '2015');
+            .replace("%year%", `${endYear}`);
     }
 
     function onMouseOut() {
@@ -199,19 +201,6 @@
         </div>
         {/if}
         {/each}
-<!--
-    {#if hoverNode}
-    <g class="hover-group">
-        <line class="hover-line" x1={hoverNode.x} x2={hoverNode.x} y1={-50} y2={hoverNode.y - hoverNode.r - 5} />
-        <foreignObject x={hoverNode.x - 20} y="-100" width="180" height="180">
-            <div>
-                <p class="hover-text">
-                    {hoverNode.name} emitted {hoverNode.value.toLocaleString()} in 2019
-                </p>
-            </div>
-        </foreignObject>
-    </g>
-    {/if} -->
     </div>
 
 
@@ -227,9 +216,11 @@
 
     {#if hoverText && hoverData && !trendsMode }
     <div class="annotation">
-        <span style="left: {hoverData.x - 80 + hoverData.country.width / 2}px;">
-            {@html generateHoverText(hoverText, hoverData.country)}
-        </span>
+        <div class="annotation-text" style="left: {hoverData.x - 80 + hoverData.country.width / 2}px;">
+            <span class="annotation-textspan">
+                {@html generateHoverText(hoverText, hoverData.country)}
+            </span>
+        </div>
         <div class="annotation-line"
             style="left: {hoverData.x + hoverData.country.width / 2}px; height: {hoverData.country.y - 16 - hoverData.country.height/2}px;">
         </div>
@@ -336,30 +327,6 @@
         transition: opacity 0s;
         z-index: 3;
     }
-
-
-    /*
-    .country-text {
-        pointer-events: none;
-        text-anchor: middle;
-        dominant-baseline: middle;
-    }
-
-    .hover-group {
-        pointer-events: none;
-    }
-
-    .hover-line {
-        stroke: 1px;
-        shape-rendering: crispEdges;
-        stroke: #777777;
-    }
-
-    .hover-text {
-        margin: 0;
-        text-align: left;
-    } */
-
     .hover-chart h2 {
         font-size: 18px;
         font-weight: 500;
@@ -424,32 +391,42 @@
         border-left: 1px solid #dfdfdf;
     }
 
-    .annotation span {
+    .annotation-text {
         position: absolute;
         font-size: 14px;
         line-height: 20px;
         width: 220px;
         padding-bottom: 5px;
-        z-index: 2;
+        z-index: 3;
         text-align: left;
         bottom: calc(100% - 15px);
         padding: 0 20px;
         box-sizing: border-box;
-        background: #f3f3f3;
-        box-shadow: 0px 0px 15px 10px #f3f3f3;
     }
-    .annotation span :global(sub) {
+
+    .annotation-textspan {
+        border-radius: 5px;
+        background: #f3f3f3;
+        box-shadow: -3px 0 2px 2px #f3f3f3, 3px 0 2px 2px #f3f3f3;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+    }
+    .annotation-textspan > :global(span) {
+        white-space: nowrap;
+    }
+
+    .annotation-text :global(sub) {
         margin-bottom: -0.2em;
         display: inline-block;
         font-size: 10px;
     }
+
 
     .annotation-line {
         position: absolute;
         top: 14px;
         z-index: 5;
         border-left: 1px solid #bbbbbb;
-        /* box-shadow: 0 -1px 1px 1px #f3f3f3cc; */
     }
 
 </style>

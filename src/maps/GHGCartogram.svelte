@@ -6,8 +6,8 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import DemersCartogram from './DemersCartogram.svelte';
-    import {ghg, percapita} from '../data';
-    import type {GHGData, PerCapitaData} from '../data';
+    import {ghg, percapita, startYear, endYear} from '../data';
+    import type {GHGData, PerCapitaData } from '../data';
     import type { CountryDataPoint, TrendsDataset } from './DemersCartogram.svelte';
     import {default as countries} from '../data/countries.json';
     import CartogramLegend from './CartogramLegend.svelte';
@@ -26,22 +26,22 @@
 
     const datasetParams = {
         [Datasets.GHGTotal]: {
-            nodeSize: 81,
+            nodeSize: 80,
             domain: [740, 420],
             helpText: {
-                code: "IRL",
+                code: "GBR",
                 text: "Each square represents a country, scaled by its emissions"
             },
-            hoverText: "<b>%country%</b> emitted %value% Mt CO<sub>2</sub>e in %year%"
+            hoverText: "<b>%country%</b> emitted %value% Mt <span>CO<sub>2</sub>e</span> in %year%"
         },
         [Datasets.GHGPerCapita]: {
-            nodeSize: 34,
+            nodeSize: 38,
             domain: [740, 420],
             helpText: {
-                code: "BRB",
+                code: "RUS",
                 text: "Each square represents a country, scaled by its per capita emissions"
             },
-            hoverText: "<b>%country%</b> emitted %value1dp% Mt CO<sub>2</sub>e per capita in %year%"
+            hoverText: "<b>%country%</b> emitted %value1dp% Mt <span>CO<sub>2</sub>e</span> per capita in %year%"
         },
         [Datasets.GHGTrends]: {
             nodeSize: 16,
@@ -72,8 +72,6 @@
             let x = start - step;
             while(x < end - step) yield x += step;
         }
-        var startYear = 1970;
-        var endYear = 2018;
         function createLineChartData(d: GHGData) {
             const years = Array.from(generateRange(endYear+1, startYear));
             return years.map(year => {
@@ -98,7 +96,7 @@
                 .map(d => {
                     return {
                         ...d, ...d.total,
-                        value: ghgDataLookup[d.code].emissions['2018']
+                        value: ghgDataLookup[d.code].emissions[`${endYear}`]
                     }
                 }),
             [Datasets.GHGPerCapita]: countries
@@ -149,4 +147,13 @@
         bottom: 0;
         left: 50px;
     }
+
+    @media (max-width: 1000px) {
+        .container {
+            margin-top: 20px;
+            transform: scale(0.85);
+            transform-origin: 0 0;
+        }
+    }
+
 </style>

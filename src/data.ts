@@ -18,6 +18,9 @@ async function getJsonData(url) {
     return fetch(url).then(response => response.json());
 }
 
+export const startYear = 1970;
+export const endYear = 2015;
+
 export const ghg = getMockData<GHGData>('ghg');
 export const percapita = getMockData<PerCapitaData>('percapita');
 export const cri = getMockData<CRIData>('cri');
@@ -41,7 +44,7 @@ function* generateRange(end: number, start = 0, step = 1) {
 }
 
 export function extractTimeseries(data: GHGData): YearlyTimeseriesDatum[] {
-    const years = Array.from(generateRange(2019, 1970));
+    const years = Array.from(generateRange(endYear+1, startYear));
     return years.map(year => {
         return {
             year, value: data.emissions[year]
