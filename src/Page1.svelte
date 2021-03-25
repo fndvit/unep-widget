@@ -9,20 +9,22 @@
     import GHGCartogram from './maps/GHGCartogram.svelte';
     import {default as copy} from './data/copy.json';
     import {Datasets} from './maps/GHGCartogram.svelte';
+    import svgs from './svg';
+import svg from './svg';
 
     const sections = [
         {
-            text: "Total emissions", icon: 'test', // nav menu
+            text: "Total emissions", icon: svg.stateoftheclimate.emissions, // nav menu
             copy: copy.state.total, // section copy
             dataset: Datasets.GHGTotal
         },
         {
-            text: "Per capita emissions", icon: 'test',
+            text: "Per capita emissions", icon: svg.stateoftheclimate.percapita,
             copy: copy.state.percapita, // section copy
             dataset: Datasets.GHGPerCapita
         },
         {
-            text: "Country trends", icon: 'test',
+            text: "Country trends", icon: svg.stateoftheclimate.trends,
             copy: copy.state.trend, // section copy
             dataset: Datasets.GHGTrends
         },

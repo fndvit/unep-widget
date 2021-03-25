@@ -7,19 +7,23 @@
     import ChartsContainer from './components/ChartsContainer.svelte';
     import Page2Charts from './Page2Charts.svelte';
     import {default as copy} from './data/copy.json';
+    import svg from './svg';
 
     const sections = [
         {
-            text: "Land Temperature", icon: 'test',
+            text: "Land Temperature", icon: svg.whatshappening.surface,
             copy: copy.happening.surface,
+            class: 'temp'
         },
         {
-            text: "Ocean Temperature", icon: 'test',
+            text: "Ocean Temperature", icon: svg.whatshappening.ocean,
             copy: copy.happening.ocean,
+            class: 'ocean'
         },
         {
-            text: "Fires", icon: 'test',
+            text: "Fires", icon: svg.whatshappening.fire,
             copy: copy.happening.fire,
+            class: 'fires'
         },
     ];
 
@@ -31,7 +35,7 @@
 
 
 <MainViz>
-    <div class="p2-copy">
+    <div class="p2-copy p2-copy-{selectedSection.class}">
         {#if selectedSection.text === "Land Temperature"}
         <CopyPane>
             <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>

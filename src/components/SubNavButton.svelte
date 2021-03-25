@@ -1,5 +1,4 @@
 <script lang="ts">
-    import svgs from '../svg';
     export let icon: string;
     export let selected: boolean = false;
     export let onclick: () => void;
@@ -7,7 +6,7 @@
 
 
 <button class:selected={selected} disabled={selected} on:click={onclick}>
-    <i>{@html svgs[icon]}</i>
+    <i>{@html icon}</i>
     <slot/>
 </button>
 
@@ -15,7 +14,7 @@
     button {
         border: 0;
         border-radius: 0;
-        padding: 16px;
+        padding: 16px 16px 4px 40px;
         background: none;
         border-bottom: 1px solid #dcdcdc;
         margin: 0;
@@ -29,6 +28,10 @@
 
     button:not(.selected):hover {
         background: #E6E6E6;
+    }
+
+    button:not(.selected) :global(svg *) {
+        stroke: #999999;
     }
 
     button:not(:disabled) {
@@ -50,10 +53,12 @@
         background: black;
     }
     i {
-        width: 18px;
-        height: 18px;
-        display: inline-block;
-        position: relative;
+        width: 22px;
+        height: 22px;
+        display: block;
+        position: absolute;
+        left: 10px;
+        bottom: 8px;
     }
 
     i :global(svg) {
