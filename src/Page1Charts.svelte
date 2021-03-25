@@ -11,7 +11,6 @@
     function calcRelativeChange(d: GHGData, fromYear: number, toYear: number): number {
         const a = d.emissions[`${fromYear}`];
         const b = d.emissions[`${toYear}`];
-        console.log(`${d.code} ${(b - a) / a}`);
         return (b - a) / a;
     }
 

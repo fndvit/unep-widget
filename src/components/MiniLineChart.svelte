@@ -14,8 +14,7 @@
     const width = chartWidth;
     const height = chartHeight + topPadding;
     const axisHeight = 20;
-
-
+    let hoverInfo: { data: YearlyTimeseriesDatum, x: number, y: number, valStr: string };
 
     const x = d3.scaleLinear()
         .domain([startYear, endYear])
@@ -27,13 +26,24 @@
 
     const linePath = d3.line<YearlyTimeseriesDatum>().x(d => x(d.year)).y(d => y(d.value))(data);
 
-    let hoverDatum: YearlyTimeseriesDatum;
-
     function mouseMove(event: any) {
+        console.log('derp');
         const pointer = d3.pointer(event);
         const closestYear = Math.round(x.invert(pointer[0]));
-        hoverDatum = data.find(d => d.year === closestYear);
+        const d = data.find(d => d.year === closestYear);
+        hoverInfo = {
+            data: d,
+            x: x(d.year),
+            y: y(d.value),
+            valStr: `${Math.round(d.value).toLocaleString()} Mt`
+        }
     }
+
+    function clamp(val: number, min:number, max: number) {
+        return Math.max(min, Math.min(max, val));
+    }
+
+    const yearap = 78;
 </script>
 
 <div class="chart-container">
@@ -49,18 +59,24 @@
             <path class="line stroke--{category}" d={linePath}></path>
         </g>
 
-        {#if hoverDatum}
+        {#if hoverInfo}
         <g transform="translate(0, {topPadding})">
-            <line class="hover-line" x1={x(hoverDatum.year)} x2={x(hoverDatum.year)}
-                y1={y(hoverDatum.value)} y2={y(0)} />
-            <circle class="hover-circle" r="4" cx={x(hoverDatum.year)} cy={y(hoverDatum.value)} />
-            <text class="hover-year" x={x(hoverDatum.year)} y={y(2) - 5}>{hoverDatum.year}</text>
-            <text class="hover-value" x={x(hoverDatum.year)} y={y(hoverDatum.value) - 10}>{hoverDatum.value.toLocaleString()}</text>
+            <line class="hover-line" x1={hoverInfo.x} x2={hoverInfo.x}
+                y1={hoverInfo.y} y2={y(0)} />
+            <circle class="hover-circle" r="4" cx={hoverInfo.x} cy={hoverInfo.y} />
+            <text class="hover-year"
+                x={clamp(hoverInfo.x, 20, 300)}
+                y={y(2) + (hoverInfo.y > 75 ? 18 : - 5)}>{hoverInfo.data.year}</text>
+            <text class="hover-value" x={clamp(hoverInfo.x, hoverInfo.valStr.length * 4.5, 320 - hoverInfo.valStr.length * 4.5)}
+                y={Math.min(70, hoverInfo.y - 10)}
+            >{hoverInfo.valStr}
+
+            </text>
         </g>
         {/if}
 
         <rect class="mouse-rect" width={width} height={height}
-            on:mousemove={mouseMove} on:mouseout={() => hoverDatum = null} />
+            on:mousemove={mouseMove} on:mouseout={() => hoverInfo = null} />
 
     </svg>
 
@@ -68,8 +84,8 @@
 
 <style>
     .mouse-rect {
-        fill: none;
-        pointer-events: none;
+        fill: transparent;
+        cursor: none;
     }
     .hover-line {
         stroke-width: 1;
@@ -84,9 +100,11 @@
 
     .hover-year {
         text-anchor: middle;
-        dominant-baseline: bottom;
         fill: #555555;
         font-size: 16px;
+        stroke: #f3f3f3;
+        stroke-width: 5px;
+        paint-order: stroke;
     }
 
     .hover-value {
@@ -95,6 +113,9 @@
         fill: #555555;
         font-weight: bold;
         font-size: 16px;
+        stroke: #f3f3f3;
+        stroke-width: 3px;
+        paint-order: stroke;
     }
 
     .line {
@@ -122,10 +143,4 @@
         text-anchor: end;
     }
 
-    .chart-container {
-        pointer-events: none;
-    }
-    .chart-container svg {
-        pointer-events: none;
-    }
 </style>
