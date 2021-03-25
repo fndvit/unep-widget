@@ -168,7 +168,6 @@
         hoverData = null;
         countryHoverState = false;
         window.clearTimeout(hoverTimeout);
-        console.log('mouseout');
     }
 
 </script>
