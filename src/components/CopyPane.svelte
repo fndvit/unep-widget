@@ -31,7 +31,7 @@
 
 </script>
 
-<div class="container">
+<div class="copy-container">
     <div class="copy-pane" on:scroll={onscroll} bind:this={el}>
         <slot/>
     </div>
@@ -44,16 +44,14 @@
 
 <style>
 
-    .container {
-        height: 420px;
-        position: relative;
-        width: 100%;
-        padding-left: 20px;
+    .copy-container {
         box-sizing: border-box;
+        display: flex;
+        position: relative;
+        padding-left: 20px;
     }
 
     .copy-pane {
-        height: 420px;
         overflow-y: auto;
         visibility: hidden;
         box-sizing: border-box;
@@ -86,7 +84,7 @@
         position: absolute;
         pointer-events: none;
         bottom: 0px;
-        left: 0;
+        left: 20px;
         right: 12px;
         height: 100px;
         background: red;

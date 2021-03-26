@@ -85,13 +85,15 @@
     .p2-copy {
         flex-shrink: 0;
         width: 400px;
+        position: relative;
+        display: flex;
     }
 
-    .p2-copy-temp :global(.copy-pane) {
+    .p2-copy-temp :global(.copy-container) {
         margin-right: -80px;
     }
 
-    .p2-copy-fires :global(.copy-pane) {
+    .p2-copy-fires :global(.copy-container) {
         margin-right: -70px;
     }
 

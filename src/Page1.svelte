@@ -84,12 +84,9 @@ import svg from './svg';
     .p1-copy {
         width: 450px;
         float: left;
+        /* position: relative; */
+        display: flex;
     }
 
-    @media (max-width: 1000px) {
-        .p1-copy {
-            width: 350px;
-        }
-    }
 
 </style>

@@ -7,7 +7,7 @@
 
     const startYear = data[0].year;
     const endYear = data[data.length-1].year;
-    const topPadding = 50;
+    const topPadding = 30;
 
     const chartWidth = 320;
     const chartHeight = 100;
