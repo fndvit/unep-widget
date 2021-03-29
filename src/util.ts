@@ -1,4 +1,4 @@
-export function throttle(fn, wait) {
+export function throttle(fn: Function, wait) {
     let isCalled = false;
 
     return function(...args){
@@ -10,4 +10,12 @@ export function throttle(fn, wait) {
             }, wait)
         }
     };
+}
+
+export function trailingDebounce(fn: Function, delay: number) {
+    var timeout: number;
+    return function() {
+        if (timeout) window.clearTimeout(timeout);
+        timeout = window.setTimeout(fn, delay);
+    }
 }
