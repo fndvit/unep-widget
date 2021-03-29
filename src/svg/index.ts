@@ -1,5 +1,8 @@
 import test from "./test.svg";
-import downarrow from './downarrow.svg';
+import arrowDown from './arrow-down.svg';
+import arrowRight from './arrow-right.svg';
+import arrowLeft from './arrow-left.svg';
+
 import whatshappeningMain from './icons_whats-happening--main.svg';
 import whatshappeningOcean from './icons_whats-happening--ocean.svg';
 import whatshappeningFire from './icons_whats-happening--fire.svg';
@@ -11,7 +14,12 @@ import stateoftheclimatePerCapita from './icons_state-of-the-climate--per-capita
 import stateoftheclimateTrends from './icons_state-of-the-climate--trends.svg';
 
 export default {
-    test, downarrow,
+    test,
+    arrows: {
+        down: arrowDown,
+        right: arrowRight,
+        left: arrowLeft
+    },
     stateoftheclimate: {
         main: stateoftheclimateMain,
         emissions: stateoftheclimateEmissions,
