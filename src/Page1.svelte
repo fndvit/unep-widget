@@ -135,6 +135,7 @@
 
 
     @media (max-width: 900px) {
+
         .top-section {
             display: block;
             height: auto;
@@ -163,6 +164,11 @@
 
 
     @media (max-width: 600px) {
+
+        /* TODO: tmp disabled annotations for mobile */
+        .cartogram-pane :global(.annotation) {
+            display: none;
+        }
         .p1-copy {
             padding-right: 20px;
         }
