@@ -5,12 +5,15 @@
     import MainNav from './components/MainNav.svelte';
     import type {MenuOption} from './components/MainNav.svelte';
     import svgs from './svg';
+    import { afterUpdate } from 'svelte';
+    import { throttle } from './util';
 
     const mainNavOptions = [
         {text: "State of the climate", icon: svgs.stateoftheclimate.main},
         {text: "What's happening", icon: svgs.whatshappening.main},
         // {text: "Climate action progress", icon: 'test'},
     ];
+    var widgetEl: HTMLElement;
 
     let selectedNavOption = mainNavOptions[0];
 
@@ -20,9 +23,45 @@
         selectedNavOption = option;
     }
 
+    const inIframe = (function () {
+        try {
+            return window.self !== window.top;
+        } catch (e) {
+            return true;
+        }
+    })();
+
+    function getCurrentHeight() {
+        return widgetEl.clientHeight;
+    }
+
+    var previousHeight: number;
+    function resizeIframe() {
+        if (inIframe) {
+            const currentHeight = getCurrentHeight();
+            if (currentHeight !== previousHeight) {
+                previousHeight = currentHeight;
+                window.parent.postMessage({
+                    type: 'unep-widget:resize',
+                    value: currentHeight
+                }, '*');
+            }
+        }
+    }
+
+    afterUpdate(() => {
+        if (inIframe) {
+            window.setTimeout(resizeIframe, 0);
+        }
+    })
+
+
 </script>
 
-<div class="widget">
+<svelte:window on:resize={throttle(resizeIframe, 100)}/>
+
+<div class="widget" bind:this={widgetEl}>
+
     <div class="content">
         <div class="navcontainer">
             <MainNav options={mainNavOptions} bind:selected={selectedNavOption} onchange={onMenuChange} />
@@ -55,6 +94,12 @@
         height: 760px;
     }
 
+    .content {
+        max-width: 1100px;
+        margin: auto;
+        position: relative;
+    }
+
     @media (min-width: 1400px) {
         .navcontainer {
             position: absolute;
@@ -63,10 +108,11 @@
         }
     }
 
-    .content {
-        max-width: 1100px;
-        margin: auto;
-        position: relative;
+
+    @media (max-width: 900px) {
+        .widget {
+            height: auto;
+        }
     }
 
     :global(.stroke--stable) { stroke: #BEC7CD; }

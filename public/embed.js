@@ -13,11 +13,19 @@ function injectIframe() {
 	var iframe = document.createElement('iframe');
     iframe.src = getIframePath();
     iframe.style.width = "100%";
-    iframe.style.height = "760px";
+    iframe.style.height = 0;
     iframe.style.border = 0;
     iframe.style.margin = 0;
     iframe.style.padding = 0;
 	script.parentNode.insertBefore(iframe, script);
+
+    window.addEventListener('message', function(event) {
+        if (event.data.type && event.data.type === 'unep-widget:resize') {
+            var height = parseInt(event.data.value);
+            iframe.style.height = height + "px";
+        }
+    }, false);
+
 }
 
 injectIframe();
