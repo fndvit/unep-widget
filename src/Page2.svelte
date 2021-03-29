@@ -1,13 +1,11 @@
 <script lang="ts">
     import SubNav from './components/SubNav.svelte';
     import MainViz from './components/MainViz.svelte';
-    import CopyPane from './components/CopyPane.svelte';
-    import CopyHeadline from './components/CopyHeadline.svelte';
-    import CopyMain from './components/CopyMain.svelte';
-    import ChartsContainer from './components/ChartsContainer.svelte';
+    import ScrollableCopyPane from './components/ScrollableCopyPane.svelte';
     import Page2Charts from './Page2Charts.svelte';
     import {default as copy} from './data/copy.json';
     import svg from './svg';
+    import ScrollableX from './components/ScrollableX.svelte';
 
     const sections = [
         {
@@ -36,25 +34,8 @@
 
 <MainViz>
     <div class="p2-copy p2-copy-{selectedSection.class}">
-        {#if selectedSection.text === "Land Temperature"}
-        <CopyPane>
-            <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
-            <CopyMain>{selectedSection.copy.summary}</CopyMain>
-        </CopyPane>
-        {:else if selectedSection.text === "Ocean Temperature"}
-        <CopyPane>
-            <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
-            <CopyMain>{selectedSection.copy.summary}</CopyMain>
-        </CopyPane>
-        {:else if selectedSection.text === "Fires"}
-        <CopyPane>
-            <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
-            <CopyMain>{selectedSection.copy.summary}</CopyMain>
-        </CopyPane>
-
-        {/if}
+        <ScrollableCopyPane {...selectedSection.copy} />
     </div>
-
 
     <div class="cartogram-container">
         {#if selectedSection.text === "Land Temperature"}
@@ -65,13 +46,13 @@
         <img src="fire.png" alt="Fires Map" />
         {/if}
     </div>
-
-
 </MainViz>
 
-<ChartsContainer>
-    <Page2Charts></Page2Charts>
-</ChartsContainer>
+<div class="p2-chart-pane">
+    <ScrollableX>
+        <Page2Charts />
+    </ScrollableX>
+</div>
 
 <style>
     .cartogram-container {
@@ -87,6 +68,7 @@
         width: 400px;
         position: relative;
         display: flex;
+        padding-left: 12px;
     }
 
     .p2-copy-temp :global(.copy-container) {

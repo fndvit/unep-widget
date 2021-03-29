@@ -9,7 +9,6 @@
 
     onMount(async () => {
         criData = await cri;
-        // useableData = criData.filter(c => getCountryBaseData(c.code));
     });
 
     function getRandom(arr: any[]) {
@@ -20,8 +19,8 @@
     </script>
 
 {#if criData}
-<div class="p2-charts">
-    <div class="test">
+<div class="p2-chart-container">
+    <div class="p2-charts-leftpane">
         <h2>How each country's climate risk compares</h2>
         <div>
             <span>Climate risk index</span>
@@ -29,7 +28,7 @@
             <span>Losses as pct. of GDP</span>
         </div>
     </div>
-    <div class="charts">
+    <div class="p2-charts">
         <ClimateRiskViz data={getRandom(criData)} header={true}/>
         <ClimateRiskViz data={getRandom(criData)}/>
         <ClimateRiskViz data={getRandom(criData)}/>
@@ -39,15 +38,14 @@
 {/if}
 
 <style>
-    .test {
+    .p2-charts-leftpane {
         width: 165px;
-        height: 500px;
         font-size: 14px;
         text-align: left;
         position: relative;
     }
 
-    .test h2 {
+    .p2-charts-leftpane h2 {
         font-size: 14px;
         margin: 0;
         position: absolute;
@@ -55,45 +53,35 @@
         margin-bottom: 8px;
         color: #000;
     }
-    .test span {
+    .p2-charts-leftpane span {
         line-height: 24px;
         white-space: nowrap;
         position: relative;
-        /* display: inline-block; */
         top: -1px;
         width: 165px;
         display: flex;
     }
-    /* .test span:after {
-        content: "";
-        top: 11px;
-        flex-grow: 1;
-        position: relative;
-        top: 11px;
-        border-top: 1px solid #ddd;
-    } */
-
-    .p2-charts {
+    .p2-chart-container {
         padding-top: 60px;
         display: flex;
     }
 
-    .charts {
+    .p2-charts {
         flex-grow: 1;
         float: left;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
     }
-    .charts > :global(*) {
+    .p2-charts > :global(*) {
         width: 200px;
     }
 
-    .charts > :global(*:last-child) {
+    .p2-charts > :global(*:last-child) {
         margin: 0;
     }
 
-    .charts :global(svg) {
+    .p2-charts :global(svg) {
         width: 100%;
     }
 
