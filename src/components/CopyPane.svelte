@@ -1,120 +1,50 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-    import svgs from '../svg';
 
-    var el: Element;
-    var scrollable: boolean = false;
-    var scrollTop: number = 0;
-    var atBottom: boolean = false;
-    var scrollHeight: number;
-    var clientHeight: number;
-
-    $: {
-        atBottom = scrollHeight === clientHeight + scrollTop;
-    }
-
-    function update() {
-        scrollHeight = el.scrollHeight;
-        clientHeight = el.clientHeight;
-        scrollable = clientHeight < scrollHeight;
-    }
-
-    onMount(() => {
-        update();
-        document.fonts.ready.then(update);
-    })
-
-    function onscroll() {
-        scrollTop = el.scrollTop;
-        scrollHeight = el.scrollHeight;
-    }
+    export var title: string;
+    export var summary: string;
 
 </script>
 
-<div class="copy-container">
-    <div class="copy-pane" on:scroll={onscroll} bind:this={el}>
-        <slot/>
-    </div>
-    {#if scrollable}
-        <div class="overflow" class:overflow-visible={!atBottom}>
-            <i>{@html svgs.downarrow}</i>
-        </div>
-    {/if}
+<div class="copy-pane">
+    <h1>{title}</h1>
+    <p>{summary}</p>
 </div>
 
 <style>
 
-    .copy-container {
-        box-sizing: border-box;
-        display: flex;
-        position: relative;
-        padding-left: 20px;
-    }
-
     .copy-pane {
-        overflow-y: auto;
-        visibility: hidden;
         box-sizing: border-box;
         text-align: left;
         color: #222;
-        scrollbar-width: thin;
     }
 
-    .copy-pane::-webkit-scrollbar {
-        width: 12px;
-    }
-    /* .copy-pane::-webkit-scrollbar-track {
-        background: orange;
-    } */
-    .copy-pane::-webkit-scrollbar-thumb {
-        background-color: #b9b9b9;
-        border-radius: 20px;
-        border: 3px solid #F3F3F3;
-    }
-    .copy-pane > :global(*),
-    .copy-pane:hover,
-    .copy-pane:focus {
-        visibility: visible;
-    }
-    .copy-pane:hover {
-        transition: visibility 0s 0.2s;
+    h1 {
+        color: #000;
+        font-size: 38px;
+        line-height: 42px;
+        font-weight: 300;
+        margin-bottom: 20px;
+        margin-top: 14px;
     }
 
-    .overflow {
-        position: absolute;
-        pointer-events: none;
-        bottom: 0px;
-        left: 20px;
-        right: 12px;
-        height: 100px;
-        background: red;
-        display: none;
-        background: rgb(255,255,255);
-        background: linear-gradient(0deg, rgba(243,243,243,1) 30%, rgba(243,243,243,0) 100%);
+    @media (max-width: 1000px) {
+        h1 {
+            font-size: 30px;
+            line-height: 36px;
+        }
     }
 
-    .overflow-visible {
-        display: block;
+    p {
+        font-size: 18px;
+        line-height: 28px;
+        margin-bottom: 0;
     }
 
-    .overflow i :global(svg) {
-        width: 26px;
-        fill: #999999;
-        position: absolute;
-        bottom: 1px;
-        left: 0;
-        right: 0;
-        margin: auto;
-        background: #F3F3F3;
-    }
-    .overflow::before {
-        content: '';
-        display: block;
-        border-top: 1px solid #DCDCDC;
-        position: absolute;
-        bottom: 10px;
-        left: 0;
-        right: 0;
+    @media (max-width: 1000px) {
+        p {
+            font-size: 16px;
+            line-height: 26px;
+        }
     }
 
 </style>
