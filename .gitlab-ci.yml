@@ -1,0 +1,38 @@
+image: node:12.16.2-alpine3.11
+
+stages:
+  - build
+  - deploy
+
+variables:
+  BUCKET_NAME: ${BUCKET_NAME}
+
+cache:
+  paths:
+    - node_modules
+
+build_svelte:
+  stage: build
+  tags:
+    - unep
+  script:
+    - npm i
+    - npm run build
+  only:
+    - main
+
+deploy_to_s3:
+  tags:
+    - unep
+  image:
+    name: robpco/awscli
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+  stage: deploy
+  only:
+    - main
+  dependencies:
+    - build_svelte
+  script:
+    - aws s3 cp public/ s3://${BUCKET_NAME} --recursive --acl public-read
