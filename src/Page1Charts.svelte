@@ -52,27 +52,8 @@
     </script>
 
 {#if ghgData}
-<div class="p1-charts">
-    <LineChartWidget data={chartData[0]} chartTextType={ChartTextType.Largest}/>
-    <LineChartWidget data={chartData[1]} chartTextType={ChartTextType.Decrease}/>
-    <LineChartWidget data={chartData[2]} chartTextType={ChartTextType.Increase}/>
-    <LineChartWidget data={chartData[3]} chartTextType={ChartTextType.PerCapita}/>
-</div>
+<LineChartWidget data={chartData[0]} chartTextType={ChartTextType.Largest}/>
+<LineChartWidget data={chartData[1]} chartTextType={ChartTextType.Decrease}/>
+<LineChartWidget data={chartData[2]} chartTextType={ChartTextType.Increase}/>
+<LineChartWidget data={chartData[3]} chartTextType={ChartTextType.PerCapita}/>
 {/if}
-
-<style>
-
-    .p1-charts {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .p1-charts > :global(*) {
-        width: 250px;
-    }
-
-    .p1-charts :global(svg) {
-        width: 100%;
-    }
-
-</style>
