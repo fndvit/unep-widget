@@ -125,6 +125,8 @@
         padding-left: 12px;
         color: black;
         text-align: left;
+        position: relative;
+        z-index: 6;
     }
 
     @media (min-width: 1300px) {
