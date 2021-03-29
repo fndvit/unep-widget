@@ -38,12 +38,12 @@
 
 <div>
     <MiniLineChart data={timeseriesData} category={category} />
-    <h2>{lastFigStr}</h2>
-    <p>{@html getChartText(data, chartTextType)}</p>
+    <h2 class="chart-figure">{lastFigStr}</h2>
+    <p class="chart-summary">{@html getChartText(data, chartTextType)}</p>
 </div>
 
 <style>
-    h2 {
+    .chart-figure {
         text-align: left;
         font-size: 30px;
         line-height: 36px;
@@ -53,14 +53,14 @@
         margin-top: 0px;
     }
 
-    p {
+    .chart-summary {
         text-align: left;
         margin-top:0;
         font-size: 16px;
         line-height: 24px;
     }
 
-    p :global(b) {
+    .chart-summary :global(b) {
         color:black;
         font-size: 18px;
         font-weight: 600;

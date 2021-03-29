@@ -13,7 +13,7 @@
     const chartHeight = 100;
     const width = chartWidth;
     const height = chartHeight + topPadding;
-    const axisHeight = 20;
+    const axisHeight = 5;
     let hoverInfo: { data: YearlyTimeseriesDatum, x: number, y: number, valStr: string };
 
     const x = d3.scaleLinear()
@@ -27,7 +27,6 @@
     const linePath = d3.line<YearlyTimeseriesDatum>().x(d => x(d.year)).y(d => y(d.value))(data);
 
     function mouseMove(event: any) {
-        console.log('derp');
         const pointer = d3.pointer(event);
         const closestYear = Math.round(x.invert(pointer[0]));
         const d = data.find(d => d.year === closestYear);
