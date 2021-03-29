@@ -91,7 +91,6 @@
         font-family: 'Roboto', sans-serif;
         background-color: #F3F3F3;
         font-size: 24px;
-        height: 760px;
     }
 
     .content {
