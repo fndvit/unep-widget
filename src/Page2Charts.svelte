@@ -68,13 +68,13 @@
 
     .p2-charts {
         flex-grow: 1;
-        float: left;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
     }
     .p2-charts > :global(*) {
         width: 200px;
+        margin: 0 12px;
     }
 
     .p2-charts > :global(*:last-child) {
