@@ -48,6 +48,7 @@
 
 
 <div class="p1-chart-pane">
+    <h2 class="chart-section-title">Top emitters, rises and drops since 1990</h2>
     <ScrollableX>
         <div class="p1-charts">
             <Page1Charts/>
@@ -114,6 +115,16 @@
     .p1-charts :global(svg) {
         width: 100%;
         box-sizing: border-box;
+    }
+
+    .chart-section-title {
+        font-size: 14px;
+        margin: 0;
+        margin-top: 12px;
+        margin-bottom: -5px;
+        padding-left: 12px;
+        color: black;
+        text-align: left;
     }
 
     @media (min-width: 1300px) {
