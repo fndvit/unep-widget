@@ -2,15 +2,13 @@
     import MainViz from './components/MainViz.svelte';
     import Page1Charts from './Page1Charts.svelte';
     import SubNav from './components/SubNav.svelte';
-    import CopyPane from './components/CopyPane.svelte';
-    import CopyHeadline from './components/CopyHeadline.svelte';
-    import CopyMain from './components/CopyMain.svelte';
     import ChartsContainer from './components/ChartsContainer.svelte';
     import GHGCartogram from './maps/GHGCartogram.svelte';
     import {default as copy} from './data/copy.json';
     import {Datasets} from './maps/GHGCartogram.svelte';
-    import svgs from './svg';
-import svg from './svg';
+    import svg from './svg';
+    import ScrollableCopyPane from './components/ScrollableCopyPane.svelte';
+    import ScrollableX from './components/ScrollableX.svelte';
 
     const sections = [
         {
@@ -36,57 +34,148 @@ import svg from './svg';
 
 <SubNav bind:selected={selectedSection} options={sections} />
 
-<MainViz>
+<div class="top-section">
     <div class="p1-copy">
-        {#if selectedSection.text === "Total emissions"}
-        <CopyPane>
-            <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
-            <CopyMain>{selectedSection.copy.summary}</CopyMain>
-        </CopyPane>
-        {:else if selectedSection.text === "Per capita emissions"}
-        <CopyPane >
-            <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
-            <CopyMain>{selectedSection.copy.summary}</CopyMain>
-        </CopyPane>
-        {:else if selectedSection.text === "Country trends"}
-        <CopyPane>
-            <CopyHeadline>{selectedSection.copy.title}</CopyHeadline>
-            <CopyMain>{selectedSection.copy.summary}</CopyMain>
-        </CopyPane>
-
-        {/if}
+        <ScrollableCopyPane {...selectedSection.copy} />
     </div>
 
-
-    <div class="cartogram-container">
-        <GHGCartogram dataset={selectedSection.dataset} />
+    <div class="cartogram-pane">
+        <ScrollableX>
+            <GHGCartogram dataset={selectedSection.dataset} />
+        </ScrollableX>
     </div>
+</div>
 
 
-</MainViz>
-
-<ChartsContainer>
-    <Page1Charts/>
-</ChartsContainer>
+<div class="p1-chart-pane">
+    <ScrollableX>
+        <div class="p1-charts">
+            <Page1Charts/>
+        </div>
+    </ScrollableX>
+</div>
 
 <style>
-
-    .cartogram-container {
-        width: 700px;
-        float: left;
-        margin-right: -100px; /* right-side overflow */
+    .top-section {
+        display: flex;
+        position: relative;
+        height: 400px;
     }
 
-    .cartogram-container :global(svg) {
+    .cartogram-pane {
+        display: flex;
+        width: 700px;
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    .cartogram-pane:hover {
+        z-index: 2;
+    }
+
+    .cartogram-pane > :global(.cartogram-container) {
+        flex: 0 0 100%;
+    }
+
+    .cartogram-pane :global(svg) {
         width: 100%;
+    }
+    .cartogram-pane :global(.scrollable) {
+        width: 100%;
+    }
+
+    .cartogram-pane :global(.cartogram-container) {
+        min-width: 500px;
+    }
+
+    .cartogram-pane :global(.scrollable-content) {
+        flex: 0 0 100%;
+        display: flex;
+        margin-top: -50px;
+        padding-top: 50px;
     }
 
     .p1-copy {
         width: 450px;
-        float: left;
-        /* position: relative; */
         display: flex;
+        padding-left: 12px;
+        box-sizing: border-box;
     }
 
+
+    .p1-charts {
+        display: flex;
+        justify-content: space-between;
+        min-width: 1000px;
+    }
+
+    .p1-charts > :global(*) {
+        flex: 1 1 25%;
+        padding: 0 12px;
+    }
+
+    .p1-charts :global(svg) {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    @media (min-width: 1300px) {
+        .cartogram-pane {
+            /* right-side overflow to enlarge cartogram when we have space */
+            margin-right: -100px;
+        }
+    }
+
+    @media (max-width: 1400px) {
+        .top-section {
+            height: 360px;
+        }
+        .p1-charts :global(.chart-summary) {
+            font-size: 14px;
+        }
+    }
+
+
+
+    @media (max-width: 900px) {
+        .top-section {
+            display: block;
+            height: auto;
+        }
+
+        .cartogram-pane {
+            height: 320px;
+            width: 100%;
+        }
+
+        .p1-copy {
+            width: auto;
+            padding-right: 20%;
+        }
+        .p1-copy :global(h1) {
+            font-size: 24px;
+            line-height: 30px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        .p1-copy :global(p) {
+            display: none;
+        }
+    }
+
+
+
+    @media (max-width: 600px) {
+        .p1-copy {
+            padding-right: 20px;
+        }
+        .p1-copy :global(h1) {
+            font-weight: 300;
+        }
+
+        :global(.p1-chart-pane .chart-figure) {
+            display: none;
+        }
+    }
 
 </style>
