@@ -91,8 +91,6 @@
     .cartogram-pane :global(.scrollable-content) {
         flex: 0 0 100%;
         display: flex;
-        margin-top: -50px;
-        padding-top: 50px;
     }
 
     .p1-copy {
