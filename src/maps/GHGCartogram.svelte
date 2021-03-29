@@ -24,7 +24,7 @@
             nodeSize: 80,
             domain: [740, 420],
             helpText: {
-                code: "GBR",
+                code: "DEU",
                 text: "Each square represents a country, scaled by its emissions"
             },
             hoverText: "<b>%country%</b> emitted %value% Mt <span>CO<sub>2</sub>e</span> in %year%"
