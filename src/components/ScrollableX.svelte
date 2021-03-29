@@ -99,6 +99,7 @@
     .scrollable-content {
         overflow-x: scroll;
         scrollbar-width: none;
+        min-width: 100%;
     }
 
     .scrollable-content::-webkit-scrollbar {
