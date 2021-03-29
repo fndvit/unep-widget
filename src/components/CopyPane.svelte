@@ -1,8 +1,6 @@
 <script lang="ts">
-
     export var title: string;
     export var summary: string;
-
 </script>
 
 <div class="copy-pane">
