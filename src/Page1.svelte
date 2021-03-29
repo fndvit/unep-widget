@@ -102,7 +102,6 @@
         box-sizing: border-box;
     }
 
-
     .p1-charts {
         display: flex;
         justify-content: space-between;
