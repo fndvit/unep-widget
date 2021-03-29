@@ -80,10 +80,6 @@ export interface MenuOption {
         background: black;
     }
 
-    button:not(.selected) .buttoncontent {
-        width: 50px;
-    }
-
     button:not(.selected):hover .buttoncontent {
         width: 100%;
         transition: width 0.2s;
@@ -101,10 +97,6 @@ export interface MenuOption {
         align-items: center;
         width: 100px;
         box-sizing: border-box;
-    }
-
-    .text {
-        opacity: 0;
     }
 
     .icon {
@@ -131,6 +123,10 @@ export interface MenuOption {
 
 
     @media (max-width: 1400px) {
+
+        .text {
+            opacity: 0;
+        }
         .mainnavbuttons {
             display: flex;
         }
