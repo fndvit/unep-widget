@@ -20,6 +20,7 @@
 <script lang="ts">
     import { getGHGCategory } from '../data';
 	import * as d3 from '../d3';
+    import { throttle, trailingDebounce } from '../util';
     import MiniTrendCharts from './MiniTrendCharts.svelte';
     import MiniLineChart from '../components/MiniLineChart.svelte';
 
@@ -43,51 +44,61 @@
     export var hoverText: string = null;
 
     var containerEl: Element;
-    var cartogramData: CartogramDataPoint[];
+    let loaded: boolean = false;
 
     var trendsTimeseriesLookup: {[code: string]: YearlyTimeseriesDatum[]} = {};
     trendsTimeseriesData.forEach(d=> trendsTimeseriesLookup[d.code] = d.data)
 
-    $: {
-	    const largestVal = Math.max(...data.map(d => d.value));
-        // TODO: do we use 0 for range bottom? what about negative emissions?
-        const radius = d3.scaleSqrt()
-            .domain([0, largestVal])
-            .range([0, nodeSize]);
-
-        const xScale = d3.scaleLinear()
-            .domain([0, domain[0]])
-            .range([0, 740]);
-
-        const yScale = d3.scaleLinear()
-            .domain([0, domain[1]])
-            .range([0, 420]);
-
-        // add r values and categories
-        cartogramData = data.map(d => {
-            const trendsTimeseries = trendsTimeseriesLookup[d.code];
-            const r = radius(d.value);
-            return {
-                ...d,
-
-                category: getGHGCategory(trendsTimeseries),
-                trendsTimeseries,
-
-                left: xScale(d.x - r) + (offset[0] || 0),
-                top: yScale(d.y - r) + (offset[1] || 0),
-
-                // width height should be the same if the aspect is correct
-                width: xScale(r * 2),
-                height: yScale(r * 2),
-
-
-            };
-        });
-        hoverData = null;
-    }
+    const chartWidth = 740;
+    const chartHeight = 420;
+    // used to scale to container el
+    const originalWidth = 700;
+    const originalHeight = 400;
+    var targetWidth: number = originalWidth;
+    var targetHeight: number = originalHeight;
 
     var lineDisplayBlock: boolean = false;
     var lineFadeIn: boolean = false;
+    var countryHoverState: boolean = false;
+    var hoverTimeout: number;
+    let hoverData: {x: number, y: number, country: CartogramDataPoint} = null;
+    var helpTextFade: boolean = false;
+    var annotation: Annotation;
+
+    $: largestVal = Math.max(...data.map(d => d.value));
+
+    $: radius = d3.scaleSqrt()
+        .domain([0, largestVal])
+        .range([0, nodeSize]);
+
+    $: xScale = d3.scaleLinear()
+        .domain([0, domain[0]])
+        .range([0, targetWidth]);
+
+    $: yScale = d3.scaleLinear()
+            .domain([0, domain[1]])
+            .range([0, targetHeight]);
+
+    var cartogramData: CartogramDataPoint[];
+    $: cartogramData = data.map(d => {
+        const trendsTimeseries = trendsTimeseriesLookup[d.code];
+        const r = radius(d.value);
+        return {
+            ...d,
+
+            category: getGHGCategory(trendsTimeseries),
+            trendsTimeseries,
+
+            left: xScale(d.x - r) + (offset[0] || 0),
+            top: yScale(d.y - r) + (offset[1] || 0),
+
+            // width height should be the same if the aspect is correct
+            width: xScale(r * 2),
+            height: yScale(r * 2),
+        };
+    });
+
+    // performance tweaks for transitioning to the trendsmode cartogram
     var timeout: number;
     $: {
         if (trendsMode) {
@@ -101,6 +112,8 @@
             }, delay)
 
         }
+    }
+    $: {
         if (!trendsMode) {
             if (timeout) {
                 window.clearTimeout(timeout);
@@ -110,16 +123,6 @@
             lineFadeIn = false;
         }
     }
-
-    var helpCountry: CartogramDataPoint;
-    $: {
-        helpCountry = null;
-        window.setTimeout(() => {
-            helpCountry = helpText ? cartogramData.find(d => d.code === helpText.code) : null;
-        }, 10);
-
-    }
-
 
     function calcStyle(d: CartogramDataPoint) {
         const styles = [
@@ -131,27 +134,46 @@
         return styles.join(';');
     }
 
-    var countryHoverState: boolean = false;
-    var hoverTimeout: number;
-    interface HoverData {
-        x: number,
-        y: number,
-        country: CartogramDataPoint
+    function resize() {
+        if (containerEl) {
+            const containerStyle = getComputedStyle(containerEl);
+            const containerWidth = containerEl.clientWidth - parseFloat(containerStyle.paddingLeft) - parseFloat(containerStyle.paddingRight);
+            const containerHeight = containerEl.clientHeight - parseFloat(containerStyle.paddingTop) - parseFloat(containerStyle.paddingBottom);
+            const scale = Math.min(containerWidth / originalWidth, containerHeight / originalHeight);
+            targetWidth = originalWidth * scale;
+            targetHeight = originalHeight * scale;
+        }
     }
 
-    let hoverData: HoverData = null;
+    // ANNOTATIONS....  yea it's pretty complicated... :(
 
-    function onMouseOver(evt: MouseEvent, country: CartogramDataPoint) {
+    function onMouseOverCountry(evt: MouseEvent, country: CartogramDataPoint) {
         countryHoverState = true;
         hoverTimeout = window.setTimeout(() => {
             if (!countryHoverState) return;
             hoverData = {
                 country,
-                x: country.left,
-                y: country.top
+                x: country.left + (country.width / 2),
+                y: country.top - 2
             };
         }, 350);
     }
+
+    function clearHoverState() {
+        hoverData = null;
+        countryHoverState = false;
+        window.clearTimeout(hoverTimeout);
+        hoverTimeout = null;
+        fadeInHelpText();
+    }
+    const _debouncedShowHelpText = trailingDebounce(() => helpTextFade = false, 500);
+
+    function fadeInHelpText() {
+        helpTextFade = true;
+        _debouncedShowHelpText();
+    }
+
+    $: data && fadeInHelpText();
 
     function generateHoverText(text: string, country: CartogramDataPoint): string {
         return text
@@ -161,27 +183,55 @@
             .replace("%year%", `${endYear}`);
     }
 
-    function onMouseOut() {
-        hoverData = null;
-        countryHoverState = false;
-        window.clearTimeout(hoverTimeout);
+    interface Annotation {
+        x: number;
+        y: number;
+        html: string;
+        class?: string
     }
+
+    $: helpCountry = helpText ? cartogramData.find(d => d.code === helpText.code) : null;
+
+    $: helpAnnotation = {
+        x: helpCountry.left - 1 + helpCountry.width/2,
+        y: helpCountry.top - 2,
+        html: helpText.text,
+        class: 'help'
+    };
+
+    $: countryAnnotation = hoverText && hoverData && !trendsMode && {
+        x: hoverData.x,
+        y: hoverData.y,
+        html: generateHoverText(hoverText, hoverData.country)
+    }
+    $: annotation = countryAnnotation || helpAnnotation;
+
+    $: hideAnnotation = helpTextFade || (!countryAnnotation && countryHoverState);
+
+    window.setTimeout(() => {
+        resize();
+        loaded = true;
+    }, 0);
 
 </script>
 
-<div class="cartogram" bind:this={containerEl}
-    class:trends-mode={trendsMode} class:test={lineDisplayBlock} class:trends-visible={lineFadeIn}
-    class:hovering={countryHoverState} class:showing-chart={hoverData}
->
+<svelte:window on:resize={throttle(resize, 50)} />
 
-    <div class="countries" >
+<div class="cartogram" bind:this={containerEl}
+    class:trends-mode={trendsMode} class:trends-visible={lineFadeIn}
+    class:hovering={countryHoverState} class:showing-chart={hoverData}
+    class:trends-block={lineDisplayBlock}
+    on:touchstart={clearHoverState}
+>
+    {#if loaded}
+    <div class="countries">
         {#each cartogramData as d (d.code)}
         {#if d.x && d.y}
         <div class="country bg--{d.category}"
             style={calcStyle(d)}
             data-code={d.code}
-            on:mouseover={(evt) => onMouseOver(evt, d)}
-            on:mouseleave={onMouseOut}
+            on:mouseover={(evt) => onMouseOverCountry(evt, d)}
+            on:mouseleave={clearHoverState}
         >
             {#if d.width > 50}
                 <span class="country-text">{d.short}</span>
@@ -198,26 +248,17 @@
         {/each}
     </div>
 
-
-
-    {#if helpText}
-    <div class="help" class:help-show={helpCountry && !countryHoverState}>
-        {#if helpCountry}
-        <div class="help-line" style="left: {helpCountry.left - 1 + helpCountry.width/2}px; top: {0}px; height: {helpCountry.top - 2}px;"></div>
-        <div class="help-text" style="top: -20px; left: {helpCountry.left - 40 + helpCountry.width/2}px;">{@html helpText.text}</div>
-        {/if}
-    </div>
     {/if}
 
-    {#if hoverText && hoverData && !trendsMode }
-    <div class="annotation">
-        <div class="annotation-text" style="left: {hoverData.x - 80 + hoverData.country.width / 2}px;">
+    {#if annotation}
+    <div class="annotation annotation-{annotation.class || 'default'}" class:annotation-hide={hideAnnotation}>
+        <div class="annotation-text" style="left: {annotation.x - 60}px;">
             <span class="annotation-textspan">
-                {@html generateHoverText(hoverText, hoverData.country)}
+                {@html annotation.html}
             </span>
         </div>
         <div class="annotation-line"
-            style="left: {hoverData.x + hoverData.country.width / 2}px; height: {hoverData.country.y - 16 - hoverData.country.height/2}px;">
+            style="left: {annotation.x}px; height: {annotation.y}px;">
         </div>
     </div>
     {/if}
@@ -234,7 +275,6 @@
 
 <style>
     .cartogram {
-        position: relative;
         transform-origin: 0 0;
         height: 100%;
         width: 100%;
@@ -242,13 +282,8 @@
     }
 
     .countries {
-        position: relative;
-        top: 0px;
         flex: 0 0 100%;
-
-        /* TMP */
-        border: 1px solid #dfdfdf;
-        overflow: hidden;
+        transform: rotateY(0.001deg);
     }
 
     .showing-chart .country:hover {
@@ -272,8 +307,14 @@
         bottom: 0;
     }
 
-    .test .trendline {
-        display: block;
+    .country {
+        position: absolute;
+        border-radius: 4px;
+        cursor: pointer;
+        opacity: 1;
+        z-index: 2;
+        transition: top 0.2s, left 0.2s, width 0.2s, height 0.2s, background-color 0.2s, opacity 0.45s ease 0.15s;
+        will-change: opacity, background-color, border-radius;
     }
 
     .trendline :global(svg) {
@@ -282,6 +323,10 @@
         position: absolute;
         top: 0;
         left: 0;
+    }
+
+    .trends-block .trendline {
+        display: block;
     }
 
     .trends-visible .trendline {
@@ -306,25 +351,13 @@
         transform: translateY(-50%);
     }
 
-    .country {
-        position: absolute;
-        border-radius: 4px;
-        cursor: pointer;
-        opacity: 1;
-        z-index: 2;
-        transition: top 0.2s, left 0.2s, width 0.2s, height 0.2s, background-color 0.2s, opacity 0.45s ease 0.15s;
-    }
-
     .hovering:not(.trends-mode) .country:not(:hover) {
         opacity: 0.65;
         transition: opacity 0.05s;
     }
-    .hovering:not(.trends-mode) .country.bg--stable:not(:hover) {
-        background-color: #bec7cde8;
-    }
 
     .hovering:not(.trends-mode) .country:hover {
-        opacity: 0.999; /* not 1 so it overrides the opacity: 1 in the other def */
+        opacity: 0.999;
         transition: opacity 0s;
         z-index: 3;
     }
@@ -380,7 +413,6 @@
         font-size: 14px;
         line-height: 20px;
         width: 180px;
-        background-color: #F3F3F3;
         padding-bottom: 5px;
         z-index: 2;
         text-align: left;
@@ -398,9 +430,9 @@
         line-height: 20px;
         width: 220px;
         padding-bottom: 5px;
-        z-index: 3;
+        z-index: 6;
         text-align: left;
-        bottom: calc(100% - 15px);
+        top: -35px;
         padding: 0 20px;
         box-sizing: border-box;
     }
@@ -408,7 +440,7 @@
     .annotation-textspan {
         border-radius: 5px;
         background: #f3f3f3;
-        box-shadow: -3px 0 2px 2px #f3f3f3, 3px 0 2px 2px #f3f3f3;
+        box-shadow: -3px 0 2px 2px #f3f3f3  , 3px 0 2px 2px #f3f3f3;
         box-decoration-break: clone;
         -webkit-box-decoration-break: clone;
     }
@@ -425,9 +457,21 @@
 
     .annotation-line {
         position: absolute;
-        top: 14px;
+        top: 0;
         z-index: 5;
         border-left: 1px solid #bbbbbb;
+    }
+
+    .annotation {
+        opacity: 1;
+    }
+    .annotation-help {
+        transition: opacity 500ms;
+    }
+
+    .annotation-hide {
+        opacity: 0;
+        transition: opacity 0s;
     }
 
 </style>
