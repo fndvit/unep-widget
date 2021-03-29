@@ -141,19 +141,14 @@
 
     let hoverData: HoverData = null;
 
-    function onMouseOver(evt: MouseEvent, country) {
-        const el = evt.currentTarget as Element;
-
+    function onMouseOver(evt: MouseEvent, country: CartogramDataPoint) {
         countryHoverState = true;
-
         hoverTimeout = window.setTimeout(() => {
             if (!countryHoverState) return;
-            const {left,top} = el.getBoundingClientRect();
-            const containerRect = containerEl.getBoundingClientRect();
             hoverData = {
                 country,
-                x: left - containerRect.left,
-                y: top - containerRect.top
+                x: country.left,
+                y: country.top
             };
         }, 350);
     }
@@ -243,11 +238,17 @@
         transform-origin: 0 0;
         height: 100%;
         width: 100%;
+        display: flex;
     }
 
     .countries {
         position: relative;
         top: 0px;
+        flex: 0 0 100%;
+
+        /* TMP */
+        border: 1px solid #dfdfdf;
+        overflow: hidden;
     }
 
     .showing-chart .country:hover {

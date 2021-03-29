@@ -5,6 +5,7 @@
 </script>
 <script lang="ts">
     import { onMount } from 'svelte';
+    import { throttle } from '../util';
     import DemersCartogram from './DemersCartogram.svelte';
     import {ghg, percapita, startYear, endYear} from '../data';
     import type {GHGData, PerCapitaData } from '../data';
@@ -14,7 +15,14 @@
 
     export var dataset: number = Datasets.GHGTotal;
 
+    let cartogramContainerEl: HTMLElement;
+
     let loaded: boolean = false;
+
+    // used to scale to container el
+    const originalWidth = 700;
+    const originalHeight = 400;
+    var scale: number = null;
 
     var datasets: {[key: number]: CountryDataPoint[]};
     var trendsTimeseriesData: TrendsDataset[];
@@ -114,23 +122,39 @@
                 })
         }
 
+        window.setTimeout(() => {
+            resize();
+        }, 0);
         loaded = true;
-
 	});
+    function resize() {
+        if (cartogramContainerEl) {
+            const parentEl = cartogramContainerEl; //.parentElement;
+            const parentStyle = getComputedStyle(parentEl);
+            const parentWidth = parentEl.clientWidth - parseFloat(parentStyle.paddingLeft) - parseFloat(parentStyle.paddingRight);
+            const parentHeight = parentEl.clientHeight - parseFloat(parentStyle.paddingTop) - parseFloat(parentStyle.paddingBottom);
+            scale = Math.min(parentWidth / originalWidth, parentHeight / originalHeight);
+        }
+    }
 
 </script>
 
+<svelte:window on:resize={throttle(resize, 50)} />
+
 {#if loaded}
-    <div class="container">
-        <DemersCartogram data={datasets[dataset]}
-            nodeSize={datasetParams[dataset].nodeSize}
-            domain={datasetParams[dataset].domain}
-            offset={datasetParams[dataset].offset || [0,0]}
-            trendsMode={dataset === Datasets.GHGTrends}
-            trendsTimeseriesData={trendsTimeseriesData}
-            helpText={datasetParams[dataset].helpText}
-            hoverText={datasetParams[dataset].hoverText}
-        />
+    <div class="cartogram-container" bind:this={cartogramContainerEl}
+        class:scaled={scale !== null}>
+        <div class="cartogram-scaler" style="width: {originalWidth}px; height: {originalHeight}px; transform: scale({scale ? scale.toFixed(3) : 1});" >
+            <DemersCartogram data={datasets[dataset]}
+                nodeSize={datasetParams[dataset].nodeSize}
+                domain={datasetParams[dataset].domain}
+                offset={datasetParams[dataset].offset || [0,0]}
+                trendsMode={dataset === Datasets.GHGTrends}
+                trendsTimeseriesData={trendsTimeseriesData}
+                helpText={datasetParams[dataset].helpText}
+                hoverText={datasetParams[dataset].hoverText}
+            />
+        </div>
         <div class="legend">
             <CartogramLegend/>
         </div>
@@ -138,9 +162,13 @@
 {/if}
 
 <style>
-    .container {
-        position: relative;
-        height: 420px;
+    .cartogram-container {
+        box-sizing: border-box;
+        padding-bottom: 20px;
+        flex: 0 0 100%;
+    }
+    .cartogram-scaler {
+        transform-origin: 0 0;
     }
     .legend {
         position: absolute;
@@ -148,12 +176,8 @@
         left: 50px;
     }
 
-    @media (max-width: 1000px) {
-        .container {
-            margin-top: 20px;
-            transform: scale(0.85);
-            transform-origin: 0 0;
-        }
+    .cartogram-container:not(.scaled) {
+        visibility: hidden;
     }
 
 </style>
