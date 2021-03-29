@@ -1,5 +1,7 @@
 
 <script lang="ts">
+    import ScrollableX from "./ScrollableX.svelte";
+
     interface MenuOption {
         text: string;
         icon: string;
@@ -8,24 +10,26 @@
     export let selected: MenuOption;
 </script>
 
-<nav>
-    <div class="subnavbuttons">
-        {#each options as option}
+<ScrollableX>
+    <nav>
+        <div class="subnavbuttons">
+            {#each options as option}
 
-        <button class:selected={selected === option} disabled={selected === option} on:click={() => selected = option}>
-            <i>{@html option.icon}</i>
-            {option.text}
-        </button>
+            <button class:selected={selected === option} disabled={selected === option} on:click={() => selected = option} title={option.text}>
+                <i>{@html option.icon}</i>
+                {option.text}
+            </button>
 
-        {/each}
-    </div>
-</nav>
+            {/each}
+        </div>
+    </nav>
+</ScrollableX>
 
 <style>
     .subnavbuttons {
         display: flex;
-        scrollbar-width: none;
-        overflow: auto;
+        position: relative;
+        z-index: 1;
     }
 
     .subnavbuttons::-webkit-scrollbar {
@@ -65,7 +69,8 @@
         font-weight: 700;
         color: #222;
     }
-    .selected:after {
+
+    .selected:before {
         content: '';
         display: block;
         position: absolute;
@@ -86,6 +91,26 @@
 
     i :global(svg) {
         width: 100%;
+    }
+
+    button::after {
+        /* this is a hack to stop the button width
+           changing when bolding the text */
+        display: block;
+        content: attr(title);
+        font-weight: bold;
+        height: 1px;
+        color: transparent;
+        overflow: hidden;
+        visibility: hidden;
+        margin-bottom: -1px;
+    }
+    @media (max-width: 900px) {
+        button {
+            height: 39px;
+            padding-top: 6px;
+            font-size: 14px;
+        }
     }
 
 </style>
