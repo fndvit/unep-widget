@@ -78,7 +78,7 @@
         left: 0;
         width: 100%;
         height: 3px;
-        background: black;
+        background: #1E1E1E;
     }
     i {
         width: 22px;

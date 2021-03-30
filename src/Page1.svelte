@@ -48,7 +48,7 @@
 
 
 <div class="p1-chart-pane">
-    <h2 class="chart-section-title">Top emitters, rises and drops since 1990</h2>
+    <h3 class="chart-section-title">Top emitters, rises and drops since 1990</h3>
     <ScrollableX>
         <div class="p1-charts">
             <Page1Charts/>
@@ -60,7 +60,8 @@
     .top-section {
         display: flex;
         position: relative;
-        height: 400px;
+        height: 375px;
+        padding-bottom:20px;
     }
 
     .cartogram-pane {

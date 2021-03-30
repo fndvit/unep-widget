@@ -4,7 +4,7 @@
 </script>
 
 <div class="copy-pane">
-    <h1>{title}</h1>
+    <h2>{title}</h2>
     <p>{summary}</p>
 </div>
 
@@ -16,32 +16,34 @@
         color: #222;
     }
 
-    h1 {
+    h2 {
         color: #000;
-        font-size: 38px;
-        line-height: 42px;
+        font-size: 30px;
+        line-height: 38px;
         font-weight: 300;
         margin-bottom: 20px;
-        margin-top: 14px;
+        margin-top: 20px;
     }
 
     @media (max-width: 1000px) {
-        h1 {
-            font-size: 30px;
-            line-height: 36px;
+        h2 {
+            font-size: 22px;
+            line-height: 28px;
         }
     }
 
     p {
         font-size: 18px;
-        line-height: 28px;
+        line-height: 1.5;
         margin-bottom: 0;
+        font-weight:300;
     }
 
     @media (max-width: 1000px) {
         p {
             font-size: 16px;
-            line-height: 26px;
+            line-height: 1.5;
+            font-weight:300;
         }
     }
 

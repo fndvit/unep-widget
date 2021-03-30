@@ -76,8 +76,8 @@ export interface MenuOption {
     }
 
     button.selected .buttoncontent {
-        border-color: black;
-        background: black;
+        border-color:  #1E1E1E;
+        background:  #1E1E1E;
     }
 
     button:not(.selected):hover .buttoncontent {

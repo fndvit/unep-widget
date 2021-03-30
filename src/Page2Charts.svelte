@@ -21,7 +21,7 @@
 {#if criData}
 <div class="p2-chart-container">
     <div class="p2-charts-leftpane">
-        <h2>How each country's climate risk compares</h2>
+        <h3>How each country's climate risk compares</h3>
         <div>
             <span>Climate risk index</span>
             <span>Fatalities per 100K people</span>
@@ -45,7 +45,7 @@
         position: relative;
     }
 
-    .p2-charts-leftpane h2 {
+    .p2-charts-leftpane h3 {
         font-size: 14px;
         margin: 0;
         position: absolute;
@@ -64,6 +64,7 @@
     .p2-chart-container {
         padding-top: 60px;
         display: flex;
+        margin-left:12px;
     }
 
     .p2-charts {

@@ -32,6 +32,7 @@
         color: #222;
         margin: 0;
         text-align: left;
+        font-weight:300;
     }
 
     p b {
