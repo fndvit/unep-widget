@@ -49,8 +49,6 @@
     var trendsTimeseriesLookup: {[code: string]: YearlyTimeseriesDatum[]} = {};
     trendsTimeseriesData.forEach(d=> trendsTimeseriesLookup[d.code] = d.data)
 
-    const chartWidth = 740;
-    const chartHeight = 420;
     // used to scale to container el
     const originalWidth = 700;
     const originalHeight = 400;
@@ -59,11 +57,11 @@
 
     var lineDisplayBlock: boolean = false;
     var lineFadeIn: boolean = false;
-    var countryHoverState: boolean = false;
     var hoverTimeout: number;
     let hoverData: {x: number, y: number, country: CartogramDataPoint} = null;
     var helpTextFade: boolean = false;
     var annotation: Annotation;
+    var hoveredForX: boolean = false;
 
     $: largestVal = Math.max(...data.map(d => d.value));
 
@@ -145,35 +143,45 @@
         }
     }
 
+    window.setTimeout(() => {
+        resize();
+        loaded = true;
+    }, 0);
+
     // ANNOTATIONS....  yea it's pretty complicated... :(
 
+    interface Annotation {
+        x: number;
+        y: number;
+        html: string;
+        class?: string
+    }
+
+    const _debouncedShowHelpText = trailingDebounce(() => helpTextFade = false, 200);
+
     function onMouseOverCountry(evt: MouseEvent, country: CartogramDataPoint) {
-        countryHoverState = true;
-        hoverTimeout = window.setTimeout(() => {
-            if (!countryHoverState) return;
-            hoverData = {
-                country,
-                x: country.left + (country.width / 2),
-                y: country.top - 2
-            };
-        }, 350);
+        helpTextFade = false;
+        _debouncedShowHelpText.cancel();
+        hoverData = {
+            country,
+            x: country.left + (country.width / 2),
+            y: country.top - 2
+        };
+        hoverTimeout = window.setTimeout(() => hoveredForX = true, 350);
     }
 
     function clearHoverState() {
         hoverData = null;
-        countryHoverState = false;
+        hoveredForX = false;
         window.clearTimeout(hoverTimeout);
         hoverTimeout = null;
         fadeInHelpText();
     }
-    const _debouncedShowHelpText = trailingDebounce(() => helpTextFade = false, 500);
 
     function fadeInHelpText() {
         helpTextFade = true;
         _debouncedShowHelpText();
     }
-
-    $: data && fadeInHelpText();
 
     function generateHoverText(text: string, country: CartogramDataPoint): string {
         return text
@@ -181,13 +189,6 @@
             .replace("%value%", Math.round(country.value).toLocaleString())
             .replace("%value1dp%", (Math.round(country.value*10)/10).toLocaleString())
             .replace("%year%", `${endYear}`);
-    }
-
-    interface Annotation {
-        x: number;
-        y: number;
-        html: string;
-        class?: string
     }
 
     $: helpCountry = helpText ? cartogramData.find(d => d.code === helpText.code) : null;
@@ -206,12 +207,11 @@
     }
     $: annotation = countryAnnotation || helpAnnotation;
 
-    $: hideAnnotation = helpTextFade || (!countryAnnotation && countryHoverState);
+    $: hideAnnotation = helpTextFade || (!countryAnnotation && hoverData)
 
-    window.setTimeout(() => {
-        resize();
-        loaded = true;
-    }, 0);
+    $: data && fadeInHelpText();
+
+    $: showTrendsChart = trendsMode && hoverData && hoveredForX;
 
 </script>
 
@@ -219,7 +219,7 @@
 
 <div class="cartogram" bind:this={containerEl}
     class:trends-mode={trendsMode} class:trends-visible={lineFadeIn}
-    class:hovering={countryHoverState} class:showing-chart={hoverData}
+    class:cartogram-country-hover={hoverData} class:showing-trends-chart={showTrendsChart}
     class:trends-block={lineDisplayBlock}
     on:touchstart={clearHoverState}
 >
@@ -264,7 +264,7 @@
     {/if}
 
 
-    {#if trendsMode && hoverData}
+    {#if trendsMode && showTrendsChart && hoverData}
     <div class="hover-chart" class:hover-chart--show={hoverData}
         style="top: {hoverData.y}px; left: {hoverData.x}px;" >
             <h2>{hoverData.country.name}</h2>
@@ -286,15 +286,15 @@
         transform: rotateY(0.001deg);
     }
 
-    .showing-chart .country:hover {
+    .trends-mode .country, .trends-mode .country * {
         cursor: none;
     }
 
-    .hovering.trends-mode .country:hover {
-        filter: brightness(1.05);
+    .cartogram-country-hover.trends-mode .country:hover {
+        background-color: #dadada;
         transform: scale(1.5);
         transition: transform 0.1s;
-        z-index: 2;
+        z-index: 5;
     }
 
     .trendline {
@@ -351,12 +351,12 @@
         transform: translateY(-50%);
     }
 
-    .hovering:not(.trends-mode) .country:not(:hover) {
+    .cartogram-country-hover:not(.trends-mode) .country:not(:hover) {
         opacity: 0.65;
         transition: opacity 0.05s;
     }
 
-    .hovering:not(.trends-mode) .country:hover {
+    .cartogram-country-hover:not(.trends-mode) .country:hover {
         opacity: 0.999;
         transition: opacity 0s;
         z-index: 3;
@@ -376,6 +376,7 @@
         position: absolute;
         width: 200px;
         pointer-events: none !important;
+        cursor: none;
         background: #EAEAEA;
         padding: 5px;
         box-shadow: 0px 0px 0px 0px #00000018;
@@ -405,7 +406,7 @@
 
     .help-show {
         opacity: 1;
-        transition: opacity 0.2s ease 0.2s;
+        transition: opacity 200ms;
     }
 
     .help-text {

@@ -14,8 +14,10 @@ export function throttle(fn: Function, wait) {
 
 export function trailingDebounce(fn: Function, delay: number) {
     var timeout: number;
-    return function() {
+    const _fn = function() {
         if (timeout) window.clearTimeout(timeout);
         timeout = window.setTimeout(fn, delay);
     }
+    _fn.cancel = () => window.clearTimeout(timeout);
+    return _fn;
 }
