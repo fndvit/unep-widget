@@ -1,15 +1,15 @@
 <ul>
     <li>
-        <span class="icon bg--climbing-fast"></span>
-        <span class="text">Climbing</span>
-    </li>
-    <li>
         <span class="icon bg--falling"></span>
-        <span class="text">Decreasing</span>
+        <span class="text">Decreased since 1990</span>
     </li>
     <li>
         <span class="icon bg--stable"></span>
-        <span class="text">Stable emissions</span>
+        <span class="text">Stable since 1990</span>
+    </li>
+    <li>
+        <span class="icon bg--climbing-fast"></span>
+        <span class="text">Still climbing</span>
     </li>
 </ul>
 

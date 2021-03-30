@@ -27,15 +27,13 @@ export const cri = getMockData<CRIData>('cri');
 
 export function getGHGCategory(data: YearlyTimeseriesDatum[]) {
     // TODO: set thresholds
-    const largest = Math.max(... data.slice(0, data.length-15).map(d => d.value) );
+    const largest = Math.max(... data.slice(0, data.length-20).map(d => d.value) );
     const last = data[data.length-1].value;
     const diff = (last - largest) / largest;
     // 0 means the same. 0.5 means 50% increase. 1 means 100% increase. etc
-    if (Math.abs(diff) < 0.2) return 'stable';
-    else if (diff < -0.2) return 'falling';
-    else if (diff > 0.7) return 'climbing-fast';
-    else if (diff > 0.05) return 'climbing';
-    else return 'none';
+    if (Math.abs(diff) < 0.25) return 'stable';
+    else if (diff < -0.25) return 'falling';
+    else return 'climbing-fast';
 }
 
 function* generateRange(end: number, start = 0, step = 1) {
