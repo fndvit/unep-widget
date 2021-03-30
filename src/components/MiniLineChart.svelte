@@ -130,9 +130,10 @@
 
     .x-axis-text {
         font-weight: 100;
-        fill: #a0a0a0;
+        fill: #999;
         dominant-baseline: hanging;
         font-size: 16px;
+        font-weight: 400;
     }
 
     .x-axis-text--min {
