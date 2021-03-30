@@ -36,15 +36,28 @@
         <ScrollableCopyPane {...selectedSection.copy} />
     </div>
 
+    <!-- @xaquingv will make them components, so it's a bit cleaner -->
+
     <div class="cartogram-container">
         {#if selectedSection.text === "Land Temperature"}
-        <img src="surface.png" alt="Land Temperature Map" />
+        <img src="surface.png" alt="Land Temperature Anomaly Map" />
+        <div class="legend">
+            <p class="text">Colder</p>
+            <img class="legend-scale" src="legend_land-anomaly.svg" alt="Land Temperature Anomaly Legend from -12ºC (blue) to 12ºC (red)" />
+            <p class="text">Warmer than the avg. for the 2000s</p>
+        </div>
         {:else if selectedSection.text === "Ocean Temperature"}
         <img src="ocean.png" alt="Ocean Temperature Map" />
+        <div class="legend">
+            <p class="text">Cold</p>
+            <img class="legend-scale" src="legend_sea-temperature.svg" alt="Ocean Temperature Legend from -2ºC (blue) to 35ºC (yellow)" />
+            <p class="text">Warm</p>
+        </div>
         {:else if selectedSection.text === "Fires"}
         <img src="fire.png" alt="Fires Map" />
         {/if}
     </div>
+    
 </div>
 
 <div class="p2-chart-pane">
@@ -62,7 +75,17 @@
         padding-bottom:20px;
     }
 
+    .legend-scale {
+        max-width: 270px;
+        display: inline-block;
+    }
 
+    .text {
+        display: inline-block;
+        font-size: 14px;
+        vertical-align: middle;
+        margin-bottom: 18px;
+    }
     .cartogram-container {
         flex-grow: 1;
         padding-top: 10px;
