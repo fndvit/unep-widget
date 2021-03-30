@@ -144,8 +144,6 @@
         }
     }
 
-
-
     @media (max-width: 900px) {
 
         .top-section {

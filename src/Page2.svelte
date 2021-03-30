@@ -79,17 +79,39 @@
         padding-left: 12px;
     }
 
-    .p2-copy-temp :global(.copy-container) {
-        margin-right: -80px;
-    }
-
-    .p2-copy-fires :global(.copy-container) {
+    .p2-copy-temp > :global(.scrollable),
+    .p2-copy-fires > :global(.scrollable) {
         margin-right: -70px;
     }
 
+
+    @media (max-width: 1100px) {
+        .p2-copy {
+            width: 330px;
+        }
+    }
     @media (max-width: 1000px) {
         .p2-copy {
-            width: 350px;
+            width: auto;
+            flex: 1 1 300px;
+        }
+    }
+    @media (max-width: 700px) {
+        .top-section {
+            display: block;
+            height: auto;
+        }
+        .p2-copy {
+            padding-right: 20%;
+        }
+        .p2-copy :global(h1) {
+            font-size: 24px;
+            line-height: 30px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        .cartogram-container {
+            display: none;
         }
     }
 </style>
