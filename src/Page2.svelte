@@ -1,6 +1,5 @@
 <script lang="ts">
     import SubNav from './components/SubNav.svelte';
-    import MainViz from './components/MainViz.svelte';
     import ScrollableCopyPane from './components/ScrollableCopyPane.svelte';
     import Page2Charts from './Page2Charts.svelte';
     import {default as copy} from './data/copy.json';
@@ -32,7 +31,7 @@
 <SubNav bind:selected={selectedSection} options={sections} />
 
 
-<MainViz>
+<div class="top-section">
     <div class="p2-copy p2-copy-{selectedSection.class}">
         <ScrollableCopyPane {...selectedSection.copy} />
     </div>
@@ -46,7 +45,7 @@
         <img src="fire.png" alt="Fires Map" />
         {/if}
     </div>
-</MainViz>
+</div>
 
 <div class="p2-chart-pane">
     <ScrollableX>
@@ -55,6 +54,15 @@
 </div>
 
 <style>
+
+    .top-section {
+        display: flex;
+        position: relative;
+        height: 375px;
+        padding-bottom:20px;
+    }
+
+
     .cartogram-container {
         flex-grow: 1;
         padding-top: 10px;

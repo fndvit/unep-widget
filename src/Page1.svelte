@@ -1,8 +1,6 @@
 <script lang="ts">
-    import MainViz from './components/MainViz.svelte';
     import Page1Charts from './Page1Charts.svelte';
     import SubNav from './components/SubNav.svelte';
-    import ChartsContainer from './components/ChartsContainer.svelte';
     import GHGCartogram from './maps/GHGCartogram.svelte';
     import {default as copy} from './data/copy.json';
     import {Datasets} from './maps/GHGCartogram.svelte';
