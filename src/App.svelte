@@ -7,6 +7,7 @@
     import svgs from './svg';
     import { afterUpdate } from 'svelte';
     import { throttle } from './util';
+    import Footer from './components/Footer.svelte';
 
     const mainNavOptions = [
         {text: "State of the climate", icon: svgs.stateoftheclimate.main},
@@ -76,6 +77,8 @@
         {/if}
         </div>
     </div>
+
+    <Footer currentSection={selectedNavOption.text}/>
 </div>
 
 <style>

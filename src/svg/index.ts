@@ -13,8 +13,11 @@ import stateoftheclimateEmissions from './icons_state-of-the-climate--total-emis
 import stateoftheclimatePerCapita from './icons_state-of-the-climate--per-capita.svg';
 import stateoftheclimateTrends from './icons_state-of-the-climate--trends.svg';
 
+import dataSource from './icons_data-source.svg';
+
 export default {
     test,
+    dataSource,
     arrows: {
         down: arrowDown,
         right: arrowRight,
