@@ -5,8 +5,8 @@
     import {default as copy} from './data/copy.json';
     import {Datasets} from './maps/GHGCartogram.svelte';
     import svg from './svg';
-    import ScrollableCopyPane from './components/ScrollableCopyPane.svelte';
     import ScrollableX from './components/ScrollableX.svelte';
+    import CopyPane from './components/CopyPane.svelte';
 
     const sections = [
         {
@@ -34,7 +34,7 @@
 
 <div class="top-section">
     <div class="p1-copy">
-        <ScrollableCopyPane {...selectedSection.copy} />
+        <CopyPane {...selectedSection.copy} />
     </div>
 
     <div class="cartogram-pane">
@@ -166,7 +166,7 @@
             margin-top: 10px;
             font-weight: 500;
         }
-        .p1-copy :global(p) {
+        .p1-copy :global(.summary-container) {
             display: none;
         }
     }

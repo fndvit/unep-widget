@@ -1,19 +1,42 @@
 <script lang="ts">
+    import ScrollablePane from "./ScrollablePane.svelte";
+
     export var title: string;
     export var summary: string;
 </script>
 
 <div class="copy-pane">
     <h2>{title}</h2>
-    <p>{summary}</p>
+
+    <div class="summary-container">
+        <ScrollablePane resetOnChange={summary}>
+            <p>{summary}</p>
+        </ScrollablePane>
+    </div>
+
+
 </div>
 
 <style>
-
     .copy-pane {
         box-sizing: border-box;
         text-align: left;
         color: #222;
+        display: flex;
+        flex-flow: column;
+    }
+
+    .summary-container {
+        flex: 1;
+        position: relative;
+    }
+
+    .summary-container > :global(.scrollable) {
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
 
     h2 {
@@ -35,7 +58,7 @@
     p {
         font-size: 18px;
         line-height: 1.5;
-        margin-bottom: 0;
+        margin: 0;
         font-weight:300;
     }
 

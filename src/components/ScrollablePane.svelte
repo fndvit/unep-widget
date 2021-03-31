@@ -10,6 +10,7 @@
     var clientHeight: number;
 
     $: atBottom = scrollHeight === clientHeight + scrollTop;
+    $: atTop = scrollTop === 0;
     $: resetOnChange && resetScroll(); // svelte syntax: this code will run when resetOnChange updates
 
     function resetScroll() {
@@ -19,13 +20,14 @@
     function update() {
         scrollHeight = el.scrollHeight;
         clientHeight = el.clientHeight;
-        isScrollable = clientHeight < scrollHeight;
     }
 
     function onscroll() {
         scrollTop = el.scrollTop;
         scrollHeight = el.scrollHeight;
     }
+
+    $: isScrollable = clientHeight < scrollHeight;
 
     onMount(() => document.fonts.ready.then(update));
     afterUpdate(update);
@@ -56,8 +58,11 @@
     </div>
 
     {#if isScrollable}
-        <div class="overflow" class:overflow-visible={!atBottom}>
-            <i>{@html svgs.arrows.down}</i>
+        <div class="overflow overflow-bottom" class:overflow-visible={!atBottom}>
+            <div class="overflow-icon">{@html svgs.arrows.down}</div>
+        </div>
+        <div class="overflow overflow-top" class:overflow-visible={!atTop}>
+            <div class="overflow-icon">{@html svgs.arrows.down}</div>
         </div>
     {/if}
 </div>
@@ -67,36 +72,59 @@
     .overflow {
         position: absolute;
         pointer-events: none;
-        bottom: 0px;
         left: 0;
         right: 12px;
         height: 100px;
-        display: none;
-        background: linear-gradient(0deg, rgba(243,243,243,1) 30%, rgba(243,243,243,0) 100%);
+        /* display: none; */
+        opacity: 0;
+        transition: opacity 100ms;
+    }
+    .overflow-bottom {
+        bottom: 0;
+        background: linear-gradient(0deg, rgba(243,243,243,1) 15%, rgba(243,243,243,0) 100%);
     }
 
-    .overflow-visible {
-        display: block;
+    .overflow-top {
+        top: 0;
+        background: linear-gradient(0deg, rgba(243,243,243,0) 0%, rgba(243,243,243,1) 90%);
     }
 
-    .overflow i :global(svg) {
-        width: 26px;
-        fill: #999999;
-        position: absolute;
-        bottom: 1px;
-        left: 0;
-        right: 0;
-        margin: auto;
-        background: #F3F3F3;
-    }
     .overflow::before {
         content: '';
         display: block;
         border-top: 1px solid #DCDCDC;
         position: absolute;
-        bottom: 10px;
         left: 0;
         right: 0;
+    }
+    .overflow-bottom::before {
+        bottom: 10px;
+    }
+    .overflow-top::before {
+        top: 10px;
+    }
+
+    .overflow-visible {
+        /* display: block; */
+        opacity: 1;
+    }
+
+    .overflow-icon :global(svg) {
+        width: 26px;
+        fill: #999999;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background: #F3F3F3;
+    }
+
+    .overflow-top .overflow-icon :global(svg) { top: 1px; }
+    .overflow-bottom .overflow-icon :global(svg) { bottom: 1px; }
+
+    .overflow-top .overflow-icon :global(svg) {
+        transform: rotate(180deg);
+        transform-origin: 50% 50%;
     }
 
 
