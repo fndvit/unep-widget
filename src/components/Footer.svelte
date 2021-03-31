@@ -1,5 +1,6 @@
 <script lang="ts">
     import svgs from '../svg';
+    import ScrollableX from './ScrollableX.svelte';
     export var currentSection: string;
 
     function getDatasource(_currentSection: string) {
@@ -14,29 +15,38 @@
 </script>
 
 <footer>
-    <div class="datasource">
-        <div class="datasource-icon">{@html svgs.dataSource} </div>
-        <span>{datasource}</span>
-
+    <div class="footer-content">
+        <ScrollableX>
+            <div class="datasource">
+                <div class="datasource-icon">{@html svgs.dataSource}</div>
+                <span>{datasource}</span>
+            </div>
+        </ScrollableX>
     </div>
 </footer>
 
 <style>
     footer {
-        height: 50px;
         background: #e6e6e6;
+    }
+    .footer-content {
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .datasource {
+        height: 50px;
+        font-size: 14px;
         display: flex;
         align-items: center;
-        justify-content: center;
-    }
-    .datasource {
         color: #666666;
-        font-size: 14px;
         text-align: left;
         font-weight: 300;
-        flex: 0 0 1100px;
-        display: flex;
-        align-items: center;
+        white-space: nowrap;
+    }
+
+    .datasource span {
+        padding-right: 10px;
     }
 
     .datasource-icon {
@@ -48,5 +58,16 @@
     }
     .datasource-icon :global(svg *) {
         stroke: #666666;
+    }
+    @media (max-width: 700px) {
+        .datasource {
+            height: 40px;
+            font-size: 12px;
+        }
+
+        .datasource-icon {
+            flex: 0 0 20px;
+            top: 0;
+        }
     }
 </style>
