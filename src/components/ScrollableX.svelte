@@ -26,20 +26,47 @@
     onMount(() => document.fonts.ready.then(update));
     afterUpdate(update);
 
+    var dragging: boolean = false;
+    var lastClientX: number;
+
+    function startDrag(evt: MouseEvent) {
+        lastClientX = evt.clientX;
+        dragging = true;
+    }
+
+    function drag(evt: MouseEvent) {
+        if (dragging) {
+            const deltaX = evt.clientX - lastClientX;
+            el.scrollLeft -= deltaX;
+            lastClientX = evt.clientX;
+        }
+    }
+
+    function endDrag() {
+        dragging = false;
+    }
+
+    function scrollRightSmooth() {
+        el.scrollTo({ left: el.scrollLeft + 200, behavior: 'smooth', });
+    }
+    function scrollLeftSmooth() {
+        el.scrollTo({ left: el.scrollLeft - 200, behavior: 'smooth', });
+    }
+
 </script>
 
-<svelte:window on:resize={update} />
+<svelte:window on:resize={update} on:mousemove={drag} on:mouseup={endDrag} />
 
-<div class="scrollable">
-    <div class="scrollable-content"  on:scroll={onscroll} bind:this={el}>
+<div class="scrollable" class:scrollable-dragging={dragging} class:scrollable-enabled={isScrollable}>
+    <div class="scrollable-content"  on:scroll={onscroll} bind:this={el} on:mousedown={startDrag}>
         <slot />
     </div>
 
     {#if isScrollable}
-        <div class="overflow overflow-right" class:overflow-visible={!atEnd}>
+        <div class="overflow overflow-right" class:overflow-visible={!atEnd} on:click={scrollRightSmooth}>
             <div>{@html svgs.arrows.right}</div>
         </div>
-        <div class="overflow overflow-left" class:overflow-visible={!atStart}>
+        <div class="overflow overflow-left" class:overflow-visible={!atStart} on:click={scrollLeftSmooth}>
             <div>{@html svgs.arrows.left}</div>
         </div>
     {/if}
@@ -49,7 +76,6 @@
 
     .overflow {
         position: absolute;
-        pointer-events: none;
         top: 0;
         bottom: 0;
         display: none;
@@ -94,6 +120,14 @@
         box-sizing: border-box;
         display: flex;
         position: relative;
+    }
+
+    .scrollable-enabled {
+        user-select: none;
+    }
+
+    .scrollable-dragging {
+        cursor: move !important;
     }
 
     .scrollable-content {
