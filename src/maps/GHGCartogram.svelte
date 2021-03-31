@@ -27,7 +27,7 @@
                 code: "DEU",
                 text: "Each square represents a country, scaled by its emissions"
             },
-            hoverText: "<b>%country%</b> emitted %value% Mt <span>CO<sub>2</sub>e</span> in %year%"
+            hoverText: "<b>%country%</b> emitted %value% million tonnes of GHG in %year%"
         },
         [Datasets.GHGPerCapita]: {
             nodeSize: 38,
@@ -36,7 +36,7 @@
                 code: "RUS",
                 text: "Each square represents a country, scaled by its per capita emissions"
             },
-            hoverText: "<b>%country%</b> emitted %value1dp% Mt <span>CO<sub>2</sub>e</span> per capita in %year%"
+            hoverText: "<b>%country%</b> emitted %value1dp% million tonnes of GHG per capita in %year%"
         },
         [Datasets.GHGTrends]: {
             nodeSize: 16,
