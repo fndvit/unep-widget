@@ -1,10 +1,10 @@
 <script lang="ts">
     import SubNav from './components/SubNav.svelte';
-    import ScrollableCopyPane from './components/ScrollableCopyPane.svelte';
     import Page2Charts from './Page2Charts.svelte';
     import {default as copy} from './data/copy.json';
     import svg from './svg';
     import ScrollableX from './components/ScrollableX.svelte';
+    import CopyPane from './components/CopyPane.svelte';
 
     const sections = [
         {
@@ -33,7 +33,8 @@
 
 <div class="top-section">
     <div class="p2-copy p2-copy-{selectedSection.class}">
-        <ScrollableCopyPane {...selectedSection.copy} />
+        <CopyPane {...selectedSection.copy} />
+        <div class="p2-short-summary">{selectedSection.copy['short-summary']}</div>
     </div>
 
     <!-- @xaquingv will make them components, so it's a bit cleaner -->
@@ -57,7 +58,7 @@
         <img src="fire.png" alt="Fires Map" />
         {/if}
     </div>
-    
+
 </div>
 
 <div class="p2-chart-pane">
@@ -107,6 +108,15 @@
         margin-right: -70px;
     }
 
+    .p2-short-summary {
+        display: none;
+        font-size: 16px;
+        line-height: 1.5;
+        font-weight:300;
+        margin: 0;
+        text-align: left;
+    }
+
 
     @media (max-width: 1100px) {
         .p2-copy {
@@ -120,21 +130,25 @@
         }
     }
     @media (max-width: 700px) {
+        .p2-short-summary {
+            display: block;
+        }
+
+        .p2-copy :global(.summary-container) {
+            display: none;
+        }
         .top-section {
             display: block;
             height: auto;
+            padding-bottom: 0;
         }
         .p2-copy {
-            padding-right: 20%;
+            padding-right: 10px;
+            display: block;
+            width: auto;
         }
-        .p2-copy :global(h1) {
-            font-size: 24px;
-            line-height: 30px;
-            margin-top: 10px;
-            font-weight: 500;
-        }
-        .cartogram-container {
-            display: none;
+        .p2-copy :global(h2) {
+            margin-bottom: 10px;
         }
     }
 </style>
