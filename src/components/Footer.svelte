@@ -7,7 +7,7 @@
         if (_currentSection === "State of the climate") {
             return "Data from the EDGAR v5.0 Database on Global Greenhouse Gas Emissions and the World Environment Situation Room";
         } else if (_currentSection === "What's happening") {
-            return "Data from NASA Earth Observations, Global Climate Risk Index 2021 by GermanWatch, and the World Environment Situation Room"
+            return "Data from NASA Earth Observations and the World Environment Situation Room, Global Climate Risk Index 2021 by GermanWatch"
         }
     }
 
