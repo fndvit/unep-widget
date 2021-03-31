@@ -30,9 +30,9 @@ export const globalEmissions = getMockData<EmissionsData>('globalEmissions');
 
 export function getGHGCategory(data: YearlyTimeseriesDatum[]) {
     // TODO: set thresholds
-    const largest = Math.max(... data.slice(0, data.length-20).map(d => d.value) );
-    const last = data[data.length-1].value;
-    const diff = (last - largest) / largest;
+    const baseValue = data.find(d => d.year === 1990).value;
+    const lastValue = data.find(d => d.year === endYear).value;
+    const diff = (lastValue - baseValue) / baseValue;
     // 0 means the same. 0.5 means 50% increase. 1 means 100% increase. etc
     if (Math.abs(diff) < 0.25) return 'stable';
     else if (diff < -0.25) return 'falling';
