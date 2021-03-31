@@ -23,13 +23,17 @@
         ghgData = await ghg;
         const useableCountries = ghgData
             .filter(c => getCountryBaseData(c.code))
-            .filter(c => c.emissions[`${endYear}`] > 1000) // TODO: wheredo we set the cutoff here?
+            .filter(c => c.emissions[`${endYear}`] > 5) // TODO: wheredo we set the cutoff here?
 
-        const dataWithRelChanges = useableCountries.map<[GHGData, number]>(d => [d, calcRelativeChange(d, 1990, endYear)])
 
         const largest10Emitters = useableCountries
             .sort((a, b) => b.emissions[`${endYear}`] - a.emissions[`${endYear}`])
             .slice(0, 10);
+
+        const largest10EmittersCodes = largest10Emitters.map(d => d.code);
+
+        const remainingCountries = useableCountries.filter(d => largest10EmittersCodes.indexOf(d.code) === -1)
+        const dataWithRelChanges = remainingCountries.map<[GHGData, number]>(d => [d, calcRelativeChange(d, 1990, endYear)])
 
         const largest10Increase = [...dataWithRelChanges]
             .sort((a,b) => b[1] - a[1])
