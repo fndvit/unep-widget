@@ -1,7 +1,8 @@
 <script context="module" lang="ts">
     export enum ChartTextType {
         Largest,
-        Relative
+        Relative,
+        PerCapita
     }
 </script>
 
@@ -29,6 +30,7 @@
             case ChartTextType.Largest:
                 return `<b>${country.name}</b> accounts for ${emissionPerc}% of global GHG emissions. In ${latestYear}, it emitted ${lastFigStr} million tonnes.`;
             case ChartTextType.Relative:
+            case ChartTextType.PerCapita:
                 const change = data.emissions[`${endYear}`] / data.emissions['1990'];
                 const fallen = change <= 1;
                 const relChange = fallen ? 1-change : change-1;
