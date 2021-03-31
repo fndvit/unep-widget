@@ -53,8 +53,8 @@
 </div>
 <style>
   h1 {
-    font-size: 42px;
-    line-height: 54px;
+    font-size: 30px;
+    line-height: 42px;
     font-weight: 300;
   }
 
@@ -70,11 +70,13 @@
     max-width: 1100px;
     margin:auto;
     text-align: left;
+    
   }
 
   .col-text {
     max-width: 420px;
     padding-top: 40px;
+    margin:10px;
   }
 
   button {
@@ -131,5 +133,16 @@
     transition: text-shadow .5s;
   }
 
+  @media (min-width: 900px) {
+    h1 {
+      font-size: 42px;
+      line-height: 54px;
+      margin-left:0;
+    }
+
+    .col-text {
+      margin:0;
+    }
+  }
 
 </style>
