@@ -8,6 +8,7 @@
     import { afterUpdate } from 'svelte';
     import { throttle } from './util';
     import Footer from './components/Footer.svelte';
+    import Intro from './components/Intro.svelte';
 
     const mainNavOptions = [
         {text: "State of the climate", icon: svgs.stateoftheclimate.main},
@@ -15,6 +16,8 @@
         // {text: "Climate action progress", icon: 'test'},
     ];
     var widgetEl: HTMLElement;
+
+    let intro = true, width, height;
 
     let selectedNavOption = mainNavOptions[0];
 
@@ -62,8 +65,13 @@
 <svelte:window on:resize={throttle(resizeIframe, 100)}/>
 
 <div class="widget" bind:this={widgetEl}>
-
-    <div class="content">
+    <div class="intro {intro ? '' : 'hiddenIntro'}">
+        <Intro 
+        on:click={(e) => intro = false}
+        visible={intro}
+        />
+    </div>
+    <div class="content {intro ? 'hidden' : 'visibleWidget'}" bind:clientWidth={width} bind:clientHeight={height}>
         <div class="navcontainer">
             <MainNav options={mainNavOptions} bind:selected={selectedNavOption} onchange={onMenuChange} />
         </div>
@@ -76,9 +84,11 @@
         <Page3/>
         {/if}
         </div>
+        
     </div>
-
-    <Footer currentSection={selectedNavOption.text}/>
+    <div class="footer {intro ? 'hidden' : 'visibleWidget'}">
+        <Footer currentSection={selectedNavOption.text}/>
+    </div>
 </div>
 
 <style>
@@ -94,6 +104,23 @@
         font-family: 'Roboto', sans-serif;
         background-color: #F3F3F3;
         font-size: 24px;
+    }
+
+    .visibleWidget {
+        visibility:visible;
+        opacity: 1;
+        transition: opacity 1s;
+        transition-delay: .75s;
+    }
+
+    .hiddenIntro {
+        opacity: 0;
+        transition: opacity 1s;
+    }
+
+    .hidden {
+        opacity:0;
+        visibility:hidden;
     }
 
     .content {
@@ -126,5 +153,11 @@
     :global(.bg--falling) { background-color: #00AACC; }
     :global(.bg--climbing) { background-color: #FDCC4D; }
     :global(.bg--climbing-fast) { background-color: #FD7D2E; }
+
+    :global(.cover) {
+        width: 100%;
+        height:100%;
+        object-fit: cover;
+    }
 
 </style>
