@@ -1,20 +1,17 @@
 <script context="module" lang="ts">
     export enum ChartTextType {
         Largest,
-        Increase,
-        Decrease,
-        PerCapita
+        Relative
     }
 </script>
 
 <script lang="ts">
     import MiniLineChart from "./MiniLineChart.svelte";
     import type { GHGData } from '../data';
-    import {getGHGCategory, extractTimeseries, getCountryBaseData} from '../data';
+    import {getGHGCategory, extractTimeseries, getCountryBaseData, globalEmissions, endYear} from '../data';
+    import { onMount } from "svelte";
     export let data: GHGData;
     export let chartTextType: number;
-
-    const dummyText = "Lorem ipsum dolor sit amet, sed diam nonummy nibh, consectetuer";
 
     const timeseriesData = extractTimeseries(data);
     const category = getGHGCategory(timeseriesData);
@@ -22,24 +19,38 @@
     const latestYear = timeseriesData[timeseriesData.length-1].year;
     const lastFigure = timeseriesData[timeseriesData.length-1].value;
     const lastFigStr = Math.round(lastFigure).toLocaleString();
+    var globalTotal: number;
 
-    function getChartText(data: GHGData, chartTextType: number) {
+    function getChartText(data: GHGData, _globalTotal: number, chartTextType: number) {
+        const latestEmissions = data.emissions[`${endYear}`];
+        const emissionShare = (latestEmissions / _globalTotal);
+        const emissionPerc = (emissionShare * 100).toFixed(2);
         switch (chartTextType) {
             case ChartTextType.Largest:
-                return `<b>${country.name}</b> accounts for x% of global emissions. In ${latestYear}, it emitted ${lastFigStr} tonnes of CO2.`;
-            case ChartTextType.Increase:
-                return `CO2 emissions in <b>${country.name}</b> have risen x% since 1970. Today, it accounts for x% of global emissions.`;
-            default:
-                return `CO2 emissions in <b>${country.name}</b> have fallen x% since 1970. Today, it accounts for x% of global emissions.`;
+                return `<b>${country.name}</b> accounts for ${emissionPerc}% of global emissions. In ${latestYear}, it emitted ${lastFigStr} tonnes of CO2.`;
+            case ChartTextType.Relative:
+                const change = data.emissions[`${endYear}`] / data.emissions['1990'];
+                const fallen = change <= 1;
+                const relChange = fallen ? 1-change : change-1;
+                const percStr = Math.round(relChange * 100).toFixed(0);
+                return `CO2 emissions in <b>${country.name}</b> have ${fallen? 'fallen' : 'risen'} ${percStr}% since 1990. `
+                    + `Today, it accounts for ${emissionPerc}% of global emissions.`;
         }
     }
+
+    onMount(async () => {
+        const _globalEmissions = await globalEmissions;
+        globalTotal = _globalEmissions[endYear];
+    });
+
+    $: summary = globalTotal ? getChartText(data, globalTotal, chartTextType) : "";
 
 </script>
 
 <div>
     <MiniLineChart data={timeseriesData} category={category} />
     <h3 class="chart-figure">{lastFigStr}</h3>
-    <p class="chart-summary">{@html getChartText(data, chartTextType)}</p>
+    <p class="chart-summary">{@html summary}</p>
 </div>
 
 <style>
