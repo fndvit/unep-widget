@@ -1,6 +1,7 @@
 <script lang="ts">
     import * as d3 from '../d3';
     import type { YearlyTimeseriesDatum } from '../data';
+    import { clamp } from '../util';
 
     export let data: YearlyTimeseriesDatum[];
     export let category: string;
@@ -36,10 +37,6 @@
             y: y(d.value),
             valStr: `${Math.round(d.value).toLocaleString()} Mt`
         }
-    }
-
-    function clamp(val: number, min:number, max: number) {
-        return Math.max(min, Math.min(max, val));
     }
 
     const yearap = 78;

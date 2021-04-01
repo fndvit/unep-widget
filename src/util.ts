@@ -21,3 +21,7 @@ export function trailingDebounce(fn: Function, delay: number) {
     _fn.cancel = () => window.clearTimeout(timeout);
     return _fn;
 }
+
+export function clamp(val: number, min:number, max: number) {
+    return Math.max(min, Math.min(max, val));
+}
