@@ -13,6 +13,9 @@ import stateoftheclimateEmissions from './icons_state-of-the-climate--total-emis
 import stateoftheclimatePerCapita from './icons_state-of-the-climate--per-capita.svg';
 import stateoftheclimateTrends from './icons_state-of-the-climate--trends.svg';
 
+import legendLand from './legend_land-anomaly.svg';
+import legendSea from './legend_sea-temperature.svg';
+
 import dataSource from './icons_data-source.svg';
 
 export default {
@@ -34,5 +37,9 @@ export default {
         ocean: whatshappeningOcean,
         fire: whatshappeningFire,
         surface: whatshappeningSurface,
+    },
+    legends: {
+        land: legendLand,
+        sea: legendSea
     }
 };

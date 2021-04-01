@@ -63,7 +63,9 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
-		inlineSvg(),
+		inlineSvg({
+			removeSVGTagAttrs: false,
+		}),
 		typescript({
 			sourceMap: !production,
 			inlineSources: !production

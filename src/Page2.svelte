@@ -2,23 +2,23 @@
     import SubNav from './components/SubNav.svelte';
     import Page2Charts from './Page2Charts.svelte';
     import {default as copy} from './data/copy.json';
-    import svg from './svg';
+    import svgs from './svg';
     import ScrollableX from './components/ScrollableX.svelte';
     import CopyPane from './components/CopyPane.svelte';
 
     const sections = [
         {
-            text: "Land Temperature", icon: svg.whatshappening.surface,
+            text: "Land Temperature", icon: svgs.whatshappening.surface,
             copy: copy.happening.surface,
             class: 'temp'
         },
         {
-            text: "Ocean Temperature", icon: svg.whatshappening.ocean,
+            text: "Ocean Temperature", icon: svgs.whatshappening.ocean,
             copy: copy.happening.ocean,
             class: 'ocean'
         },
         {
-            text: "Fires", icon: svg.whatshappening.fire,
+            text: "Fires", icon: svgs.whatshappening.fire,
             copy: copy.happening.fire,
             class: 'fires'
         },
@@ -44,14 +44,14 @@
         <img src="surface.png" alt="Land Temperature Anomaly Map" />
         <div class="legend">
             <p class="text">Colder</p>
-            <img class="legend-scale" src="legend_land-anomaly.svg" alt="Land Temperature Anomaly Legend from -12ºC (blue) to 12ºC (red)" />
+            <div class="legend-scale">{@html svgs.legends.land}</div>
             <p class="text">Warmer than the avg. for the 2000s</p>
         </div>
         {:else if selectedSection.text === "Ocean Temperature"}
         <img src="ocean.png" alt="Ocean Temperature Map" />
         <div class="legend">
             <p class="text">Cold</p>
-            <img class="legend-scale" src="legend_sea-temperature.svg" alt="Ocean Temperature Legend from -2ºC (blue) to 35ºC (yellow)" />
+            <div class="legend-scale">{@html svgs.legends.sea}</div>
             <p class="text">Warm</p>
         </div>
         {:else if selectedSection.text === "Fires"}
@@ -80,6 +80,9 @@
         max-width: 270px;
         display: inline-block;
     }
+    .legend-scale > :global(svg) {
+        width: 100%;
+    }
 
     .text {
         display: inline-block;
@@ -92,9 +95,6 @@
         padding-top: 10px;
     }
 
-    .cartogram-container > img {
-        width: 100%;
-    }
     .p2-copy {
         flex-shrink: 0;
         width: 400px;
@@ -149,6 +149,10 @@
         }
         .p2-copy :global(h2) {
             margin-bottom: 10px;
+        }
+        .cartogram-container :global(.aimg .annotation),
+        .cartogram-container :global(.aimg .circle-container) {
+            display: none;
         }
     }
 </style>
