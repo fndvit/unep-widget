@@ -29,7 +29,7 @@
     <ClimateRiskSvg data={data} />
     <div>
         <p>
-            <b>{data.country}</b> has a CRI score of {data.cri_score} and ranks {ordinal(data.cri_rank)}. In 2019, it ranks {ordinal(data.fatalities_in_2019)} in deaths —{ordinal(data.fatalities_per_100000_inhabitants)} when adjusted per population; and {ordinal(data.losses_in_millions_usd)} in economic loss —{ordinal(data.losses_per_unit_gdp_percentage)} when adjusted to their GDP.
+            <b>{data.country}</b> has a CRI score of {data.cri_score} and ranks {ordinal(data.cri_rank)} overall in the index. In 2019, it ranks {ordinal(data.fatalities_in_2019)} in climate-related deaths{ data.fatalities_in_2019 === data.fatalities_per_100000_inhabitants? '': ` —${ordinal(data.fatalities_per_100000_inhabitants)} when adjusted per population`}; and {ordinal(data.losses_in_millions_usd)} in economic loss{ data.losses_in_millions_usd === data.losses_per_unit_gdp_percentage? '': ` —${ordinal(data.losses_per_unit_gdp_percentage)} when adjusted per GDP`}.
         </p>
     </div>
 </div>
