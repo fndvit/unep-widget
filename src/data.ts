@@ -71,7 +71,10 @@ export interface CRIData {
     code: string,
     country: string,
     cri_rank: number,
+    cri_score: number,
     fatalities_per_100000_inhabitants: number,
+    fatalities_in_2019: number,
+    losses_in_millions_usd: number,
     losses_per_unit_gdp_percentage: number
 }
 
