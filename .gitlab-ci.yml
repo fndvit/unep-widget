@@ -3,6 +3,7 @@ image: node:12.16.2-alpine3.11
 stages:
   - build
   - deploy
+  - flushcache
 
 variables:
   BUCKET_NAME: ${BUCKET_NAME}
@@ -36,3 +37,14 @@ deploy_to_s3:
     - build_svelte
   script:
     - aws s3 cp public/ s3://${BUCKET_NAME} --recursive --acl public-read
+
+flushcache:
+    image: docker:stable
+    stage: flushcache
+    before_script:
+        - apk add --update curl && rm -rf /var/cache/apk/*
+    script:
+    - |
+        curl --fail --output "/dev/null" --silent --show-error -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache" \
+        -H "Authorization: Bearer $CF_API_TOKEN" -H "Content-Type: application/json" \
+        --data '{"purge_everything":true}'
