@@ -70,7 +70,7 @@
             text: "Fires", icon: svgs.whatshappening.fire,
             copy: copy.happening.fire,
             class: 'fires',
-            imgTitle: '<b>A decade of fires</b> (monthly data from 2010 to 2019)',
+            imgTitle: '<b>A decade of fires</b> (monthly data from 2010 to 2020)',
             annotations: [
                 {
                     text: "In Australia, the 2019-2020 wildfire season was the worst on record, burning 18.3 million hectares by mid-January, causing loss of life, homes, livelihoods and the reported deaths of a billion animals.",
