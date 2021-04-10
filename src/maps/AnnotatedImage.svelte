@@ -13,8 +13,10 @@ import { onDestroy } from 'svelte';
     import { clamp } from '../util';
     export var src: string;
     export var alt: string;
+    export var title: string;
     export var annotations: ImageAnnotation[];
     var imgEl: HTMLImageElement;
+    var vidEl: HTMLVideoElement;
     var imgRatio: number;
     var loaded: boolean = false;
     var srcImgHeight: number;
@@ -27,8 +29,9 @@ import { onDestroy } from 'svelte';
     $: annotation = mappedAnnotations && mappedAnnotations[0];
 
     function onImgLoad() {
-        srcImgHeight = imgEl.naturalHeight;
-        srcImgWidth = imgEl.naturalWidth;
+        console.log(`loaded ${src}`)
+        srcImgHeight = src === 'fire' ? vidEl.videoHeight : imgEl.naturalHeight;
+        srcImgWidth = src === 'fire' ? vidEl.videoWidth : imgEl.naturalWidth;
         imgRatio = srcImgWidth / srcImgHeight;
         startCycling();
         loaded = true;
@@ -41,7 +44,7 @@ import { onDestroy } from 'svelte';
 
     var stopCycling: () => any = () => null;
     function startCycling() {
-        const interval = window.setInterval(nextAnnotation, 10000);
+        const interval = window.setInterval(nextAnnotation, 7000);
         stopCycling = () => window.clearInterval(interval);
     }
 
@@ -97,8 +100,20 @@ import { onDestroy } from 'svelte';
 </script>
 
 <div class="aimg">
-    <img {src} {alt} on:load={onImgLoad} bind:this={imgEl}/>
-
+  {#if src === 'fire'}
+    <video 
+        src='{src}.mp4'
+        poster='{src}.png'
+        muted
+        autoplay
+        loop
+        bind:this={vidEl}
+        on:playing={onImgLoad}>
+        <track kind="captions">
+    </video>
+    {:else}
+    <img src='{src}.jpg' {alt} on:load={onImgLoad} bind:this={imgEl}/>
+    {/if}
     {#if loaded}
 
     <div class="annotation">
@@ -121,6 +136,9 @@ import { onDestroy } from 'svelte';
 
     {/if}
 
+    <div class="title {src === 'ocean' ? 'white' : ''}">
+        <p>{@html title}</p>
+    </div>
 </div>
 
 <style>
@@ -129,10 +147,25 @@ import { onDestroy } from 'svelte';
         position: relative;
     }
 
-    .aimg img {
+    .aimg img, .aimg video {
         width: 100%;
         object-fit: contain;
         display: block;
+    }
+
+    .title {
+        position: absolute;
+        top:8.5rem;
+        left:2rem;
+        max-width: 120px;
+        font-size: 14px;
+        line-height: 1.3;
+        text-align: left;
+        color:#808080;
+    }
+
+    .white {
+        color:#FFF;
     }
 
     .text {

@@ -46,7 +46,7 @@
 
 
 <div class="p1-chart-pane">
-    <h3 class="chart-section-title">Top emitters, rises and drops since 1990</h3>
+    <h3 class="chart-section-title">Top emitters and country trends since 1990</h3>
     <ScrollableX>
         <div class="p1-charts">
             <Page1Charts/>

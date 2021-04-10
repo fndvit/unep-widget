@@ -12,6 +12,7 @@
             text: "Land Temperature", icon: svgs.whatshappening.surface,
             copy: copy.happening.surface,
             class: 'temp',
+            imgTitle: '<b>Surface temperature anomalies</b> (May 2020)',
             annotations: [
                 {
                     text: "In Madagascar, temperatures have risen significantly (0.2°C over the north and 0.1°C over the south) in recent years. Rainfall patterns have also changed.",
@@ -51,6 +52,7 @@
             text: "Ocean Temperature", icon: svgs.whatshappening.ocean,
             copy: copy.happening.ocean,
             class: 'ocean',
+            imgTitle: '<b>Ocean temperature</b> (May 2020)',
             annotations: [
                 {
                     text: "In September 2020, Arctic sea ice shrank to the second-lowest extent ever recorded (3.709 million square kilometres). Also last July, the area of Arctic sea ice was the lowest on record for that month.",
@@ -68,6 +70,7 @@
             text: "Fires", icon: svgs.whatshappening.fire,
             copy: copy.happening.fire,
             class: 'fires',
+            imgTitle: '<b>A decade of fires</b> (monthly data from 2010 to 2019)',
             annotations: [
                 {
                     text: "In Australia, the 2019-2020 wildfire season was the worst on record, burning 18.3 million hectares by mid-January, causing loss of life, homes, livelihoods and the reported deaths of a billion animals.",
@@ -116,21 +119,21 @@
 
     <div class="cartogram-container">
         {#if selectedSection.text === "Land Temperature"}
-        <AnnotatedImage src="surface.png" alt="Land Temperature Anomaly Map" annotations={selectedSection.annotations} />
+        <AnnotatedImage src="surface" alt="Land Temperature Anomaly Map" annotations={selectedSection.annotations} title={selectedSection.imgTitle}/>
         <div class="legend">
             <p class="text">Colder</p>
             <div class="legend-scale">{@html svgs.legends.land}</div>
             <p class="text">Warmer than the avg. for the 2000s</p>
         </div>
         {:else if selectedSection.text === "Ocean Temperature"}
-        <AnnotatedImage src="ocean.png" alt="Ocean Temperature Map" annotations={selectedSection.annotations} />
+        <AnnotatedImage src="ocean" alt="Ocean Temperature Map" annotations={selectedSection.annotations} title={selectedSection.imgTitle}/>
         <div class="legend">
             <p class="text">Cold</p>
             <div class="legend-scale">{@html svgs.legends.sea}</div>
             <p class="text">Warm</p>
         </div>
         {:else if selectedSection.text === "Fires"}
-        <AnnotatedImage src="fire.png" alt="Fires Map" annotations={selectedSection.annotations} />
+        <AnnotatedImage src="fire" alt="Fires Map" annotations={selectedSection.annotations} title={selectedSection.imgTitle}/>
         {/if}
     </div>
 
