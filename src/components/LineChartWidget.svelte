@@ -51,7 +51,7 @@
 
 <div>
     <MiniLineChart data={timeseriesData} category={category} />
-    <h3 class="chart-figure">{lastFigStr}</h3>
+    <h3 class="chart-figure">{lastFigStr} Mt</h3>
     <p class="chart-summary">{@html summary}</p>
 </div>
 

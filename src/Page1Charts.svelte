@@ -61,8 +61,6 @@
         const _largest10PerCapita = percapitaData
             .sort((a,b) => b.emissions_percapita - a.emissions_percapita)
 
-        console.log(_largest10PerCapita);
-
         chartData = [
             getRandom(largest10Emitters),
             getRandom(largest10Decrease),

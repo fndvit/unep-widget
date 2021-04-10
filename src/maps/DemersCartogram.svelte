@@ -191,6 +191,11 @@
             .replace("%year%", `${endYear}`);
     }
 
+    function trendsHoverText(country: CartogramDataPoint): string {
+        let value = Math.round(country.trendsTimeseries[45].value).toLocaleString();
+        return `${value} Mt`
+    }
+
     $: helpCountry = helpText ? cartogramData.find(d => d.code === helpText.code) : null;
 
     $: helpAnnotation = {
@@ -267,7 +272,8 @@
     {#if trendsMode && showTrendsChart && hoverData}
     <div class="hover-chart" class:hover-chart--show={hoverData}
         style="top: {hoverData.y}px; left: {hoverData.x}px;" >
-            <h2>{hoverData.country.name}</h2>
+            <h3>{hoverData.country.name}</h3>
+            <h3 class='light'>{@html trendsHoverText(hoverData.country)}</h3>
             <MiniLineChart data={hoverData.country.trendsTimeseries} category={hoverData.country.category} />
     </div>
     {/if}
@@ -279,6 +285,31 @@
         height: 100%;
         width: 100%;
         display: flex;
+    }
+
+    h3 {
+        font-size:18px;
+        font-weight: 600;
+        padding:0;
+        text-align:left;
+        width: 70%;
+        padding-left: 5px;
+        padding-top: 2px;
+        margin-bottom: -10px;
+        margin-top: 0;
+    }
+
+    .light{
+        font-size:16px;
+        font-weight: 300;
+        text-align:right;
+        right:8px;
+        top:8px;
+        position:absolute;
+    }
+
+    .label {
+        font-size: 14px;
     }
 
     .countries {
@@ -360,17 +391,6 @@
         opacity: 0.999;
         transition: opacity 0s;
         z-index: 3;
-    }
-    .hover-chart h2 {
-        font-size: 18px;
-        font-weight: 500;
-        margin: 0;
-        text-align: left;
-        width: 100%;
-        padding-left: 5px;
-        padding-top: 2px;
-        margin-bottom: -10px;
-
     }
     .hover-chart {
         position: absolute;
