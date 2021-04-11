@@ -1,6 +1,5 @@
 <script lang="ts" context="module">
     import type { YearlyTimeseriesDatum } from '../data';
-    import { endYear } from '../data';
 
     export interface CountryDataPoint {
         name: string;
@@ -18,9 +17,8 @@
 </script>
 
 <script lang="ts">
-    import { getGHGCategory } from '../data';
-	import * as d3 from '../d3';
-    import { throttle, trailingDebounce } from '../util';
+    import * as d3 from '../d3';
+    import { createLookup, throttle, trailingDebounce } from '../util';
     import MiniTrendCharts from './MiniTrendCharts.svelte';
     import MiniLineChart from '../components/MiniLineChart.svelte';
 
@@ -39,15 +37,15 @@
     export var domain: [number, number];
     export var offset: [number, number] = [0,0];
     export var trendsMode: boolean = false;
-    export var trendsTimeseriesData: TrendsDataset[];
+    export var trendsTimeseriesData: TrendsDataset[] = [];
     export var helpText: {code: string, text: string} = null;
-    export var hoverText: string = null;
+    export var categoryFn: (code: CountryDataPoint) => string;
+    export var hoverTextFn: (country: CountryDataPoint) => string;
 
     var containerEl: Element;
     let loaded: boolean = false;
 
-    var trendsTimeseriesLookup: {[code: string]: YearlyTimeseriesDatum[]} = {};
-    trendsTimeseriesData.forEach(d=> trendsTimeseriesLookup[d.code] = d.data)
+    const trendsTimeseriesLookup = createLookup(trendsTimeseriesData, d => d.code, d => d.data)
 
     // used to scale to container el
     const originalWidth = 700;
@@ -84,7 +82,7 @@
         return {
             ...d,
 
-            category: getGHGCategory(trendsTimeseries),
+            category: categoryFn(d),
             trendsTimeseries,
 
             left: xScale(d.x - r) + (offset[0] || 0),
@@ -183,14 +181,6 @@
         _debouncedShowHelpText();
     }
 
-    function generateHoverText(text: string, country: CartogramDataPoint): string {
-        return text
-            .replace("%country%", country.name)
-            .replace("%value%", Math.round(country.value).toLocaleString())
-            .replace("%value1dp%", (Math.round(country.value*10)/10).toLocaleString())
-            .replace("%year%", `${endYear}`);
-    }
-
     function trendsHoverText(country: CartogramDataPoint): string {
         let value = Math.round(country.trendsTimeseries[45].value).toLocaleString();
         return `${value} Mt`
@@ -205,10 +195,10 @@
         class: 'help'
     };
 
-    $: countryAnnotation = hoverText && hoverData && !trendsMode && {
+    $: countryAnnotation = hoverTextFn && hoverData && !trendsMode && {
         x: hoverData.x,
         y: hoverData.y,
-        html: generateHoverText(hoverText, hoverData.country)
+        html: hoverTextFn(hoverData.country)
     }
     $: annotation = countryAnnotation || helpAnnotation;
 

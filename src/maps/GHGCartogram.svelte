@@ -6,11 +6,12 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import DemersCartogram from './DemersCartogram.svelte';
-    import {ghg, percapita, startYear, endYear} from '../data';
-    import type {GHGData, PerCapitaData } from '../data';
+    import {ghg, percapita, startYear, endYear, getGHGCategory } from '../data';
+    import type { GHGData } from '../data';
     import type { CountryDataPoint, TrendsDataset } from './DemersCartogram.svelte';
     import {default as countries} from '../data/countries.json';
     import CartogramLegend from './CartogramLegend.svelte';
+    import { createLookup, displayVal, generateRange } from '../util';
 
     export var dataset: number = Datasets.GHGTotal;
 
@@ -18,6 +19,7 @@
 
     var datasets: {[key: number]: CountryDataPoint[]};
     var trendsTimeseriesData: TrendsDataset[];
+    var getCategory: (c: CountryDataPoint) => string;
 
     const datasetParams = {
         [Datasets.GHGTotal]: {
@@ -27,7 +29,7 @@
                 code: "DEU",
                 text: "Each square represents a country, scaled by its emissions"
             },
-            hoverText: "<b>%country%</b> emitted %value% million tonnes of GHG in %year%"
+            hoverTextFn: (c: CountryDataPoint) => `<b>${c.name}</b> emitted ${displayVal(c.value, 0)} million tonnes of GHG in ${endYear}`
         },
         [Datasets.GHGPerCapita]: {
             nodeSize: 38,
@@ -36,7 +38,7 @@
                 code: "RUS",
                 text: "Each square represents a country, scaled by its per capita emissions"
             },
-            hoverText: "<b>%country%</b> emitted %value1dp% million tonnes of GHG per capita in %year%"
+            hoverTextFn: (c: CountryDataPoint) => `<b>${c.name}</b> emitted ${displayVal(c.value, 1)} million tonnes of GHG per capita in ${endYear}`
         },
         [Datasets.GHGTrends]: {
             nodeSize: 16,
@@ -46,8 +48,6 @@
                 code: "UZB",
                 text: "Each tile represents individual country trends in greenhouse gas emissions"
             }
-
-
         }
     }
 
@@ -55,18 +55,9 @@
         const ghgData = await ghg;
         const percapitaData = await percapita;
 
-        let ghgDataLookup: {[code: string]: GHGData} = {};
-        let percapitaDataLookup: {[code: string]: PerCapitaData} = {};
+        const ghgDataLookup = createLookup(ghgData, d => d.code, d => d);
+        const percapitaDataLookup = createLookup(percapitaData, d => d.code, d => d);
 
-        ghgData.forEach(d => ghgDataLookup[d.code] = d);
-        percapitaData.forEach(d => percapitaDataLookup[d.code] = d);
-
-
-        let mockLineCharData = {};
-        function* generateRange(end: number, start = 0, step = 1) {
-            let x = start - step;
-            while(x < end - step) yield x += step;
-        }
         function createLineChartData(d: GHGData) {
             const years = Array.from(generateRange(endYear+1, startYear));
             return years.map(year => {
@@ -79,6 +70,9 @@
                 code: d.code, data:createLineChartData(d)
             };
         })
+
+        const trendsTimeseriesLookup = createLookup(trendsTimeseriesData, d => d.code, d => d.data);
+        getCategory = c => getGHGCategory(trendsTimeseriesLookup[c.code]);
 
         countries.forEach(d => {
             if (!ghgDataLookup[d.code]) console.warn(`Missing GHG data for ${d.name} (${d.code})`);
@@ -123,7 +117,8 @@
             trendsMode={dataset === Datasets.GHGTrends}
             trendsTimeseriesData={trendsTimeseriesData}
             helpText={datasetParams[dataset].helpText}
-            hoverText={datasetParams[dataset].hoverText}
+            hoverTextFn={datasetParams[dataset].hoverTextFn}
+            categoryFn={getCategory}
         />
         <div class="legend">
             <CartogramLegend/>
