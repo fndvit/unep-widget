@@ -9,7 +9,7 @@
 
     const sections = [
         {
-            text: "Land Temperature", icon: svgs.whatshappening.surface,
+            text: "Land temperature", icon: svgs.whatshappening.surface,
             copy: copy.happening.surface,
             class: 'temp',
             imgTitle: '<b>Surface temperature anomalies</b> (May 2020)',
@@ -49,7 +49,7 @@
 
         },
         {
-            text: "Ocean Temperature", icon: svgs.whatshappening.ocean,
+            text: "Ocean temperature", icon: svgs.whatshappening.ocean,
             copy: copy.happening.ocean,
             class: 'ocean',
             imgTitle: '<b>Ocean temperature</b> (May 2020)',
@@ -118,14 +118,14 @@
     <!-- @xaquingv will make them components, so it's a bit cleaner -->
 
     <div class="cartogram-container">
-        {#if selectedSection.text === "Land Temperature"}
+        {#if selectedSection.text === "Land temperature"}
         <AnnotatedImage src="surface" alt="Land Temperature Anomaly Map" annotations={selectedSection.annotations} title={selectedSection.imgTitle}/>
         <div class="legend">
             <p class="text">Colder</p>
             <div class="legend-scale">{@html svgs.legends.land}</div>
             <p class="text">Warmer than the avg. for the 2000s</p>
         </div>
-        {:else if selectedSection.text === "Ocean Temperature"}
+        {:else if selectedSection.text === "Ocean temperature"}
         <AnnotatedImage src="ocean" alt="Ocean Temperature Map" annotations={selectedSection.annotations} title={selectedSection.imgTitle}/>
         <div class="legend">
             <p class="text">Cold</p>
