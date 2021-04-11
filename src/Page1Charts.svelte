@@ -1,9 +1,10 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import {ChartTextType} from './components/LineChartWidget.svelte';
+    import { ChartTextType } from './components/LineChartWidget.svelte';
     import LineChartWidget from './components/LineChartWidget.svelte';
-    import {ghg, percapita, getCountryBaseData, endYear } from './data';
-    import type {GHGData, PerCapitaData} from './data';
+    import { ghg, percapita, getCountryBaseData, endYear } from './data';
+    import type { GHGData, PerCapitaData } from './data';
+    import { createLookup } from './util';
 
     let ghgData: GHGData[];
     let percapitaData: PerCapitaData[];
@@ -48,8 +49,7 @@
 
         const usedCountryCodes = [...largest10Emitters, ...largest10Increase, ...largest10Decrease].map(d => d.code);
 
-        var perCapitaLookup: {[code: string]: number} = {};
-        percapitaData.forEach(d => perCapitaLookup[d.code] = d.emissions_percapita);
+        const perCapitaLookup = createLookup(percapitaData, d => d.code, d => d.emissions_percapita)
 
         const largest10PerCapita = useableCountries
             .filter(d => usedCountryCodes.indexOf(d.code) === -1)
