@@ -1,12 +1,12 @@
 <script lang="ts">
     import Page1Charts from './Page1Charts.svelte';
     import SubNav from './components/SubNav.svelte';
-    import GHGCartogram from './maps/GHGCartogram.svelte';
-    import {default as copy} from './data/copy.json';
-    import {Datasets} from './maps/GHGCartogram.svelte';
-    import svg from './svg';
     import ScrollableX from './components/ScrollableX.svelte';
     import CopyPane from './components/CopyPane.svelte';
+    import GHGCartogram from './maps/GHGCartogram.svelte';
+    import {Datasets} from './maps/GHGCartogram.svelte';
+    import {copy} from './data';
+    import svg from './svg';
 
     const sections = [
         {

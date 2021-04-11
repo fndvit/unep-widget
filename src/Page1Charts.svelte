@@ -48,7 +48,6 @@
 
         const usedCountryCodes = [...largest10Emitters, ...largest10Increase, ...largest10Decrease].map(d => d.code);
 
-
         var perCapitaLookup: {[code: string]: number} = {};
         percapitaData.forEach(d => perCapitaLookup[d.code] = d.emissions_percapita);
 
@@ -56,7 +55,6 @@
             .filter(d => usedCountryCodes.indexOf(d.code) === -1)
             .sort((a,b) => perCapitaLookup[b.code] - perCapitaLookup[a.code])
             .slice(0, 10)
-
 
         const _largest10PerCapita = percapitaData
             .sort((a,b) => b.emissions_percapita - a.emissions_percapita)

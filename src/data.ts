@@ -2,14 +2,19 @@ import {default as ghgMockData} from './data/mock/ghg-by-country.json';
 import {default as globalEmissionsData} from './data/mock/global-emissions.json';
 import {default as percapitaMockData} from './data/mock/ghg-per-capita.json';
 import {default as criMockData} from './data/mock/cri.json';
+import {default as ndcMockData} from './data/mock/ndc.json';
 import {default as countries} from './data/countries.json';
+import {default as copyJson} from './data/copy.json'
+
+export const copy = copyJson;
 
 // mock data while we wait for API
 const mockData = {
     globalEmissions: globalEmissionsData,
     ghg: ghgMockData,
     percapita: percapitaMockData,
-    cri: criMockData
+    cri: criMockData,
+    ndc: ndcMockData
 }
 
 async function getMockData<DatumType>(dataset) {
@@ -26,6 +31,7 @@ export const endYear = 2015;
 export const ghg = getMockData<GHGData[]>('ghg');
 export const percapita = getMockData<PerCapitaData[]>('percapita');
 export const cri = getMockData<CRIData[]>('cri');
+export const ndc = getMockData<NDCData[]>('ndc');
 export const globalEmissions = getMockData<EmissionsData>('globalEmissions');
 
 export function getGHGCategory(data: YearlyTimeseriesDatum[]) {
@@ -76,6 +82,14 @@ export interface CRIData {
     fatalities_in_2019: number,
     losses_in_millions_usd: number,
     losses_per_unit_gdp_percentage: number
+}
+
+export interface NDCData {
+    country: string,
+    iso: string,
+    latest_submission: string,
+    ghg: string,
+    ghg_target: string
 }
 
 export interface YearlyTimeseriesDatum {

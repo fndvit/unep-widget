@@ -1,11 +1,11 @@
 <script lang="ts">
-    import SubNav from './components/SubNav.svelte';
     import Page2Charts from './Page2Charts.svelte';
-    import {default as copy} from './data/copy.json';
-    import svgs from './svg';
+    import SubNav from './components/SubNav.svelte';
     import ScrollableX from './components/ScrollableX.svelte';
     import CopyPane from './components/CopyPane.svelte';
     import AnnotatedImage from './maps/AnnotatedImage.svelte';
+    import {copy} from './data';
+    import svgs from './svg';
 
     const sections = [
         {

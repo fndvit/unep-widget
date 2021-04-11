@@ -3,17 +3,27 @@
     import Page2 from './Page2.svelte';
     import Page3 from './Page3.svelte';
     import MainNav from './components/MainNav.svelte';
-    import type {MenuOption} from './components/MainNav.svelte';
+    import type { MenuOption } from './components/MainNav.svelte';
     import svgs from './svg';
     import { afterUpdate } from 'svelte';
     import { throttle } from './util';
     import Footer from './components/Footer.svelte';
 
-    const mainNavOptions = [
-        {text: "State of the climate", icon: svgs.stateoftheclimate.main},
-        {text: "What's happening", icon: svgs.whatshappening.main},
-        // {text: "Climate action progress", icon: 'test'},
+    const mainNavOptions: MenuOption[] = [
+        {
+            text: "State of the climate", icon: svgs.stateoftheclimate.main,
+            component: Page1
+        },
+        {
+            text: "What's happening", icon: svgs.whatshappening.main,
+            component: Page2
+        },
+        {
+            text: "Climate action progress", icon: svgs.whatshappening.main,
+            component: Page3
+        },
     ];
+
     var widgetEl: HTMLElement;
 
     let selectedNavOption = mainNavOptions[0];
@@ -68,13 +78,7 @@
             <MainNav options={mainNavOptions} bind:selected={selectedNavOption} onchange={onMenuChange} />
         </div>
         <div>
-        {#if selectedNavOption === mainNavOptions[0]}
-        <Page1/>
-        {:else if selectedNavOption === mainNavOptions[1]}
-        <Page2/>
-        {:else if selectedNavOption === mainNavOptions[2]}
-        <Page3/>
-        {/if}
+            <svelte:component this={selectedNavOption.component} />
         </div>
     </div>
 

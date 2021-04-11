@@ -1,15 +1,17 @@
 <script lang="ts" context="module">
+    import type { SvelteComponent } from "svelte";
 
-export interface MenuOption {
-    text: string;
-    icon: string;
-}
+    export interface MenuOption {
+        text: string,
+        icon: string,
+        component: typeof SvelteComponent
+    }
 </script>
 
 <script lang="ts">
     export let options: MenuOption[];
     export let selected: MenuOption;
-    export let onchange: (option: MenuOption) => void;
+    export let onchange: (option: typeof options[0]) => void;
 </script>
 
 <nav class="mainnavbuttons">
