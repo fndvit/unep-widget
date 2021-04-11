@@ -5,6 +5,7 @@ import {default as criMockData} from './data/mock/cri.json';
 import {default as ndcMockData} from './data/mock/ndc.json';
 import {default as countries} from './data/countries.json';
 import {default as copyJson} from './data/copy.json'
+import { createLookup } from './util';
 
 export const copy = copyJson;
 
@@ -59,8 +60,7 @@ export function extractTimeseries(data: GHGData): YearlyTimeseriesDatum[] {
     });
 }
 
-const countryLookup: {[code: string]: CountryBaseData} = {};
-countries.forEach(c => countryLookup[c.code] = c);
+const countryLookup = createLookup(countries, d => d.code, d => d);
 export function getCountryBaseData(code: string): CountryBaseData | null {
     return countryLookup[code];
 }
