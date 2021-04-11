@@ -3,15 +3,18 @@
     import ScrollableX from './ScrollableX.svelte';
     export var currentSection: string;
 
-    function getDatasource(_currentSection: string) {
-        if (_currentSection === "State of the climate") {
-            return "Data from the EDGAR v5.0 Database on Global Greenhouse Gas Emissions and the World Environment Situation Room";
-        } else if (_currentSection === "What's happening") {
-            return "Data from NASA Earth Observations and the World Environment Situation Room, Global Climate Risk Index 2021 by GermanWatch"
-        }
+    const dataSources = {
+        "State of the climate":
+            "Data from the EDGAR v5.0 Database on Global Greenhouse Gas Emissions and the World Environment Situation Room",
+
+        "What's happening":
+            "Data from NASA Earth Observations and the World Environment Situation Room, Global Climate Risk Index 2021 by GermanWatch",
+
+        "Climate action progress":
+            "Data from the EDGAR v5.0 Database on Global Greenhouse Gas Emissions, Climate Watch and the Pew Research Center"
     }
 
-    $: datasource = getDatasource(currentSection);
+    $: datasource = dataSources[currentSection] || 'Unknown';
 </script>
 
 <footer>
