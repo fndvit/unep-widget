@@ -19,7 +19,7 @@
             component: Page2
         },
         {
-            text: "Climate action progress", icon: svgs.whatshappening.main,
+            text: "Climate action progress", icon: svgs.climateactionprogress.main,
             component: Page3
         },
     ];

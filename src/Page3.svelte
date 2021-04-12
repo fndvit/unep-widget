@@ -8,11 +8,11 @@
 
     const sections = [
         {
-            text: "NDC submissions", icon: svgs.test,
+            text: "NDC submissions", icon: svgs.climateactionprogress.ndc,
             copy: copy.progress.ndcs,
         },
         {
-            text: "Public opinion", icon: svgs.test,
+            text: "Public opinion", icon: svgs.climateactionprogress.opinion,
             copy: copy.progress.public,
         }
     ];
