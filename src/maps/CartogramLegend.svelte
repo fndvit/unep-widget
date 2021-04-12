@@ -1,22 +1,25 @@
-<ul>
-    <li>
-        <span class="icon bg--falling"></span>
-        <span class="text">Decreased since 1990</span>
-    </li>
-    <li>
-        <span class="icon bg--stable"></span>
-        <span class="text">Stable since 1990</span>
-    </li>
-    <li>
-        <span class="icon bg--climbing-fast"></span>
-        <span class="text">Still climbing</span>
-    </li>
-</ul>
+<script lang="ts">
+    interface LegendItem {
+        text: string
+        class: string
+    }
+    export var categories: LegendItem[];
+    export var highlight: LegendItem;
+</script>
 
+<ul class:highlight-mode={highlight}>
+    {#each categories as category}
+    <li class:highlight={category === highlight}>
+        <span class="icon bg--{category.class}"></span>
+        <span class="text">{category.text}</span>
+    </li>
+    {/each}
+</ul>
 
 <style>
     ul {
         font-size: 14px;
+        line-height: 20px;
         display: flex;
         list-style-type: none;
         margin: 0;
@@ -25,14 +28,25 @@
     li {
         text-indent: 0;
         margin-right: 20px;
+        text-align: left;
+        padding-left: 20px;
+        position: relative;
+        transition: all 0.3s;
+    }
+    ul.highlight-mode li {
+        transition-delay: 0s;
+    }
+    ul.highlight-mode li:not(.highlight) {
+        opacity: 0.5;
     }
     .icon {
         display: inline-block;
         width: 15px;
         height: 15px;
-        margin-right: 3px;
         border-radius: 4px;
-        margin-bottom: -2px;
+        position: absolute;
+        left: 0px;
+        top: 1px;
     }
 
 </style>

@@ -41,6 +41,7 @@
     export var helpText: {code: string, text: string} = null;
     export var categoryFn: (code: CountryDataPoint) => string;
     export var hoverTextFn: (country: CountryDataPoint) => string;
+    export var onHoverFn: (country: CountryDataPoint) => void = c => null
 
     var containerEl: Element;
     let loaded: boolean = false;
@@ -157,7 +158,8 @@
 
     const _debouncedShowHelpText = trailingDebounce(() => helpTextFade = false, 200);
 
-    function onMouseOverCountry(evt: MouseEvent, country: CartogramDataPoint) {
+    function onMouseEnterCountry(evt: MouseEvent, country: CartogramDataPoint) {
+        onHoverFn(country);
         helpTextFade = false;
         _debouncedShowHelpText.cancel();
         hoverData = {
@@ -166,6 +168,11 @@
             y: country.top - 2
         };
         hoverTimeout = window.setTimeout(() => hoveredForX = true, 350);
+    }
+
+    function onMouseLeaveCountry(evt: MouseEvent, country: CartogramDataPoint) {
+        clearHoverState();
+        onHoverFn(null);
     }
 
     function clearHoverState() {
@@ -225,8 +232,8 @@
         <div class="country bg--{d.category}"
             style={calcStyle(d)}
             data-code={d.code}
-            on:mouseover={(evt) => onMouseOverCountry(evt, d)}
-            on:mouseleave={clearHoverState}
+            on:mouseenter={(evt) => onMouseEnterCountry(evt, d)}
+            on:mouseleave={(evt) => onMouseLeaveCountry(evt, d)}
         >
             {#if d.width > 50}
                 <span class="country-text">{d.short}</span>

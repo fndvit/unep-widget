@@ -21,6 +21,12 @@
     var trendsTimeseriesData: TrendsDataset[];
     var getCategory: (c: CountryDataPoint) => string;
 
+    const legend = [
+        { text: "Decreased since 1990", class: "falling" },
+        { text: "Stable since 1990", class: "stable" },
+        { text: "Still climbing", class: "climbing-fast" },
+    ];
+
     const datasetParams = {
         [Datasets.GHGTotal]: {
             nodeSize: 80,
@@ -121,7 +127,7 @@
             categoryFn={getCategory}
         />
         <div class="legend">
-            <CartogramLegend/>
+            <CartogramLegend categories={legend}/>
         </div>
     </div>
 {/if}

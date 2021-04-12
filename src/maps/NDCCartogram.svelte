@@ -5,7 +5,7 @@
     import {ghg, ndc, endYear} from '../data';
     import { createLookup } from '../util';
     import { onMount } from 'svelte';
-    // import CartogramLegend from './CartogramLegend.svelte';
+    import CartogramLegend from './CartogramLegend.svelte';
 
     let loaded: boolean = false;
 
@@ -17,6 +17,16 @@
     var dataset: CountryDataPoint[];
     var getCategory: (country: CountryDataPoint) => string;
     var getHoverText: (country: CountryDataPoint) => string;
+
+    const legend = [
+        { text: "First 2020 NDC", class: "ndc-first2020" },
+        { text: "Second 2020 NDC", class: "ndc-second2020" },
+        { text: "Only First NDC", class: "ndc-first" },
+        { text: "Only INDC", class: "ndc-indc" },
+        { text: "Nothing submitted", class: "ndc-nosubmission" }
+    ]
+
+    var legendHighlight = null;
 
 
     const ndcCategories: {category: string, re: RegExp}[] = [
@@ -76,6 +86,15 @@
         loaded = true;
 	});
 
+    function onHoverFn(c: CountryDataPoint) {
+        if (c) {
+            const category = getCategory(c);
+            legendHighlight = legend.find(l => l.class === category);
+        } else {
+            legendHighlight = null;
+        }
+    }
+
 </script>
 
 {#if loaded}
@@ -87,10 +106,11 @@
             trendsMode={false}
             categoryFn={getCategory}
             hoverTextFn={getHoverText}
+            onHoverFn={onHoverFn}
             helpText={helpText}
         />
         <div class="legend">
-            <!-- <CartogramLegend/> -->
+            <CartogramLegend categories={legend} highlight={legendHighlight}/>
         </div>
     </div>
 {/if}
@@ -105,7 +125,7 @@
     .legend {
         position: absolute;
         bottom: 0;
-        left: 50px;
+        left: 0;
     }
 
 </style>
