@@ -13,6 +13,10 @@ import stateoftheclimateEmissions from './icons_state-of-the-climate--total-emis
 import stateoftheclimatePerCapita from './icons_state-of-the-climate--per-capita.svg';
 import stateoftheclimateTrends from './icons_state-of-the-climate--trends.svg';
 
+import climateActionProgressMain from './icons_climate-action-progress--main.svg';
+import climateActionProgressNdc from './icons_climate-action-progress--ndc.svg';
+import climateActionProgressOpinion from './icons_climate-action-progress--opinion.svg';
+
 import legendLand from './legend_land-anomaly.svg';
 import legendSea from './legend_sea-temperature.svg';
 
@@ -37,6 +41,11 @@ export default {
         ocean: whatshappeningOcean,
         fire: whatshappeningFire,
         surface: whatshappeningSurface,
+    },
+    climateactionprogress: {
+        main: climateActionProgressMain,
+        ndc: climateActionProgressNdc,
+        opinion: climateActionProgressOpinion
     },
     legends: {
         land: legendLand,
