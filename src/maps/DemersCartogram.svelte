@@ -18,7 +18,7 @@
 
 <script lang="ts">
     import * as d3 from '../d3';
-    import { createLookup, throttle, trailingDebounce } from '../util';
+    import { clamp, createLookup, throttle, trailingDebounce } from '../util';
     import MiniTrendCharts from './MiniTrendCharts.svelte';
     import MiniLineChart from '../components/MiniLineChart.svelte';
 
@@ -247,7 +247,7 @@
 
     {#if annotation}
     <div class="annotation annotation-{annotation.class || 'default'}" class:annotation-hide={hideAnnotation}>
-        <div class="annotation-text" style="left: {annotation.x - 60}px;">
+        <div class="annotation-text" style="left: {clamp(annotation.x - 60, 0, targetWidth - 220)}px;">
             <span class="annotation-textspan">
                 {@html annotation.html}
             </span>
@@ -444,17 +444,32 @@
         z-index: 6;
         text-align: left;
         top: -35px;
-        padding: 0 20px;
         box-sizing: border-box;
     }
 
-    .annotation-textspan {
-        border-radius: 5px;
+
+    .annotation-text:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 5px;
+        top: 5px;
+        width: 10px;
         background: #f3f3f3;
-        box-shadow: -3px 0 2px 2px #f3f3f3  , 3px 0 2px 2px #f3f3f3;
+        box-shadow: -3px 0 2px 2px #f3f3f3;
+        border-radius: 2px;
+    }
+
+    .annotation-textspan {
+        position: relative;
+        border-radius: 2px;
+        background: #f3f3f3;
+        box-shadow: -2px 0 2px 2px #f3f3f3, 3px 0 2px 2px #f3f3f3;
         box-decoration-break: clone;
         -webkit-box-decoration-break: clone;
     }
+
     .annotation-textspan > :global(span) {
         white-space: nowrap;
     }
@@ -475,6 +490,7 @@
 
     .annotation {
         opacity: 1;
+        pointer-events: none;
     }
     .annotation-help {
         transition: opacity 500ms;

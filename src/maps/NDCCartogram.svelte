@@ -19,26 +19,22 @@
     var getHoverText: (country: CountryDataPoint) => string;
 
 
-    const ndcCategories: {category: string, re: RegExp, hoverTextFn: (c: CountryDataPoint) => string}[] = [
+    const ndcCategories: {category: string, re: RegExp}[] = [
         {
             category: 'ndc-first2020',
-            re: /^2020 NDC ((\(First NDC\))|(\(Updated First NDC\)))/,
-            hoverTextFn: c => `${c.name} have submitted their first 2020 NDC`
+            re: /^2020 NDC ((\(First NDC\))|(\(Updated First NDC\)))/
         },
         {
             category: 'ndc-second2020',
-            re: /^2020 NDC ((\(Second NDC\))|(\(Updated Second NDC\)))/,
-            hoverTextFn: c => `${c.name} have submitted their second 2020 NDC`
+            re: /^2020 NDC ((\(Second NDC\))|(\(Updated Second NDC\)))/
         },
         {
             category: 'ndc-indc',
-            re: /^Only INDC/,
-            hoverTextFn: c => `${c.name} have only submitted their INDC`
+            re: /^Only INDC/
         },
         {
             category: 'ndc-first',
-            re: /^Only First NDC/,
-            hoverTextFn: c => `${c.name} have only submitted their first NDC`
+            re: /^Only First NDC/
         }
     ]
 
@@ -57,12 +53,11 @@
             return ndcCategory.category
         }
 
+        const uppercaseFirstLetter = (str:string) => str.charAt(0).toUpperCase() + str.slice(1)
         getHoverText = (c: CountryDataPoint) => {
             const ndc = ndcLookup[c.code];
-            if (!ndc) return `${c.name} has no NDC data`;
-            const ndcCategory = ndcCategories.find(d => d.re.test(ndc.latest_submission));
-            if (!ndcCategory) return `${c.name} unknown category`;
-            return ndcCategory.hoverTextFn(c);
+            if (!ndc) return `<b>${c.name}</b><br/>No NDC data`;
+            return `<b>${c.name}</b><br/>${uppercaseFirstLetter(ndc.ghg_target)}`;
         }
 
         countries.forEach(d => {
