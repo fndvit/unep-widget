@@ -460,8 +460,8 @@
         display: block;
         position: absolute;
         left: 0;
-        bottom: 5px;
-        top: 5px;
+        bottom: 9px;
+        top: 9px;
         width: 10px;
         background: #f3f3f3;
         box-shadow: -3px 0 2px 2px #f3f3f3;
