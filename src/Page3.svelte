@@ -2,6 +2,7 @@
     import CopyPane from './components/CopyPane.svelte';
     import ScrollableX from './components/ScrollableX.svelte';
     import SubNav from './components/SubNav.svelte';
+    import Page3Charts from './Page3Charts.svelte';
     import { copy } from './data';
     import NDCCartogram from './maps/NDCCartogram.svelte';
     import svgs from './svg';
@@ -35,6 +36,17 @@
         {/if}
     </div>
 </div>
+
+<div class="p3-chart-pane">
+    <h3 class="chart-section-title">Countries' GHG emission targets</h3>
+    <ScrollableX>
+        <div class="p3-charts">
+            <Page3Charts />
+        </div>
+    </ScrollableX>
+
+</div>
+
 
 <style>
 
@@ -83,6 +95,17 @@
         box-sizing: border-box;
     }
 
+    .chart-section-title {
+        font-size: 14px;
+        margin: 0;
+        margin-top: 12px;
+        margin-bottom: 16px;
+        padding-left: 12px;
+        color: black;
+        position: relative;
+        z-index: 6;
+    }
+
     @media (min-width: 1300px) {
         .cartogram-pane {
             /* right-side overflow to enlarge cartogram when we have space */
@@ -93,6 +116,9 @@
     @media (max-width: 1400px) {
         .top-section {
             height: 360px;
+        }
+        .p3-charts :global(.chart-summary) {
+            font-size: 14px;
         }
     }
 
@@ -139,5 +165,23 @@
             display: none;
         }
     }
+
+    .p3-charts {
+        display: flex;
+        justify-content: space-between;
+        min-width: 1000px;
+        margin-bottom: 20px;
+    }
+
+    .p3-charts > :global(*) {
+        flex: 1 1 25%;
+        padding: 0 12px;
+    }
+
+    .p3-charts :global(svg) {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
 
 </style>
