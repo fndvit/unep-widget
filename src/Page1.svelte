@@ -10,18 +10,21 @@
 
     const sections = [
         {
-            text: "Total emissions", icon: svg.stateoftheclimate.emissions, // nav menu
-            copy: copy.state.total, // section copy
+            text: "Total emissions",
+            icon: svg.stateoftheclimate.emissions,
+            copy: copy.state.total,
             dataset: Datasets.GHGTotal
         },
         {
-            text: "Per capita emissions", icon: svg.stateoftheclimate.percapita,
-            copy: copy.state.percapita, // section copy
+            text: "Per capita emissions",
+            icon: svg.stateoftheclimate.percapita,
+            copy: copy.state.percapita,
             dataset: Datasets.GHGPerCapita
         },
         {
-            text: "Country trends", icon: svg.stateoftheclimate.trends,
-            copy: copy.state.trend, // section copy
+            text: "Country trends",
+            icon: svg.stateoftheclimate.trends,
+            copy: copy.state.trend,
             dataset: Datasets.GHGTrends
         },
     ]
