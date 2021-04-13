@@ -108,7 +108,7 @@
             onHoverFn={onHoverFn}
             helpText={helpText}
         />
-        <div class="legend">
+        <div class="legend-container">
             <CartogramLegend categories={legend} highlight={legendHighlight}/>
         </div>
     </div>
@@ -121,7 +121,7 @@
         flex: 0 0 100%;
     }
 
-    .legend {
+    .legend-container {
         position: absolute;
         bottom: 0;
         left: 0;
