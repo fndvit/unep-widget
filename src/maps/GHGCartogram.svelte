@@ -49,7 +49,6 @@
         [Datasets.GHGTrends]: {
             nodeSize: 16,
             domain: [1350, 1350 / (740/435)],
-            offset: [0, 0],
             helpText: {
                 code: "UZB",
                 text: "Each tile represents individual country trends in greenhouse gas emissions"
@@ -119,7 +118,6 @@
         <DemersCartogram data={datasets[dataset]}
             nodeSize={datasetParams[dataset].nodeSize}
             domain={datasetParams[dataset].domain}
-            offset={datasetParams[dataset].offset || [0,0]}
             trendsMode={dataset === Datasets.GHGTrends}
             trendsTimeseriesData={trendsTimeseriesData}
             helpText={datasetParams[dataset].helpText}

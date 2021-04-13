@@ -35,7 +35,6 @@
     export var data: CountryDataPoint[];
     export var nodeSize: number = 100;
     export var domain: [number, number];
-    export var offset: [number, number] = [0,0];
     export var trendsMode: boolean = false;
     export var trendsTimeseriesData: TrendsDataset[] = [];
     export var helpText: {code: string, text: string} = null;
@@ -86,8 +85,6 @@
             category: categoryFn(d),
             trendsTimeseries,
 
-            left: xScale(d.x - r) + (offset[0] || 0),
-            top: yScale(d.y - r) + (offset[1] || 0),
 
             // width height should be the same if the aspect is correct
             width: xScale(r * 2),

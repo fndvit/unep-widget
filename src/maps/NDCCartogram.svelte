@@ -102,7 +102,6 @@
         <DemersCartogram data={dataset}
             nodeSize={80}
             domain={[740, 420]}
-            offset={[0,0]}
             trendsMode={false}
             categoryFn={getCategory}
             hoverTextFn={getHoverText}
