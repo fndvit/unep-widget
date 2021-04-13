@@ -2,7 +2,7 @@
     import type { CountryDataPoint } from './DemersCartogram.svelte';
     import {default as countries} from '../data/countries.json';
     import DemersCartogram from './DemersCartogram.svelte';
-    import {ghg, ndc, endYear} from '../data';
+    import {ghg, ndc, endYear, getNDCCategory} from '../data';
     import { createLookup } from '../util';
     import { onMount } from 'svelte';
     import CartogramLegend from './CartogramLegend.svelte';
@@ -28,26 +28,6 @@
 
     var legendHighlight = null;
 
-
-    const ndcCategories: {category: string, re: RegExp}[] = [
-        {
-            category: 'ndc-first2020',
-            re: /^2020 NDC ((\(First NDC\))|(\(Updated First NDC\)))/
-        },
-        {
-            category: 'ndc-second2020',
-            re: /^2020 NDC ((\(Second NDC\))|(\(Updated Second NDC\)))/
-        },
-        {
-            category: 'ndc-indc',
-            re: /^Only INDC/
-        },
-        {
-            category: 'ndc-first',
-            re: /^Only First NDC/
-        }
-    ]
-
     onMount(async () => {
         const ghgData = await ghg;
         const ndcData = await ndc;
@@ -58,9 +38,7 @@
         getCategory = c => {
             const ndc = ndcLookup[c.code];
             if (!ndc) return 'ndc-nodata';
-            const ndcCategory = ndcCategories.find(d => d.re.test(ndc.latest_submission))
-            if (!ndcCategory) return 'ndc-unknown';
-            return ndcCategory.category
+            return getNDCCategory(ndc);
         }
 
         const uppercaseFirstLetter = (str:string) => str.charAt(0).toUpperCase() + str.slice(1)
