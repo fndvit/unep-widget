@@ -122,6 +122,7 @@
             trendsTimeseriesData={trendsTimeseriesData}
             helpText={datasetParams[dataset].helpText}
             hoverTextFn={datasetParams[dataset].hoverTextFn}
+            hideLabels={dataset === Datasets.GHGPerCapita}
             categoryFn={getCategory}
         />
         <div class="legend">

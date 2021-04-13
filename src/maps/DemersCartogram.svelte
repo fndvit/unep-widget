@@ -41,6 +41,7 @@
     export var categoryFn: (code: CountryDataPoint) => string;
     export var hoverTextFn: (country: CountryDataPoint) => string;
     export var onHoverFn: (country: CountryDataPoint) => void = c => null
+    export var hideLabels: boolean = false;
 
     var containerEl: Element;
     let loaded: boolean = false;
@@ -234,7 +235,7 @@
             on:mouseenter={(evt) => onMouseEnterCountry(evt, d)}
             on:mouseleave={(evt) => onMouseLeaveCountry(evt, d)}
         >
-            {#if d.width > 50}
+            {#if !hideLabels && d.width > 50}
                 <span class="country-text">{d.short}</span>
             {/if}
 
