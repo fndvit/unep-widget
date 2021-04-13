@@ -85,6 +85,8 @@
             category: categoryFn(d),
             trendsTimeseries,
 
+            left: xScale(d.x - r),
+            top: yScale(d.y - r),
 
             // width height should be the same if the aspect is correct
             width: xScale(r * 2),
