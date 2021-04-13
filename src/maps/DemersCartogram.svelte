@@ -377,6 +377,7 @@
         left: 0;
         width: 100%;
         transform: translateY(-50%);
+        text-align: center;
     }
 
     .cartogram-country-hover:not(.trends-mode) .country:not(:hover) {
@@ -433,7 +434,6 @@
         width: 180px;
         padding-bottom: 5px;
         z-index: 2;
-        text-align: left;
     }
 
     .help-line {
@@ -449,7 +449,6 @@
         width: 220px;
         padding-bottom: 5px;
         z-index: 6;
-        text-align: left;
         top: -35px;
         box-sizing: border-box;
     }

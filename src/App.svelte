@@ -13,7 +13,7 @@
 
     :global(body) {
         padding: 0;
-        text-align: center;
+        text-align: left;
         margin: 0;
         font-family: 'Roboto', sans-serif;
         background-color: #F3F3F3;

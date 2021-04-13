@@ -41,7 +41,6 @@
     .p2-charts-leftpane {
         width: 165px;
         font-size: 14px;
-        text-align: left;
         position: relative;
     }
 

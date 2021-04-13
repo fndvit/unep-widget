@@ -123,7 +123,6 @@
         margin-bottom: -5px;
         padding-left: 12px;
         color: black;
-        text-align: left;
         position: relative;
         z-index: 6;
     }

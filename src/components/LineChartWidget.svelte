@@ -57,7 +57,6 @@
 
 <style>
     .chart-figure {
-        text-align: left;
         font-size: 24px;
         line-height: 32px;
         font-weight: 300;
@@ -67,7 +66,6 @@
     }
 
     .chart-summary {
-        text-align: left;
         margin-top:0;
         font-size: 16px;
         line-height: 24px;

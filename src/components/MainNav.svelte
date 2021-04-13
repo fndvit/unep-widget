@@ -36,7 +36,6 @@
         border: none;
         color: #222;
         font-weight: 300;
-        text-align: left;
         padding: 0;
         outline: none;
         font-size: 14px;
