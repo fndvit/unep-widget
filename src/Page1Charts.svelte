@@ -4,7 +4,7 @@
     import LineChartWidget from './components/LineChartWidget.svelte';
     import { ghg, percapita, getCountryBaseData, endYear } from './data';
     import type { GHGData, PerCapitaData } from './data';
-    import { createLookup } from './util';
+    import { createLookup, getRandom } from './util';
 
     let ghgData: GHGData[];
     let percapitaData: PerCapitaData[];
@@ -14,11 +14,6 @@
         const a = d.emissions[`${fromYear}`];
         const b = d.emissions[`${toYear}`];
         return (b - a) / a;
-    }
-
-    function getRandom(data: GHGData[]): GHGData {
-        const r = Math.floor(Math.random() * data.length);
-        return data[r];
     }
 
     onMount(async () => {
