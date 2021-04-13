@@ -27,6 +27,7 @@
         // go to spash or change page
         // change page for now
         selectedNavOption = option;
+        window.setTimeout(() => document.dispatchEvent(new CustomEvent('content-resize')), 0);
     }
 
 </script>

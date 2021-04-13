@@ -37,6 +37,8 @@
         }
     })
 
+    document.addEventListener('content-resize', resizeIframe);
+
 </script>
 
 <svelte:window on:resize={throttle(resizeIframe, 100)}/>
