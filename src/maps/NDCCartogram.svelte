@@ -70,10 +70,6 @@
             return `<b>${c.name}</b><br/>${uppercaseFirstLetter(ndc.ghg_target)}`;
         }
 
-        countries.forEach(d => {
-            if (!ghgDataLookup[d.code]) console.warn(`Missing GHG data for ${d.name} (${d.code})`);
-        })
-
         dataset = countries
             .filter(d => ghgDataLookup[d.code]) // TODO: hack while we have inconsistent/mock data
             .map(d => {
