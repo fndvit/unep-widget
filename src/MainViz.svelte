@@ -1,13 +1,14 @@
 <script lang="ts">
     import type { SvelteComponent } from "svelte";
     import type { MenuOption } from './components/MainNav.svelte';
+
     import { MainNav, SubNav, ScrollableX, CopyPane, Footer } from './components';
     import svg from './svg';
     import { copy } from './data';
     import { GHGCartogram, NDCCartogram } from './maps';
     import { Datasets } from './maps/GHGCartogram.svelte';
-    import Page1Charts from './Page1Charts.svelte';
     import Page2Carto from './Page2Carto.svelte';
+    import Page1Charts from './Page1Charts.svelte';
     import Page3Charts from './Page3Charts.svelte';
     import Page2Charts from './Page2Charts.svelte';
 
