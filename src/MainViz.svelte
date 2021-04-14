@@ -1,4 +1,5 @@
 <script lang="ts">
+    import type { SvelteComponent } from "svelte";
     import MainNav from './components/MainNav.svelte';
     import type { MenuOption } from './components/MainNav.svelte';
     import svg from './svg';
@@ -27,6 +28,7 @@
         sections: Section[];
         class: string;
         bottomSectionTitle?: string;
+        bottomComponent: typeof SvelteComponent;
     }
 
     const pages: Page[] = [
@@ -35,6 +37,7 @@
             icon: svg.stateoftheclimate.main,
             class: "sotc",
             bottomSectionTitle: "Top emitters and country trends since 1990",
+            bottomComponent: Page1Charts,
             sections: [
                 {
                     text: "Total emissions",
@@ -60,6 +63,7 @@
             text: "What's happening",
             icon: svg.whatshappening.main,
             class: "whatshappening",
+            bottomComponent: Page2Charts,
             sections: [
                 {
                     text: "Land temperature",
@@ -84,8 +88,9 @@
         {
             text: "Climate action progress",
             icon: svg.climateactionprogress.main,
-            bottomSectionTitle: "Countries' GHG emission targets",
             class: "cap",
+            bottomSectionTitle: "Countries' GHG emission targets",
+            bottomComponent: Page3Charts,
             sections: [
                 {
                     text: "NDC submissions",
@@ -115,51 +120,51 @@
 </script>
 
 <div class="content content--{selectedPage.class}">
+
     <div class="navcontainer">
         <MainNav options={pages} bind:selected={selectedPage} onchange={onMenuChange} />
     </div>
-    <div>
-        <SubNav bind:selected={selectedSection} options={selectedPage.sections} />
 
-        <div class="top-section">
-            <div class="copy-container">
-                <CopyPane {...selectedSection.copy} />
-            </div>
+    <SubNav bind:selected={selectedSection} options={selectedPage.sections} />
 
-            <div class="cartogram-pane">
-                {#if selectedPage.text === "State of the climate"}
-                    <ScrollableX>
-                        <GhgCartogram dataset={selectedSection.dataset} />
-                    </ScrollableX>
-                {:else if selectedPage.text === "What's happening"}
-                    <Page2Carto selectedSectionStr={selectedSection.text} />
-                {:else if selectedPage.text === "Climate action progress"}
-                    {#if selectedSection.text === "NDC submissions"}
-                    <ScrollableX>
-                        <NdcCartogram />
-                    </ScrollableX>
-                    {/if}
+    <div class="top-section">
+
+        <div class="copy-container">
+            <CopyPane {...selectedSection.copy} />
+        </div>
+
+        <div class="cartogram-pane">
+            {#if selectedPage.text === "State of the climate"}
+                <ScrollableX>
+                    <GhgCartogram dataset={selectedSection.dataset} />
+                </ScrollableX>
+            {:else if selectedPage.text === "What's happening"}
+                <Page2Carto selectedSectionStr={selectedSection.text} />
+            {:else if selectedPage.text === "Climate action progress"}
+                {#if selectedSection.text === "NDC submissions"}
+                <ScrollableX>
+                    <NdcCartogram />
+                </ScrollableX>
                 {/if}
-            </div>
+            {/if}
         </div>
 
-        <div class="bottom-section">
-            {#if selectedPage.bottomSectionTitle}
-                <h3 class="chart-section-title">{selectedPage.bottomSectionTitle}</h3>
-            {/if}
-            <ScrollableX>
-                <div class="chart-container">
-                    {#if selectedPage.text === "State of the climate"}
-                        <Page1Charts/>
-                    {:else if selectedPage.text === "What's happening"}
-                        <Page2Charts />
-                    {:else if selectedPage.text === "Climate action progress"}
-                        <Page3Charts />
-                    {/if}
-                </div>
-            </ScrollableX>
-        </div>
     </div>
+
+    <div class="bottom-section">
+
+        {#if selectedPage.bottomSectionTitle}
+            <h3 class="chart-section-title">{selectedPage.bottomSectionTitle}</h3>
+        {/if}
+
+        <ScrollableX>
+            <div class="chart-container">
+                <svelte:component this={selectedPage.bottomComponent} />
+            </div>
+        </ScrollableX>
+
+    </div>
+
 </div>
 
 <Footer currentSection={selectedPage.text}/>

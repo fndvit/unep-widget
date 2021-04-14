@@ -1,5 +1,4 @@
 <script lang="ts" context="module">
-    import type { SvelteComponent } from "svelte";
 
     export interface MenuOption {
         text: string,
