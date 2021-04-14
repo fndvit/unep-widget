@@ -61,3 +61,25 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+
+/* GHG emission category colours */
+.stroke--stable { stroke: #BEC7CD; }
+.stroke--falling { stroke: #00AACC; }
+.stroke--climbing { stroke: #FDCC4D; }
+.stroke--climbing-fast { stroke: #FD7D2E; }
+
+.bg--stable { background-color: #BEC7CD; }
+.bg--falling { background-color: #00AACC; }
+.bg--climbing { background-color: #FDCC4D; }
+.bg--climbing-fast { background-color: #FD7D2E; }
+
+/* NDC category colors */
+.bg--ndc-first2020 { background-color: #1EA3C7; }
+.bg--ndc-second2020 { background-color: #33E3FF; }
+.bg--ndc-first { background-color: #4A7D94; }
+.bg--ndc-indc { background-color: #A3A4A6; }
+.bg--ndc-nosubmission { background-color: #D5D7D9; }
+
+/* colors for testing only */
+.bg--ndc-nodata { background-color: purple; }
+.bg--ndc-unknown { background-color: red; }

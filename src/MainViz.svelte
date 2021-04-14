@@ -184,38 +184,6 @@
         position: relative;
     }
 
-    @media (min-width: 1400px) {
-        .navcontainer {
-            position: absolute;
-            right: 100%;
-            width: 150px;
-        }
-    }
-
-    /* GHG emission category colours */
-    :global(.stroke--stable) { stroke: #BEC7CD; }
-    :global(.stroke--falling) { stroke: #00AACC; }
-    :global(.stroke--climbing) { stroke: #FDCC4D; }
-    :global(.stroke--climbing-fast) { stroke: #FD7D2E; }
-
-    :global(.bg--stable) { background-color: #BEC7CD; }
-    :global(.bg--falling) { background-color: #00AACC; }
-    :global(.bg--climbing) { background-color: #FDCC4D; }
-    :global(.bg--climbing-fast) { background-color: #FD7D2E; }
-
-    /* NDC category colors */
-    :global(.bg--ndc-first2020) { background-color: #1EA3C7; }
-    :global(.bg--ndc-second2020) { background-color: #33E3FF; }
-    :global(.bg--ndc-first) { background-color: #4A7D94; }
-    :global(.bg--ndc-indc) { background-color: #A3A4A6; }
-    :global(.bg--ndc-nosubmission) { background-color: #D5D7D9; }
-
-    /* colors for testing only */
-    :global(.bg--ndc-nodata) { background-color: purple; }
-    :global(.bg--ndc-unknown) { background-color: red; }
-
-
-
     .top-section {
         display: flex;
         position: relative;
@@ -378,6 +346,14 @@
         .content--wh .cartogram-pane :global(.aimg .annotation),
         .content--wh .cartogram-pane :global(.aimg .circle-container) {
             display: none;
+        }
+    }
+
+    @media (min-width: 1400px) {
+        .navcontainer {
+            position: absolute;
+            right: 100%;
+            width: 150px;
         }
     }
 
