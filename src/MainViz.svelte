@@ -6,6 +6,7 @@
     import type { MenuOption } from './components/MainNav.svelte';
     import svgs from './svg';
     import Footer from './components/Footer.svelte';
+
     const mainNavOptions: MenuOption[] = [
         {
             text: "State of the climate", icon: svgs.stateoftheclimate.main,
@@ -81,7 +82,5 @@
     /* colors for testing only */
     :global(.bg--ndc-nodata) { background-color: purple; }
     :global(.bg--ndc-unknown) { background-color: red; }
-
-
 
 </style>
