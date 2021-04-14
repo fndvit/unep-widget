@@ -53,7 +53,7 @@
     const originalHeight = 400;
     var targetWidth: number = originalWidth;
     var targetHeight: number = originalHeight;
-
+    var resizing: boolean = false;
     var lineDisplayBlock: boolean = false;
     var lineFadeIn: boolean = false;
     var hoverTimeout: number;
@@ -133,12 +133,14 @@
 
     function resize() {
         if (containerEl) {
+            resizing = true;
             const containerStyle = getComputedStyle(containerEl);
             const containerWidth = containerEl.clientWidth - parseFloat(containerStyle.paddingLeft) - parseFloat(containerStyle.paddingRight);
             const containerHeight = containerEl.clientHeight - parseFloat(containerStyle.paddingTop) - parseFloat(containerStyle.paddingBottom);
             const scale = Math.min(containerWidth / originalWidth, containerHeight / originalHeight);
             targetWidth = originalWidth * scale;
             targetHeight = originalHeight * scale;
+            window.setTimeout(() => resizing = false);
         }
     }
 
@@ -222,7 +224,7 @@
 <div class="cartogram" bind:this={containerEl}
     class:trends-mode={trendsMode} class:trends-visible={lineFadeIn}
     class:cartogram-country-hover={hoverData} class:showing-trends-chart={showTrendsChart}
-    class:trends-block={lineDisplayBlock}
+    class:trends-block={lineDisplayBlock} class:cartogram-resizing={resizing}
     on:touchstart={clearHoverState}
 >
     {#if loaded}
@@ -343,6 +345,10 @@
         z-index: 2;
         transition: top 0.2s, left 0.2s, width 0.2s, height 0.2s, background-color 0.2s, opacity 0.45s ease 0.15s;
         will-change: opacity, background-color, border-radius;
+    }
+
+    .cartogram-resizing .country {
+        transition: none;
     }
 
     .trendline :global(svg) {
