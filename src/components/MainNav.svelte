@@ -44,6 +44,7 @@
         position: relative;
         -webkit-tap-highlight-color: transparent;
         overflow: hidden;
+        text-align: left;
     }
 
     button.selected {
