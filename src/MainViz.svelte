@@ -22,6 +22,7 @@
         };
         dataset?: number;
         class?: string;
+        bottomComponent?: typeof SvelteComponent;
     }
 
     interface Page extends MenuOption {
@@ -145,6 +146,8 @@
                 <ScrollableX>
                     <NdcCartogram />
                 </ScrollableX>
+                {:else if selectedSection.text === "Public opinion"}
+                    <div></div>
                 {/if}
             {/if}
         </div>
@@ -159,7 +162,7 @@
 
         <ScrollableX>
             <div class="chart-container">
-                <svelte:component this={selectedPage.bottomComponent} />
+                <svelte:component this={selectedSection.bottomComponent || selectedPage.bottomComponent} />
             </div>
         </ScrollableX>
 
