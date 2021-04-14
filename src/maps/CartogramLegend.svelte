@@ -18,19 +18,20 @@
 
 <style>
     .legend {
-        font-size: 14px;
-        line-height: 20px;
-        display: flex;
         list-style-type: none;
         margin: 0;
         padding: 0;
+        line-height: 24px;
     }
     .legend-item {
+        font-size: 14px;
+        line-height: 20px;
         text-indent: 0;
         margin-right: 20px;
         padding-left: 20px;
         position: relative;
         transition: all 0.3s;
+        display: inline-block;
     }
     .highlight-mode .legend-item {
         transition-delay: 0s;

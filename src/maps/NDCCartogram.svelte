@@ -91,14 +91,13 @@
 <style>
     .cartogram-container {
         box-sizing: border-box;
-        padding-bottom: 20px;
         flex: 0 0 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     .legend-container {
-        position: absolute;
-        bottom: 0;
-        left: 0;
+        padding-top: 6px;
     }
 
 </style>

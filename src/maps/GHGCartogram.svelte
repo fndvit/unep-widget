@@ -125,7 +125,7 @@
             hideLabels={dataset === Datasets.GHGPerCapita}
             categoryFn={getCategory}
         />
-        <div class="legend">
+        <div class="legend-container">
             <CartogramLegend categories={legend}/>
         </div>
     </div>
@@ -134,14 +134,18 @@
 <style>
     .cartogram-container {
         box-sizing: border-box;
-        padding-bottom: 20px;
         flex: 0 0 100%;
+        display: flex;
+        flex-direction: column;
     }
 
-    .legend {
-        position: absolute;
-        bottom: 0;
-        left: 50px;
+    .legend-container {
+        padding-left: 50px;
+    }
+    @media (max-width: 900px) {
+        .legend-container {
+            padding-left: 10px;
+        }
     }
 
 </style>
