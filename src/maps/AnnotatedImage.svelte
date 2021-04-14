@@ -101,7 +101,7 @@ import { onDestroy } from 'svelte';
 
 <div class="aimg">
   {#if src === 'fire'}
-    <video 
+    <video
         src='{src}.mp4'
         poster='{src}.png'
         muted
@@ -160,7 +160,6 @@ import { onDestroy } from 'svelte';
         max-width: 120px;
         font-size: 14px;
         line-height: 1.3;
-        text-align: left;
         color:#808080;
     }
 
@@ -172,7 +171,6 @@ import { onDestroy } from 'svelte';
         position: absolute;
         font-size: 13px;
         line-height: 1.3;
-        text-align: left;
         width: 250px;
         text-shadow: 1px 1px 1px #f3f3f3, -1px 1px 1px #f3f3f3, 1px -1px 1px #f3f3f3, -1px -1px 1px #f3f3f3,
             2px 2px 2px #f3f3f3, -2px 2px 2px #f3f3f3, 2px -2px 2px #f3f3f3, -2px -2px 2px #f3f3f3,

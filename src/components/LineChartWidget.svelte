@@ -57,18 +57,15 @@
 
 <style>
     .chart-figure {
-        text-align: left;
         font-size: 24px;
         line-height: 32px;
         font-weight: 300;
         color: #111;
-        margin-bottom: 4px;
         margin-top: 0px;
     }
 
     .chart-summary {
-        text-align: left;
-        margin-top:0;
+        margin: 0;
         font-size: 16px;
         line-height: 24px;
         font-weight:300;

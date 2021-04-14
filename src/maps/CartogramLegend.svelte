@@ -7,9 +7,9 @@
     export var highlight: LegendItem;
 </script>
 
-<ul class:highlight-mode={highlight}>
+<ul class="legend" class:highlight-mode={highlight}>
     {#each categories as category}
-    <li class:highlight={category === highlight}>
+    <li class="legend-item" class:highlight={category === highlight}>
         <span class="icon bg--{category.class}"></span>
         <span class="text">{category.text}</span>
     </li>
@@ -17,26 +17,26 @@
 </ul>
 
 <style>
-    ul {
-        font-size: 14px;
-        line-height: 20px;
-        display: flex;
+    .legend {
         list-style-type: none;
         margin: 0;
         padding: 0;
+        line-height: 24px;
     }
-    li {
+    .legend-item {
+        font-size: 14px;
+        line-height: 20px;
         text-indent: 0;
         margin-right: 20px;
-        text-align: left;
         padding-left: 20px;
         position: relative;
         transition: all 0.3s;
+        display: inline-block;
     }
-    ul.highlight-mode li {
+    .highlight-mode .legend-item {
         transition-delay: 0s;
     }
-    ul.highlight-mode li:not(.highlight) {
+    .highlight-mode .legend-item:not(.highlight) {
         opacity: 0.5;
     }
     .icon {

@@ -41,7 +41,6 @@
     .p2-charts-leftpane {
         width: 165px;
         font-size: 14px;
-        text-align: left;
         position: relative;
     }
 
@@ -72,7 +71,6 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        margin-bottom: 16px;
     }
     .p2-charts > :global(*) {
         width: 200px;

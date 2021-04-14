@@ -54,3 +54,23 @@ export function displayVal(val: number, dp: number = null): string {
     const multiplier = Math.pow(10, dp);
     return (Math.round(val*multiplier)/multiplier).toLocaleString()
 }
+
+export function getRandom<T>(data: T[]): T {
+    const r = Math.floor(Math.random() * data.length);
+    return data[r];
+}
+
+export function getXRandom<T>(data: T[], x: number): T[] {
+    if (data.length < x) throw Error(`${data} has <${x} elements`);
+
+    if (data.length === x) return data;
+
+    var items = [];
+    var remaining = [...data];
+    for (var i = 0; i < x; i++) {
+        const r = Math.floor(Math.random() * remaining.length);
+        items.push(remaining[r]);
+        remaining.splice(r, 1);
+    }
+    return items;
+}

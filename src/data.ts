@@ -49,6 +49,30 @@ export function getGHGCategory(data: YearlyTimeseriesDatum[]) {
     else return 'climbing-fast';
 }
 
+export function getNDCCategory(ndc: NDCData): string {
+
+    const ndcCategories: {category: string, re: RegExp}[] = [
+        {
+            category: 'ndc-first2020',
+            re: /^2020 NDC ((\(First NDC\))|(\(Updated First NDC\)))/
+        },
+        {
+            category: 'ndc-second2020',
+            re: /^2020 NDC ((\(Second NDC\))|(\(Updated Second NDC\)))/
+        },
+        {
+            category: 'ndc-indc',
+            re: /^Only INDC/
+        },
+        {
+            category: 'ndc-first',
+            re: /^Only First NDC/
+        }
+    ];
+    const ndcCategory = ndcCategories.find(d => d.re.test(ndc.latest_submission))
+    return ndcCategory ? ndcCategory.category : 'ndc-unknown'
+}
+
 function* generateRange(end: number, start = 0, step = 1) {
     let x = start - step;
     while(x < end - step) yield x += step;

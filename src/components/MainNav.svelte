@@ -1,10 +1,8 @@
 <script lang="ts" context="module">
-    import type { SvelteComponent } from "svelte";
 
     export interface MenuOption {
         text: string,
-        icon: string,
-        component: typeof SvelteComponent
+        icon: string
     }
 </script>
 
@@ -36,7 +34,6 @@
         border: none;
         color: #222;
         font-weight: 300;
-        text-align: left;
         padding: 0;
         outline: none;
         font-size: 14px;
@@ -45,6 +42,7 @@
         position: relative;
         -webkit-tap-highlight-color: transparent;
         overflow: hidden;
+        text-align: left;
     }
 
     button.selected {

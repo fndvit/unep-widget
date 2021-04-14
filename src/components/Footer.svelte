@@ -43,7 +43,6 @@
         display: flex;
         align-items: center;
         color: #666666;
-        text-align: left;
         font-weight: 300;
         white-space: nowrap;
     }
