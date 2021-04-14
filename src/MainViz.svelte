@@ -1,49 +1,168 @@
 <script lang="ts">
-    import Page1 from './Page1.svelte';
-    import Page2 from './Page2.svelte';
-    import Page3 from './Page3.svelte';
     import MainNav from './components/MainNav.svelte';
     import type { MenuOption } from './components/MainNav.svelte';
-    import svgs from './svg';
+    import svg from './svg';
     import Footer from './components/Footer.svelte';
+    import { copy } from './data';
+    import GhgCartogram, { Datasets } from './maps/GHGCartogram.svelte';
+    import SubNav from './components/SubNav.svelte';
+    import ScrollableX from './components/ScrollableX.svelte';
+    import CopyPane from './components/CopyPane.svelte';
+    import Page1Charts from './Page1Charts.svelte';
+    import Page2Carto from './Page2Carto.svelte';
+    import Page3Charts from './Page3Charts.svelte';
+    import Page2Charts from './Page2Charts.svelte';
+    import NdcCartogram from './maps/NDCCartogram.svelte';
 
-    const mainNavOptions: MenuOption[] = [
+    interface Section extends MenuOption {
+        copy: {
+            title: string;
+            summary: string;
+        };
+        dataset?: number;
+        class?: string;
+    }
+
+    interface Page extends MenuOption {
+        sections: Section[];
+        class: string;
+        bottomSectionTitle?: string;
+    }
+
+    const pages: Page[] = [
         {
-            text: "State of the climate", icon: svgs.stateoftheclimate.main,
-            component: Page1
+            text: "State of the climate",
+            icon: svg.stateoftheclimate.main,
+            class: "sotc",
+            bottomSectionTitle: "Top emitters and country trends since 1990",
+            sections: [
+                {
+                    text: "Total emissions",
+                    icon: svg.stateoftheclimate.emissions,
+                    copy: copy.state.total,
+                    dataset: Datasets.GHGTotal
+                },
+                {
+                    text: "Per capita emissions",
+                    icon: svg.stateoftheclimate.percapita,
+                    copy: copy.state.percapita,
+                    dataset: Datasets.GHGPerCapita
+                },
+                {
+                    text: "Country trends",
+                    icon: svg.stateoftheclimate.trends,
+                    copy: copy.state.trend,
+                    dataset: Datasets.GHGTrends
+                },
+            ]
         },
         {
-            text: "What's happening", icon: svgs.whatshappening.main,
-            component: Page2
+            text: "What's happening",
+            icon: svg.whatshappening.main,
+            class: "whatshappening",
+            sections: [
+                {
+                    text: "Land temperature",
+                    icon: svg.whatshappening.surface,
+                    copy: copy.happening.surface,
+                    class: 'temp'
+                },
+                {
+                    text: "Ocean temperature",
+                    icon: svg.whatshappening.ocean,
+                    copy: copy.happening.ocean,
+                    class: 'ocean'
+                },
+                {
+                    text: "Fires",
+                    icon: svg.whatshappening.fire,
+                    copy: copy.happening.fire,
+                    class: 'fires'
+                }
+            ]
         },
         {
-            text: "Climate action progress", icon: svgs.climateactionprogress.main,
-            component: Page3
+            text: "Climate action progress",
+            icon: svg.climateactionprogress.main,
+            bottomSectionTitle: "Countries' GHG emission targets",
+            class: "cap",
+            sections: [
+                {
+                    text: "NDC submissions",
+                    icon: svg.climateactionprogress.ndc,
+                    copy: copy.progress.ndcs,
+                },
+                {
+                    text: "Public opinion",
+                    icon: svg.climateactionprogress.opinion,
+                    copy: copy.progress.public,
+                }
+            ]
         },
     ];
 
-    let selectedNavOption = mainNavOptions[0];
+    let selectedPage = pages[0];
+    let selectedSection = selectedPage.sections[0];
 
-    function onMenuChange(option: MenuOption) {
+    function onMenuChange(option: Page) {
         // go to spash or change page
         // change page for now
-        selectedNavOption = option;
+        selectedPage = option;
+        selectedSection = selectedPage.sections[0];
         window.setTimeout(() => document.dispatchEvent(new CustomEvent('content-resize')), 0);
     }
 
 </script>
 
-<div class="content">
+<div class="content content--{selectedPage.class}">
     <div class="navcontainer">
-        <MainNav options={mainNavOptions} bind:selected={selectedNavOption} onchange={onMenuChange} />
+        <MainNav options={pages} bind:selected={selectedPage} onchange={onMenuChange} />
     </div>
     <div>
-        <svelte:component this={selectedNavOption.component} />
+        <SubNav bind:selected={selectedSection} options={selectedPage.sections} />
+
+        <div class="top-section">
+            <div class="copy-container">
+                <CopyPane {...selectedSection.copy} />
+            </div>
+
+            <div class="cartogram-pane">
+                {#if selectedPage.text === "State of the climate"}
+                    <ScrollableX>
+                        <GhgCartogram dataset={selectedSection.dataset} />
+                    </ScrollableX>
+                {:else if selectedPage.text === "What's happening"}
+                    <Page2Carto selectedSectionStr={selectedSection.text} />
+                {:else if selectedPage.text === "Climate action progress"}
+                    {#if selectedSection.text === "NDC submissions"}
+                    <ScrollableX>
+                        <NdcCartogram />
+                    </ScrollableX>
+                    {/if}
+                {/if}
+            </div>
+        </div>
+
+        <div class="bottom-section">
+            {#if selectedPage.bottomSectionTitle}
+                <h3 class="chart-section-title">{selectedPage.bottomSectionTitle}</h3>
+            {/if}
+            <ScrollableX>
+                <div class="chart-container">
+                    {#if selectedPage.text === "State of the climate"}
+                        <Page1Charts/>
+                    {:else if selectedPage.text === "What's happening"}
+                        <Page2Charts />
+                    {:else if selectedPage.text === "Climate action progress"}
+                        <Page3Charts />
+                    {/if}
+                </div>
+            </ScrollableX>
+        </div>
     </div>
 </div>
 
-<Footer currentSection={selectedNavOption.text}/>
-
+<Footer currentSection={selectedPage.text}/>
 
 <style>
 
@@ -82,5 +201,144 @@
     /* colors for testing only */
     :global(.bg--ndc-nodata) { background-color: purple; }
     :global(.bg--ndc-unknown) { background-color: red; }
+
+
+
+    .top-section {
+        display: flex;
+        position: relative;
+        height: 420px;
+        padding-bottom:20px;
+    }
+
+    .cartogram-pane {
+        display: flex;
+        width: 700px;
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    .cartogram-pane:hover {
+        z-index: 2;
+    }
+
+    .cartogram-pane > :global(.cartogram-container) {
+        flex: 0 0 100%;
+    }
+
+    .cartogram-pane :global(svg) {
+        width: 100%;
+    }
+    .cartogram-pane :global(.scrollable) {
+        width: 100%;
+    }
+
+    .cartogram-pane :global(.cartogram-container) {
+        min-width: 500px;
+    }
+
+    .cartogram-pane :global(.scrollable-content) {
+        flex: 0 0 100%;
+        display: flex;
+    }
+
+    .copy-container {
+        width: 450px;
+        display: flex;
+        padding-left: 12px;
+        box-sizing: border-box;
+    }
+
+    .chart-container {
+        display: flex;
+        justify-content: space-between;
+        min-width: 1000px;
+    }
+
+    .chart-container > :global(*) {
+        flex: 1 1 25%;
+        padding: 0 12px;
+    }
+
+    .chart-container :global(svg) {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .chart-section-title {
+        font-size: 14px;
+        margin: 0;
+        margin-top: 12px;
+        padding-left: 12px;
+        color: black;
+        position: relative;
+        z-index: 6;
+    }
+    .content--cap .chart-section-title {
+        margin-bottom: 10px;
+    }
+
+    @media (min-width: 1300px) {
+        .cartogram-pane {
+            /* right-side overflow to enlarge cartogram when we have space */
+            margin-right: -100px;
+        }
+    }
+
+    @media (max-width: 1400px) {
+        .top-section {
+            height: 360px;
+        }
+        .chart-container :global(.chart-summary) {
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 900px) {
+
+        .top-section {
+            display: block;
+            height: auto;
+        }
+
+        .cartogram-pane {
+            height: 320px;
+            width: 100%;
+        }
+
+        .copy-container {
+            width: auto;
+            padding-right: 20%;
+        }
+        .copy-container :global(h1) {
+            font-size: 24px;
+            line-height: 30px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        .copy-container :global(.summary-container) {
+            display: none;
+        }
+    }
+
+
+
+    @media (max-width: 600px) {
+
+        /* TODO: tmp disabled annotations for mobile */
+        .cartogram-pane :global(.annotation) {
+            display: none;
+        }
+        .copy-container {
+            padding-right: 20px;
+        }
+        .copy-container :global(h1) {
+            font-weight: 300;
+        }
+
+        :global(.bottom-section .chart-figure) {
+            display: none;
+        }
+    }
 
 </style>

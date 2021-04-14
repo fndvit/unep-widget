@@ -3,8 +3,7 @@
 
     export interface MenuOption {
         text: string,
-        icon: string,
-        component: typeof SvelteComponent
+        icon: string
     }
 </script>
 
