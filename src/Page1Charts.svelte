@@ -4,7 +4,7 @@
     import LineChartWidget from './components/LineChartWidget.svelte';
     import { ghg, percapita, getCountryBaseData, endYear } from './data';
     import type { GHGData, PerCapitaData } from './data';
-    import { createLookup, getRandom } from './util';
+    import { getRandom, getXRandom } from './util';
 
     let ghgData: GHGData[];
     let percapitaData: PerCapitaData[];
@@ -42,23 +42,10 @@
             .map(d => d[0])
             .slice(0, 10)
 
-        const usedCountryCodes = [...largest10Emitters, ...largest10Increase, ...largest10Decrease].map(d => d.code);
-
-        const perCapitaLookup = createLookup(percapitaData, d => d.code, d => d.emissions_percapita)
-
-        const largest10PerCapita = useableCountries
-            .filter(d => usedCountryCodes.indexOf(d.code) === -1)
-            .sort((a,b) => perCapitaLookup[b.code] - perCapitaLookup[a.code])
-            .slice(0, 10)
-
-        const _largest10PerCapita = percapitaData
-            .sort((a,b) => b.emissions_percapita - a.emissions_percapita)
-
         chartData = [
-            getRandom(largest10Emitters),
-            getRandom(largest10Decrease),
+            ...getXRandom(largest10Emitters, 2),
             getRandom(largest10Increase),
-            getRandom(largest10PerCapita),
+            getRandom(largest10Decrease),
         ];
     });
 
@@ -66,7 +53,7 @@
 
 {#if chartData && chartData.length === 4}
 <LineChartWidget data={chartData[0]} chartTextType={ChartTextType.Largest}/>
-<LineChartWidget data={chartData[1]} chartTextType={ChartTextType.Relative}/>
+<LineChartWidget data={chartData[1]} chartTextType={ChartTextType.Largest}/>
 <LineChartWidget data={chartData[2]} chartTextType={ChartTextType.Relative}/>
-<LineChartWidget data={chartData[3]} chartTextType={ChartTextType.PerCapita}/>
+<LineChartWidget data={chartData[3]} chartTextType={ChartTextType.Relative}/>
 {/if}
