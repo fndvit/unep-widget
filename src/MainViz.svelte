@@ -278,9 +278,14 @@
         color: black;
         position: relative;
         z-index: 6;
+        margin-bottom: 10px;
     }
     .content--cap .chart-section-title {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .bottom-section {
+        padding-bottom: 20px;
     }
 
     @media (min-width: 1300px) {

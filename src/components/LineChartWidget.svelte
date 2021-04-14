@@ -61,12 +61,11 @@
         line-height: 32px;
         font-weight: 300;
         color: #111;
-        margin-bottom: 4px;
         margin-top: 0px;
     }
 
     .chart-summary {
-        margin-top:0;
+        margin: 0;
         font-size: 16px;
         line-height: 24px;
         font-weight:300;

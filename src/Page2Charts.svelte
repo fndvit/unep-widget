@@ -71,7 +71,6 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        margin-bottom: 16px;
     }
     .p2-charts > :global(*) {
         width: 200px;
