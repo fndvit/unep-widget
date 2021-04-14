@@ -2,34 +2,51 @@
   import * as d3 from '../d3';
   export var data;
 
-  let width: number = 100;
-  let height: number = 50;
+  export var width: number;
+  $: height = width * .8;
+  let margin = { top: 10, right: 3, bottom: 0, left: 3};
 
-  data.forEach(d => d.year = d3.timeParse("%m/%Y")(d.year))
-  const defined = data.filter(d => d.value !== null)
+  $: x = d3.scaleLinear()
+        .domain([new Date(2013, 2), new Date(2018, 2)])
+        .range([ margin.left, width - margin.right]);
 
-  const x = d3.scaleLinear()
-        .domain(d3.extent(data, d => d.year))
-        .range([ 0, width]);
-
-  const y = d3.scaleLinear()
+  $: y = d3.scaleLinear()
     .domain([0, 100])
-    .range([ height, 0]);
+    .range([ height - margin.bottom, margin.top]);
+
+  $: lineGenerator = d3.line<any>()
+    .x(d => x(d.year))
+    .y(d => y(d.value))
+    .curve(d3.curveMonotoneX);;
   
-  const pathGenerator = d3.area<any>()
+  $: areaGenerator = d3.area<any>()
     .x(d => x(d.year))
     .y0(y(0))
-    .y1(d => y(d.value));
+    .y1(d => y(d.value))
+    .curve(d3.curveMonotoneX);;
 
 </script>
-
-<svg {width} {height} >
-  <path class="line" d={pathGenerator(defined)} />
+<div class='container'>
+<svg width={width - margin.left - margin.right} height={height - margin.top - margin.bottom} >
+  <path class="line" d={lineGenerator(data)} />
+  <path class="area" d={areaGenerator(data)} />
 </svg>
+</div>
     
 <style>
   path {
-    stroke-width: 2px;
     pointer-events: none;
+  }
+  .area {
+    fill: #00aacc;
+    opacity: .2;
+  }
+  .line {
+    stroke: #00aacc;
+    stroke-width: 1.5px;
+    fill:none;
+  }
+  .container {
+    width: 100%;
   }
 </style>
