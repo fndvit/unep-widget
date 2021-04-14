@@ -29,7 +29,6 @@ import { onDestroy } from 'svelte';
     $: annotation = mappedAnnotations && mappedAnnotations[0];
 
     function onImgLoad() {
-        console.log(`loaded ${src}`)
         srcImgHeight = src === 'fire' ? vidEl.videoHeight : imgEl.naturalHeight;
         srcImgWidth = src === 'fire' ? vidEl.videoWidth : imgEl.naturalWidth;
         imgRatio = srcImgWidth / srcImgHeight;
@@ -44,6 +43,7 @@ import { onDestroy } from 'svelte';
 
     var stopCycling: () => any = () => null;
     function startCycling() {
+        stopCycling();
         const interval = window.setInterval(nextAnnotation, 7000);
         stopCycling = () => window.clearInterval(interval);
     }
@@ -145,6 +145,7 @@ import { onDestroy } from 'svelte';
 
     .aimg {
         position: relative;
+        height: fit-content;
     }
 
     .aimg img, .aimg video {
