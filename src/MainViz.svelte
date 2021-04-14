@@ -1,19 +1,15 @@
 <script lang="ts">
     import type { SvelteComponent } from "svelte";
-    import MainNav from './components/MainNav.svelte';
     import type { MenuOption } from './components/MainNav.svelte';
+    import { MainNav, SubNav, ScrollableX, CopyPane, Footer } from './components';
     import svg from './svg';
-    import Footer from './components/Footer.svelte';
     import { copy } from './data';
-    import GhgCartogram, { Datasets } from './maps/GHGCartogram.svelte';
-    import SubNav from './components/SubNav.svelte';
-    import ScrollableX from './components/ScrollableX.svelte';
-    import CopyPane from './components/CopyPane.svelte';
+    import { GHGCartogram, NDCCartogram } from './maps';
+    import { Datasets } from './maps/GHGCartogram.svelte';
     import Page1Charts from './Page1Charts.svelte';
     import Page2Carto from './Page2Carto.svelte';
     import Page3Charts from './Page3Charts.svelte';
     import Page2Charts from './Page2Charts.svelte';
-    import NdcCartogram from './maps/NDCCartogram.svelte';
 
     interface Section extends MenuOption {
         copy: {
@@ -141,14 +137,14 @@
         <div class="cartogram-pane">
             {#if selectedPage.text === "State of the climate"}
                 <ScrollableX>
-                    <GhgCartogram dataset={selectedSection.dataset} />
+                    <GHGCartogram dataset={selectedSection.dataset} />
                 </ScrollableX>
             {:else if selectedPage.text === "What's happening"}
                 <Page2Carto selectedSectionStr={selectedSection.text} />
             {:else if selectedPage.text === "Climate action progress"}
                 {#if selectedSection.text === "NDC submissions"}
                 <ScrollableX>
-                    <NdcCartogram />
+                    <NDCCartogram />
                 </ScrollableX>
                 {:else if selectedSection.text === "Public opinion"}
                     <div></div>

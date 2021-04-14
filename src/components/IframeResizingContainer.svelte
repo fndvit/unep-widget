@@ -1,6 +1,6 @@
 <script lang="ts">
     import { afterUpdate } from 'svelte';
-    import { throttle } from './util';
+    import { throttle } from '../util';
 
     var el: HTMLElement;
 
