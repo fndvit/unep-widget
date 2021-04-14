@@ -63,7 +63,7 @@
         {
             text: "What's happening",
             icon: svg.whatshappening.main,
-            class: "whatshappening",
+            class: "wh",
             bottomComponent: Page2Charts,
             sections: [
                 {
@@ -133,6 +133,10 @@
         <div class="copy-container">
             <CopyPane {...selectedSection.copy} />
         </div>
+
+        {#if selectedSection.copy['short-summary']}
+            <div class="short-summary">{selectedSection.copy['short-summary']}</div>
+        {/if}
 
         <div class="cartogram-pane">
             {#if selectedPage.text === "State of the climate"}
@@ -250,6 +254,16 @@
         display: flex;
     }
 
+    .short-summary {
+        display: none;
+        font-size: 16px;
+        line-height: 1.5;
+        font-weight:300;
+        margin: 0;
+        margin-bottom: 10px;
+        padding: 0 10px;
+    }
+
     .copy-container {
         width: 450px;
         display: flex;
@@ -350,6 +364,19 @@
         }
 
         :global(.bottom-section .chart-figure) {
+            display: none;
+        }
+    }
+
+    @media (max-width: 700px) {
+        .short-summary {
+            display: block;
+        }
+        .content--wh .copy-container :global(h2) {
+            margin-bottom: 10px;
+        }
+        .content--wh .cartogram-pane :global(.aimg .annotation),
+        .content--wh .cartogram-pane :global(.aimg .circle-container) {
             display: none;
         }
     }
