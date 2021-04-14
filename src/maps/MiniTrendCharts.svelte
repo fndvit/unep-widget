@@ -6,7 +6,6 @@
     // TODO: optimization these should only be created once on load
     // currently inconsistent data means some are being created on
     // the cartogram transition
-    console.log('created mtc');
 
     export var data: YearlyTimeseriesDatum[];
     export var category: string = 'stable';

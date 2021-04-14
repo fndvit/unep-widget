@@ -63,7 +63,7 @@
             getRandom(largest10Emitters),
             getRandom(largest10Decrease),
             getRandom(largest10Increase),
-            getRandom(largest10PerCapita),
+            getRandom(largest10PerCapita)
         ];
     });
 

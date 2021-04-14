@@ -4,6 +4,7 @@
     import SubNav from './components/SubNav.svelte';
     import { copy } from './data';
     import NDCCartogram from './maps/NDCCartogram.svelte';
+    import PewSurvey from './maps/PewSurvey.svelte';
     import svgs from './svg';
 
     const sections = [
@@ -31,6 +32,10 @@
         {#if selectedSection.text === 'NDC submissions' }
         <ScrollableX>
             <NDCCartogram />
+        </ScrollableX>
+        {:else if selectedSection.text === 'Public opinion' }
+        <ScrollableX>
+            <PewSurvey />
         </ScrollableX>
         {/if}
     </div>

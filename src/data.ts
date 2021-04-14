@@ -5,6 +5,7 @@ import {default as criMockData} from './data/mock/cri.json';
 import {default as ndcMockData} from './data/mock/ndc.json';
 import {default as countries} from './data/countries.json';
 import {default as copyJson} from './data/copy.json'
+import {default as pewSurveyMockData} from './data/mock/pewsurvey.json'
 import { createLookup } from './util';
 
 export const copy = copyJson;
@@ -15,7 +16,8 @@ const mockData = {
     ghg: ghgMockData,
     percapita: percapitaMockData,
     cri: criMockData,
-    ndc: ndcMockData
+    ndc: ndcMockData,
+    pew: pewSurveyMockData
 }
 
 async function getMockData<DatumType>(dataset) {
@@ -34,6 +36,7 @@ export const percapita = getMockData<PerCapitaData[]>('percapita');
 export const cri = getMockData<CRIData[]>('cri');
 export const ndc = getMockData<NDCData[]>('ndc');
 export const globalEmissions = getMockData<EmissionsData>('globalEmissions');
+export const pew = getMockData<PewData[]>('pew');
 
 export function getGHGCategory(data: YearlyTimeseriesDatum[]) {
     // TODO: set thresholds
@@ -90,6 +93,12 @@ export interface NDCData {
     latest_submission: string,
     ghg: string,
     ghg_target: string
+}
+
+export interface PewData {
+    country: string,
+    year: string,
+    value: number
 }
 
 export interface YearlyTimeseriesDatum {
