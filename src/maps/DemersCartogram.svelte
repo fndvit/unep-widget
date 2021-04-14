@@ -35,13 +35,13 @@
     export var data: CountryDataPoint[];
     export var nodeSize: number = 100;
     export var domain: [number, number];
-    export var offset: [number, number] = [0,0];
     export var trendsMode: boolean = false;
     export var trendsTimeseriesData: TrendsDataset[] = [];
     export var helpText: {code: string, text: string} = null;
     export var categoryFn: (code: CountryDataPoint) => string;
     export var hoverTextFn: (country: CountryDataPoint) => string;
     export var onHoverFn: (country: CountryDataPoint) => void = c => null
+    export var hideLabels: boolean = false;
 
     var containerEl: Element;
     let loaded: boolean = false;
@@ -86,8 +86,8 @@
             category: categoryFn(d),
             trendsTimeseries,
 
-            left: xScale(d.x - r) + (offset[0] || 0),
-            top: yScale(d.y - r) + (offset[1] || 0),
+            left: xScale(d.x - r),
+            top: yScale(d.y - r),
 
             // width height should be the same if the aspect is correct
             width: xScale(r * 2),
@@ -235,7 +235,7 @@
             on:mouseenter={(evt) => onMouseEnterCountry(evt, d)}
             on:mouseleave={(evt) => onMouseLeaveCountry(evt, d)}
         >
-            {#if d.width > 50}
+            {#if !hideLabels && d.width > 50}
                 <span class="country-text">{d.short}</span>
             {/if}
 
@@ -377,6 +377,7 @@
         left: 0;
         width: 100%;
         transform: translateY(-50%);
+        text-align: center;
     }
 
     .cartogram-country-hover:not(.trends-mode) .country:not(:hover) {
@@ -433,7 +434,6 @@
         width: 180px;
         padding-bottom: 5px;
         z-index: 2;
-        text-align: left;
     }
 
     .help-line {
@@ -449,7 +449,6 @@
         width: 220px;
         padding-bottom: 5px;
         z-index: 6;
-        text-align: left;
         top: -35px;
         box-sizing: border-box;
     }

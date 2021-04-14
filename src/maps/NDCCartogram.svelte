@@ -2,7 +2,7 @@
     import type { CountryDataPoint } from './DemersCartogram.svelte';
     import {default as countries} from '../data/countries.json';
     import DemersCartogram from './DemersCartogram.svelte';
-    import {ghg, ndc, endYear} from '../data';
+    import {ghg, ndc, endYear, getNDCCategory} from '../data';
     import { createLookup } from '../util';
     import { onMount } from 'svelte';
     import CartogramLegend from './CartogramLegend.svelte';
@@ -19,34 +19,14 @@
     var getHoverText: (country: CountryDataPoint) => string;
 
     const legend = [
-        { text: "First 2020 NDC", class: "ndc-first2020" },
         { text: "Second 2020 NDC", class: "ndc-second2020" },
+        { text: "First 2020 NDC", class: "ndc-first2020" },
         { text: "Only First NDC", class: "ndc-first" },
         { text: "Only INDC", class: "ndc-indc" },
         { text: "Nothing submitted", class: "ndc-nosubmission" }
     ]
 
     var legendHighlight = null;
-
-
-    const ndcCategories: {category: string, re: RegExp}[] = [
-        {
-            category: 'ndc-first2020',
-            re: /^2020 NDC ((\(First NDC\))|(\(Updated First NDC\)))/
-        },
-        {
-            category: 'ndc-second2020',
-            re: /^2020 NDC ((\(Second NDC\))|(\(Updated Second NDC\)))/
-        },
-        {
-            category: 'ndc-indc',
-            re: /^Only INDC/
-        },
-        {
-            category: 'ndc-first',
-            re: /^Only First NDC/
-        }
-    ]
 
     onMount(async () => {
         const ghgData = await ghg;
@@ -55,12 +35,13 @@
         const ghgDataLookup = createLookup(ghgData, d => d.code, d => d)
         const ndcLookup = createLookup(ndcData, d => d.iso, d => d);
 
+        // TODO: fix missing data
+        console.log(`Missing NDC data:\n${countries.filter(c => !ndcLookup[c.code]).map(c => c.name).join('\n')}`);
+
         getCategory = c => {
             const ndc = ndcLookup[c.code];
             if (!ndc) return 'ndc-nodata';
-            const ndcCategory = ndcCategories.find(d => d.re.test(ndc.latest_submission))
-            if (!ndcCategory) return 'ndc-unknown';
-            return ndcCategory.category
+            return getNDCCategory(ndc);
         }
 
         const uppercaseFirstLetter = (str:string) => str.charAt(0).toUpperCase() + str.slice(1)
@@ -69,10 +50,6 @@
             if (!ndc) return `<b>${c.name}</b><br/>No NDC data`;
             return `<b>${c.name}</b><br/>${uppercaseFirstLetter(ndc.ghg_target)}`;
         }
-
-        countries.forEach(d => {
-            if (!ghgDataLookup[d.code]) console.warn(`Missing GHG data for ${d.name} (${d.code})`);
-        })
 
         dataset = countries
             .filter(d => ghgDataLookup[d.code]) // TODO: hack while we have inconsistent/mock data
@@ -102,14 +79,13 @@
         <DemersCartogram data={dataset}
             nodeSize={80}
             domain={[740, 420]}
-            offset={[0,0]}
             trendsMode={false}
             categoryFn={getCategory}
             hoverTextFn={getHoverText}
             onHoverFn={onHoverFn}
             helpText={helpText}
         />
-        <div class="legend">
+        <div class="legend-container">
             <CartogramLegend categories={legend} highlight={legendHighlight}/>
         </div>
     </div>
@@ -118,14 +94,13 @@
 <style>
     .cartogram-container {
         box-sizing: border-box;
-        padding-bottom: 20px;
         flex: 0 0 100%;
+        display: flex;
+        flex-direction: column;
     }
 
-    .legend {
-        position: absolute;
-        bottom: 0;
-        left: 0;
+    .legend-container {
+        padding-top: 6px;
     }
 
 </style>

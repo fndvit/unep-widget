@@ -20,7 +20,6 @@
 <style>
     .copy-pane {
         box-sizing: border-box;
-        text-align: left;
         color: #222;
         display: flex;
         flex-flow: column;
