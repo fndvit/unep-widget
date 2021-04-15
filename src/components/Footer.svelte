@@ -22,7 +22,7 @@
         <ScrollableX>
             <div class="datasource">
                 <div class="datasource-icon">{@html svgs.dataSource}</div>
-                <span>{datasource}</span>
+                <span>[v1] {datasource}</span>
             </div>
         </ScrollableX>
     </div>
