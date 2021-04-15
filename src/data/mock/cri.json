@@ -1017,15 +1017,6 @@
       "losses_per_unit_gdp_percentage": 126
     },
     {
-      "cri_rank": 116,
-      "country": "Chinese Taipei",
-      "cri_score": 99.67,
-      "fatalities_in_2019": 84,
-      "fatalities_per_100000_inhabitants": 98,
-      "losses_in_millions_usd": 80,
-      "losses_per_unit_gdp_percentage": 119
-    },
-    {
       "cri_rank": 117,
       "country": "Botswana",
       "cri_score": 99.83,

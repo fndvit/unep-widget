@@ -5,12 +5,13 @@
     import { MainNav, SubNav, ScrollableX, CopyPane, Footer } from './components';
     import svg from './svg';
     import { copy } from './data';
-    import { GHGCartogram, NDCCartogram } from './maps';
+    import { GHGCartogram, NDCCartogram} from './maps';
     import { Datasets } from './maps/GHGCartogram.svelte';
     import Page2Carto from './Page2Carto.svelte';
     import Page1Charts from './Page1Charts.svelte';
     import Page3Charts from './Page3Charts.svelte';
     import Page2Charts from './Page2Charts.svelte';
+    import PewSurvey from "./maps/PewSurvey.svelte";
 
     interface Section extends MenuOption {
         copy: {
@@ -141,14 +142,14 @@
                     <GHGCartogram dataset={selectedSection.dataset} />
                 </ScrollableX>
             {:else if selectedPage.text === "What's happening"}
-                <Page2Carto selectedSectionStr={selectedSection.text} />
+                <ScrollableX>
+                    <Page2Carto selectedSectionStr={selectedSection.text} />
+                </ScrollableX>
             {:else if selectedPage.text === "Climate action progress"}
                 {#if selectedSection.text === "NDC submissions"}
-                <ScrollableX>
-                    <NDCCartogram />
-                </ScrollableX>
+                    <ScrollableX><NDCCartogram /></ScrollableX>
                 {:else if selectedSection.text === "Public opinion"}
-                    <div></div>
+                    <ScrollableX><PewSurvey /></ScrollableX>
                 {/if}
             {/if}
         </div>

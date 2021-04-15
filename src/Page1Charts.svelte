@@ -45,7 +45,7 @@
         chartData = [
             ...getXRandom(largest10Emitters, 2),
             getRandom(largest10Increase),
-            getRandom(largest10Decrease),
+            getRandom(largest10Decrease)
         ];
     });
 
