@@ -5,13 +5,13 @@
 
     const dataSources = {
         "State of the climate":
-            "Data from the EDGAR v5.0 Database on Global Greenhouse Gas Emissions and the World Environment Situation Room",
+            "Data from the <a href='https://edgar.jrc.ec.europa.eu/booklet/EDGARv5.0_FT2018_fossil_CO2_GHG_booklet2019.xls' target='_parent'>EDGAR v5.0 Database on Global Greenhouse Gas Emissions</a> and the World Environment Situation Room",
 
         "What's happening":
-            "Data from NASA Earth Observations and the World Environment Situation Room, Global Climate Risk Index 2021 by GermanWatch",
+            "Data from <a href='https://neo.sci.gsfc.nasa.gov/dataset_index.php' target='_parent'>NASA Earth Observations</a> and the World Environment Situation Room, <a href='https://germanwatch.org/en/19777' target='_parent'>Global Climate Risk Index 2021</a> by GermanWatch",
 
         "Climate action progress":
-            "Data from the EDGAR v5.0 Database on Global Greenhouse Gas Emissions, Climate Watch and the Pew Research Center"
+            "Data from the <a href='https://edgar.jrc.ec.europa.eu/booklet/EDGARv5.0_FT2018_fossil_CO2_GHG_booklet2019.xls' target='_parent'>EDGAR v5.0 Database on Global Greenhouse Gas Emissions</a>, <a href='https://www.climatewatchdata.org/ndcs-explore' target='_parent'>Climate Watch</a> and the <a href='https://www.pewresearch.org/global/2019/02/10/climate-change-still-seen-as-the-top-global-threat-but-cyberattacks-a-rising-concern/' target='_parent'>Pew Research Center</a>"
     }
 
     $: datasource = dataSources[currentSection] || 'Unknown';
@@ -22,7 +22,7 @@
         <ScrollableX>
             <div class="datasource">
                 <div class="datasource-icon">{@html svgs.dataSource}</div>
-                <span>{datasource}</span>
+                <span>{@html datasource}</span>
             </div>
         </ScrollableX>
     </div>
