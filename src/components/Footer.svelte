@@ -22,7 +22,9 @@
         <ScrollableX>
             <div class="datasource">
                 <div class="datasource-icon">{@html svgs.dataSource}</div>
-                <span>[v1] {datasource}</span>
+                <span class="datasource-text">{datasource}</span>
+                <span class="version">v2</span>
+
             </div>
         </ScrollableX>
     </div>
@@ -31,10 +33,23 @@
 <style>
     footer {
         background: #e6e6e6;
+        position: relative;
     }
     .footer-content {
         max-width: 1100px;
         margin: auto;
+    }
+
+    .version {
+        position: absolute;
+        right: 0;
+        display: block;
+        background: #e6e6e6;
+        z-index: 1;
+        padding-left: 20px;
+        padding-right: 10px;
+        font-size: 10px;
+
     }
 
     .datasource {
@@ -47,7 +62,7 @@
         white-space: nowrap;
     }
 
-    .datasource span {
+    .datasource .datasource-text {
         padding-right: 10px;
     }
 
