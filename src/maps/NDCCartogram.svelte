@@ -19,11 +19,11 @@
     var getHoverText: (country: CountryDataPoint) => string;
 
     const legend = [
-        { text: "Second 2020 NDC", class: "ndc-second2020" },
-        { text: "First 2020 NDC", class: "ndc-first2020" },
-        { text: "Only First NDC", class: "ndc-first" },
+        { text: "Nothing submitted", class: "ndc-nosubmission" },
         { text: "Only INDC", class: "ndc-indc" },
-        { text: "Nothing submitted", class: "ndc-nosubmission" }
+        { text: "Only First NDC", class: "ndc-first" },
+        { text: "First 2020 NDC", class: "ndc-first2020" },
+        { text: "Second 2020 NDC", class: "ndc-second2020" }
     ]
 
     var legendHighlight = null;

@@ -48,7 +48,6 @@
 </script>
 
 <svg width={tileSize} height={tileSize} viewBox="0 0 {tileSize} {tileSize}">
-<!-- <rect class="tile-rect" width={tileSize} height={tileSize} /> -->
     <path class="line stroke--{category}" d={_tmp.path} />
 </svg>
 

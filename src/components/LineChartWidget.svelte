@@ -51,7 +51,7 @@
 
 <div>
     <MiniLineChart data={timeseriesData} category={category} />
-    <h3 class="chart-figure">{lastFigStr} Mt</h3>
+    <h3 class="chart-figure">{lastFigStr} <span class='units'>million tonnes of GHG</span></h3>
     <p class="chart-summary">{@html summary}</p>
 </div>
 
@@ -75,6 +75,10 @@
         color:black;
         font-size: 18px;
         font-weight: 600;
+    }
+
+    .units {
+        font-size:16px;
     }
 
 </style>
