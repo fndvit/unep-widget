@@ -36,7 +36,7 @@ deploy_to_s3:
   dependencies:
     - build_svelte
   script:
-    - aws s3 cp public/ s3://${BUCKET_NAME} --recursive --acl public-read
+    - aws s3 sync public/ s3://${BUCKET_NAME} --acl public-read
 
 flushcache:
   image: docker:stable
