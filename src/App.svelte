@@ -1,5 +1,5 @@
 <script lang="ts">
-    import IframeResizingContainer from './IframeResizingContainer.svelte';
+    import { IframeResizingContainer } from './components';
     import MainViz from './MainViz.svelte';
 
 </script>

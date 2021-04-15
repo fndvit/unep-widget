@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { afterUpdate } from 'svelte';
-    import { throttle } from './util';
+    import { afterUpdate, onDestroy, onMount } from 'svelte';
+    import { throttle } from '../util';
 
     var el: HTMLElement;
 
@@ -38,6 +38,11 @@
     })
 
     document.addEventListener('content-resize', resizeIframe);
+
+    // periodically resize incase content resizes without triggering an event
+    var resizeInterval: number;
+    onMount(() => resizeInterval = window.setInterval(resizeIframe, 1000))
+    onDestroy(() => window.clearInterval(resizeInterval))
 
 </script>
 

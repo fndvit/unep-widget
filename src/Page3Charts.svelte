@@ -51,12 +51,12 @@
     }
 
 
-    :global(.bg--ndc-second2020).bar { width: 100%; }
-    :global(.bg--ndc-first2020).bar { width: 80%; }
-    :global(.bg--ndc-indc).bar { width: 60%; }
-    :global(.bg--ndc-first).bar { width: 40%; }
-    :global(.bg--ndc-no-submission).bar { width: 20%; }
+    .ndc :global(.bg--ndc-second2020).bar { width: 100%; }
+    .ndc :global(.bg--ndc-first2020).bar { width: 80%; }
+    .ndc :global(.bg--ndc-indc).bar { width: 60%; }
+    .ndc :global(.bg--ndc-first).bar { width: 40%; }
+    .ndc :global(.bg--ndc-no-submission).bar { width: 20%; }
 
-    :global(.bg--ndc-unknown).bar  { width: 100%; }
+    .ndc :global(.bg--ndc-unknown).bar  { width: 100%; }
 
 </style>

@@ -1,19 +1,16 @@
 <script lang="ts">
     import type { SvelteComponent } from "svelte";
-    import MainNav from './components/MainNav.svelte';
     import type { MenuOption } from './components/MainNav.svelte';
+
+    import { MainNav, SubNav, ScrollableX, CopyPane, Footer } from './components';
     import svg from './svg';
-    import Footer from './components/Footer.svelte';
     import { copy } from './data';
-    import GhgCartogram, { Datasets } from './maps/GHGCartogram.svelte';
-    import SubNav from './components/SubNav.svelte';
-    import ScrollableX from './components/ScrollableX.svelte';
-    import CopyPane from './components/CopyPane.svelte';
-    import Page1Charts from './Page1Charts.svelte';
+    import { GHGCartogram, NDCCartogram} from './maps';
+    import { Datasets } from './maps/GHGCartogram.svelte';
     import Page2Carto from './Page2Carto.svelte';
+    import Page1Charts from './Page1Charts.svelte';
     import Page3Charts from './Page3Charts.svelte';
     import Page2Charts from './Page2Charts.svelte';
-    import NdcCartogram from './maps/NDCCartogram.svelte';
     import PewSurvey from "./maps/PewSurvey.svelte";
 
     interface Section extends MenuOption {
@@ -64,7 +61,7 @@
         {
             text: "What's happening",
             icon: svg.whatshappening.main,
-            class: "whatshappening",
+            class: "wh",
             bottomComponent: Page2Charts,
             sections: [
                 {
@@ -135,10 +132,14 @@
             <CopyPane {...selectedSection.copy} />
         </div>
 
+        {#if selectedSection.copy['short-summary']}
+            <div class="short-summary">{selectedSection.copy['short-summary']}</div>
+        {/if}
+
         <div class="cartogram-pane">
             {#if selectedPage.text === "State of the climate"}
                 <ScrollableX>
-                    <GhgCartogram dataset={selectedSection.dataset} />
+                    <GHGCartogram dataset={selectedSection.dataset} />
                 </ScrollableX>
             {:else if selectedPage.text === "What's happening"}
                 <ScrollableX>
@@ -146,7 +147,7 @@
                 </ScrollableX>
             {:else if selectedPage.text === "Climate action progress"}
                 {#if selectedSection.text === "NDC submissions"}
-                    <ScrollableX><NdcCartogram /></ScrollableX>
+                    <ScrollableX><NDCCartogram /></ScrollableX>
                 {:else if selectedSection.text === "Public opinion"}
                     <ScrollableX><PewSurvey /></ScrollableX>
                 {/if}
@@ -180,38 +181,6 @@
         margin: auto;
         position: relative;
     }
-
-    @media (min-width: 1400px) {
-        .navcontainer {
-            position: absolute;
-            right: 100%;
-            width: 150px;
-        }
-    }
-
-    /* GHG emission category colours */
-    :global(.stroke--stable) { stroke: #BEC7CD; }
-    :global(.stroke--falling) { stroke: #00AACC; }
-    :global(.stroke--climbing) { stroke: #FDCC4D; }
-    :global(.stroke--climbing-fast) { stroke: #FD7D2E; }
-
-    :global(.bg--stable) { background-color: #BEC7CD; }
-    :global(.bg--falling) { background-color: #00AACC; }
-    :global(.bg--climbing) { background-color: #FDCC4D; }
-    :global(.bg--climbing-fast) { background-color: #FD7D2E; }
-
-    /* NDC category colors */
-    :global(.bg--ndc-first2020) { background-color: #1EA3C7; }
-    :global(.bg--ndc-second2020) { background-color: #33E3FF; }
-    :global(.bg--ndc-first) { background-color: #4A7D94; }
-    :global(.bg--ndc-indc) { background-color: #A3A4A6; }
-    :global(.bg--ndc-nosubmission) { background-color: #D5D7D9; }
-
-    /* colors for testing only */
-    :global(.bg--ndc-nodata) { background-color: purple; }
-    :global(.bg--ndc-unknown) { background-color: red; }
-
-
 
     .top-section {
         display: flex;
@@ -249,6 +218,16 @@
     .cartogram-pane :global(.scrollable-content) {
         flex: 0 0 100%;
         display: flex;
+    }
+
+    .short-summary {
+        display: none;
+        font-size: 16px;
+        line-height: 1.5;
+        font-weight:300;
+        margin: 0;
+        margin-bottom: 10px;
+        padding: 0 10px;
     }
 
     .copy-container {
@@ -352,6 +331,27 @@
 
         :global(.bottom-section .chart-figure) {
             display: none;
+        }
+    }
+
+    @media (max-width: 700px) {
+        .short-summary {
+            display: block;
+        }
+        .content--wh .copy-container :global(h2) {
+            margin-bottom: 10px;
+        }
+        .content--wh .cartogram-pane :global(.aimg .annotation),
+        .content--wh .cartogram-pane :global(.aimg .circle-container) {
+            display: none;
+        }
+    }
+
+    @media (min-width: 1400px) {
+        .navcontainer {
+            position: absolute;
+            right: 100%;
+            width: 150px;
         }
     }
 

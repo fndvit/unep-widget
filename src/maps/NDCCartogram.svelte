@@ -37,6 +37,7 @@
 
         // TODO: fix missing data
         console.log(`Missing NDC data:\n${countries.filter(c => !ndcLookup[c.code]).map(c => c.name).join('\n')}`);
+        console.log(`Not applicable NDCs:\n${ndcData.filter(ndc => ndc.ghg_target === "Not Applicable").map(ndc => ndc.country).join('\n')}`);
 
         getCategory = c => {
             const ndc = ndcLookup[c.code];

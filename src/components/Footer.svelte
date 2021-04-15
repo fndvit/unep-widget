@@ -1,5 +1,6 @@
 <script lang="ts">
     import svgs from '../svg';
+    import {default as meta} from '../data/meta.json';
     import ScrollableX from './ScrollableX.svelte';
     export var currentSection: string;
 
@@ -22,7 +23,9 @@
         <ScrollableX>
             <div class="datasource">
                 <div class="datasource-icon">{@html svgs.dataSource}</div>
-                <span>{@html datasource}</span>
+                <span class="datasource-text">{@html datasource}</span>
+                <span class="version">v{meta.version}</span>
+
             </div>
         </ScrollableX>
     </div>
@@ -31,10 +34,23 @@
 <style>
     footer {
         background: #e6e6e6;
+        position: relative;
     }
     .footer-content {
         max-width: 1100px;
         margin: auto;
+    }
+
+    .version {
+        position: absolute;
+        right: 0;
+        display: block;
+        background: #e6e6e6;
+        z-index: 1;
+        padding-left: 20px;
+        padding-right: 10px;
+        font-size: 10px;
+
     }
 
     .datasource {
@@ -47,7 +63,7 @@
         white-space: nowrap;
     }
 
-    .datasource span {
+    .datasource .datasource-text {
         padding-right: 10px;
     }
 
