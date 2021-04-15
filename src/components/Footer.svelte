@@ -1,5 +1,6 @@
 <script lang="ts">
     import svgs from '../svg';
+    import {default as meta} from '../data/meta.json';
     import ScrollableX from './ScrollableX.svelte';
     export var currentSection: string;
 
@@ -23,7 +24,7 @@
             <div class="datasource">
                 <div class="datasource-icon">{@html svgs.dataSource}</div>
                 <span class="datasource-text">{datasource}</span>
-                <span class="version">v2</span>
+                <span class="version">v{meta.version}</span>
 
             </div>
         </ScrollableX>
