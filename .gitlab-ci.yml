@@ -37,18 +37,19 @@ deploy_to_s3:
     - build_svelte
   script:
     - aws s3 sync public/ s3://${BUCKET_NAME} --acl public-read
+    - aws s3 sync public/build/ s3://${BUCKET_NAME}/public --acl public-read
 
-flushcache:
-  image: docker:stable
-  tags:
-    - unep
-  stage: flushcache
-  dependencies:
-    - deploy_to_s3
-  before_script:
-    - apk add --update curl && rm -rf /var/cache/apk/*
-  script:
-    - |
-      curl --fail --output "/dev/null" --silent --show-error -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache" \
-      -H "Authorization: Bearer $CF_API_TOKEN" -H "Content-Type: application/json" \
-      --data '{"hosts":["climatedashboard.unenvironment.org"]}'
+# flushcache:
+#   image: docker:stable
+#   tags:
+#     - unep
+#   stage: flushcache
+#   dependencies:
+#     - deploy_to_s3
+#   before_script:
+#     - apk add --update curl && rm -rf /var/cache/apk/*
+#   script:
+#     - |
+#       curl --fail --output "/dev/null" --silent --show-error -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache" \
+#       -H "Authorization: Bearer $CF_API_TOKEN" -H "Content-Type: application/json" \
+#       --data '{"hosts":["climatedashboard.unenvironment.org"]}'
