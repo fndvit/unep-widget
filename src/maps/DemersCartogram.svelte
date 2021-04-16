@@ -18,7 +18,7 @@
 
 <script lang="ts">
     import * as d3 from '../d3';
-    import { clamp, createLookup, throttle, trailingDebounce } from '../util';
+    import { clamp, createLookup, displayVal, throttle, trailingDebounce } from '../util';
     import MiniTrendCharts from './MiniTrendCharts.svelte';
     import { MiniLineChart, Annotation } from '../components';
 
@@ -193,11 +193,6 @@
         _debouncedShowHelpText();
     }
 
-    function trendsHoverText(country: CartogramDataPoint): string {
-        let value = Math.round(country.trendsTimeseries[45].value).toLocaleString();
-        return `${value} Mt`
-    }
-
     $: helpCountry = helpText ? cartogramData.find(d => d.code === helpText.code) : null;
 
     $: helpAnnotation = {
@@ -221,6 +216,24 @@
     $: data && fadeInHelpText();
 
     $: showTrendsChart = trendsMode && hoverData && hoveredForX;
+
+    var trendsHoverShow: boolean = false;
+    var trendsHoverData: {x: number, y: number, country: CartogramDataPoint, emissionVal: number}
+    $: {
+        trendsHoverShow = false;
+        if (trendsMode && showTrendsChart && hoverData) {
+            const emissionVal = hoverData.country.trendsTimeseries[hoverData.country.trendsTimeseries.length-1].value;
+            const popupWidth = 200;
+            const popupHeightEst = 140;
+            trendsHoverData = {
+                x: clamp(hoverData.x, 5 + popupWidth/2, targetWidth - (5 + popupWidth/2)), // stop horizontal overflow
+                y: clamp(hoverData.y, 5 + popupHeightEst/2, targetHeight - (5 + popupHeightEst/2)),
+                country: hoverData.country,
+                emissionVal
+            }
+            window.setTimeout(() => trendsHoverShow = true, 0);
+        }
+    }
 
 </script>
 
@@ -270,12 +283,12 @@
     {/if}
 
 
-    {#if trendsMode && showTrendsChart && hoverData}
-    <div class="hover-chart" class:hover-chart--show={hoverData}
-        style="top: {hoverData.y}px; left: {hoverData.x}px;" >
-            <h3>{hoverData.country.name}</h3>
-            <h3 class='light'>{@html trendsHoverText(hoverData.country)}</h3>
-            <MiniLineChart data={hoverData.country.trendsTimeseries} category={hoverData.country.category} />
+    {#if trendsHoverData }
+    <div class="hover-chart" class:hover-chart--show={trendsHoverShow}
+        style="top: {trendsHoverData.y}px; left: {trendsHoverData.x}px;" >
+            <h3>{trendsHoverData.country.name}</h3>
+            <h3 class='light'>{displayVal(trendsHoverData.emissionVal, trendsHoverData.emissionVal < 10 ? 1 : 0)} Mt</h3>
+            <MiniLineChart data={trendsHoverData.country.trendsTimeseries} category={trendsHoverData.country.category} />
     </div>
     {/if}
 </div>
@@ -289,7 +302,7 @@
         position: relative;
     }
 
-    h3 {
+    .hover-chart h3 {
         font-size:18px;
         font-weight: 600;
         padding:0;
@@ -297,17 +310,20 @@
         width: 70%;
         padding-left: 5px;
         padding-top: 2px;
-        margin-bottom: -10px;
         margin-top: 0;
     }
 
-    .light{
+    .hover-chart h3.light{
         font-size:16px;
         font-weight: 300;
         text-align:right;
         right:8px;
         top:8px;
         position:absolute;
+    }
+
+    .hover-chart :global(.chart-container) {
+        margin-top: -10px;
     }
 
     .label {
@@ -404,6 +420,7 @@
     .hover-chart {
         position: absolute;
         width: 200px;
+        box-sizing: border-box;
         pointer-events: none !important;
         cursor: none;
         background: #EAEAEA;
@@ -411,7 +428,7 @@
         box-shadow: 0px 0px 0px 0px #00000018;
         visibility: hidden;
         border: 1px solid #E7E7E7;
-        transform: translate(-50%, -50%) translate(10px, 10px) scale(0.3);
+        transform: translate(-50%, -50%) scale(0.3);
         transform-origin: 50% 50%;
         z-index: 3;
     }
@@ -419,13 +436,12 @@
     .hover-chart--show {
         visibility: visible;
         box-shadow: 0px 0px 15px 0px #00000018;
-        transition: box-shadow 0.1s, transform 0.03s ease-in;
-        transform: translate(-50%, -50%) translate(10px, 10px) scale(1);
+        transition: box-shadow 100ms, transform 20ms ease-in;
+        transform: translate(-50%, -50%) scale(1);
     }
 
     .hover-chart :global(svg) {
-        width: 200px;
-        height: 100px;
+        width: 100%;
     }
 
     .help {
