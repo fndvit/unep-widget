@@ -67,6 +67,10 @@ export function getNDCCategory(ndc: NDCData): string {
         {
             category: 'ndc-first',
             re: /^Only First NDC/
+        },
+        {
+            category: 'ndc-nosubmission',
+            re: /^Nothing submitted/
         }
     ];
     const ndcCategory = ndcCategories.find(d => d.re.test(ndc.latest_submission))
