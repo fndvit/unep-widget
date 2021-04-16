@@ -227,7 +227,7 @@
         font-weight:300;
         margin: 0;
         margin-bottom: 10px;
-        padding: 0 10px;
+        padding: 0 12px;
     }
 
     .copy-container {
