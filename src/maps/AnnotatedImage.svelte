@@ -8,9 +8,8 @@
 </script>
 
 <script lang="ts">
-import { onDestroy } from 'svelte';
-
-    import { clamp } from '../util';
+    import { onDestroy } from 'svelte';
+    import { Annotation } from '../components';
     export var src: string;
     export var alt: string;
     export var title: string;
@@ -23,7 +22,7 @@ import { onDestroy } from 'svelte';
     var srcImgWidth: number;
 
     $: mappedAnnotations = annotations.map(a => {
-        return {text: a.text, x: (a.x/srcImgWidth)*100, y: (a.y/srcImgHeight)*100}
+        return {text: a.text, x: a.x, y: a.y}
     });
 
     $: annotation = mappedAnnotations && mappedAnnotations[0];
@@ -31,7 +30,6 @@ import { onDestroy } from 'svelte';
     function onImgLoad() {
         srcImgHeight = src === 'fire' ? vidEl.videoHeight : imgEl.naturalHeight;
         srcImgWidth = src === 'fire' ? vidEl.videoWidth : imgEl.naturalWidth;
-        imgRatio = srcImgWidth / srcImgHeight;
         startCycling();
         loaded = true;
     }
@@ -55,48 +53,6 @@ import { onDestroy } from 'svelte';
 
     onDestroy(stopCycling);
 
-    const circleRadiusX = 2.2;
-    $: circleRadiusY = circleRadiusX * imgRatio;
-    $: annotateHorizontally = annotation.x > 70 || annotation.x < 30;
-    $: annotateBelow = !annotateHorizontally && annotation.y < 20;
-    $: annotateLeft = annotateHorizontally && annotation.x > 50;
-    $: lineLength = annotateHorizontally ? 5 : 15;
-
-    $: line = annotateHorizontally ?
-        { // horizontal line
-            left: annotateLeft
-                ? annotation.x - lineLength - circleRadiusX
-                : annotation.x + circleRadiusX,
-            top: annotation.y,
-            height: 0,
-            width: lineLength
-        }
-        : { // top side line
-            left: annotation.x,
-            top: annotateBelow
-                ? annotation.y + circleRadiusY
-                : annotation.y - lineLength  - circleRadiusY,
-            height: lineLength,
-            width: 0
-        }
-
-    $: text = annotateHorizontally ?
-    { // horziontal annotation text
-        left: annotateLeft
-            ? line.left
-            : line.left + lineLength,
-        top: clamp(annotation.y, 10, 90),
-        transform: `translateY(-50%) `
-            + (annotateLeft ? 'translateX(-100%)' : '')
-    }
-    : { // top-side text
-        left: annotation.x,
-        top: annotateBelow
-            ? annotation.y + lineLength + circleRadiusY
-            : annotation.y - lineLength - circleRadiusY,
-        transform: "translateX(-35%) " + (annotateBelow ? '' : " translateY(-100%)")
-    }
-
 </script>
 
 <div class="aimg">
@@ -116,19 +72,13 @@ import { onDestroy } from 'svelte';
     {/if}
     {#if loaded}
 
-    <div class="annotation">
-        <div class="text"
-            style="left: {text.left}%; top: {text.top}%; transform: {text.transform};">
-            {annotation.text}
-        </div>
-        <div class="line"
-            style="left: {line.left}%; top: {line.top}%; height: {line.height}%; width: {line.width}%"/>
-    </div>
+    <Annotation canvasWidth={srcImgWidth} canvasHeight={srcImgHeight}
+        radius={0.022 * srcImgWidth} x={annotation.x} y={annotation.y} text={annotation.text} />
 
     {#each mappedAnnotations as a}
         <div class="circle-container" class:selected={a === annotation}
             on:click={() => onClickAnnotation(a)}
-            style="left: {a.x}%; top: {a.y}%;">
+            style="left: {100* a.x/srcImgWidth}%; top: {100 * a.y / srcImgHeight}%;">
             <div class="circle" />
         </div>
 
@@ -166,26 +116,6 @@ import { onDestroy } from 'svelte';
 
     .white {
         color:#FFF;
-    }
-
-    .text {
-        position: absolute;
-        font-size: 13px;
-        line-height: 1.3;
-        width: 250px;
-        text-shadow: 1px 1px 1px #f3f3f3, -1px 1px 1px #f3f3f3, 1px -1px 1px #f3f3f3, -1px -1px 1px #f3f3f3,
-            2px 2px 2px #f3f3f3, -2px 2px 2px #f3f3f3, 2px -2px 2px #f3f3f3, -2px -2px 2px #f3f3f3,
-            3px 3px 2px #f3f3f3, -3px 3px 2px #f3f3f3, 3px -3px 2px #f3f3f3, -3px -3px 2px #f3f3f3,
-            -3px 0 2px #f3f3f3, 3px 0 2px #f3f3f3, 0 -3px 2px #f3f3f3, 0 3px 2px #f3f3f3,
-            -4px 0 2px #f3f3f3, 4px 0 2px #f3f3f3, 0 -4px 2px #f3f3f3, 0 4px 2px #f3f3f3;
-        z-index: 5;
-        pointer-events: none;
-    }
-
-    .line {
-        position: absolute;
-        border-left: 1px solid #222;
-        border-top: 1px solid #222;
     }
 
     .circle-container {

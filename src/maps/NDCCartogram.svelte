@@ -10,7 +10,7 @@
     let loaded: boolean = false;
 
     const helpText = {
-        code: "DEU",
+        code: "BRA",
         text: "Each square represents a country, scaled by its emissions"
     };
 
@@ -49,7 +49,7 @@
         getHoverText = (c: CountryDataPoint) => {
             const ndc = ndcLookup[c.code];
             if (!ndc) return `<b>${c.name}</b><br/>No NDC data`;
-            return `<b>${c.name}</b><br/>${uppercaseFirstLetter(ndc.ghg_target)}`;
+            return `<b>${c.name}</b> ${uppercaseFirstLetter(ndc.ghg_target)}`;
         }
 
         dataset = countries
@@ -102,6 +102,7 @@
 
     .legend-container {
         padding-top: 6px;
+        padding-left: 10px;
     }
 
 </style>

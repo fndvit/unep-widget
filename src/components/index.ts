@@ -1,3 +1,4 @@
+export {default as Annotation} from './Annotation.svelte';
 export {default as ClimateRiskSvg} from './ClimateRiskSvg.svelte';
 export {default as ClimateRiskViz} from './ClimateRiskViz.svelte';
 export {default as CopyPane} from './CopyPane.svelte';
