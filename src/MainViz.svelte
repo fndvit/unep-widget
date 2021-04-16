@@ -314,14 +314,8 @@
         }
     }
 
-
-
     @media (max-width: 600px) {
 
-        /* TODO: tmp disabled annotations for mobile */
-        .cartogram-pane :global(.annotation) {
-            display: none;
-        }
         .copy-container {
             padding-right: 20px;
         }

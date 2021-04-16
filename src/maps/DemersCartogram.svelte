@@ -20,7 +20,7 @@
     import * as d3 from '../d3';
     import { clamp, createLookup, throttle, trailingDebounce } from '../util';
     import MiniTrendCharts from './MiniTrendCharts.svelte';
-    import MiniLineChart from '../components/MiniLineChart.svelte';
+    import { MiniLineChart, Annotation } from '../components';
 
     interface CartogramDataPoint extends CountryDataPoint {
         category: string;
@@ -59,7 +59,7 @@
     var hoverTimeout: number;
     let hoverData: {x: number, y: number, country: CartogramDataPoint} = null;
     var helpTextFade: boolean = false;
-    var annotation: Annotation;
+    var annotation: AnnotationData;
     var hoveredForX: boolean = false;
 
     $: largestVal = Math.max(...data.map(d => d.value));
@@ -73,8 +73,8 @@
         .range([0, targetWidth]);
 
     $: yScale = d3.scaleLinear()
-            .domain([0, domain[1]])
-            .range([0, targetHeight]);
+        .domain([0, domain[1]])
+        .range([0, targetHeight]);
 
     var cartogramData: CartogramDataPoint[];
     $: cartogramData = data.map(d => {
@@ -131,12 +131,14 @@
         return styles.join(';');
     }
 
+    var containerWidth: number;
+    var containerHeight: number;
     function resize() {
         if (containerEl) {
             resizing = true;
             const containerStyle = getComputedStyle(containerEl);
-            const containerWidth = containerEl.clientWidth - parseFloat(containerStyle.paddingLeft) - parseFloat(containerStyle.paddingRight);
-            const containerHeight = containerEl.clientHeight - parseFloat(containerStyle.paddingTop) - parseFloat(containerStyle.paddingBottom);
+            containerWidth = containerEl.clientWidth - parseFloat(containerStyle.paddingLeft) - parseFloat(containerStyle.paddingRight);
+            containerHeight = containerEl.clientHeight - parseFloat(containerStyle.paddingTop) - parseFloat(containerStyle.paddingBottom);
             const scale = Math.min(containerWidth / originalWidth, containerHeight / originalHeight);
             targetWidth = originalWidth * scale;
             targetHeight = originalHeight * scale;
@@ -151,9 +153,10 @@
 
     // ANNOTATIONS....  yea it's pretty complicated... :(
 
-    interface Annotation {
+    interface AnnotationData {
         x: number;
         y: number;
+        radius: number;
         html: string;
         class?: string
     }
@@ -167,7 +170,7 @@
         hoverData = {
             country,
             x: country.left + (country.width / 2),
-            y: country.top - 2
+            y: country.top + (country.height / 2)
         };
         hoverTimeout = window.setTimeout(() => hoveredForX = true, 350);
     }
@@ -198,8 +201,9 @@
     $: helpCountry = helpText ? cartogramData.find(d => d.code === helpText.code) : null;
 
     $: helpAnnotation = {
-        x: helpCountry.left - 1 + helpCountry.width/2,
-        y: helpCountry.top - 2,
+        x: helpCountry.left + helpCountry.width/2,
+        y: helpCountry.top + helpCountry.height/2,
+        radius: 2 + helpCountry.width / 2,
         html: helpText.text,
         class: 'help'
     };
@@ -207,6 +211,7 @@
     $: countryAnnotation = hoverTextFn && hoverData && !trendsMode && {
         x: hoverData.x,
         y: hoverData.y,
+        radius: 2 + hoverData.country.width / 2,
         html: hoverTextFn(hoverData.country)
     }
     $: annotation = countryAnnotation || helpAnnotation;
@@ -255,16 +260,13 @@
     {/if}
 
     {#if annotation}
-    <div class="annotation annotation-{annotation.class || 'default'}" class:annotation-hide={hideAnnotation}>
-        <div class="annotation-text" style="left: {clamp(annotation.x - 60, 0, targetWidth - 220)}px;">
-            <span class="annotation-textspan">
-                {@html annotation.html}
-            </span>
+        <div class="annotation-container"
+            class:annotation-hide={hideAnnotation} class:annotation-help={annotation.class === "help"}
+        >
+            <Annotation x={annotation.x} y={annotation.y} text={annotation.html}
+                radius={annotation.radius} forceTopWherePossible
+                canvasWidth={containerWidth} canvasHeight={containerHeight} />
         </div>
-        <div class="annotation-line"
-            style="left: {annotation.x}px; height: {annotation.y}px;">
-        </div>
-    </div>
     {/if}
 
 
@@ -284,6 +286,7 @@
         height: 100%;
         width: 100%;
         display: flex;
+        position: relative;
     }
 
     h3 {
@@ -381,7 +384,9 @@
         position: absolute;
         top: 50%;
         left: 0;
-        width: 100%;
+        right: 0;
+        width: min(100%, 50px);
+        margin: auto;
         transform: translateY(-50%);
         text-align: center;
     }
@@ -416,7 +421,6 @@
         box-shadow: 0px 0px 15px 0px #00000018;
         transition: box-shadow 0.1s, transform 0.03s ease-in;
         transform: translate(-50%, -50%) translate(10px, 10px) scale(1);
-
     }
 
     .hover-chart :global(svg) {
@@ -448,62 +452,14 @@
         border-left: 1px solid #dfdfdf;
     }
 
-    .annotation-text {
-        position: absolute;
-        font-size: 14px;
-        line-height: 20px;
-        width: 220px;
-        padding-bottom: 5px;
-        z-index: 6;
-        top: -35px;
-        box-sizing: border-box;
-    }
-
-
-    .annotation-text:before {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 0;
-        bottom: 9px;
-        top: 9px;
-        width: 10px;
-        background: #f3f3f3;
-        box-shadow: -3px 0 2px 2px #f3f3f3;
-        border-radius: 2px;
-    }
-
-    .annotation-textspan {
-        position: relative;
-        border-radius: 2px;
-        background: #f3f3f3;
-        box-shadow: -2px 0 2px 2px #f3f3f3, 3px 0 2px 2px #f3f3f3;
-        box-decoration-break: clone;
-        -webkit-box-decoration-break: clone;
-    }
-
-    .annotation-textspan > :global(span) {
-        white-space: nowrap;
-    }
-
-    .annotation-text :global(sub) {
-        margin-bottom: -0.2em;
-        display: inline-block;
-        font-size: 10px;
-    }
-
-
-    .annotation-line {
-        position: absolute;
-        top: 0;
-        z-index: 5;
-        border-left: 1px solid #bbbbbb;
-    }
-
-    .annotation {
+    .annotation-container {
         opacity: 1;
         pointer-events: none;
     }
+    .annotation-help :global(.text) {
+        font-size: 14px;
+    }
+
     .annotation-help {
         transition: opacity 500ms;
     }
@@ -511,6 +467,10 @@
     .annotation-hide {
         opacity: 0;
         transition: opacity 0s;
+    }
+
+    .annotation-container :global(.line) {
+        border-color :#bbbbbb !important;
     }
 
 </style>

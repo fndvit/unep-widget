@@ -32,7 +32,7 @@
             nodeSize: 80,
             domain: [740, 420],
             helpText: {
-                code: "DEU",
+                code: "BRA",
                 text: "Each square represents a country, scaled by its emissions"
             },
             hoverTextFn: (c: CountryDataPoint) => `<b>${c.name}</b> emitted ${displayVal(c.value, 0)} million tonnes of GHG in ${endYear}`
@@ -41,7 +41,7 @@
             nodeSize: 38,
             domain: [740, 420],
             helpText: {
-                code: "RUS",
+                code: "CAN",
                 text: "Each square represents a country, scaled by its per capita emissions"
             },
             hoverTextFn: (c: CountryDataPoint) => `<b>${c.name}</b> emitted ${displayVal(c.value, 1)} million tonnes of GHG per capita in ${endYear}`
@@ -146,6 +146,14 @@
         .legend-container {
             padding-left: 10px;
         }
+    }
+
+    .cartogram-container :global(.annotation-text) {
+        top: 5px !important;
+    }
+
+    .cartogram-container {
+        position: relative;
     }
 
 </style>
