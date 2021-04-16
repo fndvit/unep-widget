@@ -102,6 +102,7 @@
 
     .legend-container {
         padding-top: 6px;
+        padding-left: 10px;
     }
 
 </style>
