@@ -32,7 +32,7 @@
                 },
                 {
                     text: "The northernmost inhabited Arctic town, Longyearbyen on the Norwegian archipelago of Svalbard, saw a new record temperature of 21.7°C on 25 July 2020, compared to July average of 5.9°C, according to Norway's national meteorological service.",
-                    x: 439, y: 15
+                    x: 439, y: 20
                 }
             ]
         },
