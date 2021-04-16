@@ -14,6 +14,8 @@ cache:
 
 build_svelte:
   stage: build
+  artifacts:
+    untracked: true
   tags:
     - unep
   script:
@@ -37,7 +39,6 @@ deploy_to_s3:
     - build_svelte
   script:
     - aws s3 sync public/ s3://${BUCKET_NAME} --acl public-read
-    - aws s3 sync public/build/ s3://${BUCKET_NAME}/build --acl public-read
 
 # flushcache:
 #   image: docker:stable
