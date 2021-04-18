@@ -1,0 +1,14 @@
+on:
+  push:
+    branches:
+      - main
+jobs:
+  curl:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Trigger Gitlab mirror via curl
+      run: |
+        curl --request POST \
+        --url https://gitlab.com/api/v4/projects/25886567/mirror/pull \
+        --header 'PRIVATE-TOKEN: JchN3sH-AYTFPsGQ6C39' \
+        --fail

@@ -8,7 +8,12 @@
 
     onMount(async () => {
         const ndcData = await ndc;
-        ndcs = getXRandom(ndcData, 4);
+        const usableNdcs = ndcData.filter(ndc => {
+            return ndc.ghg_target
+                && ndc.ghg_target !== "Not Applicable"
+                && ndc.ghg_target !== "No data";
+        })
+        ndcs = getXRandom(usableNdcs, 4);
     })
 
     function getCountryName(code: string) {

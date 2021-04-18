@@ -14,7 +14,7 @@
     const chartHeight = 100;
     const width = chartWidth;
     const height = chartHeight + topPadding;
-    const axisHeight = 5;
+    const axisHeight = 25;
     let hoverInfo: { data: YearlyTimeseriesDatum, x: number, y: number, valStr: string };
 
     const x = d3.scaleLinear()
@@ -43,7 +43,7 @@
 </script>
 
 <div class="chart-container">
-    <svg width={width} height={height} viewBox="0 0 {width} {height + axisHeight}">
+    <svg viewBox="0 0 {width} {height + axisHeight}">
 
         <g class="x-axis" transform="translate(0, {y(0) + topPadding})">
             <line class="x-axis-line" x1={x(startYear)} x2={x(endYear)} y1="0" y2="0" />
@@ -79,6 +79,10 @@
 </div>
 
 <style>
+    svg {
+        display: block;
+    }
+
     .mouse-rect {
         fill: transparent;
         cursor: none;
