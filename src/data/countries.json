@@ -148,8 +148,8 @@
     },
     {
         "code": "CZE",
-        "name": "Czech Republic",
-        "short": "Cz. Rep.",
+        "name": "Czechia",
+        "short": "Czechia",
         "trends": {
             "x": 536.4,
             "y": 178.6
@@ -431,8 +431,8 @@
     },
     {
         "code": "KOR",
-        "name": "Korea, Rep.",
-        "short": "S. Kor.",
+        "name": "Rep. of Korea",
+        "short": "Rep. of Korea",
         "trends": {
             "x": 994.7,
             "y": 319.6
@@ -595,8 +595,8 @@
     },
     {
         "code": "RUS",
-        "name": "Russia",
-        "short": "Russia",
+        "name": "Russian Fed.",
+        "short": "Russian Fed.",
         "trends": {
             "x": 889,
             "y": 213.8
@@ -629,8 +629,8 @@
     },
     {
         "code": "SVK",
-        "name": "Slovak Republic",
-        "short": "Slo. Rep.",
+        "name": "Slovakia",
+        "short": "Slovak.",
         "trends": {
             "x": 571.6,
             "y": 178.6
@@ -697,8 +697,8 @@
     },
     {
         "code": "USA",
-        "name": "United States",
-        "short": "United States",
+        "name": "United States of America",
+        "short": "United States of America",
         "trends": {
             "x": 78,
             "y": 143.3
@@ -927,7 +927,7 @@
     },
     {
         "code": "BHS",
-        "name": "Bahamas, The",
+        "name": "Bahamas",
         "short": "Bah.",
         "trends": {
             "x": 148.5,
@@ -1056,7 +1056,7 @@
     },
     {
         "code": "CAF",
-        "name": "Central African Republic",
+        "name": "Central African Rep.",
         "short": "C.A.F.",
         "trends": {
             "x": 607.1,
@@ -1141,7 +1141,7 @@
     },
     {
         "code": "COD",
-        "name": "Congo, Dem. Rep.",
+        "name": "Dem. Rep. of the Congo",
         "short": "D.R.C.",
         "trends": {
             "x": 571.9,
@@ -1152,7 +1152,7 @@
     },
     {
         "code": "COG",
-        "name": "Congo, Rep.",
+        "name": "Congo",
         "short": "Congo",
         "trends": {
             "x": 536.6,
@@ -1315,7 +1315,7 @@
     },
     {
         "code": "EGY",
-        "name": "Egypt, Arab Rep.",
+        "name": "Egypt",
         "short": "Egy.",
         "trends": {
             "x": 606.8,
@@ -1371,7 +1371,7 @@
     },
     {
         "code": "FSM",
-        "name": "Micronesia, Fed. Sts.",
+        "name": "Fed. States of Micronesia",
         "short": "Micr.",
         "trends": {
             "x": 1135.8,
@@ -1450,7 +1450,7 @@
     },
     {
         "code": "GMB",
-        "name": "Gambia, The",
+        "name": "Gambia",
         "short": "Gamb.",
         "trends": {
             "x": 430.7,
@@ -1570,7 +1570,7 @@
     },
     {
         "code": "IRN",
-        "name": "Iran, Islamic Rep.",
+        "name": "Islamic Rep. of Iran",
         "short": "Iran",
         "trends": {
             "x": 783.2,
@@ -1689,7 +1689,7 @@
     },
     {
         "code": "KGZ",
-        "name": "Kyrgyz Republic",
+        "name": "Kyrgyzstan",
         "short": "Kyr.",
         "trends": {
             "x": 853.7,
@@ -1762,7 +1762,7 @@
     },
     {
         "code": "LAO",
-        "name": "Lao PDR",
+        "name": "Lao People's Dem. Rep.",
         "short": "Laos",
         "trends": {
             "x": 994.7,
@@ -1904,7 +1904,7 @@
     },
     {
         "code": "MDA",
-        "name": "Moldova",
+        "name": "Rep. of Moldova",
         "short": "Mold.",
         "trends": {
             "x": 642.2,
@@ -1960,7 +1960,7 @@
     },
     {
         "code": "MKD",
-        "name": "Macedonia, FYR",
+        "name": "North Macedonia",
         "short": "Mac.",
         "trends": {
             "x": 606.9,
@@ -2355,7 +2355,7 @@
     },
     {
         "code": "PRK",
-        "name": "Korea, Dem. People’s Rep.",
+        "name": "Dem. People’s Rep. of Korea",
         "short": "N. Kor.",
         "trends": {
             "x": 994.7,
@@ -2569,7 +2569,7 @@
     {
         "code": "SWZ",
         "name": "Eswatini",
-        "short": "Swazi.",
+        "short": "Eswatini",
         "trends": {
             "x": 607.1,
             "y": 636.9
@@ -2579,7 +2579,7 @@
     },
     {
         "code": "SYR",
-        "name": "Syrian Arab Republic",
+        "name": "Syrian Arab Rep.",
         "short": "Syr.",
         "trends": {
             "x": 712.7,
@@ -2756,7 +2756,7 @@
     },
     {
         "code": "TZA",
-        "name": "Tanzania",
+        "name": "United Rep. of Tanzania",
         "short": "Tanz.",
         "trends": {
             "x": 677.5,
@@ -2852,7 +2852,7 @@
     },
     {
         "code": "VEN",
-        "name": "Venezuela, RB",
+        "name": "Venezuela",
         "short": "Ven.",
         "trends": {
             "x": 219.1,
@@ -2916,7 +2916,7 @@
     },
     {
         "code": "YEM",
-        "name": "Yemen, Rep.",
+        "name": "Yemen",
         "short": "Yemen",
         "trends": {
             "x": 712.7,

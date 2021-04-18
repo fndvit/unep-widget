@@ -34,14 +34,25 @@
             width: container.getBoundingClientRect().width,
             height: container.getBoundingClientRect().height
         }
-        selectedCountry = selection;
 
-        if (pos.x > (offset.width - 200)) {
-            detailChartPosition = {x: offset.width - 200, y: pos.y}
-        } else {
-            detailChartPosition = pos
+        selectedCountry = selection;
+        hover = true;
+
+        detailChartPosition = pos
+
+        if (pos.x > offset.width - 200) {
+            detailChartPosition.x = offset.width - 200
+        } 
+        if (pos.y > offset.height - 150) {
+            detailChartPosition.y = offset.height - 150
+        } 
+        if (pos.x < 100) {
+            detailChartPosition.x = 100
+        } 
+        
+        if (pos.y < 50) {
+            detailChartPosition.y = 50
         }
-        hover = true
         
     }
 </script>
@@ -82,7 +93,7 @@
         padding-bottom: 20px;
         flex: 0 0 100%;
         text-align: left;
-        padding-left: 20px;
+        padding-left: 12px;
         margin-top:30px;
     }
 

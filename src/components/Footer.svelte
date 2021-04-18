@@ -55,10 +55,10 @@
 
     .datasource {
         height: 50px;
-        font-size: 14px;
+        font-size: 16px;
         display: flex;
         align-items: center;
-        color: #666666;
+        color: #505050;
         font-weight: 300;
         white-space: nowrap;
     }
@@ -80,7 +80,8 @@
     @media (max-width: 700px) {
         .datasource {
             height: 40px;
-            font-size: 12px;
+            font-size: 14px;
+            color:#333;
         }
 
         .datasource-icon {

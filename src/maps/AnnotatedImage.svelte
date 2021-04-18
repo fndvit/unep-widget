@@ -148,4 +148,20 @@
         transform: scale(1);
     }
 
+    @media (max-width: 900px) {
+        .title {
+            position: absolute;
+            top:11rem;
+            left:12px;
+            max-width: 180px;
+            font-size: 14px;
+            line-height: 1.3;
+            color:#505050;
+        }
+
+        .white {
+            color:#505050;
+        }
+    }
+
 </style>

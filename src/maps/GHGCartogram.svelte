@@ -79,16 +79,16 @@
         const trendsTimeseriesLookup = createLookup(trendsTimeseriesData, d => d.code, d => d.data);
         getCategory = c => getGHGCategory(trendsTimeseriesLookup[c.code]);
 
-        countries.forEach(d => {
-            if (!ghgDataLookup[d.code]) console.warn(`Missing GHG data for ${d.name} (${d.code})`);
-            if (!percapitaDataLookup[d.code]) console.warn(`Missing per capita data for ${d.name} (${d.code})`);
-        })
+        // countries.forEach(d => {
+        //     if (!ghgDataLookup[d.code]) console.warn(`Missing GHG data for ${d.name} (${d.code})`);
+        //     if (!percapitaDataLookup[d.code]) console.warn(`Missing per capita data for ${d.name} (${d.code})`);
+        // })
 
         datasets = {
             [Datasets.GHGTotal]: countries
                 .filter(d => ghgDataLookup[d.code]) // TODO: hack while we have inconsistent/mock data
                 .map(d => {
-                    console.log(d.code, ghgDataLookup[d.code].emissions[`${endYear}`])
+                    // console.log(d.code, ghgDataLookup[d.code].emissions[`${endYear}`])
                     return {
                         ...d, ...d.total,
                         value: ghgDataLookup[d.code].emissions[`${endYear}`]
