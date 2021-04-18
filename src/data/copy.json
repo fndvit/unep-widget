@@ -103,8 +103,8 @@
     "fire": {
       "menu-label": "",
       "title": "Wildfires raise spectre of terrifying new normal in hotter world",
-      "summary": "Huge wildfires in Australia, the Amazon, California, the Congo basin and even in the Arctic are sobering reminders of the human, economic and environmental costs of climate change. Record temperatures, heatwaves and droughts help spark wildfires. The global average temperature is now around 1.1°C higher than at the beginning of last century, meaning wildfires and megafires could become a new normal in some countries.",
-      "short-summary": "Wildfires in Australia, the Amazon, California, or the Congo basin are sobering reminders of costs of climate change.",
+      "summary": "Huge wildfires in Australia, the Amazon, California, the Congo basin and even in the Arctic are sobering reminders of the human, economic and environmental costs of the climate emergency. Record temperatures, heatwaves and droughts help spark wildfires. The global average temperature is now around 1.1°C higher than at the beginning of last century, meaning wildfires and megafires could become a new normal in some countries.",
+      "short-summary": "Wildfires in Australia, the Amazon, California, or the Congo basin are sobering reminders of costs of the climate emergency.",
       "annotation": [
         {
           "text": "In (country), wildfires typically strike in (months/season). In (recent year), wildfires (insert consequences in terms of lives lost, acreage lost, species lost).",
@@ -174,7 +174,7 @@
     "public": {
       "menu-label": "",
       "title": "Public awareness and concern must catalyze political action",
-      "summary": "Public concern over climate change is rising. In a survey of 26 nations in 2018, the Pew Research Center found that people broadly agree that climate change poses a severe risk to their countries, with populations in 13 nations seeing climate change as the top international threat. However, so far this awareness has not translated into sustained political action on a global scale. This must change."
+      "summary": "Public concern over the climate emergency is rising. In a survey of 26 nations in 2018, the Pew Research Center found that people broadly agree that climate change poses a severe risk to their countries, with populations in 13 nations seeing climate change as the top international threat. However, so far this awareness has not translated into sustained political action on a global scale. This must change."
     },
     "country-ndcs": "Lorem ipsum",
     "country-public": "Lorem ipsum"

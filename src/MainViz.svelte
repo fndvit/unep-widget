@@ -35,7 +35,7 @@
             text: "State of the climate",
             icon: svg.stateoftheclimate.main,
             class: "sotc",
-            bottomSectionTitle: "Top emitters and country trends since 1990",
+            bottomSectionTitle: "Country trends since 1990",
             bottomComponent: Page1Charts,
             sections: [
                 {

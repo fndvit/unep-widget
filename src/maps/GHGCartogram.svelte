@@ -44,7 +44,7 @@
                 code: "CAN",
                 text: "Each square represents a country, scaled by its per capita emissions"
             },
-            hoverTextFn: (c: CountryDataPoint) => `<b>${c.name}</b> emitted ${displayVal(c.value, 1)} million tonnes of GHG per capita in ${endYear}`
+            hoverTextFn: (c: CountryDataPoint) => `<b>${c.name}</b> emitted ${displayVal(c.value, 1)} tonnes of GHG per capita in ${endYear}`
         },
         [Datasets.GHGTrends]: {
             nodeSize: 16,
