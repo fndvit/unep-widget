@@ -30,7 +30,7 @@
     const datasetParams = {
         [Datasets.GHGTotal]: {
             nodeSize: 80,
-            domain: [740, 420],
+            domain: [740, 320],
             helpText: {
                 code: "BRA",
                 text: "Each square represents a country, scaled by its emissions"
@@ -39,7 +39,7 @@
         },
         [Datasets.GHGPerCapita]: {
             nodeSize: 38,
-            domain: [740, 420],
+            domain: [740, 320],
             helpText: {
                 code: "CAN",
                 text: "Each square represents a country, scaled by its per capita emissions"
@@ -48,7 +48,7 @@
         },
         [Datasets.GHGTrends]: {
             nodeSize: 16,
-            domain: [1350, 1350 / (740/435)],
+            domain: [1300, 1300 / (740/320)],
             helpText: {
                 code: "UZB",
                 text: "Each tile represents individual country trends in greenhouse gas emissions"

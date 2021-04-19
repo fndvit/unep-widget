@@ -229,8 +229,8 @@
     }
 
     .copy-container {
-        width: 450px;
         display: flex;
+        flex: 0 0 450px;
         padding-left: 12px;
         box-sizing: border-box;
     }
@@ -269,16 +269,17 @@
         padding-bottom: 20px;
     }
 
-    @media (min-width: 1300px) {
-        .cartogram-pane {
+    @media (max-width: 1100px) {
+        .copy-container {
             /* right-side overflow to enlarge cartogram when we have space */
-            margin-right: -100px;
+            /* margin-right: -100px; */
+            flex: 1 1 450px;
         }
     }
 
     @media (max-width: 1400px) {
         .top-section {
-            height: 360px;
+            height: 400px;
         }
         .chart-container :global(.chart-summary) {
             font-size: 14px;

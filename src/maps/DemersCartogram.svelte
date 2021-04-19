@@ -49,8 +49,8 @@
     const trendsTimeseriesLookup = createLookup(trendsTimeseriesData, d => d.code, d => d.data)
 
     // used to scale to container el
-    const originalWidth = 700;
-    const originalHeight = 400;
+    const originalWidth = domain[0];
+    const originalHeight = domain[1];
     var targetWidth: number = originalWidth;
     var targetHeight: number = originalHeight;
     var resizing: boolean = false;

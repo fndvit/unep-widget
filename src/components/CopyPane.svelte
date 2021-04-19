@@ -47,13 +47,6 @@
         margin-top: 20px;
     }
 
-    @media (max-width: 1000px) {
-        h2 {
-            font-size: 22px;
-            line-height: 28px;
-        }
-    }
-
     p {
         font-size: 18px;
         line-height: 1.5;
@@ -61,7 +54,11 @@
         font-weight:300;
     }
 
-    @media (max-width: 1000px) {
+    @media (max-width: 1100px) {
+        h2 {
+            font-size: 22px;
+            line-height: 28px;
+        }
         p {
             font-size: 16px;
             line-height: 1.5;
