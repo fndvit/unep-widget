@@ -50,6 +50,7 @@ export const ndc = getMockData<NDCDataRaw[]>('ndc')
         return data.map(ndc => {
             const processedData: NDCData = {
                 ...ndc,
+                ghg_target: ndc.ghg_target === 'Not Applicable' ? 'No GHG target' : ndc.ghg_target,
                 category: getNDCCategory(ndc)
             }
             return processedData;

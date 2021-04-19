@@ -10,7 +10,7 @@
         const ndcData = await ndc;
         const usableNdcs = ndcData.filter(ndc => {
             return ndc.ghg_target
-                && ndc.ghg_target !== "Not Applicable"
+                && ndc.ghg_target !== "No GHG target"
                 && ndc.ghg_target !== "No data";
         })
         ndcs = getXRandom(usableNdcs, 4);
