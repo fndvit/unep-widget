@@ -1937,6 +1937,17 @@
         }
     },
     {
+        "code": "SYC",
+        "name": "Seychelles",
+        "short": "Seych.",
+        "trends": {
+            "x": 748,
+            "y": 521.7
+        },
+        "percapita": null,
+        "total": null
+    },
+    {
         "code": "MDV",
         "name": "Maldives",
         "short": "Mald.",

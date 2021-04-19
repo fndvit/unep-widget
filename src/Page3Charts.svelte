@@ -21,15 +21,27 @@
         return baseData ? baseData.name : code;
     }
 
+    function capitalizeSentence(sentence: string) {
+        return sentence.charAt(0).toUpperCase() + sentence.slice(1)
+    }
 
+    function translateSubmission(sentence: string) {
+        if (sentence === 'Only INDC') {
+            return 'Only the Intended NDC (INDC)';
+        } else {
+            return sentence;
+        } 
+    }
 
 </script>
 
 {#if ndcs}
-    {#each ndcs as ndc}
+    {#each ndcs as ndc,i}
     <div class="ndc">
         <div class="bar bg--{getNDCCategory(ndc)}"></div>
-        <b>{getCountryName(ndc.iso)}</b> {ndc.ghg_target}
+        <p><b>{getCountryName(ndc.iso)}</b></p>
+        <p class='label'>{ i > 0 ? '' : 'Latest submission:'} {translateSubmission(ndc.latest_submission)}</p>
+        <p>{capitalizeSentence(ndc.ghg_target)}</p>
     </div>
     {/each}
 {/if}
@@ -55,13 +67,25 @@
         margin-bottom: 10px;
     }
 
+    .label {
+        color: #808080;
+        font-size:14px;
+        font-weight: 400;
+        padding-bottom:12px;
+    }
 
-    .ndc :global(.bg--ndc-second2020).bar { width: 100%; }
-    .ndc :global(.bg--ndc-first2020).bar { width: 80%; }
-    .ndc :global(.bg--ndc-indc).bar { width: 60%; }
-    .ndc :global(.bg--ndc-first).bar { width: 40%; }
-    .ndc :global(.bg--ndc-no-submission).bar { width: 20%; }
+    p {
+        margin:0;
+        padding:0;
+    }
 
-    .ndc :global(.bg--ndc-unknown).bar  { width: 100%; }
+
+    .ndc :global(.bg--ndc-second2020).bar { width: 90%; }
+    .ndc :global(.bg--ndc-first2020).bar { width: 60%; }
+    .ndc :global(.bg--ndc-indc).bar { width: 15%; } 
+    .ndc :global(.bg--ndc-first).bar { width: 30%; }
+    .ndc :global(.bg--ndc-no-submission).bar { width: 5%; }
+
+    .ndc :global(.bg--ndc-unknown).bar  { width: 5%; }
 
 </style>

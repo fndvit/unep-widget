@@ -46,12 +46,12 @@
         if (pos.y > offset.height - 150) {
             detailChartPosition.y = offset.height - 150
         } 
-        if (pos.x < 100) {
-            detailChartPosition.x = 100
+        if (pos.x < 92) {
+            detailChartPosition.x = 92
         } 
         
-        if (pos.y < 50) {
-            detailChartPosition.y = 50
+        if (pos.y < 32) {
+            detailChartPosition.y = 32
         }
         
     }
@@ -170,6 +170,9 @@
     @media (max-width: 900px) {
         .label {
             font-size: 11px;
+        }
+        .charts-container {
+            margin-top:0;
         }
     }
 </style>
