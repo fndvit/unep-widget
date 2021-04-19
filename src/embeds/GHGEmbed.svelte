@@ -24,6 +24,7 @@
             <div class="legend-container">
                 <CartogramLegend categories={legend}/>
             </div>
+
             <div class="cartogram-pane">
                 <ScrollableX>
                     <div class="cartogram-aspect"></div>
@@ -31,9 +32,12 @@
                 </ScrollableX>
             </div>
 
-            <div class="logo-copy">
+            <div class="logo">
                 <div class="unep-logo">{@html unepLogo}</div>
-                <p class="copy">To expore more about the state of the climate and the effects on the planet visit <a href="https://www.unep.org/">unep.org</a></p>
+                <div class="copy">
+                    <p>To explore more about the climate emergency and the effects on the planet visit <b><a href="https://www.unep.org/">unep.org</a></b></p>
+                    <p class="disclaimer">The boundaries and names shown, and the designations used on this map do not imply official endorsement or acceptance by the United Nations.</p>
+                </div>
             </div>
 
         </div>
@@ -67,6 +71,17 @@
     .copy {
         font-size: 18px;
         line-height: 1.5;
+        font-weight: 300;
+    }
+
+    p {
+        margin-top:0;
+    }
+
+    .disclaimer {
+        font-size: 14px;
+        line-height: 1.4;
+        color:#808080;
     }
 
     h1 {
@@ -91,18 +106,18 @@
     .cartogram-aspect {
         padding-bottom: calc(57.15%); /* 700/400 aspect */
         width: 100%;
-        min-width: 800px;
+        min-width: 660px;
     }
 
     .unep-logo {
-        width: 100px;
+        width: 72px;
         margin-right: 20px;
         flex: 0 0 100px;
     }
 
-    .logo-copy {
+    .logo {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
     }
 
     .cartogram-pane :global(.scrollable) {
@@ -116,20 +131,35 @@
 
 
     @media (min-width: 800px) {
+        
         .cartogram-pane {
-            margin-left: 200px;
+            margin-left: 25%;
         }
         .copy {
             position: absolute;
             top: 30px;
             left: 0;
-            width: 200px;
+            width: 20%;
+            min-width: 180px;
+        }
+
+        .cartogram-aspect {
+            min-width: 600px;
+        }
+
+        p {
+            margin-top:10px;
+        }
+
+        .container {
+            padding: 20px 12px 0;
         }
 
         .unep-logo {
             position: absolute;
-            bottom: 20px;
+            bottom: 10px;
             left: 0;
+            width: 90px;
         }
 
     }
@@ -137,6 +167,26 @@
     @media (max-width: 600px) {
         .copy {
             font-size: 14px;
+        }
+        .container {
+            padding: 20px 12px 0;
+        }
+    }
+
+    @media (min-width: 960px) {
+
+        .cartogram-aspect {
+            min-width: 700px;
+        }
+    }
+
+    @media (min-width: 1100px) {
+        .content, h1 {
+            margin-left:12px;
+        }
+
+        .cartogram-aspect {
+            min-width: 795px;
         }
     }
 
