@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-    export interface ImageAnnotation {
+    export interface MediaAnnotation {
         text: string;
         x: number;
         y: number;
@@ -11,12 +11,13 @@
     import { onDestroy } from 'svelte';
     import { Annotation } from '../components';
     export var src: string;
+    export var poster: string = null;
     export var alt: string;
-    export var title: string;
-    export var annotations: ImageAnnotation[];
+    export var video: boolean = false;
+    export var annotations: MediaAnnotation[];
+    export var onChangeAnnotation: (a: MediaAnnotation) => void = () => null;
     var imgEl: HTMLImageElement;
     var vidEl: HTMLVideoElement;
-    var imgRatio: number;
     var loaded: boolean = false;
     var srcImgHeight: number;
     var srcImgWidth: number;
@@ -27,9 +28,12 @@
 
     $: annotation = mappedAnnotations && mappedAnnotations[0];
 
+    $: selectedIndex = mappedAnnotations.indexOf(annotation);
+    $: onChangeAnnotation(annotations[selectedIndex]);
+
     function onImgLoad() {
-        srcImgHeight = src === 'fire' ? vidEl.videoHeight : imgEl.naturalHeight;
-        srcImgWidth = src === 'fire' ? vidEl.videoWidth : imgEl.naturalWidth;
+        srcImgHeight = video ? vidEl.videoHeight : imgEl.naturalHeight;
+        srcImgWidth = video ? vidEl.videoWidth : imgEl.naturalWidth;
         startCycling();
         loaded = true;
     }
@@ -46,7 +50,7 @@
         stopCycling = () => window.clearInterval(interval);
     }
 
-    function onClickAnnotation(a: ImageAnnotation) {
+    function onClickAnnotation(a: MediaAnnotation) {
         annotation = a;
         stopCycling();
     }
@@ -56,10 +60,11 @@
 </script>
 
 <div class="aimg">
-  {#if src === 'fire'}
+  {#if video}
     <video
-        src='{src}.mp4'
-        poster='{src}.png'
+        class="aimg-media"
+        src='{src}'
+        poster='{poster}'
         muted
         autoplay
         loop
@@ -68,7 +73,7 @@
         <track kind="captions">
     </video>
     {:else}
-    <img src='{src}.jpg' {alt} on:load={onImgLoad} bind:this={imgEl}/>
+    <img class="aimg-media" src='{src}' {alt} on:load={onImgLoad} bind:this={imgEl}/>
     {/if}
     {#if loaded}
 
@@ -85,10 +90,6 @@
     {/each}
 
     {/if}
-
-    <div class="title {src === 'ocean' ? 'white' : ''}">
-        <p>{@html title}</p>
-    </div>
 </div>
 
 <style>
@@ -96,26 +97,17 @@
     .aimg {
         position: relative;
         height: fit-content;
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
     }
 
-    .aimg img, .aimg video {
-        width: 100%;
+    .aimg-media {
+        max-width: 100%;
+        flex-grow: 0;
         object-fit: contain;
-        display: block;
-    }
-
-    .title {
-        position: absolute;
-        top:8.5rem;
-        left:2rem;
-        max-width: 120px;
-        font-size: 14px;
-        line-height: 1.3;
-        color:#808080;
-    }
-
-    .white {
-        color:#FFF;
     }
 
     .circle-container {
@@ -146,22 +138,6 @@
 
     .circle-container.selected .circle {
         transform: scale(1);
-    }
-
-    @media (max-width: 900px) {
-        .title {
-            position: absolute;
-            top:11rem;
-            left:12px;
-            max-width: 180px;
-            font-size: 14px;
-            line-height: 1.3;
-            color:#505050;
-        }
-
-        .white {
-            color:#505050;
-        }
     }
 
 </style>
