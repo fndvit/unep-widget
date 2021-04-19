@@ -44,9 +44,20 @@ export const ghg = getMockData<GHGDataRaw[]>('ghg')
         });
     });
 
+
+export const ndc = getMockData<NDCDataRaw[]>('ndc')
+    .then(data => {
+        return data.map(ndc => {
+            const processedData: NDCData = {
+                ...ndc,
+                category: getNDCCategory(ndc)
+            }
+            return processedData;
+        })
+    })
+
 export const percapita = getMockData<PerCapitaData[]>('percapita');
 export const cri = getMockData<CRIData[]>('cri');
-export const ndc = getMockData<NDCData[]>('ndc');
 export const globalEmissions = getMockData<EmissionsData>('globalEmissions');
 export const pew = getMockData<PewData[]>('pew');
 
@@ -60,8 +71,7 @@ function getGHGCategory(data: YearlyTimeseriesDatum[]) {
     else return 'climbing-fast';
 }
 
-export function getNDCCategory(ndc: NDCData): string {
-
+function getNDCCategory(ndc: NDCDataRaw): string {
     const ndcCategories: {category: string, re: RegExp}[] = [
         {
             category: 'ndc-first2020',
@@ -126,12 +136,16 @@ export interface CRIData {
     losses_per_unit_gdp_percentage: number
 }
 
-export interface NDCData {
+interface NDCDataRaw {
     country: string,
     iso: string,
     latest_submission: string,
     ghg: string,
     ghg_target: string
+}
+
+export interface NDCData extends NDCDataRaw {
+    category: string;
 }
 
 export interface PewData {

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import type { NDCData } from './data';
-    import { getNDCCategory, getCountryBaseData, ndc } from "./data";
+    import { getCountryBaseData, ndc } from "./data";
     import { getXRandom } from "./util";
 
     var ndcs: NDCData[];
@@ -30,7 +30,7 @@
             return 'Only the Intended NDC (INDC)';
         } else {
             return sentence;
-        } 
+        }
     }
 
 </script>
@@ -38,7 +38,7 @@
 {#if ndcs}
     {#each ndcs as ndc,i}
     <div class="ndc">
-        <div class="bar bg--{getNDCCategory(ndc)}"></div>
+        <div class="bar bg--{ndc.category}"></div>
         <p><b>{getCountryName(ndc.iso)}</b></p>
         <p class='label'>{ i > 0 ? '' : 'Latest submission:'} {translateSubmission(ndc.latest_submission)}</p>
         <p>{capitalizeSentence(ndc.ghg_target)}</p>
@@ -82,7 +82,7 @@
 
     .ndc :global(.bg--ndc-second2020).bar { width: 90%; }
     .ndc :global(.bg--ndc-first2020).bar { width: 60%; }
-    .ndc :global(.bg--ndc-indc).bar { width: 15%; } 
+    .ndc :global(.bg--ndc-indc).bar { width: 15%; }
     .ndc :global(.bg--ndc-first).bar { width: 30%; }
     .ndc :global(.bg--ndc-no-submission).bar { width: 5%; }
 

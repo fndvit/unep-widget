@@ -2,7 +2,7 @@
     import type { CountryDataPoint } from './DemersCartogram.svelte';
     import {default as countries} from '../data/countries.json';
     import DemersCartogram from './DemersCartogram.svelte';
-    import {ghg, ndc, endYear, getNDCCategory} from '../data';
+    import { ghg, ndc, endYear } from '../data';
     import { createLookup } from '../util';
     import { onMount } from 'svelte';
     import CartogramLegend from './CartogramLegend.svelte';
@@ -42,7 +42,7 @@
         getCategory = c => {
             const ndc = ndcLookup[c.code];
             if (!ndc) return 'ndc-nodata';
-            return getNDCCategory(ndc);
+            return ndc.category;
         }
 
         const uppercaseFirstLetter = (str:string) => str.charAt(0).toUpperCase() + str.slice(1)
