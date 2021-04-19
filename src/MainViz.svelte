@@ -276,9 +276,13 @@
     }
 
     @media (min-width: 1200px) {
-        .content--sotc .cartogram-pane {
-            /* right-side overflow to enlarge cartogram when we have space */
+        /* right-side overflow to enlarge cartogram when we have space */
+        .content--sotc .cartogram-pane,
+        .content--wh .cartogram-pane {
             margin-right: -200px;
+        }
+        .content--cap .cartogram-pane {
+            margin-right: -100px;
         }
     }
 
