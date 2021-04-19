@@ -29,7 +29,7 @@
 
     const datasetParams = {
         [Datasets.GHGTotal]: {
-            nodeSize: 80,
+            nodeSize: 84,
             domain: [740, 420],
             helpText: {
                 code: "BRA",
