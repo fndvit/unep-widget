@@ -185,6 +185,7 @@
         hoveredForX = false;
         window.clearTimeout(hoverTimeout);
         hoverTimeout = null;
+        trendsHoverData = null;
         fadeInHelpText();
     }
 

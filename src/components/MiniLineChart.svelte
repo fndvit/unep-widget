@@ -17,15 +17,15 @@
     const axisHeight = 25;
     let hoverInfo: { data: YearlyTimeseriesDatum, x: number, y: number, valStr: string };
 
-    const x = d3.scaleLinear()
+    $: x = d3.scaleLinear()
         .domain([startYear, endYear])
         .range([ 0, chartWidth ]);
 
-    const y = d3.scaleLinear()
+    $: y = d3.scaleLinear()
         .domain([0, Math.max(...data.map(d => d.value))])
         .range([ chartHeight, 0 ]);
 
-    const linePath = d3.line<YearlyTimeseriesDatum>().x(d => x(d.year)).y(d => y(d.value))(data);
+    $: linePath = d3.line<YearlyTimeseriesDatum>().x(d => x(d.year)).y(d => y(d.value))(data);
 
     function mouseMove(event: any) {
         const pointer = d3.pointer(event);
