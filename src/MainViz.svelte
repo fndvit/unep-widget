@@ -271,9 +271,14 @@
 
     @media (max-width: 1100px) {
         .copy-container {
-            /* right-side overflow to enlarge cartogram when we have space */
-            /* margin-right: -100px; */
             flex: 1 1 450px;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .content--sotc .cartogram-pane {
+            /* right-side overflow to enlarge cartogram when we have space */
+            margin-right: -200px;
         }
     }
 

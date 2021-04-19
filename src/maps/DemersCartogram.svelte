@@ -227,8 +227,8 @@
             const popupWidth = 200;
             const popupHeightEst = 140;
             trendsHoverData = {
-                x: clamp(hoverData.x, 5 + popupWidth/2, targetWidth - (5 + popupWidth/2)), // stop horizontal overflow
-                y: clamp(hoverData.y, 5 + popupHeightEst/2, targetHeight - (5 + popupHeightEst/2)),
+                x: clamp(hoverData.x, 5 + popupWidth/2, containerWidth - (5 + popupWidth/2)), // stop horizontal overflow
+                y: clamp(hoverData.y, 5 + popupHeightEst/2, containerHeight - (5 + popupHeightEst/2)),
                 country: hoverData.country,
                 emissionVal
             }
