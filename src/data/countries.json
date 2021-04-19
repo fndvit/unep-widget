@@ -698,7 +698,7 @@
     {
         "code": "USA",
         "name": "United States of America",
-        "short": "United States of America",
+        "short": "United States",
         "trends": {
             "x": 78,
             "y": 143.3
@@ -1107,7 +1107,7 @@
     },
     {
         "code": "CIV",
-        "name": "Cote d'Ivoire",
+        "name": "Côte d’Ivoire",
         "short": "Ivo. Co.",
         "trends": {
             "x": 430.7,
@@ -1264,7 +1264,7 @@
     },
     {
         "code": "DOM",
-        "name": "Dominican Republic",
+        "name": "Dominican Rep.",
         "short": "Dom. Rep.",
         "trends": {
             "x": 219.1,
@@ -1734,7 +1734,7 @@
     },
     {
         "code": "KNA",
-        "name": "St. Kitts and Nevis",
+        "name": "Saint Kitts and Nevis",
         "short": "Kna.",
         "trends": {
             "x": 219.1,
@@ -1824,7 +1824,7 @@
     },
     {
         "code": "LCA",
-        "name": "St. Lucia",
+        "name": "Saint Lucia",
         "short": "St. L.",
         "trends": {
             "x": 254.3,
@@ -2366,7 +2366,7 @@
     },
     {
         "code": "PRK",
-        "name": "Dem. People’s Rep. of Korea",
+        "name": "Dem. People's Rep. of Korea",
         "short": "N. Kor.",
         "trends": {
             "x": 994.7,
@@ -2852,7 +2852,7 @@
     },
     {
         "code": "VCT",
-        "name": "St. Vincent and the Grenadines",
+        "name": "Saint Vincent and the Grenadines",
         "short": "Vct.",
         "trends": {
             "x": 219.1,
