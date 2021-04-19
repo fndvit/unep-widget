@@ -28,7 +28,7 @@
         const emissionPerc = (emissionShare * 100).toFixed(2);
         switch (chartTextType) {
             case ChartTextType.Largest:
-                return `<b>${country.name}</b> is one of top emitters accounting for ${emissionPerc}% of global GHG emissions. In ${latestYear}, it emitted ${lastFigStr} million tonnes.`;
+                return `<b>${country.name}</b> is one of the top emitters accounting for ${emissionPerc}% of global GHG emissions. In ${latestYear}, it emitted ${lastFigStr} million tonnes.`;
             case ChartTextType.Relative:
             case ChartTextType.PerCapita:
                 const change = data.emissions[`${endYear}`] / data.emissions['1990'];
