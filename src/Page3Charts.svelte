@@ -68,7 +68,7 @@
     }
 
     .label {
-        color: #808080;
+        color: #666;
         font-size:14px;
         font-weight: 400;
         padding-bottom:12px;

@@ -121,7 +121,7 @@
         padding:0;
         text-align:left;
         position:absolute;
-        color: #808080;
+        color: #666;
         top: 2px;
         left: 2px;
         pointer-events: none;
