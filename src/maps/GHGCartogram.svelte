@@ -6,7 +6,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import DemersCartogram from './DemersCartogram.svelte';
-    import {ghg, percapita, startYear, endYear, getGHGCategory } from '../data';
+    import {ghg, percapita, startYear, endYear } from '../data';
     import type { GHGData } from '../data';
     import type { CountryDataPoint, TrendsDataset } from './DemersCartogram.svelte';
     import {default as countries} from '../data/countries.json';
@@ -76,8 +76,7 @@
             };
         })
 
-        const trendsTimeseriesLookup = createLookup(trendsTimeseriesData, d => d.code, d => d.data);
-        getCategory = c => getGHGCategory(trendsTimeseriesLookup[c.code]);
+        getCategory = c => ghgDataLookup[c.code].category;
 
         // countries.forEach(d => {
         //     if (!ghgDataLookup[d.code]) console.warn(`Missing GHG data for ${d.name} (${d.code})`);

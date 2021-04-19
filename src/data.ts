@@ -31,15 +31,26 @@ async function getJsonData(url) {
 export const startYear = 1970;
 export const endYear = 2015;
 
-export const ghg = getMockData<GHGData[]>('ghg');
+export const ghg = getMockData<GHGDataRaw[]>('ghg')
+    .then(data => {
+        return data.map(d => {
+            const timeseries = extractTimeseries(d);
+            const processedData: GHGData = {
+                ...d,
+                timeseries,
+                category: getGHGCategory(timeseries)
+            }
+            return processedData
+        });
+    });
+
 export const percapita = getMockData<PerCapitaData[]>('percapita');
 export const cri = getMockData<CRIData[]>('cri');
 export const ndc = getMockData<NDCData[]>('ndc');
 export const globalEmissions = getMockData<EmissionsData>('globalEmissions');
 export const pew = getMockData<PewData[]>('pew');
 
-export function getGHGCategory(data: YearlyTimeseriesDatum[]) {
-    // TODO: set thresholds
+function getGHGCategory(data: YearlyTimeseriesDatum[]) {
     const baseValue = data.find(d => d.year === 1990).value;
     const lastValue = data.find(d => d.year === endYear).value;
     const diff = (lastValue - baseValue) / baseValue;
@@ -82,7 +93,7 @@ function* generateRange(end: number, start = 0, step = 1) {
     while(x < end - step) yield x += step;
 }
 
-export function extractTimeseries(data: GHGData): YearlyTimeseriesDatum[] {
+function extractTimeseries(data: GHGDataRaw): YearlyTimeseriesDatum[] {
     const years = Array.from(generateRange(endYear+1, startYear));
     return years.map(year => {
         return {
@@ -188,7 +199,13 @@ interface EmissionsData {
     "2015": number,
 }
 
-export interface GHGData {
-    code: string,
-    emissions: EmissionsData
+interface GHGDataRaw {
+    code: string;
+    emissions: EmissionsData;
 }
+
+export interface GHGData extends GHGDataRaw {
+    category: string;
+    timeseries: YearlyTimeseriesDatum[];
+}
+

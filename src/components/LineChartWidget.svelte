@@ -9,16 +9,14 @@
 <script lang="ts">
     import MiniLineChart from "./MiniLineChart.svelte";
     import type { GHGData } from '../data';
-    import {getGHGCategory, extractTimeseries, getCountryBaseData, globalEmissions, endYear} from '../data';
+    import {getCountryBaseData, globalEmissions, endYear} from '../data';
     import { onMount } from "svelte";
     export let data: GHGData;
     export let chartTextType: number;
 
-    const timeseriesData = extractTimeseries(data);
-    const category = getGHGCategory(timeseriesData);
     const country = getCountryBaseData(data.code);
-    const latestYear = timeseriesData[timeseriesData.length-1].year;
-    const lastFigure = timeseriesData[timeseriesData.length-1].value;
+    const latestYear = data.timeseries[data.timeseries.length-1].year;
+    const lastFigure = data.timeseries[data.timeseries.length-1].value;
     const lastFigStr = Math.round(lastFigure).toLocaleString();
     var globalTotal: number;
 
@@ -50,7 +48,7 @@
 </script>
 
 <div>
-    <MiniLineChart data={timeseriesData} category={category} />
+    <MiniLineChart data={data.timeseries} category={data.category} />
     <h3 class="chart-figure">{lastFigStr} <span class='units'>million tonnes of GHG</span></h3>
     <p class="chart-summary">{@html summary}</p>
 </div>
