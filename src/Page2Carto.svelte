@@ -1,13 +1,14 @@
 <script lang="ts">
-    import AnnotatedImage from "./maps/AnnotatedImage.svelte";
+    import type { MediaAnnotation } from "./maps/AnnotatedMedia.svelte";
+    import { AnnotatedMedia } from "./maps";
     import svg from './svg';
 
     export var selectedSectionStr: string;
 
-    const sections = {
+    const sections: {[section: string]: {imgTitle: string, src: string, poster?: string, alt: string, annotations: MediaAnnotation[]}} = {
         "Land temperature": {
             imgTitle: '<b>Surface temperature anomalies</b> (May 2020)',
-            src: "surface",
+            src: "surface.jpg",
             alt: "Land Temperature Anomaly Map",
             annotations: [
                 {
@@ -32,13 +33,13 @@
                 },
                 {
                     text: "The northernmost inhabited Arctic town, Longyearbyen on the Norwegian archipelago of Svalbard, saw a new record temperature of 21.7°C on 25 July 2020, compared to July average of 5.9°C, according to Norway's national meteorological service.",
-                    x: 439, y: 15
+                    x: 439, y: 20
                 }
             ]
         },
         "Ocean temperature": {
             imgTitle: '<b>Ocean temperature</b> (May 2020)',
-            src: "ocean",
+            src: "ocean.jpg",
             alt: "Ocean Temperature Map",
             annotations: [
                 {
@@ -53,7 +54,8 @@
         },
         "Fires": {
             imgTitle: '<b>A decade of fires</b> (monthly data from 2010 to 2020)',
-            src: "fire",
+            src: "fire.mp4",
+            poster: "fire.jpg",
             alt: "Fires Map",
             annotations: [
                 {
@@ -83,22 +85,157 @@
 
     $: selectedSection = sections[selectedSectionStr];
 
+    var selectedAnnotation: MediaAnnotation;
+    function onChangeAnnotation(a: MediaAnnotation) {
+        selectedAnnotation = a;
+    }
 
 </script>
 
-<AnnotatedImage src={selectedSection.src} alt={selectedSection.alt} annotations={selectedSection.annotations} title={selectedSection.imgTitle}/>
 
-{#if selectedSection.text === "Land temperature"}
-<div class="legend">
-    <p class="text">Colder</p>
-    <div class="legend-scale">{@html svg.legends.land}</div>
-    <p class="text">Warmer than the avg. for the 2000s</p>
-</div>
-{:else if selectedSection.text === "Ocean temperature"}
-<div class="legend">
-    <p class="text">Cold</p>
-    <div class="legend-scale">{@html svg.legends.sea}</div>
-    <p class="text">Warm</p>
-</div>
-{/if}
+<div class="container">
+    <div class="title {selectedSection.src === 'ocean' ? 'white' : ''}">
+        {@html selectedSection.imgTitle}
+    </div>
+    <div class="aimg-container">
+        <AnnotatedMedia src={selectedSection.src} alt={selectedSection.alt} video={selectedSection.src === 'fire.mp4'}
+            annotations={selectedSection.annotations} onChangeAnnotation={onChangeAnnotation}
+        />
+    </div>
+    {#if selectedSectionStr === "Land temperature"}
+    <div class="legend">
+        <p class="legend-text">Colder</p>
+        <div class="legend-scale">{@html svg.legends.land}</div>
+        <p class="legend-text">Warmer than the avg. for the 2000s</p>
+    </div>
+    {:else if selectedSectionStr === "Ocean temperature"}
+    <div class="legend">
+        <p class="legend-text">Cold</p>
+        <div class="legend-scale">{@html svg.legends.sea}</div>
+        <p class="legend-text">Warm</p>
+    </div>
+    {/if}
 
+    <div class="inline-annotation">
+        {#each selectedSection.annotations as annotation}
+        <div class:visible={selectedAnnotation === annotation}>{annotation.text}</div>
+        {/each}
+    </div>
+</div>
+
+
+<style>
+    .container {
+        width: 100%;
+    }
+    .title {
+        font-size: 14px;
+        padding-left: 12px;
+        margin: 10px 0 12px 0;
+    }
+
+    .aimg-container {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .inline-annotation {
+        font-size: 14px;
+        line-height: 1.5;
+        padding: 0 10px;
+        margin-top: 10px;
+        display: grid;
+
+    }
+    .inline-annotation div {
+        grid-column: 1;
+        grid-row: 1;
+        visibility: hidden;
+    }
+    .inline-annotation div.visible {
+        visibility: visible;
+    }
+
+    .legend {
+        display: inline-block;
+        margin: auto;
+        margin-top: 8px;
+        flex: 0;
+        padding-left: 10px;
+        white-space: nowrap;
+    }
+
+    .legend-scale {
+        max-width: 270px;
+        display: inline-block;
+    }
+    .legend-scale > :global(svg) {
+        width: 100%;
+    }
+
+    .legend-text {
+        display: inline-block;
+        font-size: 14px;
+        vertical-align: middle;
+        margin-bottom: 18px;
+    }
+
+    @media (max-width: 600px) {
+
+        .container :global(.aimg .annotation) {
+            display: none;
+        }
+
+        .legend-text {
+            display: none;
+        }
+
+        .legend {
+            position: absolute;
+            top: 25px;
+        }
+
+        .aimg-container {
+            margin-top: 45px;
+        }
+    }
+
+
+    @media (min-width: 600px) {
+
+        .inline-annotation {
+            display: none;
+        }
+    }
+
+    @media (min-width: 600px) {
+        .title {
+            position: absolute;
+            top:35%;
+            left:2rem;
+            max-width: 120px;
+            font-size: 14px;
+            line-height: 1.3;
+            color:#808080;
+            z-index: 5;
+        }
+
+        .white {
+            color:#FFF;
+        }
+    }
+
+    @media (min-width: 900px) {
+        .aimg-container :global(.aimg-media) {
+            max-height: 315px;
+        }
+    }
+
+    @media (min-width: 1400px) {
+        .aimg-container :global(.aimg-media) {
+            max-height: none;
+        }
+    }
+
+</style>

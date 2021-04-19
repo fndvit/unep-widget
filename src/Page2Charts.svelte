@@ -20,12 +20,20 @@
 
 {#if criData}
 <div class="p2-chart-container">
-    <div class="p2-charts-leftpane">
+    <div class="p2-charts-leftpane p2-charts-leftpane--large">
         <h3>How each country's climate risk compares</h3>
         <div>
             <span>Climate risk index</span>
             <span>Fatalities per 100K people</span>
             <span>Losses as pct. of GDP</span>
+        </div>
+    </div>
+    <div class="p2-charts-leftpane p2-charts-leftpane--small">
+        <h3>Country’s clim. risk rank in ’19</h3>
+        <div>
+            <span>Clim. risk ind.</span>
+            <span>Deaths per 100K</span>
+            <span>Loss % GDP</span>
         </div>
     </div>
     <div class="p2-charts">
@@ -39,9 +47,9 @@
 
 <style>
     .p2-charts-leftpane {
-        width: 165px;
         font-size: 14px;
         position: relative;
+        flex: 0;
     }
 
     .p2-charts-leftpane h3 {
@@ -57,13 +65,14 @@
         white-space: nowrap;
         position: relative;
         top: -1px;
-        width: 165px;
         display: flex;
+        background: #f3f3f3;
+        display: inline-block;
+        padding-right: 5px;
     }
     .p2-chart-container {
         padding-top: 60px;
         display: flex;
-        margin-left:12px;
     }
 
     .p2-charts {
@@ -84,6 +93,23 @@
     .p2-charts :global(svg) {
         width: 100%;
     }
+    .p2-charts > :global(*:first-child svg) {
+        width: calc(100% + 100px);
+        margin-left: -100px;
+    }
+
+    .p2-charts-leftpane--large {
+        display: none;
+    }
+    .p2-charts-leftpane--large h3 { max-width: 140px; }
+    .p2-charts-leftpane--small h3 { max-width: 100px; }
+
+    @media (min-width: 500px) {
+        .p2-charts-leftpane--small { display: none; }
+        .p2-charts-leftpane--large { display: block; }
+    }
+
+
 
 </style>
 

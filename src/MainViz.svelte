@@ -142,9 +142,7 @@
                     <GHGCartogram dataset={selectedSection.dataset} />
                 </ScrollableX>
             {:else if selectedPage.text === "What's happening"}
-                <ScrollableX>
-                    <Page2Carto selectedSectionStr={selectedSection.text} />
-                </ScrollableX>
+                <Page2Carto selectedSectionStr={selectedSection.text} />
             {:else if selectedPage.text === "Climate action progress"}
                 {#if selectedSection.text === "NDC submissions"}
                     <ScrollableX><NDCCartogram /></ScrollableX>
@@ -227,7 +225,7 @@
         font-weight:300;
         margin: 0;
         margin-bottom: 10px;
-        padding: 0 10px;
+        padding: 0 12px;
     }
 
     .copy-container {
@@ -335,10 +333,12 @@
         .content--wh .copy-container :global(h2) {
             margin-bottom: 10px;
         }
-        .content--wh .cartogram-pane :global(.aimg .annotation),
-        .content--wh .cartogram-pane :global(.aimg .circle-container) {
-            display: none;
+    }
+    @media (max-width: 900px) {
+        .content--wh .cartogram-pane {
+            height: auto;
         }
+
     }
 
     @media (min-width: 1400px) {

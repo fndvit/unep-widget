@@ -3,6 +3,7 @@
     import * as d3 from '../d3';
 
     export var data: CRIData;
+    export var header: boolean = false;
 
     let chartWidth = 200;
     let chartHeight = 70;
@@ -72,7 +73,7 @@
 
 </script>
 
-<svg viewBox="0 10 {chartWidth} {chartHeight}">
+<svg viewBox="{header ? -100 : 0} 10 {header ? chartWidth + 100 : chartWidth} {chartHeight}">
     <defs>
         <linearGradient id="high-med" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" style="stop-color:#BDC7CD;" />
@@ -92,9 +93,9 @@
 
     </defs>
     <g class="tracks">
-        <line x1="0" y1={y_track1} x2="200" y2={y_track1}></line>
-        <line x1="0" y1={y_track2} x2="200" y2={y_track2}></line>
-        <line x1="0" y1={y_track3} x2="200" y2={y_track3}></line>
+        <line x1={header ? -100 : 0} y1={y_track1} x2="200" y2={y_track1}></line>
+        <line x1={header ? -100 : 0} y1={y_track2} x2="200" y2={y_track2}></line>
+        <line x1={header ? -100 : 0} y1={y_track3} x2="200" y2={y_track3}></line>
     </g>
     <g class="paths">
 
