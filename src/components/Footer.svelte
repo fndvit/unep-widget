@@ -24,8 +24,6 @@
             <div class="datasource">
                 <div class="datasource-icon">{@html svgs.dataSource}</div>
                 <span class="datasource-text">{@html datasource}</span>
-                <span class="version">v{meta.version}</span>
-
             </div>
         </ScrollableX>
     </div>
