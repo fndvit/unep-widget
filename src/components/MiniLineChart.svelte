@@ -62,7 +62,7 @@
             <circle class="hover-circle" r="4" cx={hoverInfo.x} cy={hoverInfo.y} />
             <text class="hover-year"
                 x={clamp(hoverInfo.x, 20, 300)}
-                y={y(2) + (hoverInfo.y > 75 ? 18 : - 5)}>{hoverInfo.data.year}</text>
+                y={y(0) + 2 + (hoverInfo.y > 75 ? 18 : - 5)}>{hoverInfo.data.year}</text>
             <text class="hover-value" x={clamp(hoverInfo.x, hoverInfo.valStr.length * 4.5, 320 - hoverInfo.valStr.length * 4.5)}
                 y={Math.min(70, hoverInfo.y - 10)}
             >{hoverInfo.valStr}
