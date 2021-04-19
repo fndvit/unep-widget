@@ -33,11 +33,20 @@
     $: radiusY = 100 * radius / canvasHeight;
 
     $: {
-        const horizontal = forceTopWherePossible ? (yPerc < 15) : (xPerc > 70 || xPerc < 30);
-        if (horizontal) {
-            pos = xPerc > 50  ? 'left' : 'right';
-        } else {
-            pos = yPerc < 20 ? 'below' : 'above';
+        if (forceTopWherePossible) {
+            if (yPerc < 15) {
+                pos = xPerc > 50  ? 'left' : 'right';
+            } else {
+                pos = 'above';
+            }
+        }
+        else {
+            const horizontal = xPerc > 70 || xPerc < 30;
+            if (horizontal) {
+                pos = xPerc > 50  ? 'left' : 'right';
+            } else {
+                pos = yPerc < 20 ? 'below' : 'above';
+            }
         }
     }
 
