@@ -14,6 +14,7 @@
     import { createLookup, displayVal, generateRange } from '../util';
 
     export var dataset: number = Datasets.GHGTotal;
+    export var hideLegend: boolean = false;
 
     let loaded: boolean = false;
 
@@ -124,9 +125,11 @@
             hideLabels={dataset === Datasets.GHGPerCapita}
             categoryFn={getCategory}
         />
+        {#if !hideLegend}
         <div class="legend-container">
             <CartogramLegend categories={legend}/>
         </div>
+        {/if}
     </div>
 {/if}
 

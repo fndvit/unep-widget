@@ -1,17 +1,19 @@
 var script = document.currentScript;
 
-function getIframePath() {
+function getIframePath(embed) {
 	const currentScript = document.currentScript;
 	const urlParts = currentScript.src.split('/');
 	const urlPath = urlParts.slice(0, -1).join('/');
-	return `${urlPath}/embed.html`;
+	return `${urlPath}/embed-${embed}.html`;
 }
 
 function injectIframe() {
-    // TODO: only load this embed on UNEP domain ??
+    const dataEmbed = script.getAttribute('data-embed');
+    const embeds = [ "main", "ghg" ];
+    const embed = embeds.indexOf(dataEmbed) === -1 ? "main" : dataEmbed;
 
 	var iframe = document.createElement('iframe');
-    iframe.src = getIframePath();
+    iframe.src = getIframePath(embed);
     iframe.style.width = "100%";
     iframe.style.height = 0;
     iframe.style.border = 0;
@@ -25,7 +27,6 @@ function injectIframe() {
             iframe.style.height = height + "px";
         }
     }, false);
-
 }
 
 injectIframe();

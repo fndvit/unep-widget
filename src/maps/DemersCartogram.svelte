@@ -474,7 +474,7 @@
         pointer-events: none;
     }
     .annotation-help :global(.text) {
-        font-size: 14px;
+        font-size: 14px !important;
     }
 
     .annotation-help {
