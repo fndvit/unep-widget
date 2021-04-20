@@ -88,15 +88,6 @@
         margin-top: 0;
     }
 
-    .container :global(.cartogram-container) {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        min-width: 600px;
-    }
-
     .viz-pane {
         position: relative;
     }
@@ -117,7 +108,6 @@
     }
 
     .viz-pane :global(.scrollable-content) {
-        min-width: 600px !important;
         position: relative;
     }
 
