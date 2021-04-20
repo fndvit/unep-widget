@@ -108,6 +108,7 @@
                     text: "Public opinion",
                     icon: svg.climateactionprogress.opinion,
                     copy: copy.progress.public,
+                    embed: "publicopinion"
                 }
             ]
         },
