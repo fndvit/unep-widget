@@ -4,24 +4,21 @@
     "total": {
       "menu-label": "",
       "title": "GHG emissions are changing our climate and choking our world",
-      "summary": "Global temperatures are linked to the concentration of greenhouse gases in our atmosphere and we are heading for a catastrophic rise in excess of 3°C this century. To limit this to 1.5°C, we need to cut emissions by 30 gigatones annually by 2030. That means cutting emissions from transport and industry, managing land and resources more efficiently, building smart cities and curbing deforestation and food waste.",
-      "Alternative": "GHG emissions are changing our climate and choking our world",
+      "summary": "Global temperatures are linked to the concentration of greenhouse gases (GHG) in our atmosphere and we are heading for a catastrophic rise in excess of 3°C this century. To limit this to 1.5°C, we need to cut emissions by 30 gigatones annually by 2030. That means cutting emissions from transport and industry, managing land and resources more efficiently, building smart cities and curbing deforestation and food waste.",
       "hover": "Lorem ipsum",
       "annotation": "Each square represents a country, scaled by its emissions"
     },
     "percapita": {
       "menu-label": "",
       "title": "Our individual carbon footprints vary wildly; wealth is a key factor",
-      "summary": "The wealthiest 1 per cent of the global population produce more than twice the emissions of the poorest 50 per cent. Given that two-thirds of global emissions are linked to households, everyone has a role to play. And we must act now. Every fraction of additional warming beyond 1.5°C will result in increasingly severe impacts.",
-      "Alternative": "The wealthiest 1 per cent of the global population produce more than twice the emissions of the poorest 50 per cent. As developing countries grow their economies, they need financial assistance and technical support to transition to low-carbon, resilient strategies. It is possible to reduce emissions and grow economies. For example the energy sector can cut emissions by 12.5 gigatonnes annually by switching to renewable energy and being more efficient with the power it consumes.",
+      "summary": "The wealthiest 1 per cent of the global population produce more than twice the emissions of the poorest 50 per cent. As developing countries grow their economies, they need financial assistance and technical support to transition to low-carbon, resilient strategies. It is possible to reduce emissions and grow economies. For example the energy sector can cut emissions by 12.5 gigatonnes annually by switching to renewable energy and being more efficient with the power it consumes. ",
       "hover": "Lorem ipsum",
       "annotation": "Lorem ipsum"
     },
     "trend": {
       "menu-label": "",
       "title": "Some countries are making progress but all nations need to step up",
-      "summary": "In 2019, total greenhouse gas emissions, including land-use change, reached a new high of 59.1 gigatonnes of carbon dioxide equivalent (GtCO2e). This is far above what is needed to achieve the 2015 Paris Agreement goals of limiting global warming to well below 2°C and pursuing 1.5°C. Governments must increase their pledges, known as Nationally Determined Contributions, under the Agreement. The good news is that the technologies already exist, including renewable power, green hydrogen and modern bioenergy. The COVID-19 crisis also offers an opportunity to direct stimulus packages and recovery measures towards low-carbon, green policies.",
-      "Alternative": "Some countries are making progress but all nations need to step up",
+      "summary": "In 2019, total GHG emissions, including land-use change, reached a new high of 59.1 GtCO2e. This is far above what is needed to achieve the 2015 Paris Agreement goals of limiting global warming to well below 2°C and pursuing 1.5°C. The good news is that the technologies already exist, including renewable power, green hydrogen and modern bioenergy. The COVID-19 crisis offers a chance to direct recovery measures towards low-carbon, green policies.",
       "hover": "Lorem ipsum",
       "annotation": ""
     },
@@ -147,12 +144,12 @@
     "ndcs": {
       "menu-label": "",
       "title": "Countries must strengthen pledges made under Paris Agreement",
-      "summary": "Under the 2015 Paris Agreement, governments made pledges, known as Nationally Determined Contributions, to cut emissions. And although a growing number of countries have  now committed to net-zero emissions, the levels of ambition in the Paris accord must be roughly tripled for the 2°C pathway and increased at least fivefold for the 1.5°C pathway. There is no time to lose."
+      "summary": "Under the 2015 Paris Agreement, governments made pledges, known as Nationally Determined Contributions (NDCs), to cut emissions. And although a growing number of countries have  now committed to net-zero emissions, the levels of ambition in the Paris accord must be roughly tripled for the 2°C pathway and increased at least fivefold for the 1.5°C pathway. There is no time to lose."
     },
     "public": {
       "menu-label": "",
       "title": "Public awareness and concern must catalyze political action",
-      "summary": "Public concern over climate change is rising. In a survey of 26 nations in 2018, the Pew Research Center found that people broadly agree that climate change poses a severe risk to their countries, with populations in 13 nations seeing climate change as the top international threat. However, so far this awareness has not translated into sustained political action on a global scale. This must change."
+      "summary": "Public concern over the climate emergency is rising. In a survey of 26 nations in 2018, the Pew Research Center found that people broadly agree that climate change poses a severe risk to their countries, with populations in 13 nations seeing climate change as the top international threat. However, so far this awareness has not translated into sustained political action on a global scale. This must change."
     },
     "country-ndcs": "Lorem ipsum",
     "country-public": "Lorem ipsum"
