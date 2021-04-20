@@ -1,6 +1,5 @@
 <script lang="ts">
     import { groups } from 'd3-array';
-    import * as d3 from '../d3';
     import type { PewData } from '../data';
     import { pew } from '../data';
     import { onMount } from 'svelte';
@@ -42,18 +41,22 @@
 
         if (pos.x > offset.width - 200) {
             detailChartPosition.x = offset.width - 200
-        } 
+        }
         if (pos.y > offset.height - 150) {
             detailChartPosition.y = offset.height - 150
-        } 
+        }
         if (pos.x < 92) {
             detailChartPosition.x = 92
-        } 
-        
+        }
+
         if (pos.y < 32) {
             detailChartPosition.y = 32
         }
-        
+
+    }
+
+    const nameOverrides = {
+        "United States of America": "United States"
     }
 </script>
 
@@ -64,7 +67,7 @@
     on:mouseenter={(e) => selectCountry(country, {x: e.target.offsetLeft, y: e.target.offsetTop})}
     on:mouseleave={() => hover = false }
     >
-        <p class="label">{country[0].short}</p>
+        <p class="label">{nameOverrides[country[0].short] || country[0].short}</p>
         <MiniSurveyCharts
             data={country}
             width={tileWidth}
@@ -93,7 +96,6 @@
         padding-bottom: 20px;
         flex: 0 0 100%;
         text-align: left;
-        padding-left: 12px;
         margin-top:30px;
     }
 
@@ -157,7 +159,7 @@
         top:10px;
         left:6px;
     }
-    
+
     .country {
         font-size:18px;
         font-weight: 600;
