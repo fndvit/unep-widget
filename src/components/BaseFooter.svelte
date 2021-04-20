@@ -1,7 +1,5 @@
 <script lang="ts">
-    import svgs from '../svg';
     import ScrollableX from './ScrollableX.svelte';
-
     export var background: string = "#e6e6e6";
     export var icon: string;
 </script>
