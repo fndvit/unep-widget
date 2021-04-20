@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Footer from '../components/Footer.svelte';
+    import DatasourceFooter from '../components/DatasourceFooter.svelte';
     import IframeResizingContainer from '../components/IframeResizingContainer.svelte';
     import unepLogo from '../svg/unep-logo.svg';
 
@@ -38,7 +38,7 @@
         </div>
 
     </div>
-    <Footer currentSection={footer} />
+    <DatasourceFooter currentSection={footer} />
 </IframeResizingContainer>
 
 <style>

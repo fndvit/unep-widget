@@ -1,6 +1,6 @@
 <script lang="ts">
     import svgs from '../svg';
-    import ScrollableX from './ScrollableX.svelte';
+    import BaseFooter from './BaseFooter.svelte';
     export var currentSection: string;
 
     const dataSources = {
@@ -20,73 +20,6 @@
     $: datasource = dataSources[currentSection] || 'Unknown';
 </script>
 
-<footer>
-    <div class="footer-content">
-        <ScrollableX>
-            <div class="datasource">
-                <div class="datasource-icon">{@html svgs.dataSource}</div>
-                <span class="datasource-text">{@html datasource}</span>
-            </div>
-        </ScrollableX>
-    </div>
-</footer>
-
-<style>
-    footer {
-        background: #e6e6e6;
-        position: relative;
-    }
-    .footer-content {
-        max-width: 1100px;
-        margin: auto;
-    }
-
-    .version {
-        position: absolute;
-        right: 0;
-        display: block;
-        background: #e6e6e6;
-        z-index: 1;
-        padding-left: 20px;
-        padding-right: 10px;
-        font-size: 10px;
-
-    }
-
-    .datasource {
-        height: 50px;
-        font-size: 16px;
-        display: flex;
-        align-items: center;
-        color: #505050;
-        font-weight: 300;
-        white-space: nowrap;
-    }
-
-    .datasource .datasource-text {
-        padding-right: 10px;
-    }
-
-    .datasource-icon {
-        flex: 0 0 28px;
-        padding-left: 8px;
-        margin-right: 6px;
-        position: relative;
-        top: 2px;
-    }
-    .datasource-icon :global(svg *) {
-        stroke: #666666;
-    }
-    @media (max-width: 700px) {
-        .datasource {
-            height: 40px;
-            font-size: 14px;
-            color:#333;
-        }
-
-        .datasource-icon {
-            flex: 0 0 20px;
-            top: 0;
-        }
-    }
-</style>
+<BaseFooter icon={svgs.dataSource}>
+    <slot slot="text">{@html datasource}</slot>
+</BaseFooter>

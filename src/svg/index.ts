@@ -21,10 +21,12 @@ import legendLand from './legend_land-anomaly.svg';
 import legendSea from './legend_sea-temperature.svg';
 
 import dataSource from './icons_data-source.svg';
+import embed from './icons_embed.svg';
 
 export default {
     test,
     dataSource,
+    embed,
     arrows: {
         down: arrowDown,
         right: arrowRight,

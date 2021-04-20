@@ -2,7 +2,7 @@
     import type { SvelteComponent } from "svelte";
     import type { MenuOption } from './components/MainNav.svelte';
 
-    import { MainNav, SubNav, ScrollableX, CopyPane, Footer } from './components';
+    import { MainNav, SubNav, ScrollableX, CopyPane, DatasourceFooter, EmbedFooter } from './components';
     import svg from './svg';
     import { copy } from './data';
     import { GHGCartogram, NDCCartogram} from './maps';
@@ -21,6 +21,7 @@
         dataset?: number;
         class?: string;
         bottomComponent?: typeof SvelteComponent;
+        embed?: string;
     }
 
     interface Page extends MenuOption {
@@ -42,19 +43,22 @@
                     text: "Total emissions",
                     icon: svg.stateoftheclimate.emissions,
                     copy: copy.state.total,
-                    dataset: Datasets.GHGTotal
+                    dataset: Datasets.GHGTotal,
+                    embed: "ghg"
                 },
                 {
                     text: "Per capita emissions",
                     icon: svg.stateoftheclimate.percapita,
                     copy: copy.state.percapita,
-                    dataset: Datasets.GHGPerCapita
+                    dataset: Datasets.GHGPerCapita,
+                    embed: "ghg-percapita"
                 },
                 {
                     text: "Country trends",
                     icon: svg.stateoftheclimate.trends,
                     copy: copy.state.trend,
-                    dataset: Datasets.GHGTrends
+                    dataset: Datasets.GHGTrends,
+                    embed: "ghg-trends"
                 },
             ]
         },
@@ -68,19 +72,22 @@
                     text: "Land temperature",
                     icon: svg.whatshappening.surface,
                     copy: copy.happening.surface,
-                    class: 'temp'
+                    class: 'temp',
+                    embed: "wh-temp"
                 },
                 {
                     text: "Ocean temperature",
                     icon: svg.whatshappening.ocean,
                     copy: copy.happening.ocean,
-                    class: 'ocean'
+                    class: 'ocean',
+                    embed: "wh-ocean"
                 },
                 {
                     text: "Fires",
                     icon: svg.whatshappening.fire,
                     copy: copy.happening.fire,
-                    class: 'fires'
+                    class: 'fires',
+                    embed: "wh-fires"
                 }
             ]
         },
@@ -170,7 +177,10 @@
 
 </div>
 
-<Footer currentSection={selectedPage.text}/>
+<DatasourceFooter currentSection={selectedPage.text}/>
+{#if selectedSection.embed}
+<EmbedFooter embed={selectedSection.embed}/>
+{/if}
 
 <style>
 
