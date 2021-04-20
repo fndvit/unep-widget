@@ -60,45 +60,44 @@
         <CartogramLegend categories={selectedView.legend}/>
     </slot>
 
-    <slot slot="viz">
+    <div slot="viz" class="cartogram-pane">
         <ScrollableX>
-            <div class="cartogram-aspect"></div>
-            {#if view === 'ndc'}
-            <NDCCartogram hideLegend={true} />
-            {:else}
-            <GhgCartogram dataset={selectedView.dataset} hideLegend={true} />
-            {/if}
+            <div class="cartogram-aspect">
+                {#if view === 'ndc'}
+                <NDCCartogram hideLegend={true} />
+                {:else}
+                <GhgCartogram dataset={selectedView.dataset} hideLegend={true} />
+                {/if}
+            </div>
         </ScrollableX>
-    </slot>
+    </div>
 
 </BaseEmbed>
 
 <style>
+
     .cartogram-aspect {
+        min-width: 600px;
+    }
+
+    .cartogram-aspect:before {
+        content: '';
+        display: block;
         padding-bottom: calc(57.15%); /* 700/400 aspect */
-        width: 100%;
-        min-width: 660px;
+        position: relative;
     }
 
-    @media (min-width: 800px) {
-
-        .cartogram-aspect {
-            min-width: 600px;
-        }
+    .cartogram-aspect > :global(*) {
+        position: absolute !important;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
     }
 
-    @media (min-width: 960px) {
-
-        .cartogram-aspect {
-            min-width: 700px;
-        }
-    }
-
-    @media (min-width: 1100px) {
-
-        .cartogram-aspect {
-            min-width: 795px;
-        }
+    .cartogram-pane :global(.cartogram-container) {
+        height: 100%;
+        min-width: 600px;
     }
 
 </style>
