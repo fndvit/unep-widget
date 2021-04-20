@@ -13,7 +13,7 @@
     const dataSources = {
         "State of the climate":     `Data from ${edgar} and ${wesr}`,
         "What's happening":         `Data from ${nasa}, ${wesr} and ${cri}`,
-        "Climate action progress":  `Data from the ${edgar}, ${climateWatch} and ${pew}`,
+        "Climate action progress":  `Data from ${edgar}, ${climateWatch} and ${pew}`,
         "ndc-embed":                `Data from ${edgar} and ${climateWatch}`,
         "pew-embed":                `Data from ${pew}`,
     };
