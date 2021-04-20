@@ -1,4 +1,7 @@
 <script lang="ts">
+    import { afterUpdate } from "svelte";
+
+
     var el: HTMLElement;
     var clientHeight: number;
 
@@ -11,19 +14,25 @@
     })();
 
     var previousHeight: number;
-    function resizeIframe(height: number) {
+    function resizeIframe() {
+        if (!el) return;
+        const currentHeight = el.clientHeight;
         if (inIframe) {
-            if (height !== previousHeight) {
-                previousHeight = height;
+            if (currentHeight !== previousHeight) {
+                previousHeight = currentHeight;
                 window.parent.postMessage({
                     type: 'unep-widget:resize',
-                    value: height
+                    value: currentHeight
                 }, '*');
             }
         }
     }
 
-    $: resizeIframe(clientHeight);
+    $: clientHeight && resizeIframe();
+
+    afterUpdate(() => {
+        if (inIframe) window.setTimeout(resizeIframe, 0);
+    });
 
 </script>
 
