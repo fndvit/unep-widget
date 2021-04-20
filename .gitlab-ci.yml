@@ -6,7 +6,8 @@ stages:
   - flushcache
 
 variables:
-  BUCKET_NAME: ${BUCKET_NAME}
+  STAGING_BUCKET_NAME: ${STAGING_BUCKET_NAME}
+  PROD_BUCKET_NAME: ${PROD_BUCKET_NAME}
 
 cache:
   paths:
@@ -23,8 +24,25 @@ build_svelte:
     - npm run build
   only:
     - main
+    - staging
 
-deploy_to_s3:
+deploy_to_staging:
+  tags:
+    - unep
+  image:
+    name: robpco/awscli
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+  stage: deploy
+  only:
+    - staging
+  dependencies:
+    - build_svelte
+  script:
+    - aws s3 sync public/ s3://${STAGING_BUCKET_NAME} --acl public-read
+
+deploy_to_prod:
   tags:
     - unep
   image:
@@ -38,19 +56,22 @@ deploy_to_s3:
   dependencies:
     - build_svelte
   script:
-    - aws s3 sync public/ s3://${BUCKET_NAME} --acl public-read
+    - aws s3 sync public/ s3://${PROD_BUCKET_NAME} --acl public-read
 
-# flushcache:
-#   image: docker:stable
-#   tags:
-#     - unep
-#   stage: flushcache
-#   dependencies:
-#     - deploy_to_s3
-#   before_script:
-#     - apk add --update curl && rm -rf /var/cache/apk/*
-#   script:
-#     - |
-#       curl --fail --output "/dev/null" --silent --show-error -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache" \
-#       -H "Authorization: Bearer $CF_API_TOKEN" -H "Content-Type: application/json" \
-#       --data '{"hosts":["climatedashboard.unenvironment.org"]}'
+flushcache:
+  image: docker:stable
+  only:
+   - main
+  tags:
+    - unep
+  stage: flushcache
+  dependencies:
+    - deploy_to_prod
+  before_script:
+    - apk add --update curl && rm -rf /var/cache/apk/*
+  script:
+    - |
+      curl -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
+      -H "Authorization: Bearer Bearer ${CF_API_TOKEN}"\
+      -H "Content-Type: application/json" \
+      --data '{"purge_everything":true}'

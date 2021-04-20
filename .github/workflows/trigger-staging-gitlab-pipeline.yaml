@@ -1,7 +1,9 @@
+name: 'Push to Staging'
+
 on:
   push:
     branches:
-      - main
+      - staging
 jobs:
   curl:
     runs-on: ubuntu-latest
