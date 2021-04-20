@@ -9,10 +9,11 @@
     type InputAnnotation = typeof Copy.happening.surface.annotation[0];
 
     function mapAnnotation(input: InputAnnotation): MediaAnnotation {
-        const [xStr, yStr] = input.coords.split(',');
+        const coords = (input.coords || '').split(',');
+        if (!input.text || coords.length !== 2) return null;
         return {
             text: input.text,
-            x: parseInt(xStr), y: parseInt(yStr)
+            x: parseInt(coords[0]), y: parseInt(coords[1])
         };
     }
 
@@ -23,20 +24,20 @@
             imgTitle: '<b>Surface temperature anomalies</b> (May 2020)',
             src: "surface.jpg",
             alt: "Land Temperature Anomaly Map",
-            annotations: copy.happening.surface.annotation.map(mapAnnotation)
+            annotations: copy.happening.surface.annotation.map(mapAnnotation).filter(a => a)
         },
         "Ocean temperature": {
             imgTitle: '<b>Ocean temperature</b> (May 2020)',
             src: "ocean.jpg",
             alt: "Ocean Temperature Map",
-            annotations: copy.happening.ocean.annotation.map(mapAnnotation)
+            annotations: copy.happening.ocean.annotation.map(mapAnnotation).filter(a => a)
         },
         "Fires": {
             imgTitle: '<b>A decade of fires</b> (monthly data from 2010 to 2020)',
             src: "fire.mp4",
             poster: "fire.jpg",
             alt: "Fires Map",
-            annotations: copy.happening.fire.annotation.map(mapAnnotation)
+            annotations: copy.happening.fire.annotation.map(mapAnnotation).filter(a => a)
         }
     }
 
