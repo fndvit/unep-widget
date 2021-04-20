@@ -7,11 +7,8 @@
     "start": "sirv public",
     "validate": "svelte-check",
 
-    "build.ghg": "rollup -c rollup.config.ghg-embed.js",
-    "dev.ghg": "rollup -c rollup.config.ghg-embed.js -w",
-
-    "build.wh": "rollup -c rollup.config.wh-embed.js",
-    "dev.wh": "rollup -c rollup.config.wh-embed.js -w"
+    "build.embed": "rollup -c rollup.config.embed.js",
+    "dev.embed": "rollup -c rollup.config.embed.js -w"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",

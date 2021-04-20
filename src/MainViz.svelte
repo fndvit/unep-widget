@@ -102,6 +102,7 @@
                     text: "NDC submissions",
                     icon: svg.climateactionprogress.ndc,
                     copy: copy.progress.ndcs,
+                    embed: "ndc"
                 },
                 {
                     text: "Public opinion",
