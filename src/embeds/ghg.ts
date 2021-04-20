@@ -2,7 +2,7 @@ import GHGEmbed from './GHGEmbed.svelte';
 
 var script = document.currentScript;
 const dataView = script.getAttribute('data-view');
-const embeds = [ "total", "percapita", "trends" ];
+const embeds = [ "total", "percapita", "trends", "ndc" ];
 const embed = embeds.indexOf(dataView) === -1 ? "total" : dataView;
 
 const app = new GHGEmbed({

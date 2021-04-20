@@ -7,6 +7,7 @@
     import { onMount } from 'svelte';
     import CartogramLegend from './CartogramLegend.svelte';
 
+    export var hideLegend: boolean = false;
     let loaded: boolean = false;
 
     const helpText = {
@@ -82,9 +83,11 @@
             onHoverFn={onHoverFn}
             helpText={helpText}
         />
+        {#if !hideLegend}
         <div class="legend-container">
             <CartogramLegend categories={legend} highlight={legendHighlight}/>
         </div>
+        {/if}
     </div>
 {/if}
 
