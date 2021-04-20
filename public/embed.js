@@ -25,15 +25,6 @@ function injectIframe() {
     iframe.style.padding = 0;
 	script.parentNode.insertBefore(iframe, script);
 
-    // const uid = performance.now().toString();
-    // window.addEventListener('message', function(event) {
-    //     if (event.data.type && event.data.type === 'unep-widget:getuid') {
-    //         function postTheMessage() {
-    //             document.querySelector('#my_iframe').contentWindow.postMessage("Parent doc messaged the iframe", "*");
-    //           }
-    //     }
-    // }
-
     window.addEventListener('message', function(event) {
         if (event.data.type && event.data.type === 'unep-widget:resize'
             && iframe.contentWindow === event.source
