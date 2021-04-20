@@ -9,11 +9,17 @@ function getIframePath(embed) {
 
 function injectIframe() {
     const dataEmbed = script.getAttribute('data-embed');
-    const embeds = [ "main", "ghg", "ghg-percapita", "ghg-trends", "ndc" ];
-    const embed = embeds.indexOf(dataEmbed) === -1 ? "main" : dataEmbed;
+    const embeds = [
+        "main", "ghg", "ghg-percapita", "ghg-trends", "ndc",
+        "wh-temp", "wh-ocean", "wh-fires"
+    ];
+
+    if (embeds.indexOf(dataEmbed) === -1) {
+        throw Error("unknown embed");
+    }
 
 	var iframe = document.createElement('iframe');
-    iframe.src = getIframePath(embed);
+    iframe.src = getIframePath(dataEmbed);
     iframe.style.width = "100%";
     iframe.style.height = 0;
     iframe.style.border = 0;

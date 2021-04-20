@@ -94,7 +94,7 @@
 
 
 <div class="container">
-    <div class="title {selectedSection.src === 'ocean' ? 'white' : ''}">
+    <div class="title {selectedSectionStr === 'Ocean temperature' ? 'white' : ''}">
         {@html selectedSection.imgTitle}
     </div>
     <div class="aimg-container">
