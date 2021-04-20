@@ -60,6 +60,7 @@
         font-weight: 300;
         color: #111;
         margin-top: 0px;
+        white-space: nowrap;
     }
 
     .chart-summary {
