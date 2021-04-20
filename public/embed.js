@@ -9,7 +9,7 @@ function getIframePath(embed) {
 
 function injectIframe() {
     const dataEmbed = script.getAttribute('data-embed');
-    const embeds = [ "main", "ghg" ];
+    const embeds = [ "main", "ghg", "ghg-percapita", "ghg-trends" ];
     const embed = embeds.indexOf(dataEmbed) === -1 ? "main" : dataEmbed;
 
 	var iframe = document.createElement('iframe');

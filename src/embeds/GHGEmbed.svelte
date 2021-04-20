@@ -1,10 +1,11 @@
 <script lang="ts">
-    import Footer from '../components/Footer.svelte';
-    import IframeResizingContainer from '../components/IframeResizingContainer.svelte';
     import ScrollableX from '../components/ScrollableX.svelte';
     import CartogramLegend from '../maps/CartogramLegend.svelte';
     import GhgCartogram, { Datasets } from '../maps/GHGCartogram.svelte';
-    import unepLogo from '../svg/unep-logo.svg';
+
+    import BaseEmbed from './BaseEmbed.svelte'
+
+    export var view: string;
 
     const legend = [
         { text: "Decreased since 1990", class: "falling" },
@@ -12,164 +13,53 @@
         { text: "Still climbing", class: "climbing-fast" },
     ];
 
+    const views = {
+        total: {
+            header: "GHG emissions are changing our climate and choking our world",
+            dataset: Datasets.GHGTotal
+        },
+        percapita: {
+            header: "Our individual carbon footprints vary wildly; wealth is a key factor",
+            dataset: Datasets.GHGPerCapita
+        },
+        trends: {
+            header: "Some countries are making progress but all nations need to step up",
+            dataset: Datasets.GHGTrends
+        },
+    }
+
+    const selectedView = views[view];
+
 </script>
 
-<IframeResizingContainer>
-    <div class="container">
+<BaseEmbed
+    header={selectedView.header}
+    footer="State of the climate">
 
-        <h1>GHG emissions are changing our climate and choking our world</h1>
+    <slot slot="legend">
+        <CartogramLegend categories={legend}/>
+    </slot>
 
-        <div class="content">
+    <slot slot="viz">
+        <ScrollableX>
+            <div class="cartogram-aspect"></div>
+            <GhgCartogram dataset={selectedView.dataset} hideLegend={true} />
+        </ScrollableX>
+    </slot>
 
-            <div class="legend-container">
-                <CartogramLegend categories={legend}/>
-            </div>
-
-            <div class="cartogram-pane">
-                <ScrollableX>
-                    <div class="cartogram-aspect"></div>
-                    <GhgCartogram dataset={Datasets.GHGTotal} hideLegend={true} />
-                </ScrollableX>
-            </div>
-
-            <div class="logo">
-                <div class="unep-logo">{@html unepLogo}</div>
-                <div class="copy">
-                    <p>To explore more about the climate emergency and the effects on the planet visit <b><a href="https://www.unep.org/">unep.org</a></b></p>
-                    <p class="disclaimer">The boundaries and names shown, and the designations used on this map do not imply official endorsement or acceptance by the United Nations.</p>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-    <Footer currentSection="State of the climate" />
-</IframeResizingContainer>
+</BaseEmbed>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
-
-    :global(body) {
-        padding: 0;
-        text-align: left;
-        margin: 0;
-        font-family: 'Roboto', sans-serif;
-        background-color: #F3F3F3;
-        font-size: 24px;
-    }
-
-    .container {
-        padding: 20px 20px 0;
-        max-width: 1100px;
-        margin: auto;
-    }
-
-    .content {
-        position: relative;
-    }
-
-    .copy {
-        font-size: 18px;
-        line-height: 1.5;
-        font-weight: 300;
-    }
-
-    p {
-        margin-top:0;
-    }
-
-    .disclaimer {
-        font-size: 14px;
-        line-height: 1.4;
-        color:#808080;
-    }
-
-    h1 {
-        font-size: 22px;
-        line-height: 28px;
-        margin-top: 0;
-    }
-
-    .container :global(.cartogram-container) {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        min-width: 600px;
-    }
-
-    .cartogram-pane {
-        position: relative;
-    }
-
     .cartogram-aspect {
         padding-bottom: calc(57.15%); /* 700/400 aspect */
         width: 100%;
         min-width: 660px;
     }
 
-    .unep-logo {
-        width: 72px;
-        margin-right: 20px;
-        flex: 0 0 100px;
-    }
-
-    .logo {
-        display: flex;
-        align-items: flex-start;
-    }
-
-    .cartogram-pane :global(.scrollable) {
-        overflow: hidden;
-    }
-
-    .cartogram-pane :global(.scrollable-content) {
-        min-width: 600px !important;
-        position: relative;
-    }
-
-
     @media (min-width: 800px) {
-        
-        .cartogram-pane {
-            margin-left: 25%;
-        }
-        .copy {
-            position: absolute;
-            top: 30px;
-            left: 0;
-            width: 20%;
-            min-width: 180px;
-        }
 
         .cartogram-aspect {
             min-width: 600px;
-        }
-
-        p {
-            margin-top:10px;
-        }
-
-        .container {
-            padding: 20px 12px 0;
-        }
-
-        .unep-logo {
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            width: 90px;
-        }
-
-    }
-
-    @media (max-width: 600px) {
-        .copy {
-            font-size: 14px;
-        }
-        .container {
-            padding: 20px 12px 0;
         }
     }
 
@@ -181,9 +71,6 @@
     }
 
     @media (min-width: 1100px) {
-        .content, h1 {
-            margin-left:12px;
-        }
 
         .cartogram-aspect {
             min-width: 795px;
