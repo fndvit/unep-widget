@@ -117,12 +117,15 @@
     let selectedSection = selectedPage.sections[0];
 
     function onMenuChange(option: Page) {
-        // go to spash or change page
-        // change page for now
         selectedPage = option;
         selectedSection = selectedPage.sections[0];
-        window.setTimeout(() => document.dispatchEvent(new CustomEvent('content-resize')), 0);
     }
+
+    function dispatchResizeEvent() {
+        document.dispatchEvent(new CustomEvent('content-resize'));
+    }
+
+    $: selectedPage && selectedSection && window.setTimeout(dispatchResizeEvent, 0);
 
 </script>
 
