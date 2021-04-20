@@ -74,7 +74,7 @@
 {#if loaded}
     <div class="cartogram-container">
         <DemersCartogram data={dataset}
-            nodeSize={80}
+            nodeSize={84}
             domain={[740, 420]}
             trendsMode={false}
             categoryFn={getCategory}
