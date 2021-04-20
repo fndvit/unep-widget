@@ -41,7 +41,7 @@
             }
         }
         else {
-            const horizontal = xPerc > 70 || xPerc < 30;
+            const horizontal = xPerc > 65 || xPerc < 35;
             if (horizontal) {
                 pos = xPerc > 50  ? 'left' : 'right';
             } else {
@@ -175,7 +175,7 @@
     .annotation--left,
     .annotation--right {
         flex-direction: row;
-        width: 45%;
+        width: calc(250px + 5%);
     }
 
     .annotation--left .text,
