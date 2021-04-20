@@ -61,7 +61,7 @@
 </script>
 
 {#if loaded}
-<div class="charts-container" bind:clientWidth={width} bind:this={container} >
+<div class="pew-container" bind:clientWidth={width} bind:this={container} >
     {#each groupByCountry as country}
     <div class="mini-chart"
     on:mouseenter={(e) => selectCountry(country, {x: e.target.offsetLeft, y: e.target.offsetTop})}
@@ -91,7 +91,7 @@
 {/if}
 
 <style>
-    .charts-container {
+    .pew-container {
         box-sizing: border-box;
         padding-bottom: 20px;
         flex: 0 0 100%;
@@ -173,7 +173,7 @@
         .label {
             font-size: 11px;
         }
-        .charts-container {
+        .pew-container {
             margin-top:0;
         }
     }
