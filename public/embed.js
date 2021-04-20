@@ -14,12 +14,10 @@ function injectIframe() {
         "wh-temp", "wh-ocean", "wh-fires"
     ];
 
-    if (embeds.indexOf(dataEmbed) === -1) {
-        throw Error("unknown embed");
-    }
+    const embed = embeds.indexOf(dataEmbed) === -1 ? 'main' : dataEmbed;
 
 	var iframe = document.createElement('iframe');
-    iframe.src = getIframePath(dataEmbed);
+    iframe.src = getIframePath(embed);
     iframe.style.width = "100%";
     iframe.style.height = 0;
     iframe.style.border = 0;
