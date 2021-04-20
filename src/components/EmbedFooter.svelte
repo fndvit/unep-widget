@@ -23,6 +23,10 @@
         inputEl.setSelectionRange(0, inputEl.value.length);
     }
 
+    const urlParts = window.location.href.split('/');
+    const urlPath = urlParts.slice(0, -1).join('/');
+    const embedScript = `${urlPath}/embed.js`
+
     $: embed && reset();
 
 </script>
@@ -34,10 +38,10 @@
         {/if}
     </slot>
     <div slot="content" class="input-container">
-        <input type="text" bind:this={inputEl} readonly="readonly"
+        <input type="text" bind:this={inputEl} readonly={true}
             on:click={selectAll}
             class:visible={showEmbedCode}
-            value="<script defer src='/embed.js' data-embed='{embed}'></script>" />
+            value="<script defer src='{embedScript}' data-embed='{embed}'></script>" />
     </div>
 </BaseFooter>
 
