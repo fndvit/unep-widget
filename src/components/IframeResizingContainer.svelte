@@ -1,8 +1,9 @@
 <script lang="ts">
-    import { afterUpdate, onDestroy, onMount } from 'svelte';
     import { throttle } from '../util';
 
     var el: HTMLElement;
+
+    var clientHeight: number;
 
     const inIframe = (function () {
         try {
@@ -12,42 +13,23 @@
         }
     })();
 
-    function getCurrentHeight() {
-        return el.clientHeight;
-    }
-
-
     var previousHeight: number;
-    function resizeIframe() {
+    function resizeIframe(height: number) {
         if (inIframe) {
-            const currentHeight = getCurrentHeight();
-            if (currentHeight !== previousHeight) {
-                previousHeight = currentHeight;
+            if (height !== previousHeight) {
+                previousHeight = height;
                 window.parent.postMessage({
                     type: 'unep-widget:resize',
-                    value: currentHeight
+                    value: height
                 }, '*');
             }
         }
     }
 
-    afterUpdate(() => {
-        if (inIframe) {
-            window.setTimeout(resizeIframe, 0);
-        }
-    })
-
-    document.addEventListener('content-resize', resizeIframe);
-
-    // periodically resize incase content resizes without triggering an event
-    var resizeInterval: number;
-    onMount(() => resizeInterval = window.setInterval(resizeIframe, 1000))
-    onDestroy(() => window.clearInterval(resizeInterval))
+    $: resizeIframe(clientHeight);
 
 </script>
 
-<svelte:window on:resize={throttle(resizeIframe, 100)}/>
-
-<div class="iframe-resizer" bind:this={el}>
+<div class="iframe-resizer" bind:this={el} bind:clientHeight={clientHeight}>
     <slot />
 </div>
