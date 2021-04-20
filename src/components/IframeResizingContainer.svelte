@@ -1,8 +1,5 @@
 <script lang="ts">
-    import { throttle } from '../util';
-
     var el: HTMLElement;
-
     var clientHeight: number;
 
     const inIframe = (function () {
