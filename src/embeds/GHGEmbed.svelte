@@ -54,7 +54,8 @@
 
 <BaseEmbed
     header={selectedView.header}
-    footer={selectedView.footer}>
+    footer={selectedView.footer}
+    {view}>
 
     <slot slot="legend">
         <CartogramLegend categories={selectedView.legend}/>

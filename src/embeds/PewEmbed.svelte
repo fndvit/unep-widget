@@ -5,7 +5,8 @@
 
 <BaseEmbed
     header="Public awareness and concern must catalyze political action"
-    footer="pew-embed">
+    footer="pew-embed"
+    view="pew-embed">
 
     <slot slot="viz">
         <PewSurvey />

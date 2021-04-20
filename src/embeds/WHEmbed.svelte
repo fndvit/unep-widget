@@ -25,7 +25,8 @@
 
 <BaseEmbed
     header={selectedView.header}
-    footer="What's happening">
+    footer="What's happening"
+    {view}>
 
     <slot slot="viz">
         <Page2Carto selectedSectionStr={selectedView.carto} />

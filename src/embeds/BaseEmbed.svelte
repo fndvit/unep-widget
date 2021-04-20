@@ -5,6 +5,7 @@
 
     export var header: string;
     export var footer: string;
+    export var view: string;
 
     const legend = [
         { text: "Decreased since 1990", class: "falling" },
@@ -29,9 +30,11 @@
 
             <div class="logo">
                 <div class="unep-logo">{@html unepLogo}</div>
-                <div class="copy">
+                <div class="copy" style='top:{(view !== 'pew-embed' && view !== 'temp' && view !== 'ocean' && view !== 'fires')?30:0}px'>
                     <p>To explore more about the climate emergency and the effects on the planet visit <b><a href="https://www.unep.org/">unep.org</a></b></p>
+                    {#if view !== 'pew-embed' && view !== 'temp' && view !== 'ocean' && view !== 'fires' }
                     <p class="disclaimer">The boundaries and names shown, and the designations used on this map do not imply official endorsement or acceptance by the United Nations.</p>
+                    {/if}
                 </div>
             </div>
 
