@@ -41,7 +41,7 @@
         <input type="text" bind:this={inputEl} readonly={true}
             on:click={selectAll}
             class:visible={showEmbedCode}
-            value="<script defer src='{embedScript}' data-embed='{embed}'></script>" />
+            value="<script async src='{embedScript}' data-embed='{embed}'></script>" />
     </div>
 </BaseFooter>
 

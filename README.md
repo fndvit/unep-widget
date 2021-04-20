@@ -26,7 +26,7 @@ The entire `public/` folder should be hosted statically
 
 An example of this can be seen in `index.html`:
 ```html
-<script defer src='<base_url>/embed.js'></script>
+<script async src='<base_url>/embed.js'></script>
 ```
 
 This will inject the widget iframe into the DOM wherever the `<script>` tag is located.
