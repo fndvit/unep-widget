@@ -279,6 +279,10 @@
         margin-bottom: 20px;
     }
 
+    .content--cap .cartogram-pane :global(.pew-container) {
+        padding-left: 12px;
+    }
+
     .bottom-section {
         padding-bottom: 20px;
     }
