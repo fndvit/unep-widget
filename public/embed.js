@@ -11,7 +11,8 @@ function injectIframe() {
     const dataEmbed = script.getAttribute('data-embed');
     const embeds = [
         "main", "ghg", "ghg-percapita", "ghg-trends", "ndc",
-        "wh-temp", "wh-ocean", "wh-fires"
+        "wh-temp", "wh-ocean", "wh-fires",
+        "publicopinion"
     ];
 
     const embed = embeds.indexOf(dataEmbed) === -1 ? 'main' : dataEmbed;

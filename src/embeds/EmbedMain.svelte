@@ -1,5 +1,6 @@
 <script lang="ts">
     import GHGEmbed from './GHGEmbed.svelte';
+    import PewEmbed from './PewEmbed.svelte';
     import WHEmbed from './WHEmbed.svelte';
     export var view: string;
 
@@ -12,4 +13,6 @@
     <GHGEmbed {view} />
 {:else if whembeds.indexOf(view) !== -1}
     <WHEmbed {view} />
+{:else if view === 'publicopinion'}
+    <PewEmbed />
 {/if}
