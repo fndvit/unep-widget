@@ -8,8 +8,6 @@
 
     export var view: string;
 
-    console.log('view', view);
-
     const legend = [
         { text: "Decreased since 1990", class: "falling" },
         { text: "Stable since 1990", class: "stable" },
