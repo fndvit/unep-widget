@@ -8,6 +8,8 @@ stages:
 variables:
   STAGING_BUCKET_NAME: ${STAGING_BUCKET_NAME}
   PROD_BUCKET_NAME: ${PROD_BUCKET_NAME}
+  CF_ZONE_ID: ${CF_ZONE_ID}
+  CF_API_TOKEN: ${CF_API_TOKEN}
 
 cache:
   paths:
