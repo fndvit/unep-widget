@@ -146,7 +146,7 @@
     }
     @media (max-width: 900px) {
         .legend-container {
-            padding-left: 10px;
+            padding-left: 12px;
         }
     }
 
