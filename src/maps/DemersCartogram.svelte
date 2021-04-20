@@ -20,7 +20,8 @@
     import * as d3 from '../d3';
     import { clamp, createLookup, displayVal, throttle, trailingDebounce } from '../util';
     import MiniTrendCharts from './MiniTrendCharts.svelte';
-    import { MiniLineChart, Annotation } from '../components';
+    import MiniLineChart from '../components/MiniLineChart.svelte';
+    import Annotation from '../components/Annotation.svelte';
 
     interface CartogramDataPoint extends CountryDataPoint {
         category: string;
