@@ -11,6 +11,6 @@ jobs:
     - name: Trigger Gitlab mirror via curl
       run: |
         curl --request POST \
-        --url https://gitlab.com/api/v4/projects/25886567/mirror/pull \
-        --header 'PRIVATE-TOKEN: JchN3sH-AYTFPsGQ6C39' \
+        --url https://gitlab.com/api/v4/projects/${{ secrets.MIRROR_PROJECT_ID }}/mirror/pull \
+        --header 'PRIVATE-TOKEN: ${{ secrets.GITLAB_PRIVATE_TOKEN }}' \
         --fail
